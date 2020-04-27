@@ -1,0 +1,12 @@
+//
+// Created by Ivan Gorshkov on 27.04.2020.
+//
+
+#ifndef BEATCOVID_PROJECT_SRC_ANIMATIONMENAGER_H_
+#define BEATCOVID_PROJECT_SRC_ANIMATIONMENAGER_H_
+
+class AnimationMenager {
+
+};
+
+#endif //BEATCOVID_PROJECT_SRC_ANIMATIONMENAGER_H_

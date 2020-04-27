@@ -11,13 +11,16 @@ class Player {
   sf::Sprite getSprite();
   void move(float dx);
   void jump();
+  float getHp();
+  float getArm();
+  float takeDamge(float dmg);
   void status(float offsetX, float offsetY, float time, std::string *TileMap);
   sf::FloatRect getRect();
   void collision (int num, std::string *TileMap);
  private:
 
-  int hp;
-  int arm;
+  float hp;
+  float arm;
   int points;
   bool isGround;
   bool isJump;
