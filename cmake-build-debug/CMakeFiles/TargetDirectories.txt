@@ -1,0 +1,15 @@
+/home/ilya-kalinin/beatcovid/cmake-build-debug/CMakeFiles/install/strip.dir
+/home/ilya-kalinin/beatcovid/cmake-build-debug/CMakeFiles/install/local.dir
+/home/ilya-kalinin/beatcovid/cmake-build-debug/CMakeFiles/install.dir
+/home/ilya-kalinin/beatcovid/cmake-build-debug/CMakeFiles/list_install_components.dir
+/home/ilya-kalinin/beatcovid/cmake-build-debug/CMakeFiles/COVID19.dir
+/home/ilya-kalinin/beatcovid/cmake-build-debug/CMakeFiles/level.dir
+/home/ilya-kalinin/beatcovid/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/ilya-kalinin/beatcovid/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/ilya-kalinin/beatcovid/cmake-build-debug/project/include/tinyxml/CMakeFiles/install/strip.dir
+/home/ilya-kalinin/beatcovid/cmake-build-debug/project/include/tinyxml/CMakeFiles/install/local.dir
+/home/ilya-kalinin/beatcovid/cmake-build-debug/project/include/tinyxml/CMakeFiles/tinyxml.dir
+/home/ilya-kalinin/beatcovid/cmake-build-debug/project/include/tinyxml/CMakeFiles/edit_cache.dir
+/home/ilya-kalinin/beatcovid/cmake-build-debug/project/include/tinyxml/CMakeFiles/rebuild_cache.dir
+/home/ilya-kalinin/beatcovid/cmake-build-debug/project/include/tinyxml/CMakeFiles/install.dir
+/home/ilya-kalinin/beatcovid/cmake-build-debug/project/include/tinyxml/CMakeFiles/list_install_components.dir

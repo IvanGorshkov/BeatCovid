@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -g  -shared -Wl,-soname,liblevel.so -o liblevel.so CMakeFiles/level.dir/project/src/Level_map.cpp.o  -Wl,-rpath,/home/ilya-kalinin/beatcovid/cmake-build-debug/project/include/tinyxml project/include/tinyxml/libtinyxml.so 
