@@ -18,6 +18,8 @@ int main()
 
     Object pl = lvl.GetObject("player");
     s.setPosition(pl.rect.left, (pl.rect.top - 147));
+
+
     while (window.isOpen())
     {
         Event event;
