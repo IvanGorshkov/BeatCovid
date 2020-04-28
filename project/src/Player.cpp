@@ -96,6 +96,9 @@ void Player::status(float time, std::string *TileMap) {
   }
   collision(0, TileMap);
   if (STATE != JUMP) {
+    if ((STATE == STAY || STATE == RUN ||  STATE == LAY) && isGround == false) {
+      anim.set("jump");
+    }
     dy += 0.002 * time;
   }
 
