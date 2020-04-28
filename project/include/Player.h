@@ -3,31 +3,40 @@
 //
 
 #pragma once
+
 #include <SFML/Graphics.hpp>
+#include "AnimationMenager.h"
 
 class Player {
  public:
-  explicit Player(sf::Texture &image);
-  sf::Sprite getSprite();
-  void move(float dx);
-  void jump();
+  explicit Player(AnimationMenager &a_m);
+  void draw(sf::RenderWindow &window, float offsetX, float offsetY);
+  void keyCheck();
   float getHp();
   float getArm();
   float takeDamge(float dmg);
-  void status(float offsetX, float offsetY, float time, std::string *TileMap);
+  void status(float time, std::string *TileMap);
   sf::FloatRect getRect();
   void collision (int num, std::string *TileMap);
- private:
+  void setKey(std::string name, bool value);
 
+ private:
+  enum {
+    STAY,
+    RUN,
+    JUMP,
+    LAY,
+  } STATE;
+
+  AnimationMenager anim;
+  std::map<std::string, bool> key;
+  bool dir;
   float hp;
   float arm;
+  float max_jump;
   int points;
   bool isGround;
-  bool isJump;
   float dx;
   float dy;
-  float jumphight;
-  float currentFrame;
   sf::FloatRect rect;
-  sf::Sprite sprite;
 };
