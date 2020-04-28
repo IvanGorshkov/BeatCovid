@@ -5,15 +5,18 @@
 #include "Player.h"
 #include <iostream>
 
-Player::Player(AnimationMenager &a_m)
-              : arm(100)
+Player::Player(AnimationManager &a_m, Level &lev)
+              : obj(lev.GetAllObjects())
+              , arm(100)
               , hp(100)
               , dx(0.1)
               , max_jump(0)
               , anim(a_m)
               , STATE(STAY)
-              , rect(sf::FloatRect(150,100,40,50))
-              , isGround(true) {}
+              , isGround(true) {
+  Object pl = lev.GetObject("player");
+   rect = sf::FloatRect(pl.rect.left, pl.rect.top ,40,50);
+}
 
 void Player::keyCheck() {
   if (key["L"]) {
@@ -35,7 +38,7 @@ void Player::keyCheck() {
   if (hp > 0) {
     if (key["UP"]) {
       if (STATE == STAY || STATE == RUN) {
-        dy = -2;
+        dy = -0.2;
         STATE = JUMP;
       }
     }
@@ -56,20 +59,18 @@ void Player::keyCheck() {
 
   if (!key["UP"]) {
     if (STATE == JUMP) {
-      dy = 2;
+      dy = 0.2;
     }
   }
 
-  key["R"]=key["L"]=key["UP"] = key["DOWN"] = false;
+  key["R"] = key["L"] = key["UP"] = key["DOWN"] = false;
 }
 
 sf::FloatRect Player::getRect() {
   return rect;
 }
 
-void Player::status(float time, std::string *TileMap) {
-
-
+void Player::status(float time) {
   keyCheck();
 
   if (STATE == STAY) {
@@ -91,32 +92,33 @@ void Player::status(float time, std::string *TileMap) {
   }
 
   anim.flip(dir);
+
   if (hp > 0) {
-  rect.left += dx * time;
+    rect.left += dx * time;
   }
-  collision(0, TileMap);
+
+  collision(0);
   if (STATE != JUMP) {
     if ((STATE == STAY || STATE == RUN ||  STATE == LAY) && isGround == false) {
       anim.set("jump");
     }
-    dy += 0.002 * time;
+    dy = 0.2;
   }
 
   if (STATE == JUMP) {
-    max_jump += 2;
-    if (max_jump > 200) {
-      dy = 2;
+    max_jump += 0.2;
+    if (max_jump > 150) {
+      dy = 0.2;
     }
   }
 
-  rect.top += dy;
+  rect.top += dy * time;
   isGround= false;
 
-  collision(1, TileMap);
+  collision(1);
 
   if (hp <= 0) {
     anim.set("die");
-
     if (anim.getCurrentFrame() == 6) {
       anim.pause();
     }
@@ -125,13 +127,12 @@ void Player::status(float time, std::string *TileMap) {
   anim.tick(time);
 }
 
-void Player::collision (int num, std::string *TileMap) {
-    for (int i = rect.top/16 ; i<(rect.top+rect.height)/16; i++) {
-    for (int j = rect.left/16; j<(rect.left+rect.width)/16; j++) {
-      if ((TileMap[i][j]=='P') || (TileMap[i][j]=='k') || (TileMap[i][j]=='0') ||
-      (TileMap[i][j]=='r') || (TileMap[i][j]=='t')) {
+void Player::collision (int num) {
+  for (int i=0;i<obj.size();i++) {
+    if (rect.intersects(obj[i].rect)) {
+      if (obj[i].name=="wall") {
         if (dy>0 && num == 1) {
-          rect.top = i * 16 -  rect.height;
+          rect.top = obj[i].rect.top -  rect.height;
           dy = 0;
           isGround = true;
           if (STATE == JUMP) {
@@ -142,18 +143,19 @@ void Player::collision (int num, std::string *TileMap) {
         }
 
         if (dy<0 && num == 1) {
-          rect.top = i * 16 + 16;
+          rect.top = obj[i].rect.top + obj[i].rect.height;
           dy=0;
+          max_jump = 200;
           return;
         }
 
         if (dx>0 && num == 0) {
-          rect.left = j * 16 - rect.width;
+          rect.left = obj[i].rect.left - rect.width;
           return;
         }
 
         if (dx<0 && num == 0) {
-          rect.left = j * 16 + 16;
+          rect.left = obj[i].rect.left + obj[i].rect.width;
           return;
         }
       }
@@ -178,9 +180,8 @@ float Player::getArm() {
   return arm;
 }
 
-void Player::draw(sf::RenderWindow &window, float offsetX, float offsetY)
-{
-  anim.draw(window,rect.left - offsetX,rect.top + rect.height - offsetY);
+void Player::draw(sf::RenderWindow &window) {
+  anim.draw(window,rect.left,rect.top + rect.height);
 }
 
 void Player::setKey(std::string name, bool value) {

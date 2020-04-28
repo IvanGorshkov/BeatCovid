@@ -5,19 +5,21 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "AnimationMenager.h"
+#include "AnimationManager.h"
+#include "Level_map.h"
 
 class Player {
  public:
-  explicit Player(AnimationMenager &a_m);
-  void draw(sf::RenderWindow &window, float offsetX, float offsetY);
+  std::vector<Object> obj;
+  explicit Player(AnimationManager &a_m, Level &lev);
+  void draw(sf::RenderWindow &window);
   void keyCheck();
   float getHp();
   float getArm();
   float takeDamge(float dmg);
-  void status(float time, std::string *TileMap);
+  void status(float time);
   sf::FloatRect getRect();
-  void collision (int num, std::string *TileMap);
+  void collision (int num);
   void setKey(std::string name, bool value);
 
  private:
@@ -28,7 +30,7 @@ class Player {
     LAY,
   } STATE;
 
-  AnimationMenager anim;
+  AnimationManager anim;
   std::map<std::string, bool> key;
   bool dir;
   float hp;

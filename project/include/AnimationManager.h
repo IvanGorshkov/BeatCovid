@@ -7,9 +7,9 @@
 #include <map>
 #include "Animation.h"
 
-class AnimationMenager {
+class AnimationManager {
  public:
-  AnimationMenager() = default;
+  AnimationManager() = default;
   void create(std::string name, sf::Texture &texture, int x, int y, int w, int h, int count, float speed, int step=0);
   void draw(sf::RenderWindow &window,int x=0, int y=0);
   void set(std::string name);
@@ -17,6 +17,8 @@ class AnimationMenager {
   void tick(float time);
   void pause();
   int getCurrentFrame();
+  float getH();
+  float getW();
  private:
   std::map<sf::String, Animation> anim_list;
   sf::String current_anim;

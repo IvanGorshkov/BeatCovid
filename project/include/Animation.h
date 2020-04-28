@@ -13,6 +13,7 @@ class Animation {
   void setFlip(bool value);
   void setPlay(bool value);
   float getCurrentFrame();
+  std::vector<sf::IntRect> getFrames();
   void setSpritePosition(int x, int y);
   sf::Sprite getSprite();
 

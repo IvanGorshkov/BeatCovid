@@ -50,3 +50,7 @@ void Animation::setPlay(bool value) {
 float Animation::getCurrentFrame() {
   return current_frame;
 }
+
+std::vector<sf::IntRect> Animation::getFrames() {
+  return frames;
+}
