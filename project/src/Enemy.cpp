@@ -9,20 +9,20 @@ Enemy::Enemy(int x, int y, sf::Color color)
   sprite.setColor(color);
 }
 
-void Enemy::Hit(Player &player, BulletManager &bullet) const {
-  float speed = 0.1;
-  float X = (player.getRect().left - this->rect.left) / BLOKSIZE;
-  float Y = (player.getRect().top - this->rect.top) / BLOKSIZE;
-  float dx, dy;
-  if (Y / X > 1 || Y / X < -1) {
-    dy = Y > 0 ? speed : -speed;
-    dx = dy * X / Y;
-  } else {
-    dx = X > 0 ? speed : -speed;
-    dy = dx * Y / X;
-  }
-  //bullet.add(this->rect.left, this->rect.top, dx, dy);
-}
+//void Enemy::Hit(Player &player, BulletManager &bullet) const {
+//  float speed = 0.1;
+//  float X = (player.getRect().left - this->rect.left) / BLOKSIZE;
+//  float Y = (player.getRect().top - this->rect.top) / BLOKSIZE;
+//  float dx, dy;
+//  if (Y / X > 1 || Y / X < -1) {
+//    dy = Y > 0 ? speed : -speed;
+//    dx = dy * X / Y;
+//  } else {
+//    dx = X > 0 ? speed : -speed;
+//    dy = dx * Y / X;
+//  }
+//  //bullet.add(this->rect.left, this->rect.top, dx, dy);
+//}
 
 void Enemy::draw(sf::RenderWindow &windows) {
   windows.draw(sprite);

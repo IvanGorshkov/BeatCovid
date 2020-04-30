@@ -10,18 +10,18 @@ Bullet::Bullet(float x, float y, float dx, float dy)
   anim.set("move");
 }
 
-void Bullet::Update(float time) {
+void Bullet::Update(float time, std::vector<Object> &obj) {
   rect.left += dx * time;
   rect.top += dy * time;
-  /*
-  for (auto& i : obj) {
-      if (rect.intersects(i.rect)) {
-          dx = 0;
-          dy = 0;
-          isLife = false;
-          anim.set("explode");
-      }
+
+  for (auto &i : obj) {
+    if (rect.intersects(i.rect) && i.name == "wall") {
+      dx = 0;
+      dy = 0;
+      isLife = false;
+      anim.set("explode");
+    }
   }
-  */
+
   anim.tick(time);
 }
