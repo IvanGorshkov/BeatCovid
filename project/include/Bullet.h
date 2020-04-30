@@ -9,5 +9,5 @@
 class Bullet : public Entity {
  public:
   Bullet(float x, float y, float dx, float dy);
-  void Update(float time) override;
+  void Update(float time, std::vector<Object> &obj) override;
 };

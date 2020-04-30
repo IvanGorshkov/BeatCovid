@@ -14,7 +14,6 @@ add_executable(beatcovid
         project/src/AnimationManager.cpp
         project/src/Entity.cpp
         project/src/GameManager.cpp
-        project/src/BulletManager.cpp
 )
 
 add_subdirectory(project/include/tinyxml)

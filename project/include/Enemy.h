@@ -3,7 +3,6 @@
 #include <SFML/Graphics.hpp>
 #include "Level_map.h"
 #include "Player.h"
-#include "BulletManager.h"
 
 #define BLOKSIZE 16
 
@@ -12,7 +11,7 @@ class Enemy {
   explicit Enemy(int x, int y, sf::Color color);
   void draw(sf::RenderWindow &windows);
   void update(float offsetX, float offsetY);
-  void Hit(Player &player, BulletManager &bullet) const;
+//  void Hit(Player &player, BulletManager &bullet) const;
 
  private:
   int dmg;

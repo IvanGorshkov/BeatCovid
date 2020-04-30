@@ -185,6 +185,10 @@ void Player::draw(sf::RenderWindow &window) {
   anim.draw(window, rect.left, rect.top + rect.height);
 }
 
+bool Player::GetDir() {
+  return dir;
+}
+
 void Player::setKey(std::string name, bool value) {
   key[name] = value;
 }

@@ -5,20 +5,40 @@ GameManager::GameManager(Level &lvl) {
   player = new Player(lvl.GetObject("player"));
 }
 
-// Функция обновляет все наши классы (Игрок, враг, антитела, вакцина)
+// Общие методы Менеджера
 void GameManager::Update(float time) {
   player->status(time, obj);
-  bullets.update(time);
+
+  for (it = entities.begin(); it != entities.end(); it++) {
+    if (!(*it)->IsLife()) {
+      it = entities.erase(it);
+    } else {
+      (*it)->Update(time, obj);
+    }
+  }
 }
 
-void GameManager::draw(sf::RenderWindow &window) {
+void GameManager::Draw(sf::RenderWindow &window) {
   player->draw(window);
-  bullets.draw(window);
+
+  for (it = entities.begin(); it != entities.end(); it++) {
+    (*it)->Draw(window);
+  }
 }
 
 Player *GameManager::GetPlayer() {
   return player;
 }
 void GameManager::Fire() {
-  bullets.add(player->getRect().left + player->getRect().width, player->getRect().top + 10, 0.2, 0);
+  if (player->GetDir()) {
+    addBullet(player->getRect().left, player->getRect().top + 10, -0.2, 0);
+  } else {
+    addBullet(player->getRect().left + player->getRect().width, player->getRect().top + 10, 0.2, 0);
+  }
+
+}
+
+// Методы для работы с Bullet
+void GameManager::addBullet(float x, float y, float dx, float dy) {
+  entities.push_back(new Bullet(x, y, dx, dy));
 }

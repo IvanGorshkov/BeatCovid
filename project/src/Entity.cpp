@@ -15,14 +15,6 @@ void Entity::Draw(sf::RenderWindow &window) {
   anim.draw(window, rect.left, rect.top + rect.height);
 }
 
-void Entity::Update(float time) {
-  rect.left += dx * time;
-  rect.top += dy * time;
-  anim.set("move");
-
-  anim.tick(time);
-}
-
 void Entity::SetAnimation(AnimationManager getAnim, std::string firstAnim) {
   anim = std::move(getAnim);
   anim.set(std::move(firstAnim));

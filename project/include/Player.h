@@ -13,6 +13,7 @@ class Player {
   Player() = default;
   explicit Player(Object position);
   void draw(sf::RenderWindow &window);
+  bool GetDir();
   void keyCheck();
   float getHp();
   float getArm();

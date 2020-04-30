@@ -8,7 +8,7 @@
 #include "Player.h"
 #include "AnimationManager.h"
 #include "Level_map.h"
-#include "BulletManager.h"
+//#include "BulletManager.h"
 #include "GameManager.h"
 
 int main() {
@@ -64,7 +64,7 @@ int main() {
     game.Update(time);
 
     lvl.Draw(window);
-    game.draw(window);
+    game.Draw(window);
     if (game.GetPlayer()->takeDamge(0.005) > 0) {
       sf::RectangleShape hp;
       hp.setSize(sf::Vector2f(100 * (game.GetPlayer()->getHp() / 100), 20));
