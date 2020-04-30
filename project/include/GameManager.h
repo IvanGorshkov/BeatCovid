@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "Entity.h"
 #include "Bullet.h"
+#include "Enemy.h"
 
 class GameManager {
  public:
@@ -17,9 +18,15 @@ class GameManager {
 
  private:
   void addBullet(float x, float y, float dx, float dy);
+  void updateBullet(float time);
+  void drawBullet(sf::RenderWindow &window);
+  void updateEnemy(float time);
+  void drawEnemy(sf::RenderWindow &window);
+  void hitPlayer();
   std::vector<Object> obj;
-  std::list<Entity *> entities;
-  std::list<Entity *>::iterator it;
+  std::list<Bullet> bullets;
+  std::list<Bullet>::iterator bulletsIt;
+  std::list<Enemy> enemies;
+  std::list<Enemy>::iterator enemiesIt;
   Player *player;
-//  BulletManager bullets;
 };
