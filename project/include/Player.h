@@ -10,16 +10,16 @@
 
 class Player {
  public:
-  std::vector<Object> obj;
-  explicit Player(AnimationManager &a_m, Level &lev);
+  Player() = default;
+  explicit Player(Object position);
   void draw(sf::RenderWindow &window);
   void keyCheck();
   float getHp();
   float getArm();
   float takeDamge(float dmg);
-  void status(float time);
+  void status(float time, std::vector<Object> objs);
   sf::FloatRect getRect();
-  void collision (int num);
+  void collision(int num, std::vector<Object> objs);
   void setKey(std::string name, bool value);
 
  private:

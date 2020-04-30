@@ -3,16 +3,17 @@
 #include "Bullet.h"
 #include "Level_map.h"
 #include "AnimationManager.h"
+#include <list>
 
 class BulletManager {
-public:
-    BulletManager();
-    void update(float time, AnimationManager& anim);
-    void add(float x, float y, float dx, float dy);
-    void draw(sf::RenderWindow &window, AnimationManager& animb);
+ public:
+  explicit BulletManager();
+  void update(float tim);
+  void add(float x, float y, float dx, float dy);
+  void draw(sf::RenderWindow &window);
 
-private:
-    std::list<Bullet> bullets;
-    std::list<Bullet>::iterator it;
+ private:
+  std::list<Bullet> bullets;
+  std::list<Bullet>::iterator it;
 };
 

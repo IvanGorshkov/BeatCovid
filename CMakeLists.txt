@@ -4,8 +4,18 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(project/include)
 include_directories(project/include/tinyxml)
 
-add_executable(beatcovid main.cpp project/src/Player.cpp project/src/Enemy.cpp project/src/Bullet.cpp project/src/Level_map.cpp project/src/Animation.cpp project/src/AnimationManager.cpp
-        project/src/BulletManager.cpp project/src/EnemyManager.cpp)
+add_executable(beatcovid
+        main.cpp
+        project/src/Player.cpp
+        project/src/Enemy.cpp
+        project/src/Bullet.cpp
+        project/src/Level_map.cpp
+        project/src/Animation.cpp
+        project/src/AnimationManager.cpp
+        project/src/Entity.cpp
+        project/src/GameManager.cpp
+        project/src/BulletManager.cpp
+)
 
 add_subdirectory(project/include/tinyxml)
 
