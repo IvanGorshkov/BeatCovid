@@ -2,21 +2,12 @@
 
 #include <SFML/Graphics.hpp>
 #include "AnimationManager.h"
-#include <list>
+#include "Entity.h"
 
 #define BLOKSIZE 16
 
-class Bullet {
-public:
-    Bullet(float x, float y, float dx, float dy);
-    void update(float time, AnimationManager& anim);
-    void draw(sf::RenderWindow &window, AnimationManager& anim);
-
-private:
-    float dx;
-    float dy;
-    bool isLife;
-    //AnimationMenager anim;
-    sf::FloatRect rect;
-    sf::Sprite sprite;
+class Bullet : public Entity {
+ public:
+  Bullet(float x, float y, float dx, float dy);
+  void Update(float time, std::vector<Object> &obj) override;
 };

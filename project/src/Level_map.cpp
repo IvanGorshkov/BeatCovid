@@ -66,15 +66,15 @@ bool Level::LoadFromFile(std::string filename) {
   // Вектор из прямоугольников изображений (TextureRect)
   std::vector<sf::Rect<int> > subRects;
 
-  for(int y = 0; y < rows; y++) {
-    for(int x = 0; x < columns; x++) {
+  for (int y = 0; y < rows; y++) {
+    for (int x = 0; x < columns; x++) {
       sf::Rect<int> rect;
       rect.top = y * tileHeight;
       rect.height = tileHeight;
       rect.left = x * tileWidth;
       rect.width = tileWidth;
       subRects.push_back(rect);
-	}
+    }
   }
   // Работа со слоями
   TiXmlElement *layerElement;
@@ -168,7 +168,7 @@ bool Level::LoadFromFile(std::string filename) {
 
         sf::Sprite sprite;
         sprite.setTexture(tilesetImage);
-        sprite.setTextureRect(sf::Rect<int>(0,0,0,0));
+        sprite.setTextureRect(sf::Rect<int>(0, 0, 0, 0));
         sprite.setPosition(x, y);
 
         if (objectElement->Attribute("width") != NULL) {
@@ -186,7 +186,7 @@ bool Level::LoadFromFile(std::string filename) {
         object.type = objectType;
         object.sprite = sprite;
 
-        sf::Rect <float> objectRect;
+        sf::Rect<float> objectRect;
         objectRect.top = y;
         objectRect.left = x;
         objectRect.height = height;
@@ -217,7 +217,7 @@ bool Level::LoadFromFile(std::string filename) {
       objectGroupElement = objectGroupElement->NextSiblingElement("objectgroup");
     }
   } else {
-        std::cout << "No object layers found..." << std::endl;
+    std::cout << "No object layers found..." << std::endl;
   }
   return true;
 }
@@ -234,7 +234,7 @@ Object Level::GetObject(std::string name) {
 std::vector<Object> Level::GetObjects(std::string name) {
   // Все объекты с заданным именем
   std::vector<Object> vec;
-  for(int i = 0; i < objects.size(); i++) {
+  for (int i = 0; i < objects.size(); i++) {
     if (objects[i].name == name) {
       vec.push_back(objects[i]);
     }
@@ -242,11 +242,9 @@ std::vector<Object> Level::GetObjects(std::string name) {
   return vec;
 }
 
-
 std::vector<Object> Level::GetAllObjects() {
   return objects;
 }
-
 
 sf::Vector2i Level::GetTileSize() {
   return sf::Vector2i(tileWidth, tileHeight);
@@ -254,8 +252,8 @@ sf::Vector2i Level::GetTileSize() {
 
 void Level::Draw(sf::RenderWindow &window) {
   // Рисуем все тайлы (объекты НЕ рисуем!)
-  for(int layer = 0; layer < layers.size(); layer++) {
-    for(int tile = 0; tile < layers[layer].tiles.size(); tile++) {
+  for (int layer = 0; layer < layers.size(); layer++) {
+    for (int tile = 0; tile < layers[layer].tiles.size(); tile++) {
       window.draw(layers[layer].tiles[tile]);
     }
   }

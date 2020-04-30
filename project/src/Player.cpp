@@ -5,17 +5,18 @@
 #include "Player.h"
 #include <iostream>
 
-Player::Player(AnimationManager &a_m, Level &lev)
-              : obj(lev.GetAllObjects())
-              , arm(100)
-              , hp(100)
-              , dx(0.1)
-              , max_jump(0)
-              , anim(a_m)
-              , STATE(STAY)
-              , isGround(true) {
-  Object pl = lev.GetObject("player");
-   rect = sf::FloatRect(pl.rect.left, pl.rect.top ,40,50);
+Player::Player(Object position)
+    : arm(100), hp(100), dx(0.1), max_jump(0), STATE(STAY), isGround(true) {
+  sf::Texture player_t;
+  player_t.loadFromFile("../fang.png");
+  anim = AnimationManager(player_t);
+
+  anim.create("walk", 0, 244, 40, 50, 6, 0.005, 40);
+  anim.create("stay", 0, 187, 42, 52, 3, 0.002, 42);
+  anim.create("die", 0, 1199, 59, 41, 7, 0.004, 59);
+  anim.create("jump", 0, 528, 29, 30, 4, 0.0045, 38);
+  anim.create("lay", 0, 436, 80, 20, 1, 0);
+  rect = sf::FloatRect(position.rect.left, position.rect.top, 40, 50);
 }
 
 void Player::keyCheck() {
@@ -70,7 +71,7 @@ sf::FloatRect Player::getRect() {
   return rect;
 }
 
-void Player::status(float time) {
+void Player::status(float time, std::vector<Object> objs) {
   keyCheck();
 
   if (STATE == STAY) {
@@ -97,9 +98,9 @@ void Player::status(float time) {
     rect.left += dx * time;
   }
 
-  collision(0);
+  collision(0, objs);
   if (STATE != JUMP) {
-    if ((STATE == STAY || STATE == RUN ||  STATE == LAY) && isGround == false) {
+    if ((STATE == STAY || STATE == RUN || STATE == LAY) && isGround == false) {
       anim.set("jump");
     }
     dy = 0.2;
@@ -113,9 +114,9 @@ void Player::status(float time) {
   }
 
   rect.top += dy * time;
-  isGround= false;
+  isGround = false;
 
-  collision(1);
+  collision(1, objs);
 
   if (hp <= 0) {
     anim.set("die");
@@ -127,12 +128,12 @@ void Player::status(float time) {
   anim.tick(time);
 }
 
-void Player::collision (int num) {
-  for (int i=0;i<obj.size();i++) {
-    if (rect.intersects(obj[i].rect)) {
-      if (obj[i].name=="wall") {
-        if (dy>0 && num == 1) {
-          rect.top = obj[i].rect.top -  rect.height;
+void Player::collision(int num, std::vector<Object> objs) {
+  for (int i = 0; i < objs.size(); i++) {
+    if (rect.intersects(objs[i].rect)) {
+      if (objs[i].name == "wall") {
+        if (dy > 0 && num == 1) {
+          rect.top = objs[i].rect.top - rect.height;
           dy = 0;
           isGround = true;
           if (STATE == JUMP) {
@@ -142,20 +143,20 @@ void Player::collision (int num) {
           return;
         }
 
-        if (dy<0 && num == 1) {
-          rect.top = obj[i].rect.top + obj[i].rect.height;
-          dy=0;
+        if (dy < 0 && num == 1) {
+          rect.top = objs[i].rect.top + objs[i].rect.height;
+          dy = 0;
           max_jump = 200;
           return;
         }
 
-        if (dx>0 && num == 0) {
-          rect.left = obj[i].rect.left - rect.width;
+        if (dx > 0 && num == 0) {
+          rect.left = objs[i].rect.left - rect.width;
           return;
         }
 
-        if (dx<0 && num == 0) {
-          rect.left = obj[i].rect.left + obj[i].rect.width;
+        if (dx < 0 && num == 0) {
+          rect.left = objs[i].rect.left + objs[i].rect.width;
           return;
         }
       }
@@ -181,7 +182,11 @@ float Player::getArm() {
 }
 
 void Player::draw(sf::RenderWindow &window) {
-  anim.draw(window,rect.left,rect.top + rect.height);
+  anim.draw(window, rect.left, rect.top + rect.height);
+}
+
+bool Player::GetDir() {
+  return dir;
 }
 
 void Player::setKey(std::string name, bool value) {

@@ -24,7 +24,7 @@ struct Layer {
 };
 
 class Level {
-public:
+ public:
   bool LoadFromFile(std::string filename);
   Object GetObject(std::string name);
   std::vector<Object> GetObjects(std::string name);
@@ -32,7 +32,7 @@ public:
   void Draw(sf::RenderWindow &window);
   sf::Vector2i GetTileSize();
 
-private:
+ private:
   int width, height, tileWidth, tileHeight;
   int firstTileID;
   sf::Rect<float> drawingBounds;
