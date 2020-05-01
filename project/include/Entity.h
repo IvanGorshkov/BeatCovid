@@ -7,6 +7,7 @@
 
 class Entity {
  public:
+  Entity() = default;
   explicit Entity(float x, float y, float dx, float dy, int height, int weight);
   sf::FloatRect GetRect();
   virtual void Update(float time, std::vector<Object> &obj) = 0;
