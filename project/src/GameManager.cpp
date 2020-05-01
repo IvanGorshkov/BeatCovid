@@ -56,6 +56,7 @@ void GameManager::Fire() {
     player->AddPoints(-1);
   }
 }
+// Методы для работы с Антителами
 
 // Методы работы с классом Bullet
 // Обновление Bullet
