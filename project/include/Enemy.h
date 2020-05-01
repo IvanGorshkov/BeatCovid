@@ -8,10 +8,14 @@ class Enemy: public Entity {
  public:
   explicit Enemy(float x, float y, int height, int weight);
   void Update(float time, std::vector<Object> &obj) override;
+  float GetTimer() const;
+  void ResetTimer();
+  void setDie();
 
  private:
   int dmg;
   int countDmg;
+  float timer;
 };
 
 //class Police : public Enemy {

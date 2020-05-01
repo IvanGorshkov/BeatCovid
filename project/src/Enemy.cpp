@@ -1,7 +1,7 @@
 #include "Enemy.h"
 
 Enemy::Enemy(float x, float y,int height, int weight)
-    : Entity(x, y, 0, 0, 1, 1) {
+    : Entity(x, y, 0, 0, height, weight) {
   sf::Texture enemyTexture;
   enemyTexture.loadFromFile("../enemy.png");
   anim = AnimationManager(enemyTexture);
@@ -12,7 +12,20 @@ Enemy::Enemy(float x, float y,int height, int weight)
 
 void Enemy::Update(float time, std::vector<Object> &obj) {
   anim.set("move");
+  timer += time;
   anim.tick(time);
+}
+
+float Enemy::GetTimer() const {
+  return timer;
+}
+
+void Enemy::ResetTimer() {
+  timer = 0;
+}
+
+void Enemy::setDie() {
+  isLife = false;
 }
 //
 //Police::Police(int x, int y)

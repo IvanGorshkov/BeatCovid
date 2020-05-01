@@ -6,17 +6,23 @@
 #include <iostream>
 
 Player::Player(Object position)
-    : arm(100), hp(100), dx(0.1), max_jump(0), STATE(STAY), isGround(true) {
+    : Entity(position.rect.left,position.rect.top, 0.1, 0.1, 50, 40)
+    , arm(100)
+    , hp(100)
+    , max_jump(0)
+    , STATE(STAY)
+    , isGround(true)
+    , points(0)
+    , vaccine(false) {
   sf::Texture player_t;
   player_t.loadFromFile("../fang.png");
   anim = AnimationManager(player_t);
-
   anim.create("walk", 0, 244, 40, 50, 6, 0.005, 40);
   anim.create("stay", 0, 187, 42, 52, 3, 0.002, 42);
   anim.create("die", 0, 1199, 59, 41, 7, 0.004, 59);
   anim.create("jump", 0, 528, 29, 30, 4, 0.0045, 38);
+  anim.create("win", 0, 744, 33, 76, 4, 0.0045, 38);
   anim.create("lay", 0, 436, 80, 20, 1, 0);
-  rect = sf::FloatRect(position.rect.left, position.rect.top, 40, 50);
 }
 
 void Player::keyCheck() {
@@ -71,25 +77,24 @@ sf::FloatRect Player::getRect() {
   return rect;
 }
 
-void Player::status(float time, std::vector<Object> objs) {
+void Player::Update(float time, std::vector<Object> &obj) {
   keyCheck();
 
   if (STATE == STAY) {
-    anim.set("stay");
+    SetAnimation(anim,"stay");
   }
 
   if (STATE == RUN) {
-    anim.set("walk");
+
+    SetAnimation(anim,"walk");
   }
 
   if (STATE == JUMP) {
-    anim.set("jump");
-
+    SetAnimation(anim,"jump");
   }
 
   if (STATE == LAY) {
-    anim.set("lay");
-
+    SetAnimation(anim,"lay");
   }
 
   anim.flip(dir);
@@ -98,10 +103,10 @@ void Player::status(float time, std::vector<Object> objs) {
     rect.left += dx * time;
   }
 
-  collision(0, objs);
+  collision(0, obj);
   if (STATE != JUMP) {
     if ((STATE == STAY || STATE == RUN || STATE == LAY) && isGround == false) {
-      anim.set("jump");
+      SetAnimation(anim,"jump");
     }
     dy = 0.2;
   }
@@ -116,10 +121,10 @@ void Player::status(float time, std::vector<Object> objs) {
   rect.top += dy * time;
   isGround = false;
 
-  collision(1, objs);
+  collision(1, obj);
 
   if (hp <= 0) {
-    anim.set("die");
+    SetAnimation(anim,"die");
     if (anim.getCurrentFrame() == 6) {
       anim.pause();
     }
@@ -160,6 +165,10 @@ void Player::collision(int num, std::vector<Object> objs) {
           return;
         }
       }
+
+    if (objs[i].name == "finish" &&  vaccine == true) {
+        SetAnimation(anim, "win");
+      }
     }
   }
 }
@@ -181,14 +190,26 @@ float Player::getArm() {
   return arm;
 }
 
-void Player::draw(sf::RenderWindow &window) {
-  anim.draw(window, rect.left, rect.top + rect.height);
-}
-
 bool Player::GetDir() {
   return dir;
 }
 
 void Player::setKey(std::string name, bool value) {
   key[name] = value;
+}
+
+void Player::AddPoints(int points) {
+  this->points += points;
+}
+
+int Player::GetPoints() {
+  return points;
+}
+
+bool Player::GetVaccine() {
+  return vaccine;
+}
+
+void Player::SetVaccine(bool value) {
+  vaccine = value;
 }

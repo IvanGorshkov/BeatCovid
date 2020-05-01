@@ -7,8 +7,9 @@
 #include <SFML/Graphics.hpp>
 #include "AnimationManager.h"
 #include "Level_map.h"
+#include "Entity.h"
 
-class Player {
+class Player: public Entity {
  public:
   Player() = default;
   explicit Player(Object position);
@@ -18,10 +19,14 @@ class Player {
   float getHp();
   float getArm();
   float takeDamge(float dmg);
-  void status(float time, std::vector<Object> objs);
+  void Update(float time, std::vector<Object> &obj) override;
   sf::FloatRect getRect();
   void collision(int num, std::vector<Object> objs);
   void setKey(std::string name, bool value);
+  void AddPoints(int points);
+  int GetPoints();
+  bool GetVaccine();
+  void SetVaccine(bool value);
 
  private:
   enum {
@@ -31,7 +36,6 @@ class Player {
     LAY,
   } STATE;
 
-  AnimationManager anim;
   std::map<std::string, bool> key;
   bool dir;
   float hp;
@@ -39,7 +43,5 @@ class Player {
   float max_jump;
   int points;
   bool isGround;
-  float dx;
-  float dy;
-  sf::FloatRect rect;
+  bool vaccine;
 };
