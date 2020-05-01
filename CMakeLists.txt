@@ -14,6 +14,9 @@ add_executable(beatcovid
         project/src/AnimationManager.cpp
         project/src/Entity.cpp
         project/src/GameManager.cpp
+        project/src/Antibodies.cpp
+        project/src/GameLables.cpp
+        project/src/Vaccine.cpp
 )
 
 add_subdirectory(project/include/tinyxml)

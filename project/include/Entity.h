@@ -7,16 +7,18 @@
 
 class Entity {
  public:
+  Entity() = default;
   explicit Entity(float x, float y, float dx, float dy, int height, int weight);
   sf::FloatRect GetRect();
   virtual void Update(float time, std::vector<Object> &obj) = 0;
   void Draw(sf::RenderWindow &window);
-  void SetAnimation(AnimationManager getAnim, std::string firstAnim);
+  bool IsDie();
   bool IsLife() const;
-  void SetLife(bool getIsLife);
 
  protected:
   bool isLife;
+  bool isDie;
+  float timerDie;
   float dx;
   float dy;
   sf::FloatRect rect;

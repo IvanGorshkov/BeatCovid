@@ -17,7 +17,7 @@ int main() {
 
   //  BulletManager bulletmanager;
   Level lvl;
-  lvl.LoadFromFile("../test_map.tmx");
+  lvl.LoadFromFile("../files/test_map.tmx");
   GameManager game(lvl);
   sf::Clock clock;
   while (window.isOpen()) {
@@ -65,22 +65,20 @@ int main() {
 
     lvl.Draw(window);
     game.Draw(window);
-    if (game.GetPlayer()->takeDamge(0.005) > 0) {
-      sf::RectangleShape hp;
-      hp.setSize(sf::Vector2f(100 * (game.GetPlayer()->getHp() / 100), 20));
-      hp.setFillColor(sf::Color::Green);
-      sf::Vector2f center = window.getView().getCenter();
-      sf::Vector2f size = window.getView().getSize();
-      hp.setPosition(center.x - size.x / 2 + 11, center.y - size.y / 2 + 13);
-      window.draw(hp);
-      sf::RectangleShape arm;
-      arm.setSize(sf::Vector2f(100 * (game.GetPlayer()->getArm() / 60), 20));
-      arm.setFillColor(sf::Color::Blue);
-      arm.setPosition(140, 10);
-      arm.setPosition(center.x - size.x / 2 + 150, center.y - size.y / 2 + 13);
-      window.draw(arm);
+    sf::RectangleShape hp;
+    hp.setSize(sf::Vector2f(100 * (game.GetPlayer()->getHp() / 100), 20));
+    hp.setFillColor(sf::Color::Green);
+    sf::Vector2f center = window.getView().getCenter();
+    sf::Vector2f size = window.getView().getSize();
+    hp.setPosition(center.x - size.x / 2 + 11, center.y - size.y / 2 + 13);
+    window.draw(hp);
+    sf::RectangleShape arm;
+    arm.setSize(sf::Vector2f(100 * (game.GetPlayer()->getArm() / 60), 20));
+    arm.setFillColor(sf::Color::Blue);
+    arm.setPosition(140, 10);
+    arm.setPosition(center.x - size.x / 2 + 150, center.y - size.y / 2 + 13);
+    window.draw(arm);
 
-    }
 
     view.setCenter(game.GetPlayer()->getRect().left, game.GetPlayer()->getRect().top);
     window.setView(view);
