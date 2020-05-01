@@ -290,7 +290,7 @@ The default is to condense white space.
 
 If you change the default, you should call TiXmlBase::SetCondenseWhiteSpace( bool )
 before making any calls to Parse XML data, and I don't recommend changing it after
-it has been set.
+it has been Set.
 
 
 <h3> Handles </h3>
@@ -396,7 +396,7 @@ An example is probably the best way to go. Take:
 @endverbatim
 
 Its not much of a To Do list, but it will do. To read this file 
-(say "demo.xml") you would create a document, and parse it in:
+(say "demo.xml") you would Create a document, and parse it in:
 @verbatim
 	TiXmlDocument doc( "demo.xml" );
 	doc.LoadFile();

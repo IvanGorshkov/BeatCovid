@@ -1,56 +1,52 @@
-//
-// Created by Ivan Gorshkov on 27.04.2020.
-//
-
 #include "Animation.h"
 
 Animation::Animation(sf::Texture &t, int x, int y, int w, int h, int count, float speed, int step) {
   this->speed = speed;
   sprite.setTexture(t);
   sprite.setOrigin(0, h);
-  current_frame = 0;
-  is_playing = true;
+  currentFrame = 0;
+  isPlaying = true;
   flip = false;
   for (int kI = 0; kI < count; ++kI) {
-    frames.push_back(sf::IntRect(x + kI * step, y, w, h));
-    frames_flip.push_back(sf::IntRect(x + kI * step + w, y, -w, h));
+    frames.emplace_back(x + kI * step, y, w, h);
+    framesFlip.emplace_back(x + kI * step + w, y, -w, h);
   }
 }
 
-void Animation::tick(float time) {
-  if (!is_playing) {
+void Animation::Tick(float time) {
+  if (!isPlaying) {
     return;
   }
-  current_frame += speed * time;
-  if (current_frame > frames.size()) {
-    current_frame -= frames.size();
+  currentFrame += speed * time;
+  if (currentFrame > frames.size()) {
+    currentFrame -= frames.size();
   }
-  int i = current_frame;
+  int i = currentFrame;
   sprite.setTextureRect(frames[i]);
   if (flip) {
-    sprite.setTextureRect(frames_flip[i]);
+    sprite.setTextureRect(framesFlip[i]);
   }
 }
 
-void Animation::setFlip(bool value) {
+void Animation::SetFlip(bool value) {
   flip = value;
 }
 
-void Animation::setSpritePosition(int x, int y) {
+void Animation::SetSpritePosition(int x, int y) {
   sprite.setPosition(x, y);
 }
-sf::Sprite Animation::getSprite() {
+sf::Sprite Animation::GetSprite() {
   return sprite;
 }
 
-void Animation::setPlay(bool value) {
-  is_playing = value;
+void Animation::SetPlay(bool value) {
+  isPlaying = value;
 }
 
-float Animation::getCurrentFrame() {
-  return current_frame;
+float Animation::GetCurrentFrame() const {
+  return currentFrame;
 }
 
-std::vector<sf::IntRect> Animation::getFrames() {
+std::vector<sf::IntRect> Animation::GetFrames() {
   return frames;
 }

@@ -80,7 +80,7 @@ bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classTiXmlElement.html">TiXmlElement</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTiXmlDocument.html#ad09d17927f908f40efb406af2fb873be">RootElement</a> () const </td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get the root element -- the only top level element -- of the document.  <a href="#ad09d17927f908f40efb406af2fb873be"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTiXmlDocument.html#a6dfc01a6e5d58e56acd537dfd3bdeb29">Error</a> () const </td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">If an error occurs, Error will be set to true.  <a href="#a6dfc01a6e5d58e56acd537dfd3bdeb29"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">If an error occurs, Error will be Set to true.  <a href="#a6dfc01a6e5d58e56acd537dfd3bdeb29"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9d0f689f6e09ea494ea547be8d79c25e"></a><!-- doxytag: member="TiXmlDocument::ErrorDesc" ref="a9d0f689f6e09ea494ea547be8d79c25e" args="() const " -->
 const char *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTiXmlDocument.html#a9d0f689f6e09ea494ea547be8d79c25e">ErrorDesc</a> () const </td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Contains a textual (english) description of the error if one occurs. <br/></td></tr>
@@ -174,7 +174,7 @@ virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </div>
 <div class="memdoc">
 
-<p>If an error occurs, Error will be set to true. </p>
+<p>If an error occurs, Error will be Set to true. </p>
 <p>Also,</p>
 <ul>
 <li>The <a class="el" href="classTiXmlDocument.html#af96fc2f3f9ec6422782bfe916c9e778f" title="Generally, you probably want the error string ( ErrorDesc() ).">ErrorId()</a> will contain the integer identifier of the error (not generally useful)</li>
@@ -415,7 +415,7 @@ virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <p><a class="el" href="classTiXmlDocument.html#a51dac56316f89b35bdb7d0d433ba988e" title="SetTabSize() allows the error reporting functions (ErrorRow() and ErrorCol()) to...">SetTabSize()</a> allows the error reporting functions (<a class="el" href="classTiXmlDocument.html#af30efc75e804aa2e92fb8be3a8cb676e" title="Returns the location (if known) of the error.">ErrorRow()</a> and <a class="el" href="classTiXmlDocument.html#aa90bc630ee5203c6109ca5fad3323649" title="The column where the error occured. See ErrorRow().">ErrorCol()</a>) to report the correct values for row and column. </p>
 <p>It does not change the output or input in any way.</p>
 <p>By calling this method, with a tab size greater than 0, the row and column of each node and attribute is stored when the file is loaded. Very useful for tracking the DOM back in to the source file.</p>
-<p>The tab size is required for calculating the location of nodes. If not set, the default of 4 is used. The tabsize is set per document. Setting the tabsize to 0 disables row/column tracking.</p>
+<p>The tab size is required for calculating the location of nodes. If not Set, the default of 4 is used. The tabsize is Set per document. Setting the tabsize to 0 disables row/column tracking.</p>
 <p>Note that row and column tracking is not supported when using operator&gt;&gt;.</p>
 <p>The tab size needs to be enabled before the parse or load. Correct usage: </p>
 <div class="fragment"><pre class="fragment">

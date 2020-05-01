@@ -662,7 +662,7 @@
 <a name="l00891"></a>00891 <span class="comment">/*  A class used to manage a group of attributes.</span>
 <a name="l00892"></a>00892 <span class="comment">    It is only used internally, both by the ELEMENT and the DECLARATION.</span>
 <a name="l00893"></a>00893 <span class="comment">    </span>
-<a name="l00894"></a>00894 <span class="comment">    The set can be changed transparent to the Element and Declaration</span>
+<a name="l00894"></a>00894 <span class="comment">    The Set can be changed transparent to the Element and Declaration</span>
 <a name="l00895"></a>00895 <span class="comment">    classes that use it, but NOT transparent to the Attribute</span>
 <a name="l00896"></a>00896 <span class="comment">    which has to implement a next() and previous() method. Which makes</span>
 <a name="l00897"></a>00897 <span class="comment">    it a bit problematic and prevents the use of STL.</span>
@@ -1048,7 +1048,7 @@
 <a name="l01452"></a><a class="code" href="classTiXmlDocument.html#ad09d17927f908f40efb406af2fb873be">01452</a>     <span class="keyword">const</span> <a class="code" href="classTiXmlElement.html" title="The element is a container class.">TiXmlElement</a>* <a class="code" href="classTiXmlDocument.html#ad09d17927f908f40efb406af2fb873be" title="Get the root element -- the only top level element -- of the document.">RootElement</a>()<span class="keyword"> const     </span>{ <span class="keywordflow">return</span> <a class="code" href="classTiXmlNode.html#af4fb652f6bd79ae0d5ce7d0f7d3c0fba" title="Convenience function to get through elements.">FirstChildElement</a>(); }
 <a name="l01453"></a>01453     <a class="code" href="classTiXmlElement.html" title="The element is a container class.">TiXmlElement</a>* <a class="code" href="classTiXmlDocument.html#ad09d17927f908f40efb406af2fb873be" title="Get the root element -- the only top level element -- of the document.">RootElement</a>()                 { <span class="keywordflow">return</span> <a class="code" href="classTiXmlNode.html#af4fb652f6bd79ae0d5ce7d0f7d3c0fba" title="Convenience function to get through elements.">FirstChildElement</a>(); }
 <a name="l01454"></a>01454 
-<a name="l01460"></a><a class="code" href="classTiXmlDocument.html#a6dfc01a6e5d58e56acd537dfd3bdeb29">01460</a>     <span class="keywordtype">bool</span> <a class="code" href="classTiXmlDocument.html#a6dfc01a6e5d58e56acd537dfd3bdeb29" title="If an error occurs, Error will be set to true.">Error</a>()<span class="keyword"> const                      </span>{ <span class="keywordflow">return</span> error; }
+<a name="l01460"></a><a class="code" href="classTiXmlDocument.html#a6dfc01a6e5d58e56acd537dfd3bdeb29">01460</a>     <span class="keywordtype">bool</span> <a class="code" href="classTiXmlDocument.html#a6dfc01a6e5d58e56acd537dfd3bdeb29" title="If an error occurs, Error will be Set to true.">Error</a>()<span class="keyword"> const                      </span>{ <span class="keywordflow">return</span> error; }
 <a name="l01461"></a>01461 
 <a name="l01463"></a><a class="code" href="classTiXmlDocument.html#a9d0f689f6e09ea494ea547be8d79c25e">01463</a>     <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="classTiXmlDocument.html#a9d0f689f6e09ea494ea547be8d79c25e" title="Contains a textual (english) description of the error if one occurs.">ErrorDesc</a>()<span class="keyword"> const  </span>{ <span class="keywordflow">return</span> errorDesc.c_str (); }
 <a name="l01464"></a>01464 

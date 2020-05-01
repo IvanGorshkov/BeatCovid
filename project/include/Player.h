@@ -1,7 +1,3 @@
-//
-// Created by Ivan Gorshkov on 25.04.2020.
-//
-
 #pragma once
 
 #include <SFML/Graphics.hpp>
@@ -9,22 +5,21 @@
 #include "Level_map.h"
 #include "Entity.h"
 
-class Player: public Entity {
+class Player : public Entity {
  public:
   Player() = default;
-  explicit Player(Object position);
-  void draw(sf::RenderWindow &window);
-  bool GetDir();
-  void keyCheck();
-  float getHp();
-  float getArm();
-  float takeDamge(float dmg);
+  explicit Player(const Object& position);
+  bool GetDir() const;
+  void KeyCheck();
+  float GetHp() const;
+  float GetArm() const;
+  float TakeDamge(float dmg);
+  int GetDmg() const;
   void Update(float time, std::vector<Object> &obj) override;
-  sf::FloatRect getRect();
-  void collision(int num, std::vector<Object> objs);
-  void setKey(std::string name, bool value);
-  void AddPoints(int points);
-  int GetPoints();
+  void Collision(int num, std::vector<Object> objs);
+  void SetKey(std::string name, bool value);
+  void AddPoints(int getPoints);
+  int GetPoints() const;
   bool GetVaccine();
   void SetVaccine(bool value);
 
@@ -38,6 +33,7 @@ class Player: public Entity {
 
   std::map<std::string, bool> key;
   bool dir;
+  int dmg;
   float hp;
   float arm;
   float max_jump;

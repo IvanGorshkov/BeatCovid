@@ -187,7 +187,7 @@ class&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 
 <p>Return the position, in the original source file, of this node or attribute. </p>
 <p>The row and column are 1-based. (That is the first row and first column is 1,1). If the returns values are 0 or less, then the parser does not have a row and column value.</p>
-<p>Generally, the row and column value will be set when the TiXmlDocument::Load(), <a class="el" href="classTiXmlDocument.html#a4c852a889c02cf251117fd1d9fe1845f" title="Load a file using the current document value.">TiXmlDocument::LoadFile()</a>, or any TiXmlNode::Parse() is called. It will NOT be set when the DOM was created from operator&gt;&gt;.</p>
+<p>Generally, the row and column value will be Set when the TiXmlDocument::Load(), <a class="el" href="classTiXmlDocument.html#a4c852a889c02cf251117fd1d9fe1845f" title="Load a file using the current document value.">TiXmlDocument::LoadFile()</a>, or any TiXmlNode::Parse() is called. It will NOT be Set when the DOM was created from operator&gt;&gt;.</p>
 <p>The values reflect the initial load. Once the DOM is modified programmatically (by adding or changing nodes and attributes) the new values will NOT update to reflect changes in the document.</p>
 <p>There is a minor performance cost to computing the row and column. Computation can be disabled if <a class="el" href="classTiXmlDocument.html#a51dac56316f89b35bdb7d0d433ba988e" title="SetTabSize() allows the error reporting functions (ErrorRow() and ErrorCol()) to...">TiXmlDocument::SetTabSize()</a> is called with 0 as the value.</p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classTiXmlDocument.html#a51dac56316f89b35bdb7d0d433ba988e" title="SetTabSize() allows the error reporting functions (ErrorRow() and ErrorCol()) to...">TiXmlDocument::SetTabSize()</a> </dd></dl>
@@ -211,7 +211,7 @@ class&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 <div class="memdoc">
 
 <p>The world does not agree on whether white space should be kept or not. </p>
-<p>In order to make everyone happy, these global, static functions are provided to set whether or not TinyXml will condense all white space into a single space or not. The default is to condense. Note changing this value is not thread safe. </p>
+<p>In order to make everyone happy, these global, static functions are provided to Set whether or not TinyXml will condense all white space into a single space or not. The default is to condense. Note changing this value is not thread safe. </p>
 
 </div>
 </div>

@@ -8,9 +8,9 @@
 #include "tinyxml.h"
 
 struct Object {
-  int GetPropertyInt(std::string name);
-  float GetPropertyFloat(std::string name);
-  std::string GetPropertyString(std::string name);
+  int GetPropertyInt(std::string getName);
+  float GetPropertyFloat(std::string getName);
+  std::string GetPropertyString(std::string getName);
   std::string name;
   std::string type;
   sf::Rect<float> rect;

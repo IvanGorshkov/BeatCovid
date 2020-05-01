@@ -1,12 +1,8 @@
-//
-// Created by Ivan Gorshkov on 01.05.2020.
-//
-
 #include "GameLables.h"
 #include <sstream>
 
 GameLables::GameLables() {
-  font.loadFromFile("../Inconsolata-Bold.ttf");
+  font.loadFromFile("../files/Inconsolata-Bold.ttf");
   points.setFont(font);
   points.setCharacterSize(40);
   points.setStyle(sf::Text::Bold);
