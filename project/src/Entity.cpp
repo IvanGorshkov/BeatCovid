@@ -1,5 +1,4 @@
 #include "Entity.h"
-#include <utility>
 
 Entity::Entity(float x, float y, float dx, float dy, int width, int height)
     : dx(dx), dy(dy), isLife(true), timerDie(0), isDie(false) {
@@ -11,7 +10,7 @@ sf::FloatRect Entity::GetRect() {
 }
 
 void Entity::Draw(sf::RenderWindow &window) {
-  anim.draw(window, rect.left, rect.top + rect.height);
+  anim.Draw(window, rect.left, rect.top + rect.height);
 }
 
 bool Entity::IsDie() {

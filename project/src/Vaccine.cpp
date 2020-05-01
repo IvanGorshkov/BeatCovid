@@ -8,11 +8,11 @@ Vaccine::Vaccine(float x, float y, float w, float h):Entity(x,y,0,0,w,h) {
   sf::Texture tVaccine;
   tVaccine.loadFromFile("../files/images/vaccine.png");
   anim = AnimationManager(tVaccine);
-  anim.create("stay", 0, 0, 32, 32, 1, 0);
+  anim.Create("stay", 0, 0, 32, 32, 1, 0);
 }
 
 void Vaccine::Update(Player *player) {
-  if (rect.intersects(player->getRect())) {
+  if (rect.intersects(player->GetRect())) {
     isLife = false;
   }
 }

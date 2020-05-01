@@ -1,7 +1,3 @@
-//
-// Created by Ivan Gorshkov on 27.04.2020.
-//
-
 #pragma once
 #include <SFML/Graphics.hpp>
 
@@ -9,21 +5,21 @@ class Animation {
  public:
   Animation() = default;
   Animation(sf::Texture &t, int x, int y, int w, int h, int count, float speed, int step);
-  void tick(float time);
-  void setFlip(bool value);
-  void setPlay(bool value);
-  float getCurrentFrame();
-  std::vector<sf::IntRect> getFrames();
-  void setSpritePosition(int x, int y);
-  sf::Sprite getSprite();
+  void Tick(float time);
+  void SetFlip(bool value);
+  void SetPlay(bool value);
+  float GetCurrentFrame() const;
+  std::vector<sf::IntRect> GetFrames();
+  void SetSpritePosition(int x, int y);
+  sf::Sprite GetSprite();
 
  private:
   std::vector<sf::IntRect> frames;
   sf::Sprite sprite;
   bool flip;
-  bool is_playing;
+  bool isPlaying;
   float speed;
-  float current_frame;
-  std::vector<sf::IntRect> frames_flip;
+  float currentFrame;
+  std::vector<sf::IntRect> framesFlip;
 };
 

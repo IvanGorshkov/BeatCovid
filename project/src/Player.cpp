@@ -5,7 +5,7 @@
 #include "Player.h"
 #include <iostream>
 
-Player::Player(Object position)
+Player::Player(const Object& position)
     : Entity(position.rect.left, position.rect.top, 0.1, 0.1, 50, 40),
       arm(100),
       hp(100),
@@ -18,15 +18,15 @@ Player::Player(Object position)
   sf::Texture player_t;
   player_t.loadFromFile("../files/images/fang.png");
   anim = AnimationManager(player_t);
-  anim.create("walk", 0, 244, 40, 50, 6, 0.005, 40);
-  anim.create("stay", 0, 187, 42, 52, 3, 0.002, 42);
-  anim.create("die", 0, 1199, 59, 41, 7, 0.004, 59);
-  anim.create("jump", 0, 528, 29, 30, 4, 0.0045, 38);
-  anim.create("win", 0, 744, 33, 76, 4, 0.0045, 38);
-  anim.create("lay", 0, 436, 80, 20, 1, 0);
+  anim.Create("walk", 0, 244, 40, 50, 6, 0.005, 40);
+  anim.Create("stay", 0, 187, 42, 52, 3, 0.002, 42);
+  anim.Create("die", 0, 1199, 59, 41, 7, 0.004, 59);
+  anim.Create("jump", 0, 528, 29, 30, 4, 0.0045, 38);
+  anim.Create("win", 0, 744, 33, 76, 4, 0.0045, 38);
+  anim.Create("lay", 0, 436, 80, 20, 1, 0);
 }
 
-void Player::keyCheck() {
+void Player::KeyCheck() {
   if (key["L"]) {
     dir = true;
     if (STATE == STAY) {
@@ -74,43 +74,39 @@ void Player::keyCheck() {
   key["R"] = key["L"] = key["UP"] = key["DOWN"] = false;
 }
 
-sf::FloatRect Player::getRect() {
-  return rect;
-}
-
-int Player::GetDmg() {
+int Player::GetDmg() const {
   return dmg;
 }
 
 void Player::Update(float time, std::vector<Object> &obj) {
-  keyCheck();
+  KeyCheck();
 
   if (STATE == STAY) {
-    anim.set("stay");
+    anim.Set("stay");
   }
 
   if (STATE == RUN) {
-    anim.set("walk");
+    anim.Set("walk");
   }
 
   if (STATE == JUMP) {
-    anim.set("jump");
+    anim.Set("jump");
   }
 
   if (STATE == LAY) {
-    anim.set("lay");
+    anim.Set("lay");
   }
 
-  anim.flip(dir);
+  anim.Flip(dir);
 
   if (hp > 0) {
     rect.left += dx * time;
   }
 
-  collision(0, obj);
+  Collision(0, obj);
   if (STATE != JUMP) {
-    if ((STATE == STAY || STATE == RUN || STATE == LAY) && isGround == false) {
-      anim.set("jump");
+    if ((STATE == STAY || STATE == RUN || STATE == LAY) && !isGround) {
+      anim.Set("jump");
     }
     dy = 0.2;
   }
@@ -125,24 +121,24 @@ void Player::Update(float time, std::vector<Object> &obj) {
   rect.top += dy * time;
   isGround = false;
 
-  collision(1, obj);
+  Collision(1, obj);
 
   if (hp <= 0) {
-    anim.set("die");
-    if (anim.getCurrentFrame() == 6) {
-      anim.pause();
+    anim.Set("die");
+    if (anim.GetCurrentFrame() == 6) {
+      anim.Pause();
     }
   }
 
-  anim.tick(time);
+  anim.Tick(time);
 }
 
-void Player::collision(int num, std::vector<Object> objs) {
-  for (int i = 0; i < objs.size(); i++) {
-    if (rect.intersects(objs[i].rect)) {
-      if (objs[i].name == "wall") {
+void Player::Collision(int num, std::vector<Object> objs) {
+  for (auto & obj : objs) {
+    if (rect.intersects(obj.rect)) {
+      if (obj.name == "wall") {
         if (dy > 0 && num == 1) {
-          rect.top = objs[i].rect.top - rect.height;
+          rect.top = obj.rect.top - rect.height;
           dy = 0;
           isGround = true;
           if (STATE == JUMP) {
@@ -153,60 +149,60 @@ void Player::collision(int num, std::vector<Object> objs) {
         }
 
         if (dy < 0 && num == 1) {
-          rect.top = objs[i].rect.top + objs[i].rect.height;
+          rect.top = obj.rect.top + obj.rect.height;
           dy = 0;
           max_jump = 200;
           return;
         }
 
         if (dx > 0 && num == 0) {
-          rect.left = objs[i].rect.left - rect.width;
+          rect.left = obj.rect.left - rect.width;
           return;
         }
 
         if (dx < 0 && num == 0) {
-          rect.left = objs[i].rect.left + objs[i].rect.width;
+          rect.left = obj.rect.left + obj.rect.width;
           return;
         }
       }
 
-      if (objs[i].name == "finish" && vaccine == true) {
-        anim.set("win");
+      if (obj.name == "finish" && vaccine) {
+        anim.Set("win");
       }
     }
   }
 }
 
-float Player::takeDamge(float dmg) {
+float Player::TakeDamge(float getDmg) {
   if (arm > 0) {
-    arm -= dmg;
+    arm -= getDmg;
   } else {
-    hp -= dmg;
+    hp -= getDmg;
   }
   return hp;
 }
 
-float Player::getHp() {
+float Player::GetHp() const {
   return hp;
 }
 
-float Player::getArm() {
+float Player::GetArm() const {
   return arm;
 }
 
-bool Player::GetDir() {
+bool Player::GetDir() const {
   return dir;
 }
 
-void Player::setKey(std::string name, bool value) {
+void Player::SetKey(std::string name, bool value) {
   key[name] = value;
 }
 
-void Player::AddPoints(int points) {
-  this->points += points;
+void Player::AddPoints(int getPoints) {
+  this->points += getPoints;
 }
 
-int Player::GetPoints() {
+int Player::GetPoints() const {
   return points;
 }
 

@@ -1,7 +1,3 @@
-//
-// Created by Ivan Gorshkov on 01.05.2020.
-//
-
 #include "GameLables.h"
 #include <sstream>
 

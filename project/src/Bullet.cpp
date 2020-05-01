@@ -1,13 +1,13 @@
 #include "Bullet.h"
 
-Bullet::Bullet(float x, float y, float dx, float dy, int dmg)
+Bullet::Bullet(float x, float y, float dx, float dy, float dmg)
     : Entity(x, y, dx, dy, 16, 16), dmg(dmg) {
   sf::Texture bulletTexture;
   bulletTexture.loadFromFile("../files/images/bullet.png");
   anim = AnimationManager(bulletTexture);
-  anim.create("move", 7, 10, 8, 8, 1, 0);
-  anim.create("explode", 27, 7, 18, 18, 4, 0.01, 29);
-  anim.set("move");
+  anim.Create("move", 7, 10, 8, 8, 1, 0);
+  anim.Create("explode", 27, 7, 18, 18, 4, 0.01, 29);
+  anim.Set("move");
 }
 
 void Bullet::Update(float time, std::vector<Object> &obj) {
@@ -19,7 +19,7 @@ void Bullet::Update(float time, std::vector<Object> &obj) {
         dx = 0;
         dy = 0;
         timerDie += time;
-        anim.set("explode");
+        anim.Set("explode");
         isLife = false;
         break;
       }
@@ -29,9 +29,9 @@ void Bullet::Update(float time, std::vector<Object> &obj) {
   rect.left += dx * time;
   rect.top += dy * time;
 
-  anim.tick(time);
+  anim.Tick(time);
 }
 
-int Bullet::GetDmg() const {
+float Bullet::GetDmg() const {
   return dmg;
 }

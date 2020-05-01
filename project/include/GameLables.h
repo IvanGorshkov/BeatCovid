@@ -1,7 +1,3 @@
-//
-// Created by Ivan Gorshkov on 01.05.2020.
-//
-
 #pragma once
 
 #include <SFML/Graphics.hpp>

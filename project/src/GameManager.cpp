@@ -49,9 +49,9 @@ Player *GameManager::GetPlayer() {
 void GameManager::Fire() {
   if (player->GetPoints() > 0) {
     if (player->GetDir()) {
-      playerBullets.emplace_back(player->getRect().left, player->getRect().top + 10, -0.2, 0, player->GetDmg());
+      playerBullets.emplace_back(player->GetRect().left, player->GetRect().top + 10, -0.2, 0, player->GetDmg());
     } else {
-      playerBullets.emplace_back(player->getRect().left + player->getRect().width, player->getRect().top + 10, 0.2, 0, player->GetDmg());
+      playerBullets.emplace_back(player->GetRect().left + player->GetRect().width, player->GetRect().top + 10, 0.2, 0, player->GetDmg());
     }
     player->AddPoints(-1);
   }
@@ -103,8 +103,9 @@ void GameManager::checkHitEnemy() {
 // Проверка на попадание в героя
 void GameManager::checkHitPlayer() {
   for (enemyBulletsIt = enemyBullets.begin(); enemyBulletsIt != enemyBullets.end(); enemyBulletsIt++) {
-    if (enemyBulletsIt->GetRect().intersects(player->getRect()) && enemyBulletsIt->IsLife()) {
-      player->takeDamge(enemyBulletsIt->GetDmg());
+    if (enemyBulletsIt->GetRect().intersects(player->GetRect()) && enemyBulletsIt->IsLife()) {
+      player->TakeDamge(enemyBulletsIt->GetDmg());
+      std::cout << player->GetHp() << std::endl;
       break;
     }
   }
@@ -115,8 +116,8 @@ void GameManager::bulletPlayer() {
   for (enemiesIt = enemies.begin(); enemiesIt != enemies.end(); enemiesIt++) {
     if (enemiesIt->GetTimer() > 1000) {
       float speed = 0.2;
-      float X = (player->getRect().left - enemiesIt->GetRect().left) / 16;
-      float Y = (player->getRect().top - enemiesIt->GetRect().top) / 16;
+      float X = (player->GetRect().left - enemiesIt->GetRect().left) / 16;
+      float Y = (player->GetRect().top - enemiesIt->GetRect().top) / 16;
 
       // Дальность полета пули
       if (std::abs(X) > 30 || std::abs(Y) > 30) {
@@ -157,9 +158,9 @@ void GameManager::bulletPlayer() {
 //      }
 
       if (X > 0) {
-        enemyBullets.emplace_back(enemiesIt->GetRect().left + 20, enemiesIt->GetRect().top, dx, dy,enemyBulletsIt->GetDmg());
+        enemyBullets.emplace_back(enemiesIt->GetRect().left + 20, enemiesIt->GetRect().top, dx, dy,enemiesIt->GetDmg());
       } else {
-        enemyBullets.emplace_back(enemiesIt->GetRect().left - 16, enemiesIt->GetRect().top, dx, dy,enemyBulletsIt->GetDmg());
+        enemyBullets.emplace_back(enemiesIt->GetRect().left - 16, enemiesIt->GetRect().top, dx, dy,enemiesIt->GetDmg());
       }
 
       enemiesIt->ResetTimer();
