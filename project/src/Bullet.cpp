@@ -15,7 +15,7 @@ void Bullet::Update(float time, std::vector<Object> &obj) {
     timerDie += time;
   } else {
     for (auto &i : obj) {
-      if (rect.intersects(i.rect)) {
+      if (rect.intersects(i.rect) && !(i.name == "vaccine" || i.name == "antigen")) {
         dx = 0;
         dy = 0;
         timerDie += time;

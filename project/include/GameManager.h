@@ -9,7 +9,6 @@
 #include "Enemy.h"
 #include "Antibodies.h"
 #include "GameLables.h"
-#include "Vaccine.h"
 
 class GameManager {
  public:
@@ -51,8 +50,8 @@ class GameManager {
   void updateAntibodies(float time);
 
   // Методы работы с классом Vaccine
-  std::list<Vaccine> vaccine;
-  std::list<Vaccine>::iterator vaccineIt;
+  std::list<Antibodies> vaccine;
+  std::list<Antibodies>::iterator vaccineIt;
   void drawVaccine(sf::RenderWindow &window);
   void updateVaccine(float time);
 };

@@ -16,8 +16,11 @@ add_executable(beatcovid
         project/src/GameManager.cpp
         project/src/Antibodies.cpp
         project/src/GameLables.cpp
-        project/src/Vaccine.cpp
-)
+        project/src/Arrmor.cpp
+        project/src/Robe.cpp
+        project/src/Gloves.cpp
+        project/src/Glasses.cpp
+        project/src/Mask.cpp)
 
 add_subdirectory(project/include/tinyxml)
 

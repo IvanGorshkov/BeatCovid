@@ -4,6 +4,10 @@
 #include "AnimationManager.h"
 #include "Level_map.h"
 #include "Entity.h"
+#include "Robe.h"
+#include "Gloves.h"
+#include "Glasses.h"
+#include "Mask.h"
 
 class Player : public Entity {
  public:
@@ -16,13 +20,13 @@ class Player : public Entity {
   float TakeDamge(float dmg);
   int GetDmg() const;
   void Update(float time, std::vector<Object> &obj) override;
-  void Collision(int num, std::vector<Object> objs);
+  void Collision(int num, std::vector<Object> &objs);
   void SetKey(std::string name, bool value);
   void AddPoints(int getPoints);
   int GetPoints() const;
   bool GetVaccine();
   void SetVaccine(bool value);
-
+  void DrawObjs(sf::RenderWindow &window);
  private:
   enum {
     STAY,
@@ -40,4 +44,8 @@ class Player : public Entity {
   int points;
   bool isGround;
   bool vaccine;
+  Robe bathrobe;
+  Gloves gloves;
+  Glasses glasses;
+  Mask mask;
 };

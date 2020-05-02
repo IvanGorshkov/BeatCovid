@@ -26,8 +26,10 @@ int main() {
       if (event.type == sf::Event::Closed)
         window.close();
 
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        game.Fire();
+      if (event.type == sf::Event::KeyPressed) {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+          game.Fire();
+        }
       }
     }
 
@@ -51,19 +53,6 @@ int main() {
 
     lvl.Draw(window);
     game.Draw(window);
-    sf::RectangleShape hp;
-    hp.setSize(sf::Vector2f(100 * (game.GetPlayer()->GetHp() / 100), 20));
-    hp.setFillColor(sf::Color::Green);
-    sf::Vector2f center = window.getView().getCenter();
-    sf::Vector2f size = window.getView().getSize();
-    hp.setPosition(center.x - size.x / 2 + 11, center.y - size.y / 2 + 13);
-    window.draw(hp);
-    sf::RectangleShape arm;
-    arm.setSize(sf::Vector2f(100 * (game.GetPlayer()->GetArm() / 60), 20));
-    arm.setFillColor(sf::Color::Blue);
-    arm.setPosition(140, 10);
-    arm.setPosition(center.x - size.x / 2 + 150, center.y - size.y / 2 + 13);
-    window.draw(arm);
 
     view.setCenter(game.GetPlayer()->GetRect().left, game.GetPlayer()->GetRect().top);
     window.setView(view);
