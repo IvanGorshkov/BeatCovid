@@ -6,16 +6,16 @@
 #include "tinyxml.h"
 #include "Level_map.h"
 
-int Object::GetPropertyInt(std::string name) {
-  return atoi(properties[name].c_str());
+int Object::GetPropertyInt(std::string getName) {
+  return atoi(properties[getName].c_str());
 }
 
-float Object::GetPropertyFloat(std::string name) {
-  return strtod(properties[name].c_str(), NULL);
+float Object::GetPropertyFloat(std::string getName) {
+  return strtod(properties[getName].c_str(), NULL);
 }
 
-std::string Object::GetPropertyString(std::string name) {
-  return properties[name];
+std::string Object::GetPropertyString(std::string getName) {
+  return properties[getName];
 }
 
 bool Level::LoadFromFile(std::string filename) {

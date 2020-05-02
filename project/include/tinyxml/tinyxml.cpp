@@ -1043,7 +1043,7 @@ bool TiXmlDocument::LoadFile( FILE* file, TiXmlEncoding encoding )
 	// a newline-carriage return is hit.
 	//
 	// Wikipedia:
-	// Systems based on ASCII or a compatible character set use either LF  (Line feed, '\n', 0x0A, 10 in decimal) or 
+	// Systems based on ASCII or a compatible character Set use either LF  (Line feed, '\n', 0x0A, 10 in decimal) or
 	// CR (Carriage return, '\r', 0x0D, 13 in decimal) individually, or CR followed by LF (CR+LF, 0x0D 0x0A)...
 	//		* LF:    Multics, Unix and Unix-like systems (GNU/Linux, AIX, Xenix, Mac OS X, FreeBSD, etc.), BeOS, Amiga, RISC OS, and others
     //		* CR+LF: DEC RT-11 and most other early non-Unix, non-IBM OSes, CP/M, MP/M, DOS, OS/2, Microsoft Windows, Symbian OS
@@ -1514,9 +1514,9 @@ TiXmlAttributeSet::~TiXmlAttributeSet()
 void TiXmlAttributeSet::Add( TiXmlAttribute* addMe )
 {
     #ifdef TIXML_USE_STL
-	assert( !Find( TIXML_STRING( addMe->Name() ) ) );	// Shouldn't be multiply adding to the set.
+	assert( !Find( TIXML_STRING( addMe->Name() ) ) );	// Shouldn't be multiply adding to the Set.
 	#else
-	assert( !Find( addMe->Name() ) );	// Shouldn't be multiply adding to the set.
+	assert( !Find( addMe->Name() ) );	// Shouldn't be multiply adding to the Set.
 	#endif
 
 	addMe->next = &sentinel;

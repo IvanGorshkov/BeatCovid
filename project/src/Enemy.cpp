@@ -1,45 +1,48 @@
 #include "Enemy.h"
 
 Enemy::Enemy(float x, float y,int height, int weight)
-    : Entity(x, y, 0, 0, height, weight) {
+    : Entity(x, y, 0, 0, height, weight),
+    hp(3),
+    dmg(10),
+    timerHit(0) {
   sf::Texture enemyTexture;
-  enemyTexture.loadFromFile("../enemy.png");
+  enemyTexture.loadFromFile("../files/images/enemy.png");
   anim = AnimationManager(enemyTexture);
-  anim.create("move", 0, 0, 16, 16, 2, 0.002, 18);
-  anim.create("dead", 58, 0, 16, 16, 1, 0);
-  anim.set("move");
+  anim.Create("move", 0, 0, 16, 16, 2, 0.002, 18);
+  anim.Create("dead", 58, 0, 16, 16, 1, 0);
+  anim.Set("move");
 }
 
 void Enemy::Update(float time, std::vector<Object> &obj) {
-  anim.set("move");
-  timer += time;
-  anim.tick(time);
+  timerHit += time;
+
+  if (!isLife && !IsDie()) {
+    timerDie += time;
+  } else {
+    if (hp < 0) {
+      dx = 0;
+      dy = 0;
+      timerDie += time;
+      anim.Set("dead");
+      isLife = false;
+    }
+  }
+
+  anim.Tick(time);
 }
 
 float Enemy::GetTimer() const {
-  return timer;
+  return timerHit;
 }
 
 void Enemy::ResetTimer() {
-  timer = 0;
+  timerHit = 0;
 }
 
-void Enemy::setDie() {
-  isLife = false;
+float Enemy::GetDmg() const {
+  return dmg;
 }
-//
-//Police::Police(int x, int y)
-//    : Enemy(x, y, sf::Color::Black) {
-//}
-//
-//Delivery::Delivery(int x, int y)
-//    : Enemy(x, y, sf::Color::Yellow) {
-//}
-//
-//Breaker::Breaker(int x, int y)
-//    : Enemy(x, y, sf::Color::Red) {
-//}
-//
-//Virus::Virus(int x, int y)
-//    : Enemy(x, y, sf::Color::Green) {
-//}
+
+void Enemy::TakeDmg(float getDmg) {
+  hp -= getDmg;
+}

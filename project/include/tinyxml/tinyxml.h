@@ -214,7 +214,7 @@ public:
 
 	/**	The world does not agree on whether white space should be kept or
 		not. In order to make everyone happy, these global, static functions
-		are provided to set whether or not TinyXml will condense all white space
+		are provided to Set whether or not TinyXml will condense all white space
 		into a single space or not. The default is to condense. Note changing this
 		value is not thread safe.
 	*/
@@ -228,8 +228,8 @@ public:
 		1,1). If the returns values are 0 or less, then the parser does not have
 		a row and column value.
 
-		Generally, the row and column value will be set when the TiXmlDocument::Load(),
-		TiXmlDocument::LoadFile(), or any TiXmlNode::Parse() is called. It will NOT be set
+		Generally, the row and column value will be Set when the TiXmlDocument::Load(),
+		TiXmlDocument::LoadFile(), or any TiXmlNode::Parse() is called. It will NOT be Set
 		when the DOM was created from operator>>.
 
 		The values reflect the initial load. Once the DOM is modified programmatically
@@ -441,7 +441,7 @@ public:
 		    a node to a stream is very well defined. You'll get a nice stream
 		    of output, without any extra whitespace or newlines.
 		    
-		    But reading is not as well defined. (As it always is.) If you create
+		    But reading is not as well defined. (As it always is.) If you Create
 		    a TiXmlElement (for example) and read that from an input stream,
 		    the text needs to define an element or junk will result. This is
 		    true of all input streams, but it's worth keeping in mind.
@@ -891,7 +891,7 @@ private:
 /*	A class used to manage a group of attributes.
 	It is only used internally, both by the ELEMENT and the DECLARATION.
 	
-	The set can be changed transparent to the Element and Declaration
+	The Set can be changed transparent to the Element and Declaration
 	classes that use it, but NOT transparent to the Attribute
 	which has to implement a next() and previous() method. Which makes
 	it a bit problematic and prevents the use of STL.
@@ -1215,7 +1215,7 @@ class TiXmlText : public TiXmlNode
 public:
 	/** Constructor for text element. By default, it is treated as 
 		normal, encoded text. If you want it be output as a CDATA text
-		element, set the parameter _cdata to 'true'
+		element, Set the parameter _cdata to 'true'
 	*/
 	TiXmlText (const char * initValue ) : TiXmlNode (TiXmlNode::TINYXML_TEXT)
 	{
@@ -1452,7 +1452,7 @@ public:
 	const TiXmlElement* RootElement() const		{ return FirstChildElement(); }
 	TiXmlElement* RootElement()					{ return FirstChildElement(); }
 
-	/** If an error occurs, Error will be set to true. Also,
+	/** If an error occurs, Error will be Set to true. Also,
 		- The ErrorId() will contain the integer identifier of the error (not generally useful)
 		- The ErrorDesc() method will return the name of the error. (very useful)
 		- The ErrorRow() and ErrorCol() will return the location of the error (if known)
@@ -1487,7 +1487,7 @@ public:
 		the source file.
 
 		The tab size is required for calculating the location of nodes. If not
-		set, the default of 4 is used. The tabsize is set per document. Setting
+		set, the default of 4 is used. The tabsize is Set per document. Setting
 		the tabsize to 0 disables row/column tracking.
 
 		Note that row and column tracking is not supported when using operator>>.
@@ -1757,9 +1757,9 @@ public:
 	void SetIndent( const char* _indent )			{ indent = _indent ? _indent : "" ; }
 	/// Query the indention string.
 	const char* Indent()							{ return indent.c_str(); }
-	/** Set the line breaking string. By default set to newline (\n). 
+	/** Set the line breaking string. By default Set to newline (\n).
 		Some operating systems prefer other characters, or can be
-		set to the null/empty string for no indenation.
+		Set to the null/empty string for no indenation.
 	*/
 	void SetLineBreak( const char* _lineBreak )		{ lineBreak = _lineBreak ? _lineBreak : ""; }
 	/// Query the current line breaking string.

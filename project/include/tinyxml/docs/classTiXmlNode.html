@@ -672,7 +672,7 @@ std::string &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="e
 <p>An output stream operator, for every class. </p>
 <p>Note that this outputs without any newlines or formatting, as opposed to <a class="el" href="classTiXmlBase.html#a0de56b3f2ef14c65091a3b916437b512" title="All TinyXml classes can print themselves to a filestream or the string class (TiXmlString...">Print()</a>, which includes tabs and new lines.</p>
 <p>The operator&lt;&lt; and operator&gt;&gt; are not completely symmetric. Writing a node to a stream is very well defined. You'll get a nice stream of output, without any extra whitespace or newlines.</p>
-<p>But reading is not as well defined. (As it always is.) If you create a <a class="el" href="classTiXmlElement.html" title="The element is a container class.">TiXmlElement</a> (for example) and read that from an input stream, the text needs to define an element or junk will result. This is true of all input streams, but it's worth keeping in mind.</p>
+<p>But reading is not as well defined. (As it always is.) If you Create a <a class="el" href="classTiXmlElement.html" title="The element is a container class.">TiXmlElement</a> (for example) and read that from an input stream, the text needs to define an element or junk will result. This is true of all input streams, but it's worth keeping in mind.</p>
 <p>A <a class="el" href="classTiXmlDocument.html" title="Always the top level node.">TiXmlDocument</a> will read nodes until it reads a root element, and all the children of that root element. </p>
 
 </div>

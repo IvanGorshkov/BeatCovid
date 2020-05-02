@@ -138,7 +138,7 @@ void TiXmlBase::ConvertUTF32ToUTF8( unsigned long input, char* output, int* leng
 		if ( anyByte < 127 )
 			return isalpha( anyByte );
 		else
-			return 1;	// What else to do? The unicode set is huge...get the english ones right.
+			return 1;	// What else to do? The unicode Set is huge...get the english ones right.
 //	}
 //	else
 //	{
@@ -159,7 +159,7 @@ void TiXmlBase::ConvertUTF32ToUTF8( unsigned long input, char* output, int* leng
 		if ( anyByte < 127 )
 			return isalnum( anyByte );
 		else
-			return 1;	// What else to do? The unicode set is huge...get the english ones right.
+			return 1;	// What else to do? The unicode Set is huge...get the english ones right.
 //	}
 //	else
 //	{
@@ -797,7 +797,7 @@ const char* TiXmlDocument::Parse( const char* p, TiXmlParsingData* prevData, TiX
 
 void TiXmlDocument::SetError( int err, const char* pError, TiXmlParsingData* data, TiXmlEncoding encoding )
 {	
-	// The first error in a chain is more accurate - don't set again!
+	// The first error in a chain is more accurate - don't Set again!
 	if ( error )
 		return;
 
@@ -1106,7 +1106,7 @@ const char* TiXmlElement::Parse( const char* p, TiXmlParsingData* data, TiXmlEnc
 			// Read the value -- which can include other
 			// elements -- read the end tag, and return.
 			++p;
-			p = ReadValue( p, data, encoding );		// Note this is an Element method, and will set the error if one happens.
+			p = ReadValue( p, data, encoding );		// Note this is an Element method, and will Set the error if one happens.
 			if ( !p || !*p ) {
 				// We were looking for the end tag, but found nothing.
 				// Fix for [ 1663758 ] Failure to report error on bad XML

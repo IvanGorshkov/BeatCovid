@@ -5,27 +5,32 @@
 #include "Player.h"
 #include <iostream>
 
-Player::Player(Object position)
-    : Entity(position.rect.left,position.rect.top, 0.1, 0.1, 50, 40)
-    , arm(100)
-    , hp(100)
-    , max_jump(0)
-    , STATE(STAY)
-    , isGround(true)
-    , points(0)
-    , vaccine(false) {
+Player::Player(const Object& position)
+    : Entity(position.rect.left, position.rect.top, 0.1, 0.1, 50, 40),
+      hp(100),
+      max_jump(0),
+      STATE(STAY),
+      isGround(true),
+      points(0),
+      vaccine(false),
+      dmg(1),
+      bathrobe(position.rect.left, position.rect.top, 50, 40, 1),
+      gloves(position.rect.left, position.rect.top, 50, 40, 1),
+      glasses(position.rect.left, position.rect.top, 50, 40, 1),
+      mask(position.rect.left, position.rect.top, 50, 40, 1){
   sf::Texture player_t;
-  player_t.loadFromFile("../fang.png");
+  player_t.loadFromFile("../files/images/fang.png");
   anim = AnimationManager(player_t);
-  anim.create("walk", 0, 244, 40, 50, 6, 0.005, 40);
-  anim.create("stay", 0, 187, 42, 52, 3, 0.002, 42);
-  anim.create("die", 0, 1199, 59, 41, 7, 0.004, 59);
-  anim.create("jump", 0, 528, 29, 30, 4, 0.0045, 38);
-  anim.create("win", 0, 744, 33, 76, 4, 0.0045, 38);
-  anim.create("lay", 0, 436, 80, 20, 1, 0);
+  anim.Create("walk", 0, 244, 40, 50, 6, 0.005, 40);
+  anim.Create("stay", 0, 187, 42, 52, 3, 0.002, 42);
+  anim.Create("die", 0, 1199, 59, 41, 7, 0.004, 59);
+  anim.Create("jump", 0, 528, 29, 30, 4, 0.0045, 38);
+  anim.Create("win", 0, 744, 33, 76, 4, 0.0045, 38);
+  anim.Create("lay", 0, 436, 80, 20, 1, 0);
+  arm = bathrobe.GetArm() + glasses.GetArm() + gloves.GetArm() + mask.GetArm();
 }
 
-void Player::keyCheck() {
+void Player::KeyCheck() {
   if (key["L"]) {
     dir = true;
     if (STATE == STAY) {
@@ -73,47 +78,70 @@ void Player::keyCheck() {
   key["R"] = key["L"] = key["UP"] = key["DOWN"] = false;
 }
 
-sf::FloatRect Player::getRect() {
-  return rect;
+int Player::GetDmg() const {
+  return dmg;
 }
 
 void Player::Update(float time, std::vector<Object> &obj) {
-  keyCheck();
+  KeyCheck();
 
   if (STATE == STAY) {
-    SetAnimation(anim,"stay");
+    anim.Set("stay");
+    bathrobe.SetAnim("stay");
+    gloves.SetAnim("stay");
+    glasses.SetAnim("stay");
+    mask.SetAnim("stay");
   }
 
   if (STATE == RUN) {
-
-    SetAnimation(anim,"walk");
+    anim.Set("walk");
+    bathrobe.SetAnim("walk");
+    gloves.SetAnim("walk");
+    glasses.SetAnim("walk");
+    mask.SetAnim("walk");
   }
 
   if (STATE == JUMP) {
-    SetAnimation(anim,"jump");
+    anim.Set("jump");
+    bathrobe.SetAnim("jump");
+    gloves.SetAnim("jump");
+    glasses.SetAnim("jump");
+    mask.SetAnim("jump");
   }
 
   if (STATE == LAY) {
-    SetAnimation(anim,"lay");
+    anim.Set("lay");
+    bathrobe.SetAnim("lay");
+    gloves.SetAnim("lay");
+    glasses.SetAnim("lay");
+    mask.SetAnim("lay");
   }
 
-  anim.flip(dir);
+  anim.Flip(dir);
+  bathrobe.FlipAnim(dir);
+  gloves.FlipAnim(dir);
+  glasses.FlipAnim(dir);
+  mask.FlipAnim(dir);
 
   if (hp > 0) {
     rect.left += dx * time;
   }
 
-  collision(0, obj);
+  Collision(0, obj);
   if (STATE != JUMP) {
-    if ((STATE == STAY || STATE == RUN || STATE == LAY) && isGround == false) {
-      SetAnimation(anim,"jump");
+    if ((STATE == STAY || STATE == RUN || STATE == LAY) && !isGround) {
+      anim.Set("jump");
+      bathrobe.SetAnim("jump");
+      gloves.SetAnim("jump");
+      glasses.SetAnim("jump");
+      mask.SetAnim("jump");
     }
     dy = 0.2;
   }
 
   if (STATE == JUMP) {
     max_jump += 0.2;
-    if (max_jump > 150) {
+    if (max_jump > 75) {
       dy = 0.2;
     }
   }
@@ -121,24 +149,37 @@ void Player::Update(float time, std::vector<Object> &obj) {
   rect.top += dy * time;
   isGround = false;
 
-  collision(1, obj);
+  Collision(1, obj);
 
   if (hp <= 0) {
-    SetAnimation(anim,"die");
-    if (anim.getCurrentFrame() == 6) {
-      anim.pause();
+    anim.Set("die");
+    bathrobe.SetAnim("die");
+    gloves.SetAnim("die");
+    glasses.SetAnim("die");
+    mask.SetAnim("die");
+    if (anim.GetCurrentFrame() == 6) {
+      anim.Pause();
+      bathrobe.StatusAnim();
+      gloves.StatusAnim();
+      glasses.StatusAnim();
+      mask.StatusAnim();
     }
   }
 
-  anim.tick(time);
+  anim.Tick(time);
+  obj[0].rect = rect;
+  bathrobe.Update(time, obj);
+  gloves.Update(time, obj);
+  glasses.Update(time, obj);
+  mask.Update(time, obj);
 }
 
-void Player::collision(int num, std::vector<Object> objs) {
-  for (int i = 0; i < objs.size(); i++) {
-    if (rect.intersects(objs[i].rect)) {
-      if (objs[i].name == "wall") {
+void Player::Collision(int num, std::vector<Object> &objs) {
+  for (auto & obj : objs) {
+    if (rect.intersects(obj.rect)) {
+      if (obj.name == "wall") {
         if (dy > 0 && num == 1) {
-          rect.top = objs[i].rect.top - rect.height;
+          rect.top = obj.rect.top - rect.height;
           dy = 0;
           isGround = true;
           if (STATE == JUMP) {
@@ -149,60 +190,73 @@ void Player::collision(int num, std::vector<Object> objs) {
         }
 
         if (dy < 0 && num == 1) {
-          rect.top = objs[i].rect.top + objs[i].rect.height;
+          rect.top = obj.rect.top + obj.rect.height;
           dy = 0;
           max_jump = 200;
           return;
         }
 
         if (dx > 0 && num == 0) {
-          rect.left = objs[i].rect.left - rect.width;
+          rect.left = obj.rect.left - rect.width;
           return;
         }
 
         if (dx < 0 && num == 0) {
-          rect.left = objs[i].rect.left + objs[i].rect.width;
+          rect.left = obj.rect.left + obj.rect.width;
           return;
         }
       }
 
-    if (objs[i].name == "finish" &&  vaccine == true) {
-        SetAnimation(anim, "win");
+      if (obj.name == "finish" && vaccine) {
+        anim.Set("win");
+        bathrobe.SetAnim("win");
+        gloves.SetAnim("win");
+        glasses.SetAnim("win");
+        mask.SetAnim("win");
       }
     }
   }
 }
+void Player::DrawObjs(sf::RenderWindow &window) {
+  Draw(window);
+  bathrobe.Draw(window);
+  gloves.Draw(window);
+  glasses.Draw(window);
+  mask.Draw(window);
+}
 
-float Player::takeDamge(float dmg) {
-  if (arm > 0) {
-    arm -= dmg;
-  } else {
-    hp -= dmg;
+float Player::TakeDamge(float getDmg) {
+  if (hp > 0) {
+    if (arm > getDmg) {
+      --hp;
+    } else {
+      hp += arm - getDmg;
+    }
   }
   return hp;
 }
 
-float Player::getHp() {
+float Player::GetHp() const {
   return hp;
 }
 
-float Player::getArm() {
+float Player::GetArm() const {
   return arm;
 }
 
-bool Player::GetDir() {
+bool Player::GetDir() const {
   return dir;
 }
 
-void Player::setKey(std::string name, bool value) {
+void Player::SetKey(std::string name, bool value) {
   key[name] = value;
 }
 
-void Player::AddPoints(int points) {
-  this->points += points;
+void Player::AddPoints(int getPoints) {
+  this->points += getPoints;
 }
 
-int Player::GetPoints() {
+int Player::GetPoints() const {
   return points;
 }
 
