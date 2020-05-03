@@ -6,7 +6,7 @@ using namespace sf;
 
 int main()
 {
-    RenderWindow window(VideoMode(480, 480), "SFML works!");
+    RenderWindow window(VideoMode(1024, 1024), "SFML works!");
     Texture t;
     t.loadFromFile("ivan.png");
     Sprite s;
