@@ -1,21 +1,38 @@
 cmake_minimum_required(VERSION 3.16)
-project(COVID19)
-
+project(beatcovid)
 set(CMAKE_CXX_STANDARD 14)
-
-find_package(SFML 2.5.1 COMPONENTS graphics audio REQUIRED)
-
-add_executable(COVID19 main.cpp)
-
-INCLUDE_DIRECTORIES(project/include)
-
-add_library(level project/src/Level_map.cpp)
-
+include_directories(project/include)
 include_directories(project/include/tinyxml)
+include_directories(project/include/imgui-master)
+include_directories( ${OPENGL_INCLUDE_DIRS} )
+
+add_executable(beatcovid
+        main.cpp
+        project/src/Player.cpp
+        project/src/Enemy.cpp
+        project/src/Bullet.cpp
+        project/src/Level_map.cpp
+        project/src/Animation.cpp
+        project/src/AnimationManager.cpp
+        project/src/Entity.cpp
+        project/src/GameManager.cpp
+        project/src/Antibodies.cpp
+        project/src/GameLables.cpp
+        project/src/Arrmor.cpp
+        project/src/Robe.cpp
+        project/src/Gloves.cpp
+        project/src/Glasses.cpp
+        project/src/Mask.cpp
+        project/include/imgui-master/imgui.cpp
+        project/include/imgui-master/imgui_draw.cpp
+        project/include/imgui-master/imgui_demo.cpp
+        project/include/imgui-master/imgui_widgets.cpp
+        project/include/imgui-master/imgui-SFML.cpp
+        project/src/Interface.cpp)
 
 add_subdirectory(project/include/tinyxml)
 
-target_link_libraries(level tinyxml)
+find_package(OpenGL REQUIRED)
 
-target_link_libraries(COVID19 sfml-graphics sfml-audio level)
-
+find_package(SFML REQUIRED system window graphics network audio)
+target_link_libraries(beatcovid sfml-graphics sfml-audio tinyxml ${OPENGL_LIBRARIES})

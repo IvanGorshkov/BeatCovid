@@ -23,14 +23,14 @@
 <p>TinyXML is a simple, small, C++ XML parser that can be easily integrated into other programs.</p>
 <h2>What it does. </h2>
 <p>In brief, TinyXML parses an XML document, and builds from that a Document Object Model (DOM) that can be read, modified, and saved.</p>
-<p>XML stands for "eXtensible Markup Language." It allows you to create your own document markups. Where HTML does a very good job of marking documents for browsers, XML allows you to define any kind of document markup, for example a document that describes a "to do" list for an organizer application. XML is a very structured and convenient format. All those random file formats created to store application data can all be replaced with XML. One parser for everything.</p>
+<p>XML stands for "eXtensible Markup Language." It allows you to Create your own document markups. Where HTML does a very good job of marking documents for browsers, XML allows you to define any kind of document markup, for example a document that describes a "to do" list for an organizer application. XML is a very structured and convenient format. All those random file formats created to store application data can all be replaced with XML. One parser for everything.</p>
 <p>The best place for the complete, correct, and quite frankly hard to read spec is at <a href="http://www.w3.org/TR/2004/REC-xml-20040204/">http://www.w3.org/TR/2004/REC-xml-20040204/</a>. An intro to XML (that I really like) can be found at <a href="http://skew.org/xml/tutorial/">http://skew.org/xml/tutorial</a>.</p>
 <p>There are different ways to access and interact with XML data. TinyXML uses a Document Object Model (DOM), meaning the XML data is parsed into a C++ objects that can be browsed and manipulated, and then written to disk or another output stream. You can also construct an XML document from scratch with C++ objects and write this to disk or another output stream.</p>
 <p>TinyXML is designed to be easy and fast to learn. It is two headers and four cpp files. Simply add these to your project and off you go. There is an example file - xmltest.cpp - to get you started.</p>
 <p>TinyXML is released under the ZLib license, so you can use it in open source or commercial code. The details of the license are at the top of every source file.</p>
 <p>TinyXML attempts to be a flexible parser, but with truly correct and compliant XML output. TinyXML should compile on any reasonably C++ compliant system. It does not rely on exceptions or RTTI. It can be compiled with or without STL support. TinyXML fully supports the UTF-8 encoding, and the first 64k character entities.</p>
 <h2>What it doesn't do. </h2>
-<p>TinyXML doesn't parse or use DTDs (Document Type Definitions) or XSLs (eXtensible Stylesheet Language.) There are other parsers out there (check out www.sourceforge.org, search for XML) that are much more fully featured. But they are also much bigger, take longer to set up in your project, have a higher learning curve, and often have a more restrictive license. If you are working with browsers or have more complete XML needs, TinyXML is not the parser for you.</p>
+<p>TinyXML doesn't parse or use DTDs (Document Type Definitions) or XSLs (eXtensible Stylesheet Language.) There are other parsers out there (check out www.sourceforge.org, search for XML) that are much more fully featured. But they are also much bigger, take longer to Set up in your project, have a higher learning curve, and often have a more restrictive license. If you are working with browsers or have more complete XML needs, TinyXML is not the parser for you.</p>
 <p>The following DTD syntax will not parse at this time in TinyXML:</p>
 <div class="fragment"><pre class="fragment">
 	&lt;!DOCTYPE Archiv [
@@ -59,7 +59,7 @@
 <p>When STL support is compiled out, no STL files are included whatsoever. All the string classes are implemented by TinyXML itself. API methods all use the 'const char*' form for input.</p>
 <p>Use the compile time define:</p>
 <p>TIXML_USE_STL</p>
-<p>to compile one version or the other. This can be passed by the compiler, or set as the first line of "tinyxml.h".</p>
+<p>to compile one version or the other. This can be passed by the compiler, or Set as the first line of "tinyxml.h".</p>
 <p>Note: If compiling the test code in Linux, setting the environment variable TINYXML_USE_STL=YES/NO will control STL compilation. In the Windows project file, STL and non STL targets are provided. In your project, It's probably easiest to add the line "#define TIXML_USE_STL" as the first line of <a class="el" href="tinyxml_8h_source.html">tinyxml.h</a>.</p>
 <h3>UTF-8 </h3>
 <p>TinyXML supports UTF-8 allowing to manipulate XML files in any language. TinyXML also supports "legacy mode" - the encoding used before UTF-8 support and probably best described as "extended ascii".</p>
@@ -77,7 +77,7 @@ If the declaration tag is read, and it has an encoding="something else", then Ti
 <li>
 Until one of the above criteria is met, TinyXML runs in Legacy Mode. </li>
 </ol>
-<p>What happens if the encoding is incorrectly set or detected? TinyXML will try to read and pass through text seen as improperly encoded. You may get some strange results or mangled characters. You may want to force TinyXML to the correct mode.</p>
+<p>What happens if the encoding is incorrectly Set or detected? TinyXML will try to read and pass through text seen as improperly encoded. You may get some strange results or mangled characters. You may want to force TinyXML to the correct mode.</p>
 <p>You may force TinyXML to Legacy Mode by using LoadFile( TIXML_ENCODING_LEGACY ) or LoadFile( filename, TIXML_ENCODING_LEGACY ). You may force it to use legacy mode all the time by setting TIXML_DEFAULT_ENCODING = TIXML_ENCODING_LEGACY. Likewise, you may force it to TIXML_ENCODING_UTF8 with the same technique.</p>
 <p>For English users, using English XML, UTF-8 is the same as low-ASCII. You don't need to be aware of UTF-8 or change your code in any way. You can think of UTF-8 as a "superset" of ASCII.</p>
 <p>UTF-8 is not a double byte format - but it is a standard encoding of Unicode! TinyXML does not use or directly support wchar, TCHAR, or Microsoft's _UNICODE at this time. It is common to see the term "Unicode" improperly refer to UTF-16, a wide byte encoding of unicode. This is a source of confusion.</p>
@@ -151,8 +151,8 @@ Until one of the above criteria is met, TinyXML runs in Legacy Mode. </li>
 <p>Reads XML from a stream, making it useful for network transmission. The tricky part is knowing when the XML document is complete, since there will almost certainly be other data in the stream. TinyXML will assume the XML data is complete after it reads the root element. Put another way, documents that are ill-constructed with more than one root element will not read correctly. Also note that operator&gt;&gt; is somewhat slower than Parse, due to both implementation of the STL and limitations of TinyXML.</p>
 <h3>White space </h3>
 <p>The world simply does not agree on whether white space should be kept, or condensed. For example, pretend the '_' is a space, and look at "Hello____world". HTML, and at least some XML parsers, will interpret this as "Hello_world". They condense white space. Some XML parsers do not, and will leave it as "Hello____world". (Remember to keep pretending the _ is a space.) Others suggest that __Hello___world__ should become Hello___world.</p>
-<p>It's an issue that hasn't been resolved to my satisfaction. TinyXML supports the first 2 approaches. Call <a class="el" href="classTiXmlBase.html#a0f799ec645bfb8d8a969e83478f379c1" title="The world does not agree on whether white space should be kept or not.">TiXmlBase::SetCondenseWhiteSpace( bool )</a> to set the desired behavior. The default is to condense white space.</p>
-<p>If you change the default, you should call <a class="el" href="classTiXmlBase.html#a0f799ec645bfb8d8a969e83478f379c1" title="The world does not agree on whether white space should be kept or not.">TiXmlBase::SetCondenseWhiteSpace( bool )</a> before making any calls to Parse XML data, and I don't recommend changing it after it has been set.</p>
+<p>It's an issue that hasn't been resolved to my satisfaction. TinyXML supports the first 2 approaches. Call <a class="el" href="classTiXmlBase.html#a0f799ec645bfb8d8a969e83478f379c1" title="The world does not agree on whether white space should be kept or not.">TiXmlBase::SetCondenseWhiteSpace( bool )</a> to Set the desired behavior. The default is to condense white space.</p>
+<p>If you change the default, you should call <a class="el" href="classTiXmlBase.html#a0f799ec645bfb8d8a969e83478f379c1" title="The world does not agree on whether white space should be kept or not.">TiXmlBase::SetCondenseWhiteSpace( bool )</a> before making any calls to Parse XML data, and I don't recommend changing it after it has been Set.</p>
 <h3>Handles </h3>
 <p>Where browsing an XML document in a robust way, it is important to check for null returns from method calls. An error safe implementation can generate a lot of code like:</p>
 <div class="fragment"><pre class="fragment">
@@ -196,7 +196,7 @@ tinyXmlTest: test app, non-STL  </li>
 tinyXmlTestSTL: test app, STL  </li>
 </ul>
 <h3>Makefile</h3>
-<p>At the top of the makefile you can set:</p>
+<p>At the top of the makefile you can Set:</p>
 <p>PROFILE, DEBUG, and TINYXML_USE_STL. Details (such that they are) are in the makefile.</p>
 <p>In the tinyxml directory, type "make clean" then "make". The executable file 'xmltest' will be created.</p>
 <h3>To Use in an Application:</h3>
@@ -210,7 +210,7 @@ tinyXmlTestSTL: test app, STL  </li>
 		&lt;Item priority="1"&gt; Go to the &lt;bold&gt;Toy store!&lt;/bold&gt;&lt;/Item&gt;
 		&lt;Item priority="2"&gt; Do bills&lt;/Item&gt;
 	&lt;/ToDo&gt;
-</pre></div><p>Its not much of a To Do list, but it will do. To read this file (say "demo.xml") you would create a document, and parse it in: </p>
+</pre></div><p>Its not much of a To Do list, but it will do. To read this file (say "demo.xml") you would Create a document, and parse it in: </p>
 <div class="fragment"><pre class="fragment">
 	TiXmlDocument doc( "demo.xml" );
 	doc.LoadFile();

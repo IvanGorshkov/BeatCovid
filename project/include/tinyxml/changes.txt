@@ -67,7 +67,7 @@ Changes in version 2.0.0 BETA
   Thanks to Brian Yoder.
 - Fixed bug where isalpha() and isalnum() would get called with a negative value for 
   high ascii numbers. Thanks to Alesky Aksenov.
-- Fixed some errors codes that were not getting set.
+- Fixed some errors codes that were not getting Set.
 - Made methods "const" that were not.
 - Added a switch to enable or disable the ignoring of white space. ( TiXmlDocument::SetIgnoreWhiteSpace() )
 - Greater standardization and code re-use in the parser.
@@ -110,7 +110,7 @@ Changes in version 2.1.3
 
 Changes in version 2.1.4
 - Reworked the entity code. Entities were not correctly surving round trip input and output.
-  Will now automatically create entities for high ascii in output.
+  Will now automatically Create entities for high ascii in output.
 
 Changes in version 2.1.5
 - Bug fix by kylotan : infinite loop on some input (tinyxmlparser.cpp rev 1.27)
@@ -279,7 +279,7 @@ Changes in version 2.1.5
 - olivier barthelemy also reported a problem with double truncation, also related to the %lf issue.
 - zaelsius came up with a great (and simple) suggestion to fix QueryValueAttribute truncating strings.
 - added some null pointer checks suggested by hansenk
-- Sami Väisänen found a (rare) buffer overrun that could occur in parsing.
+- Sami Vï¿½isï¿½nen found a (rare) buffer overrun that could occur in parsing.
 - vi tri filed a bug that led to a refactoring of the attribute setting mess (as well as adding a missing SetDoubleAttribute() )
 - removed TIXML_ERROR_OUT_OF_MEMORY. TinyXML does not systematically address OOO, and the notion it does is misleading.
 - vanneto, keithmarshall, others all reported the warning from IsWhiteSpace() usage. Cleaned this up - many thanks to everyone who reported this one.
