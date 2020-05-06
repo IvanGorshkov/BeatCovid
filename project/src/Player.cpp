@@ -267,3 +267,4 @@ bool Player::GetVaccine() {
 void Player::SetVaccine(bool value) {
   vaccine = value;
 }
+

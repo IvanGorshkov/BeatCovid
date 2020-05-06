@@ -161,21 +161,6 @@ CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 //Value Computed by CMake
 CMAKE_PROJECT_NAME:STATIC=beatcovid
 
-//Value Computed by CMake
-CMAKE_PROJECT_VERSION:STATIC=2.1
-
-//Value Computed by CMake
-CMAKE_PROJECT_VERSION_MAJOR:STATIC=2
-
-//Value Computed by CMake
-CMAKE_PROJECT_VERSION_MINOR:STATIC=1
-
-//Value Computed by CMake
-CMAKE_PROJECT_VERSION_PATCH:STATIC=
-
-//Value Computed by CMake
-CMAKE_PROJECT_VERSION_TWEAK:STATIC=
-
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
 
@@ -238,54 +223,6 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
-//imgui top-level directory
-IMGUI_DIR:PATH=
-
-//Build ImGui_SFML examples
-IMGUI_SFML_BUILD_EXAMPLES:BOOL=OFF
-
-//Path to a directory containing user ImGui config
-IMGUI_SFML_CONFIG_DIR:PATH=/home/ilya-kalinin/beatcovid/project/include/imgui-master
-
-//Path where user's config header will be installed
-IMGUI_SFML_CONFIG_INSTALL_DIR:PATH=
-
-//Name of a custom user ImGui config header
-IMGUI_SFML_CONFIG_NAME:STRING=imconfig-SFML.h
-
-//Use find_package to find SFML
-IMGUI_SFML_FIND_SFML:BOOL=ON
-
-//Use default imconfig-SFML.h
-IMGUI_SFML_USE_DEFAULT_CONFIG:BOOL=ON
-
-//The directory containing a CMake configuration file for ImGui-SFML.
-ImGui-SFML_DIR:PATH=ImGui-SFML_DIR-NOTFOUND
-
-//Path to a file.
-OPENGL_EGL_INCLUDE_DIR:PATH=OPENGL_EGL_INCLUDE_DIR-NOTFOUND
-
-//Path to a file.
-OPENGL_GLX_INCLUDE_DIR:PATH=/usr/include
-
-//Path to a file.
-OPENGL_INCLUDE_DIR:PATH=/usr/include
-
-//Path to a library.
-OPENGL_egl_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libEGL.so
-
-//Path to a library.
-OPENGL_glu_LIBRARY:FILEPATH=OPENGL_glu_LIBRARY-NOTFOUND
-
-//Path to a library.
-OPENGL_glx_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libGLX.so
-
-//Path to a library.
-OPENGL_opengl_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libOpenGL.so
-
-//Path to a file.
-OPENGL_xmesa_INCLUDE_DIR:PATH=OPENGL_xmesa_INCLUDE_DIR-NOTFOUND
-
 //Path to a program.
 ProcessorCount_cmd_nproc:FILEPATH=/usr/bin/nproc
 
@@ -303,12 +240,6 @@ beatcovid_BINARY_DIR:STATIC=/home/ilya-kalinin/beatcovid/cmake-build-debug
 
 //Value Computed by CMake
 beatcovid_SOURCE_DIR:STATIC=/home/ilya-kalinin/beatcovid
-
-//Value Computed by CMake
-imgui_sfml_BINARY_DIR:STATIC=/home/ilya-kalinin/beatcovid/cmake-build-debug/project/include/imgui-master
-
-//Value Computed by CMake
-imgui_sfml_SOURCE_DIR:STATIC=/home/ilya-kalinin/beatcovid/project/include/imgui-master
 
 //Value Computed by CMake
 tinyxml_BINARY_DIR:STATIC=/home/ilya-kalinin/beatcovid/cmake-build-debug/project/include/tinyxml
@@ -472,24 +403,6 @@ CMAKE_STRIP-ADVANCED:INTERNAL=1
 CMAKE_UNAME:INTERNAL=/usr/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
-//Details about finding OpenGL
-FIND_PACKAGE_MESSAGE_DETAILS_OpenGL:INTERNAL=[/usr/lib/x86_64-linux-gnu/libOpenGL.so][/usr/lib/x86_64-linux-gnu/libGLX.so][/usr/include][c ][v()]
-//ADVANCED property for variable: OPENGL_EGL_INCLUDE_DIR
-OPENGL_EGL_INCLUDE_DIR-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: OPENGL_GLX_INCLUDE_DIR
-OPENGL_GLX_INCLUDE_DIR-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: OPENGL_INCLUDE_DIR
-OPENGL_INCLUDE_DIR-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: OPENGL_egl_LIBRARY
-OPENGL_egl_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: OPENGL_glu_LIBRARY
-OPENGL_glu_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: OPENGL_glx_LIBRARY
-OPENGL_glx_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: OPENGL_opengl_LIBRARY
-OPENGL_opengl_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: OPENGL_xmesa_INCLUDE_DIR
-OPENGL_xmesa_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ProcessorCount_cmd_nproc
 ProcessorCount_cmd_nproc-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ProcessorCount_cmd_sysctl

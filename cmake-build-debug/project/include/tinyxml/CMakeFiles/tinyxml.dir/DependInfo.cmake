@@ -20,7 +20,6 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../project/include"
   "../project/include/tinyxml"
-  "../project/include/imgui-master"
   )
 
 # Targets to which this target links.

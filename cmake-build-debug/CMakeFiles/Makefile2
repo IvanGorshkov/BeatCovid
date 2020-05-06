@@ -94,12 +94,12 @@ project/include/tinyxml/clean: project/include/tinyxml/CMakeFiles/tinyxml.dir/cl
 CMakeFiles/beatcovid.dir/all: project/include/tinyxml/CMakeFiles/tinyxml.dir/all
 	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/depend
 	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ilya-kalinin/beatcovid/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23 "Built target beatcovid"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ilya-kalinin/beatcovid/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18 "Built target beatcovid"
 .PHONY : CMakeFiles/beatcovid.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/beatcovid.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ilya-kalinin/beatcovid/cmake-build-debug/CMakeFiles 28
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ilya-kalinin/beatcovid/cmake-build-debug/CMakeFiles 23
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/beatcovid.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ilya-kalinin/beatcovid/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/beatcovid.dir/rule
@@ -121,7 +121,7 @@ CMakeFiles/beatcovid.dir/clean:
 project/include/tinyxml/CMakeFiles/tinyxml.dir/all:
 	$(MAKE) -f project/include/tinyxml/CMakeFiles/tinyxml.dir/build.make project/include/tinyxml/CMakeFiles/tinyxml.dir/depend
 	$(MAKE) -f project/include/tinyxml/CMakeFiles/tinyxml.dir/build.make project/include/tinyxml/CMakeFiles/tinyxml.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ilya-kalinin/beatcovid/cmake-build-debug/CMakeFiles --progress-num=24,25,26,27,28 "Built target tinyxml"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ilya-kalinin/beatcovid/cmake-build-debug/CMakeFiles --progress-num=19,20,21,22,23 "Built target tinyxml"
 .PHONY : project/include/tinyxml/CMakeFiles/tinyxml.dir/all
 
 # Build rule for subdir invocation for target.

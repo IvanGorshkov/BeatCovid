@@ -3,8 +3,6 @@ project(beatcovid)
 set(CMAKE_CXX_STANDARD 14)
 include_directories(project/include)
 include_directories(project/include/tinyxml)
-include_directories(project/include/imgui-master)
-include_directories( ${OPENGL_INCLUDE_DIRS} )
 
 add_executable(beatcovid
         main.cpp
@@ -23,16 +21,9 @@ add_executable(beatcovid
         project/src/Gloves.cpp
         project/src/Glasses.cpp
         project/src/Mask.cpp
-        project/include/imgui-master/imgui.cpp
-        project/include/imgui-master/imgui_draw.cpp
-        project/include/imgui-master/imgui_demo.cpp
-        project/include/imgui-master/imgui_widgets.cpp
-        project/include/imgui-master/imgui-SFML.cpp
         project/src/Interface.cpp)
 
 add_subdirectory(project/include/tinyxml)
 
-find_package(OpenGL REQUIRED)
-
 find_package(SFML REQUIRED system window graphics network audio)
-target_link_libraries(beatcovid sfml-graphics sfml-audio tinyxml ${OPENGL_LIBRARIES})
+target_link_libraries(beatcovid sfml-graphics sfml-audio tinyxml)

@@ -6,5 +6,5 @@ CXX_FLAGS = -g -fPIC   -std=gnu++14
 
 CXX_DEFINES = -Dtinyxml_EXPORTS
 
-CXX_INCLUDES = -I/home/ilya-kalinin/beatcovid/project/include -I/home/ilya-kalinin/beatcovid/project/include/tinyxml -I/home/ilya-kalinin/beatcovid/project/include/imgui-master 
+CXX_INCLUDES = -I/home/ilya-kalinin/beatcovid/project/include -I/home/ilya-kalinin/beatcovid/project/include/tinyxml 
 

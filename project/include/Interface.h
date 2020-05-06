@@ -1,11 +1,12 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 
 class Interface {
- public:
-  Interface() = default;
-  static void MainMenu();
-  static void Pause();
-  static void StartGame(sf::RenderWindow *window);
+public:
+    Interface() = default;
+    void StartNewGame(sf::RenderWindow & window);
+    void GameMenu(sf::RenderWindow &window);
+    void MainMenu(sf::RenderWindow &window);
+    void DiedMenu(sf::RenderWindow &window);
 };
