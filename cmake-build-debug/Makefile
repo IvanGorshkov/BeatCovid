@@ -641,6 +641,33 @@ project/src/Robe.cpp.s:
 	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Robe.cpp.s
 .PHONY : project/src/Robe.cpp.s
 
+project/src/SaveGame.o: project/src/SaveGame.cpp.o
+
+.PHONY : project/src/SaveGame.o
+
+# target to build an object file
+project/src/SaveGame.cpp.o:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/SaveGame.cpp.o
+.PHONY : project/src/SaveGame.cpp.o
+
+project/src/SaveGame.i: project/src/SaveGame.cpp.i
+
+.PHONY : project/src/SaveGame.i
+
+# target to preprocess a source file
+project/src/SaveGame.cpp.i:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/SaveGame.cpp.i
+.PHONY : project/src/SaveGame.cpp.i
+
+project/src/SaveGame.s: project/src/SaveGame.cpp.s
+
+.PHONY : project/src/SaveGame.s
+
+# target to generate assembly for a file
+project/src/SaveGame.cpp.s:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/SaveGame.cpp.s
+.PHONY : project/src/SaveGame.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -706,6 +733,9 @@ help:
 	@echo "... project/src/Robe.o"
 	@echo "... project/src/Robe.i"
 	@echo "... project/src/Robe.s"
+	@echo "... project/src/SaveGame.o"
+	@echo "... project/src/SaveGame.i"
+	@echo "... project/src/SaveGame.s"
 .PHONY : help
 
 

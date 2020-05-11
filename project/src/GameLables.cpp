@@ -19,7 +19,7 @@ void GameLables::DrawPoints(sf::RenderWindow &window, int points_int) {
   window.draw(points);
 }
 
-void GameLables::DrawHp(sf::RenderWindow &window,  int hp_int) {
+void GameLables::DrawHp(sf::RenderWindow &window, int hp_int) {
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
   points.setPosition(center.x - size.x / 2 + 10, center.y - size.y / 2 + 13);

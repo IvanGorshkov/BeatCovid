@@ -1,6 +1,6 @@
 #include "Antibodies.h"
 
-Antibodies::Antibodies(float x, float y, float w, float h, std::string name):Entity(x,y,0,0,w,h) {
+Antibodies::Antibodies(float x, float y, float w, float h, std::string name) : Entity(x, y, 0, 0, w, h) {
   sf::Texture pointsTexture;
   if (name == "vaccine") {
     pointsTexture.loadFromFile("../files/images/vaccine.png");

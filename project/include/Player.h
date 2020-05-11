@@ -12,7 +12,7 @@
 class Player : public Entity {
  public:
   Player() = default;
-  explicit Player(const Object& position);
+  explicit Player(const Object &position);
   bool GetDir() const;
   void KeyCheck();
   float GetHp() const;
@@ -27,6 +27,8 @@ class Player : public Entity {
   bool GetVaccine();
   void SetVaccine(bool value);
   void DrawObjs(sf::RenderWindow &window);
+  AnimationManager GetAnim();
+  bool GetFinish();
  private:
   enum {
     STAY,
@@ -36,6 +38,7 @@ class Player : public Entity {
   } STATE;
 
   std::map<std::string, bool> key;
+  bool finish;
   bool dir;
   int dmg;
   float hp;
