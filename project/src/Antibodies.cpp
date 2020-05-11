@@ -1,9 +1,13 @@
 #include "Antibodies.h"
 
-Antibodies::Antibodies(float x, float y, float w, float h):Entity(x,y,0,0,w,h) {
-  sf::Texture antibodiesTexture;
-  antibodiesTexture.loadFromFile("../files/images/antitel.png");
-  anim = AnimationManager(antibodiesTexture);
+Antibodies::Antibodies(float x, float y, float w, float h, std::string name) : Entity(x, y, 0, 0, w, h) {
+  sf::Texture pointsTexture;
+  if (name == "vaccine") {
+    pointsTexture.loadFromFile("../files/images/vaccine.png");
+  } else {
+    pointsTexture.loadFromFile("../files/images/antitel.png");
+  }
+  anim = AnimationManager(pointsTexture);
   anim.Create("stay", 0, 0, 32, 32, 1, 0);
 }
 

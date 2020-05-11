@@ -10,11 +10,11 @@ GameManager::GameManager(Level &lvl) {
     }
 
     if (i.name == "antigen") {
-      antibodies.emplace_back(i.rect.left, i.rect.top, 32, 32);
+      antibodies.emplace_back(i.rect.left, i.rect.top, 32, 32, "antigen");
     }
 
     if (i.name == "vaccine") {
-      vaccine.emplace_back(i.rect.left, i.rect.top, 32, 32);
+      vaccine.emplace_back(i.rect.left, i.rect.top, 32, 32, "vaccine");
     }
   }
 }
@@ -33,12 +33,14 @@ void GameManager::Update(float time) {
 
 // Вывод всех классов на экран
 void GameManager::Draw(sf::RenderWindow &window) {
-  player->Draw(window);
+  player->DrawObjs(window);
   drawBullet(window);
   drawEnemy(window);
   drawAntibodies(window);
   drawVaccine(window);
   lables.DrawPoints(window, player->GetPoints());
+  lables.DrawHp(window, player->GetHp());
+  lables.DrawArm(window, player->GetArm());
 }
 
 Player *GameManager::GetPlayer() {
@@ -47,15 +49,21 @@ Player *GameManager::GetPlayer() {
 
 // Огонь игроком
 void GameManager::Fire() {
+
   if (player->GetPoints() > 0) {
     if (player->GetDir()) {
-      playerBullets.emplace_back(player->GetRect().left, player->GetRect().top + 10, -0.2, 0, player->GetDmg());
+      playerBullets.emplace_back(player->GetRect().left - 20, player->GetRect().top + 10, -0.2, 0, player->GetDmg());
     } else {
-      playerBullets.emplace_back(player->GetRect().left + player->GetRect().width, player->GetRect().top + 10, 0.2, 0, player->GetDmg());
+      playerBullets.emplace_back(player->GetRect().left + player->GetRect().width + 10,
+                                 player->GetRect().top + 10,
+                                 0.2,
+                                 0,
+                                 player->GetDmg());
     }
     player->AddPoints(-1);
   }
 }
+// Методы для работы с Антителами
 
 // Методы работы с классом Bullet
 // Обновление Bullet
@@ -105,7 +113,6 @@ void GameManager::checkHitPlayer() {
   for (enemyBulletsIt = enemyBullets.begin(); enemyBulletsIt != enemyBullets.end(); enemyBulletsIt++) {
     if (enemyBulletsIt->GetRect().intersects(player->GetRect()) && enemyBulletsIt->IsLife()) {
       player->TakeDamge(enemyBulletsIt->GetDmg());
-      std::cout << player->GetHp() << std::endl;
       break;
     }
   }
@@ -158,9 +165,17 @@ void GameManager::bulletPlayer() {
 //      }
 
       if (X > 0) {
-        enemyBullets.emplace_back(enemiesIt->GetRect().left + 20, enemiesIt->GetRect().top, dx, dy,enemiesIt->GetDmg());
+        enemyBullets.emplace_back(enemiesIt->GetRect().left + 20,
+                                  enemiesIt->GetRect().top,
+                                  dx,
+                                  dy,
+                                  enemiesIt->GetDmg());
       } else {
-        enemyBullets.emplace_back(enemiesIt->GetRect().left - 16, enemiesIt->GetRect().top, dx, dy,enemiesIt->GetDmg());
+        enemyBullets.emplace_back(enemiesIt->GetRect().left - 16,
+                                  enemiesIt->GetRect().top,
+                                  dx,
+                                  dy,
+                                  enemiesIt->GetDmg());
       }
 
       enemiesIt->ResetTimer();

@@ -1,10 +1,10 @@
 #include "Enemy.h"
 
-Enemy::Enemy(float x, float y,int height, int weight)
+Enemy::Enemy(float x, float y, int height, int weight)
     : Entity(x, y, 0, 0, height, weight),
-    hp(3),
-    dmg(1),
-    timerHit(0) {
+      hp(3),
+      dmg(10),
+      timerHit(0) {
   sf::Texture enemyTexture;
   enemyTexture.loadFromFile("../files/images/enemy.png");
   anim = AnimationManager(enemyTexture);
