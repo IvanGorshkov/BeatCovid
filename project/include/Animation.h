@@ -16,10 +16,10 @@ class Animation {
  private:
   std::vector<sf::IntRect> frames;
   sf::Sprite sprite;
-  bool flip;
-  bool isPlaying;
-  float speed;
-  float currentFrame;
+  bool flip{};
+  bool isPlaying{};
+  float speed{};
+  float currentFrame{};
   std::vector<sf::IntRect> framesFlip;
 };
 

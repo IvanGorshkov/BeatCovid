@@ -211,6 +211,13 @@ void Player::Collision(int num, std::vector<Object> &objs) {
     }
   }
 }
+void Player::DrawObjs(sf::RenderWindow &window) {
+  Draw(window);
+  bathrobe.Draw(window);
+  gloves.Draw(window);
+  glasses.Draw(window);
+  mask.Draw(window);
+}
 
 bool Player::GetFinish() {
   return finish;
