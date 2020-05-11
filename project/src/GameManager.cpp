@@ -54,7 +54,11 @@ void GameManager::Fire() {
     if (player->GetDir()) {
       playerBullets.emplace_back(player->GetRect().left - 20, player->GetRect().top + 10, -0.2, 0, player->GetDmg());
     } else {
-      playerBullets.emplace_back(player->GetRect().left + player->GetRect().width + 10, player->GetRect().top + 10, 0.2, 0, player->GetDmg());
+      playerBullets.emplace_back(player->GetRect().left + player->GetRect().width + 10,
+                                 player->GetRect().top + 10,
+                                 0.2,
+                                 0,
+                                 player->GetDmg());
     }
     player->AddPoints(-1);
   }
@@ -161,9 +165,17 @@ void GameManager::bulletPlayer() {
 //      }
 
       if (X > 0) {
-        enemyBullets.emplace_back(enemiesIt->GetRect().left + 20, enemiesIt->GetRect().top, dx, dy,enemiesIt->GetDmg());
+        enemyBullets.emplace_back(enemiesIt->GetRect().left + 20,
+                                  enemiesIt->GetRect().top,
+                                  dx,
+                                  dy,
+                                  enemiesIt->GetDmg());
       } else {
-        enemyBullets.emplace_back(enemiesIt->GetRect().left - 16, enemiesIt->GetRect().top, dx, dy,enemiesIt->GetDmg());
+        enemyBullets.emplace_back(enemiesIt->GetRect().left - 16,
+                                  enemiesIt->GetRect().top,
+                                  dx,
+                                  dy,
+                                  enemiesIt->GetDmg());
       }
 
       enemiesIt->ResetTimer();
