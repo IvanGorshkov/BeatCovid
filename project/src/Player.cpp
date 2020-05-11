@@ -223,6 +223,7 @@ bool Player::GetFinish() {
   return finish;
 }
 
+
 float Player::TakeDamge(float getDmg) {
   if (hp > 0) {
     if (arm > getDmg) {
