@@ -17,7 +17,7 @@ Player::Player(const Object& position)
       bathrobe(position.rect.left, position.rect.top, 50, 40, 1),
       gloves(position.rect.left, position.rect.top, 50, 40, 1),
       glasses(position.rect.left, position.rect.top, 50, 40, 1),
-      mask(position.rect.left, position.rect.top, 50, 40, 1){
+      mask(position.rect.left, position.rect.top, 50, 40, 1) {
   sf::Texture player_t;
   player_t.loadFromFile("../files/images/fang.png");
   anim = AnimationManager(player_t);
@@ -141,7 +141,7 @@ void Player::Update(float time, std::vector<Object> &obj) {
 
   if (STATE == JUMP) {
     max_jump += 0.2;
-    if (max_jump > 75) {
+    if (max_jump > 10) {
       dy = 0.2;
     }
   }
@@ -186,37 +186,40 @@ void Player::Collision(int num, std::vector<Object> &objs) {
             max_jump = 0;
           }
           STATE = STAY;
-          return;
         }
 
         if (dy < 0 && num == 1) {
           rect.top = obj.rect.top + obj.rect.height;
           dy = 0;
           max_jump = 200;
-          return;
         }
 
         if (dx > 0 && num == 0) {
           rect.left = obj.rect.left - rect.width;
-          return;
         }
 
         if (dx < 0 && num == 0) {
           rect.left = obj.rect.left + obj.rect.width;
-          return;
         }
       }
 
+      finish = false;
       if (obj.name == "finish" && vaccine) {
         anim.Set("win");
         bathrobe.SetAnim("win");
         gloves.SetAnim("win");
         glasses.SetAnim("win");
         mask.SetAnim("win");
+        finish = true;
       }
     }
   }
 }
+
+bool Player::GetFinish() {
+  return finish;
+}
+
 void Player::DrawObjs(sf::RenderWindow &window) {
   Draw(window);
   bathrobe.Draw(window);
@@ -266,4 +269,8 @@ bool Player::GetVaccine() {
 
 void Player::SetVaccine(bool value) {
   vaccine = value;
+}
+
+AnimationManager Player::GetAnim() {
+  return anim;
 }

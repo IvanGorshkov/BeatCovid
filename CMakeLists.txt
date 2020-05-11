@@ -20,7 +20,8 @@ add_executable(beatcovid
         project/src/Robe.cpp
         project/src/Gloves.cpp
         project/src/Glasses.cpp
-        project/src/Mask.cpp)
+        project/src/Mask.cpp
+        project/src/Interface.cpp)
 
 add_subdirectory(project/include/tinyxml)
 
