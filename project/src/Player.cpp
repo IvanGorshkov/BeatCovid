@@ -1,11 +1,7 @@
-//
-// Created by Ivan Gorshkov on 25.04.2020.
-//
-
 #include "Player.h"
 #include <iostream>
 
-Player::Player(const Object& position)
+Player::Player(const Object &position)
     : Entity(position.rect.left, position.rect.top, 0.1, 0.1, 50, 40),
       hp(100),
       max_jump(0),
@@ -14,6 +10,7 @@ Player::Player(const Object& position)
       points(0),
       vaccine(false),
       dmg(1),
+      finish(false),
       bathrobe(position.rect.left, position.rect.top, 50, 40, 1),
       gloves(position.rect.left, position.rect.top, 50, 40, 1),
       glasses(position.rect.left, position.rect.top, 50, 40, 1),
@@ -173,9 +170,11 @@ void Player::Update(float time, std::vector<Object> &obj) {
   glasses.Update(time, obj);
   mask.Update(time, obj);
 }
-
+bool Player::GetFinish() {
+  return finish;
+}
 void Player::Collision(int num, std::vector<Object> &objs) {
-  for (auto & obj : objs) {
+  for (auto &obj : objs) {
     if (rect.intersects(obj.rect)) {
       if (obj.name == "wall") {
         if (dy > 0 && num == 1) {
@@ -215,11 +214,6 @@ void Player::Collision(int num, std::vector<Object> &objs) {
     }
   }
 }
-
-bool Player::GetFinish() {
-  return finish;
-}
-
 void Player::DrawObjs(sf::RenderWindow &window) {
   Draw(window);
   bathrobe.Draw(window);
@@ -263,12 +257,21 @@ int Player::GetPoints() const {
   return points;
 }
 
+void Player::PenaltyPoints(int penaltyPoints) {
+  points -=penaltyPoints;
+}
+
 bool Player::GetVaccine() {
   return vaccine;
 }
 
 void Player::SetVaccine(bool value) {
   vaccine = value;
+}
+
+void Player::GoToStart(const Object &position) {
+  rect.left = position.rect.left;
+  rect.top = position.rect.top;
 }
 
 AnimationManager Player::GetAnim() {

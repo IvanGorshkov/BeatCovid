@@ -12,7 +12,7 @@
 class Player : public Entity {
  public:
   Player() = default;
-  explicit Player(const Object& position);
+  explicit Player(const Object &position);
   bool GetDir() const;
   void KeyCheck();
   float GetHp() const;
@@ -24,10 +24,12 @@ class Player : public Entity {
   void SetKey(std::string name, bool value);
   void AddPoints(int getPoints);
   int GetPoints() const;
+  void PenaltyPoints(int penaltyPoints);
   bool GetVaccine();
   void SetVaccine(bool value);
   void DrawObjs(sf::RenderWindow &window);
   AnimationManager GetAnim();
+  void GoToStart(const Object &position);
   bool GetFinish();
  private:
   enum {

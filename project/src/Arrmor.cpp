@@ -1,10 +1,6 @@
-//
-// Created by Ivan Gorshkov on 02.05.2020.
-//
-
 #include "Arrmor.h"
 
-Arrmor::Arrmor(float x, float y, float w, float h): Entity(x, y, 0, 0, w, h) {
+Arrmor::Arrmor(float x, float y, float w, float h) : Entity(x, y, 0, 0, w, h) {
 
 }
 
@@ -25,6 +21,6 @@ void Arrmor::FlipAnim(bool value) {
   anim.Flip(value);
 }
 
-int Arrmor::GetArm(){
+int Arrmor::GetArm() {
   return arm;
 }
