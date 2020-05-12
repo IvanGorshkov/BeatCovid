@@ -1,9 +1,9 @@
-#include "Gloves.h"
+#include "Robe.h"
 
-Gloves::Gloves(float x, float y, float w, float h, int lvl) : Arrmor(x, y, w, h) {
+Robe::Robe(float x, float y, float w, float h, int lvl) : Armor(x, y, w, h) {
   sf::Texture player_t;
   switch (lvl) {
-    case 1:player_t.loadFromFile("../files/images/gloves.png");
+    case 1:player_t.loadFromFile("../files/images/armor.png");
       arm = 1;
       break;
     case 2: break;
