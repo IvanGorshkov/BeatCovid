@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Level_map.h"
-#include "GameManager.h"
+#include "SaveGame.h"
 
 // Вывод главного меню
 void Interface::MainMenu(sf::RenderWindow &window) {
@@ -53,7 +53,8 @@ void Interface::MainMenu(sf::RenderWindow &window) {
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
       if (menuNum == 1) {
-        StartNewGame(window);
+        std::string lvlname = "../files/maps/test_map.tmx";
+        StartNewGame(window, lvlname);
         for (int kI = 0; kI < 100000000; ++kI) {}
       }
 
@@ -71,22 +72,25 @@ void Interface::MainMenu(sf::RenderWindow &window) {
     window.draw(MenuLoad);
     window.draw(MenuExit);
     window.display();
-    std::cout << window.isOpen() << std::endl;
   }
 }
 
-bool Interface::GameMenu(sf::RenderWindow &window) {
-  sf::Texture menuContinue, menuToMenu;
+bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
+  sf::Texture menuContinue, menuToMenu, saveGame;
+  Save save;
   menuToMenu.loadFromFile("../files/menu/to_menu.png");
   menuContinue.loadFromFile("../files/menu/continue.png");
+  saveGame.loadFromFile("../files/menu/save.png");
   sf::Sprite MenuToMenu(menuToMenu);
   sf::Sprite MenuContinue(menuContinue);
+  sf::Sprite SaveGame(saveGame);
   int menuNum = 0;
 
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
   MenuContinue.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 30);
-  MenuToMenu.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 90);
+  SaveGame.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 90);
+  MenuToMenu.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 150);
   while (window.isOpen()) {
 
     sf::Event event;
@@ -98,12 +102,18 @@ bool Interface::GameMenu(sf::RenderWindow &window) {
 
     MenuContinue.setColor(sf::Color::White);
     MenuToMenu.setColor(sf::Color::White);
+    SaveGame.setColor(sf::Color::White);
     menuNum = 0;
     window.clear(sf::Color(129, 181, 221));
 
-    if (sf::IntRect(100, 90, 300, 50).contains(sf::Mouse::getPosition(window))) {
+    if (sf::IntRect(100, 150, 300, 50).contains(sf::Mouse::getPosition(window))) {
       MenuToMenu.setColor(sf::Color::Blue);
       menuNum = 1;
+    }
+
+    if (sf::IntRect(100, 90, 300, 50).contains(sf::Mouse::getPosition(window))) {
+      SaveGame.setColor(sf::Color::Blue);
+      menuNum = 3;
     }
 
     if (sf::IntRect(100, 30, 300, 50).contains(sf::Mouse::getPosition(window))) {
@@ -118,10 +128,15 @@ bool Interface::GameMenu(sf::RenderWindow &window) {
       if (menuNum == 2) {
         return true;
       }
+      if (menuNum == 3) {
+        save.SaveGame(game);
+      }
+
     }
 
     window.draw(MenuToMenu);
     window.draw(MenuContinue);
+    window.draw(SaveGame);
 
     window.display();
   }
@@ -173,14 +188,14 @@ bool Interface::DiedMenu(sf::RenderWindow &window) {
 }
 
 // Старт новой игры
-void Interface::StartNewGame(sf::RenderWindow &window) {
+void Interface::StartNewGame(sf::RenderWindow &window, std::string lvlName) {
   sf::View view(sf::FloatRect(0, 0, 1280, 800));
 
   Level lvl;
-  lvl.LoadFromFile("../files/test_map.tmx");
+
+  lvl.LoadFromFile(lvlName);
   GameManager game(lvl);
   sf::Clock clock;
-  Interface inter;
   while (window.isOpen()) {
     window.clear(sf::Color(107, 140, 255));
     float time = clock.getElapsedTime().asMicroseconds();
@@ -221,7 +236,7 @@ void Interface::StartNewGame(sf::RenderWindow &window) {
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-      bool status = GameMenu(window);
+      bool status = GameMenu(window, game);
       if (status == false) {
         break;
       }
@@ -290,6 +305,8 @@ bool Interface::WinMenu(sf::RenderWindow &window) {
         return false;
       }
       if (menuNum == 2) {
+        std::string levelName = "../files/maps/lvl2.tmx";
+        StartNewGame(window, levelName);
         return true;
       }
     }
@@ -301,4 +318,92 @@ bool Interface::WinMenu(sf::RenderWindow &window) {
   }
 
   return true;
+}
+
+// Экран штраф от полицейского
+bool Interface::PenaltyPolice(sf::RenderWindow &window) {
+  sf::Texture deathMsg, menuToMenu;
+  deathMsg.loadFromFile("../files/menu/penalty_police.png");
+  menuToMenu.loadFromFile("../files/menu/continue.png");
+  sf::Sprite menu1(deathMsg);
+  sf::Sprite menu2(menuToMenu);
+  int menuNum = 0;
+
+  sf::Vector2f center = window.getView().getCenter();
+  sf::Vector2f size = window.getView().getSize();
+  menu1.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 30);
+  menu2.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 90);
+  while (window.isOpen()) {
+    sf::Event event;
+    while (window.pollEvent(event)) {
+      if (event.type == sf::Event::Closed) {
+        window.close();
+      }
+    }
+    menu1.setColor(sf::Color::White);
+    menu2.setColor(sf::Color::White);
+    menuNum = 0;
+    window.clear(sf::Color(129, 181, 221));
+
+    if (sf::IntRect(100, 90, 300, 50).contains(sf::Mouse::getPosition(window))) {
+      menu2.setColor(sf::Color::Blue);
+      menuNum = 1;
+    }
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+      if (menuNum == 1) {
+        return true;
+      }
+    }
+
+    window.draw(menu1);
+    window.draw(menu2);
+    window.display();
+  }
+
+  return false;
+}
+
+// Экран умер от полицейского
+bool Interface::DiedPolice(sf::RenderWindow &window) {
+  sf::Texture deathMsg, menuToMenu;
+  deathMsg.loadFromFile("../files/menu/died_police.png");
+  menuToMenu.loadFromFile("../files/menu/continue.png");
+  sf::Sprite menu1(deathMsg);
+  sf::Sprite menu2(menuToMenu);
+  int menuNum = 0;
+
+  sf::Vector2f center = window.getView().getCenter();
+  sf::Vector2f size = window.getView().getSize();
+  menu1.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 30);
+  menu2.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 90);
+  while (window.isOpen()) {
+    sf::Event event;
+    while (window.pollEvent(event)) {
+      if (event.type == sf::Event::Closed) {
+        window.close();
+      }
+    }
+    menu1.setColor(sf::Color::White);
+    menu2.setColor(sf::Color::White);
+    menuNum = 0;
+    window.clear(sf::Color(129, 181, 221));
+
+    if (sf::IntRect(100, 90, 300, 50).contains(sf::Mouse::getPosition(window))) {
+      menu2.setColor(sf::Color::Blue);
+      menuNum = 1;
+    }
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+      if (menuNum == 1) {
+        return true;
+      }
+    }
+
+    window.draw(menu1);
+    window.draw(menu2);
+    window.display();
+  }
+
+  return false;
 }

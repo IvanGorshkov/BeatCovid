@@ -9,7 +9,7 @@ void Arrmor::Update(float time, std::vector<Object> &obj) {
   rect = obj[0].rect;
 }
 
-void Arrmor::SetAnim(std::string name) {
+void Arrmor::SetAnim(const std::string& name) {
   anim.Set(name);
 }
 
@@ -21,6 +21,6 @@ void Arrmor::FlipAnim(bool value) {
   anim.Flip(value);
 }
 
-int Arrmor::GetArm() {
+int Arrmor::GetArm() const {
   return arm;
 }

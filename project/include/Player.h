@@ -21,14 +21,16 @@ class Player : public Entity {
   int GetDmg() const;
   void Update(float time, std::vector<Object> &obj) override;
   void Collision(int num, std::vector<Object> &objs);
-  void SetKey(std::string name, bool value);
+  void SetKey(const std::string& name, bool value);
   void AddPoints(int getPoints);
   int GetPoints() const;
-  bool GetVaccine();
+  void PenaltyPoints(int penaltyPoints);
+  bool GetVaccine() const;
   void SetVaccine(bool value);
   void DrawObjs(sf::RenderWindow &window);
   AnimationManager GetAnim();
-  bool GetFinish();
+  void GoToStart(const Object &position);
+  bool GetFinish() const;
  private:
   enum {
     STAY,

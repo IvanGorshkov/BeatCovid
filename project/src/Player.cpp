@@ -10,6 +10,7 @@ Player::Player(const Object &position)
       points(0),
       vaccine(false),
       dmg(1),
+      finish(false),
       bathrobe(position.rect.left, position.rect.top, 50, 40, 1),
       gloves(position.rect.left, position.rect.top, 50, 40, 1),
       glasses(position.rect.left, position.rect.top, 50, 40, 1),
@@ -169,7 +170,9 @@ void Player::Update(float time, std::vector<Object> &obj) {
   glasses.Update(time, obj);
   mask.Update(time, obj);
 }
-
+bool Player::GetFinish() const {
+  return finish;
+}
 void Player::Collision(int num, std::vector<Object> &objs) {
   for (auto &obj : objs) {
     if (rect.intersects(obj.rect)) {
@@ -219,11 +222,6 @@ void Player::DrawObjs(sf::RenderWindow &window) {
   mask.Draw(window);
 }
 
-bool Player::GetFinish() {
-  return finish;
-}
-
-
 float Player::TakeDamge(float getDmg) {
   if (hp > 0) {
     if (arm > getDmg) {
@@ -247,7 +245,7 @@ bool Player::GetDir() const {
   return dir;
 }
 
-void Player::SetKey(std::string name, bool value) {
+void Player::SetKey(const std::string& name, bool value) {
   key[name] = value;
 }
 
@@ -259,12 +257,21 @@ int Player::GetPoints() const {
   return points;
 }
 
-bool Player::GetVaccine() {
+void Player::PenaltyPoints(int penaltyPoints) {
+  points -= penaltyPoints;
+}
+
+bool Player::GetVaccine() const {
   return vaccine;
 }
 
 void Player::SetVaccine(bool value) {
   vaccine = value;
+}
+
+void Player::GoToStart(const Object &position) {
+  rect.left = position.rect.left;
+  rect.top = position.rect.top;
 }
 
 AnimationManager Player::GetAnim() {
