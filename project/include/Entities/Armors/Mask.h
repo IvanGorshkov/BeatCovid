@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Arrmor.h"
+#include "Armor.h"
 
-class Mask : public Arrmor {
+class Mask : public Armor {
  public:
   Mask() = default;
   Mask(float x, float y, float w, float h, int lvl);

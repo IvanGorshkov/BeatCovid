@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Arrmor.h"
+#include "Armor.h"
 
-class Robe : public Arrmor {
+class Robe : public Armor {
  public:
   Robe() = default;
   Robe(float x, float y, float w, float h, int lvl);

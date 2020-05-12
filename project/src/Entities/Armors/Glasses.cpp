@@ -1,6 +1,6 @@
 #include "Glasses.h"
 
-Glasses::Glasses(float x, float y, float w, float h, int lvl) : Arrmor(x, y, w, h) {
+Glasses::Glasses(float x, float y, float w, float h, int lvl) : Armor(x, y, w, h) {
   sf::Texture player_t;
   switch (lvl) {
     case 1:player_t.loadFromFile("../files/images/glasses.png");
