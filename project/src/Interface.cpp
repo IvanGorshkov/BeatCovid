@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Level_map.h"
-#include "GameManager.h"
+#include "SaveGame.h"
 
 // Вывод главного меню
 void Interface::MainMenu(sf::RenderWindow &window) {
@@ -53,7 +53,8 @@ void Interface::MainMenu(sf::RenderWindow &window) {
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
       if (menuNum == 1) {
-        StartNewGame(window);
+        std::string lvlname = "../files/maps/test_map.tmx";
+        StartNewGame(window, lvlname);
         for (int kI = 0; kI < 100000000; ++kI) {}
       }
 
@@ -71,22 +72,25 @@ void Interface::MainMenu(sf::RenderWindow &window) {
     window.draw(MenuLoad);
     window.draw(MenuExit);
     window.display();
-    std::cout << window.isOpen() << std::endl;
   }
 }
 
-bool Interface::GameMenu(sf::RenderWindow &window) {
-  sf::Texture menuContinue, menuToMenu;
+bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
+  sf::Texture menuContinue, menuToMenu, saveGame;
+  Save save;
   menuToMenu.loadFromFile("../files/menu/to_menu.png");
   menuContinue.loadFromFile("../files/menu/continue.png");
+  saveGame.loadFromFile("../files/menu/save.png");
   sf::Sprite MenuToMenu(menuToMenu);
   sf::Sprite MenuContinue(menuContinue);
+  sf::Sprite SaveGame(saveGame);
   int menuNum = 0;
 
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
   MenuContinue.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 30);
-  MenuToMenu.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 90);
+  SaveGame.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 90);
+  MenuToMenu.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 150);
   while (window.isOpen()) {
 
     sf::Event event;
@@ -98,12 +102,18 @@ bool Interface::GameMenu(sf::RenderWindow &window) {
 
     MenuContinue.setColor(sf::Color::White);
     MenuToMenu.setColor(sf::Color::White);
+    SaveGame.setColor(sf::Color::White);
     menuNum = 0;
     window.clear(sf::Color(129, 181, 221));
 
-    if (sf::IntRect(100, 90, 300, 50).contains(sf::Mouse::getPosition(window))) {
+    if (sf::IntRect(100, 150, 300, 50).contains(sf::Mouse::getPosition(window))) {
       MenuToMenu.setColor(sf::Color::Blue);
       menuNum = 1;
+    }
+
+    if (sf::IntRect(100, 90, 300, 50).contains(sf::Mouse::getPosition(window))) {
+      SaveGame.setColor(sf::Color::Blue);
+      menuNum = 3;
     }
 
     if (sf::IntRect(100, 30, 300, 50).contains(sf::Mouse::getPosition(window))) {
@@ -118,10 +128,15 @@ bool Interface::GameMenu(sf::RenderWindow &window) {
       if (menuNum == 2) {
         return true;
       }
+      if (menuNum == 3) {
+        save.SaveGame(game);
+      }
+
     }
 
     window.draw(MenuToMenu);
     window.draw(MenuContinue);
+    window.draw(SaveGame);
 
     window.display();
   }
@@ -169,8 +184,140 @@ bool Interface::DiedMenu(sf::RenderWindow &window) {
     window.draw(menu2);
     window.display();
   }
-
   return false;
+}
+
+// Старт новой игры
+void Interface::StartNewGame(sf::RenderWindow &window, std::string lvlName) {
+  sf::View view(sf::FloatRect(0, 0, 1280, 800));
+
+  Level lvl;
+
+  lvl.LoadFromFile(lvlName);
+  GameManager game(lvl);
+  sf::Clock clock;
+  while (window.isOpen()) {
+    window.clear(sf::Color(107, 140, 255));
+    float time = clock.getElapsedTime().asMicroseconds();
+    clock.restart();
+
+    time = time / 500;
+
+    if (time > 40) {
+      time = 40;
+    }
+
+    sf::Event event;
+    while (window.pollEvent(event)) {
+      if (event.type == sf::Event::Closed)
+        window.close();
+
+      if (event.type == sf::Event::KeyPressed) {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+          game.Fire();
+        }
+      }
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+      game.GetPlayer()->SetKey("L", true);
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+      game.GetPlayer()->SetKey("R", true);
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+      game.GetPlayer()->SetKey("UP", true);
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+      game.GetPlayer()->SetKey("DOWN", true);
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+      bool status = GameMenu(window, game);
+      if (status == false) {
+        break;
+      }
+
+    }
+    if (game.GetPlayer()->GetAnim().GetCurrentFrame() == 6 && game.GetPlayer()->GetHp() <= 0) {
+      bool status = DiedMenu(window);
+      if (status == true) {
+        break;
+      }
+    }
+
+    if (game.GetPlayer()->GetFinish()) {
+      bool status = WinMenu(window);
+      if (status == true) {
+        break;
+      }
+    }
+    game.Update(time);
+    lvl.Draw(window);
+    game.Draw(window);
+    view.setCenter(game.GetPlayer()->GetRect().left, game.GetPlayer()->GetRect().top);
+    window.setView(view);
+    window.display();
+  }
+}
+
+bool Interface::WinMenu(sf::RenderWindow &window) {
+  sf::Texture menuContinue, menuToMenu;
+  menuToMenu.loadFromFile("../files/menu/to_menu.png");
+  menuContinue.loadFromFile("../files/menu/next_mission.png");
+  sf::Sprite MenuToMenu(menuToMenu);
+  sf::Sprite MenuContinue(menuContinue);
+  int menuNum = 0;
+
+  sf::Vector2f center = window.getView().getCenter();
+  sf::Vector2f size = window.getView().getSize();
+  MenuContinue.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 30);
+  MenuToMenu.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 90);
+  while (window.isOpen()) {
+
+    sf::Event event;
+    while (window.pollEvent(event)) {
+      if (event.type == sf::Event::Closed) {
+        window.close();
+      }
+    }
+
+    MenuContinue.setColor(sf::Color::White);
+    MenuToMenu.setColor(sf::Color::White);
+    menuNum = 0;
+    window.clear(sf::Color(129, 181, 221));
+
+    if (sf::IntRect(100, 90, 300, 50).contains(sf::Mouse::getPosition(window))) {
+      MenuToMenu.setColor(sf::Color::Blue);
+      menuNum = 1;
+    }
+
+    if (sf::IntRect(100, 30, 300, 50).contains(sf::Mouse::getPosition(window))) {
+      MenuContinue.setColor(sf::Color::Blue);
+      menuNum = 2;
+    }
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+      if (menuNum == 1) {
+        return false;
+      }
+      if (menuNum == 2) {
+        std::string levelName = "../files/maps/lvl2.tmx";
+        StartNewGame(window, levelName);
+        return true;
+      }
+    }
+
+    window.draw(MenuToMenu);
+    window.draw(MenuContinue);
+
+    window.display();
+  }
+
+  return true;
 }
 
 // Экран штраф от полицейского
@@ -259,135 +406,4 @@ bool Interface::DiedPolice(sf::RenderWindow &window) {
   }
 
   return false;
-}
-
-// Старт новой игры
-void Interface::StartNewGame(sf::RenderWindow &window) {
-  sf::View view(sf::FloatRect(0, 0, 1280, 800));
-
-  Level lvl;
-  lvl.LoadFromFile("../files/test_map.tmx");
-  GameManager game(lvl);
-  sf::Clock clock;
-  Interface inter;
-  while (window.isOpen()) {
-    window.clear(sf::Color(107, 140, 255));
-    float time = clock.getElapsedTime().asMicroseconds();
-    clock.restart();
-
-    time = time / 500;
-
-    if (time > 40) {
-      time = 40;
-    }
-
-    sf::Event event;
-    while (window.pollEvent(event)) {
-      if (event.type == sf::Event::Closed)
-        window.close();
-
-      if (event.type == sf::Event::KeyPressed) {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-          game.Fire();
-        }
-      }
-    }
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-      game.GetPlayer()->SetKey("L", true);
-    }
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-      game.GetPlayer()->SetKey("R", true);
-    }
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-      game.GetPlayer()->SetKey("UP", true);
-    }
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-      game.GetPlayer()->SetKey("DOWN", true);
-    }
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-      bool status = GameMenu(window);
-      if (status == false) {
-        break;
-      }
-
-    }
-    if (game.GetPlayer()->GetAnim().GetCurrentFrame() == 6 && game.GetPlayer()->GetHp() <= 0) {
-      bool status = DiedMenu(window);
-      if (status == true) {
-        break;
-      }
-    }
-
-    if (game.GetPlayer()->GetFinish()) {
-      bool status = WinMenu(window);
-      if (status == true) {
-        break;
-      }
-    }
-    game.Update(time);
-    lvl.Draw(window);
-    game.Draw(window);
-    view.setCenter(game.GetPlayer()->GetRect().left, game.GetPlayer()->GetRect().top);
-    window.setView(view);
-    window.display();
-  }
-}
-
-bool Interface::WinMenu(sf::RenderWindow &window) {
-  sf::Texture menuContinue, menuToMenu;
-  menuToMenu.loadFromFile("../files/menu/to_menu.png");
-  menuContinue.loadFromFile("../files/menu/next_mission.png");
-  sf::Sprite MenuToMenu(menuToMenu);
-  sf::Sprite MenuContinue(menuContinue);
-  int menuNum = 0;
-
-  sf::Vector2f center = window.getView().getCenter();
-  sf::Vector2f size = window.getView().getSize();
-  MenuContinue.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 30);
-  MenuToMenu.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 90);
-  while (window.isOpen()) {
-
-    sf::Event event;
-    while (window.pollEvent(event)) {
-      if (event.type == sf::Event::Closed) {
-        window.close();
-      }
-    }
-
-    MenuContinue.setColor(sf::Color::White);
-    MenuToMenu.setColor(sf::Color::White);
-    menuNum = 0;
-    window.clear(sf::Color(129, 181, 221));
-
-    if (sf::IntRect(100, 90, 300, 50).contains(sf::Mouse::getPosition(window))) {
-      MenuToMenu.setColor(sf::Color::Blue);
-      menuNum = 1;
-    }
-
-    if (sf::IntRect(100, 30, 300, 50).contains(sf::Mouse::getPosition(window))) {
-      MenuContinue.setColor(sf::Color::Blue);
-      menuNum = 2;
-    }
-
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-      if (menuNum == 1) {
-        return false;
-      }
-      if (menuNum == 2) {
-        return true;
-      }
-    }
-
-    window.draw(MenuToMenu);
-    window.draw(MenuContinue);
-
-    window.display();
-  }
-
-  return true;
 }

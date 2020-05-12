@@ -13,7 +13,6 @@
 #include "Police.h"
 #include "Delivery.h"
 #include "Virus.h"
-#include "Interface.h"
 
 class GameManager {
  public:
@@ -44,8 +43,8 @@ class GameManager {
   void bulletPlayer();
 
   // Методы работы с классом Enemy
-  std::list<Enemy*> enemies;
-  std::list<Enemy*>::iterator enemiesIt;
+  std::list<Enemy *> enemies;
+  std::list<Enemy *>::iterator enemiesIt;
   void updateEnemy(float time);
   void drawEnemy(sf::RenderWindow &window);
 

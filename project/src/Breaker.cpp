@@ -1,7 +1,7 @@
 #include "Breaker.h"
 
 Breaker::Breaker(float x, float y, int height, int weight)
-  : Enemy(x, y, height, weight, 3, 1) {
+    : Enemy(x, y, height, weight, 3, 1) {
   sf::Texture breakerTexture;
   breakerTexture.loadFromFile("../files/images/enemy.png");
   anim = AnimationManager(breakerTexture);

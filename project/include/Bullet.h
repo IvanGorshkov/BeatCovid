@@ -1,7 +1,5 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include "AnimationManager.h"
 #include "Entity.h"
 
 class Bullet : public Entity {

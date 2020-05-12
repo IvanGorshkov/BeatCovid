@@ -1,5 +1,6 @@
 #include "GameManager.h"
 #include "cmath"
+#include "Interface.h"
 
 GameManager::GameManager(Level &lvl) {
   obj = lvl.GetAllObjects();

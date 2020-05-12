@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="100" height="30" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="platformertiles" tilewidth="32" tileheight="32">
-  <image source="../files/platformertiles.png" width="256" height="96"/>
+  <image source="../files/maps/platformertiles.png" width="256" height="96"/>
  </tileset>
  <layer name="addlayer" width="100" height="30">
   <data>

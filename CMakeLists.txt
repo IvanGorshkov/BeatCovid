@@ -24,6 +24,7 @@ add_executable(beatcovid
         project/src/Glasses.cpp
         project/src/Mask.cpp
         project/src/Interface.cpp
+        project/src/SaveGame.cpp
         project/src/Breaker.cpp
         project/src/Delivery.cpp
         project/src/Police.cpp
