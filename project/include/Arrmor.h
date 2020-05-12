@@ -6,10 +6,10 @@ class Arrmor : public Entity {
   Arrmor() = default;
   Arrmor(float x, float y, float w, float h);
   void Update(float time, std::vector<Object> &obj) override;
-  void SetAnim(std::string name);
+  void SetAnim(const std::string& name);
   void StatusAnim();
   void FlipAnim(bool value);
-  int GetArm();
+  int GetArm() const;
  protected:
   float arm;
 };

@@ -219,10 +219,9 @@ void Player::DrawObjs(sf::RenderWindow &window) {
   mask.Draw(window);
 }
 
-bool Player::GetFinish() {
+bool Player::GetFinish() const {
   return finish;
 }
-
 
 float Player::TakeDamge(float getDmg) {
   if (hp > 0) {
@@ -259,12 +258,21 @@ int Player::GetPoints() const {
   return points;
 }
 
+void Player::PenaltyPoints(int penaltyPoints) {
+  points -=penaltyPoints;
+}
+
 bool Player::GetVaccine() {
   return vaccine;
 }
 
 void Player::SetVaccine(bool value) {
   vaccine = value;
+}
+
+void Player::GoToStart(const Object &position) {
+  rect.left = position.rect.left;
+  rect.top = position.rect.top;
 }
 
 AnimationManager Player::GetAnim() {

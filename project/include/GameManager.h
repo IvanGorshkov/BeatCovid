@@ -9,6 +9,11 @@
 #include "Enemy.h"
 #include "Antibodies.h"
 #include "GameLables.h"
+#include "Breaker.h"
+#include "Police.h"
+#include "Delivery.h"
+#include "Virus.h"
+#include "Interface.h"
 
 class GameManager {
  public:
@@ -24,6 +29,7 @@ class GameManager {
  private:
   std::vector<Object> obj;
   Player *player;
+  Object startPlayerPosition;
   GameLables lables;
 
   // Методы работы с классом Bullet
@@ -38,8 +44,8 @@ class GameManager {
   void bulletPlayer();
 
   // Методы работы с классом Enemy
-  std::list<Enemy> enemies;
-  std::list<Enemy>::iterator enemiesIt;
+  std::list<Enemy*> enemies;
+  std::list<Enemy*>::iterator enemiesIt;
   void updateEnemy(float time);
   void drawEnemy(sf::RenderWindow &window);
 

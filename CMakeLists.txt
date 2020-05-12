@@ -23,7 +23,11 @@ add_executable(beatcovid
         project/src/Gloves.cpp
         project/src/Glasses.cpp
         project/src/Mask.cpp
-        project/src/Interface.cpp)
+        project/src/Interface.cpp
+        project/src/Breaker.cpp
+        project/src/Delivery.cpp
+        project/src/Police.cpp
+        project/src/Virus.cpp)
 
 find_package(SFML REQUIRED system window graphics network audio)
 target_link_libraries(beatcovid sfml-graphics sfml-audio tinyxml)

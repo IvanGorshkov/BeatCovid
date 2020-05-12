@@ -24,11 +24,13 @@ class Player : public Entity {
   void SetKey(std::string name, bool value);
   void AddPoints(int getPoints);
   int GetPoints() const;
+  void PenaltyPoints(int penaltyPoints);
   bool GetVaccine();
   void SetVaccine(bool value);
   void DrawObjs(sf::RenderWindow &window);
   AnimationManager GetAnim();
-  bool GetFinish();
+  void GoToStart(const Object &position);
+  bool GetFinish() const;
  private:
   enum {
     STAY,

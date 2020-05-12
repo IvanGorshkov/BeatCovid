@@ -5,9 +5,11 @@
 class Interface {
  public:
   Interface() = default;
-  void StartNewGame(sf::RenderWindow &window);
-  bool GameMenu(sf::RenderWindow &window);
-  void MainMenu(sf::RenderWindow &window);
-  bool DiedMenu(sf::RenderWindow &window);
-  bool WinMenu(sf::RenderWindow &window);
+  static void StartNewGame(sf::RenderWindow &window);
+  static bool GameMenu(sf::RenderWindow &window);
+  static void MainMenu(sf::RenderWindow &window);
+  static bool DiedMenu(sf::RenderWindow &window);
+  static bool PenaltyPolice(sf::RenderWindow &window);
+  static bool DiedPolice(sf::RenderWindow &window);
+  static bool WinMenu(sf::RenderWindow &window);
 };

@@ -169,6 +169,95 @@ bool Interface::DiedMenu(sf::RenderWindow &window) {
     window.draw(menu2);
     window.display();
   }
+
+  return false;
+}
+
+// Экран штраф от полицейского
+bool Interface::PenaltyPolice(sf::RenderWindow &window) {
+  sf::Texture deathMsg, menuToMenu;
+  deathMsg.loadFromFile("../files/menu/penalty_police.png");
+  menuToMenu.loadFromFile("../files/menu/continue.png");
+  sf::Sprite menu1(deathMsg);
+  sf::Sprite menu2(menuToMenu);
+  int menuNum = 0;
+
+  sf::Vector2f center = window.getView().getCenter();
+  sf::Vector2f size = window.getView().getSize();
+  menu1.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 30);
+  menu2.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 90);
+  while (window.isOpen()) {
+    sf::Event event;
+    while (window.pollEvent(event)) {
+      if (event.type == sf::Event::Closed) {
+        window.close();
+      }
+    }
+    menu1.setColor(sf::Color::White);
+    menu2.setColor(sf::Color::White);
+    menuNum = 0;
+    window.clear(sf::Color(129, 181, 221));
+
+    if (sf::IntRect(100, 90, 300, 50).contains(sf::Mouse::getPosition(window))) {
+      menu2.setColor(sf::Color::Blue);
+      menuNum = 1;
+    }
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+      if (menuNum == 1) {
+        return true;
+      }
+    }
+
+    window.draw(menu1);
+    window.draw(menu2);
+    window.display();
+  }
+
+  return false;
+}
+
+// Экран умер от полицейского
+bool Interface::DiedPolice(sf::RenderWindow &window) {
+  sf::Texture deathMsg, menuToMenu;
+  deathMsg.loadFromFile("../files/menu/died_police.png");
+  menuToMenu.loadFromFile("../files/menu/continue.png");
+  sf::Sprite menu1(deathMsg);
+  sf::Sprite menu2(menuToMenu);
+  int menuNum = 0;
+
+  sf::Vector2f center = window.getView().getCenter();
+  sf::Vector2f size = window.getView().getSize();
+  menu1.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 30);
+  menu2.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 90);
+  while (window.isOpen()) {
+    sf::Event event;
+    while (window.pollEvent(event)) {
+      if (event.type == sf::Event::Closed) {
+        window.close();
+      }
+    }
+    menu1.setColor(sf::Color::White);
+    menu2.setColor(sf::Color::White);
+    menuNum = 0;
+    window.clear(sf::Color(129, 181, 221));
+
+    if (sf::IntRect(100, 90, 300, 50).contains(sf::Mouse::getPosition(window))) {
+      menu2.setColor(sf::Color::Blue);
+      menuNum = 1;
+    }
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+      if (menuNum == 1) {
+        return true;
+      }
+    }
+
+    window.draw(menu1);
+    window.draw(menu2);
+    window.display();
+  }
+
   return false;
 }
 
