@@ -2,7 +2,7 @@
 #include <sstream>
 
 GameLables::GameLables() {
-  font.loadFromFile("../files/Inconsolata-Bold.ttf");
+  font.loadFromFile("../files/fonts/Inconsolata-Bold.ttf");
   points.setFont(font);
   points.setCharacterSize(40);
   points.setStyle(sf::Text::Bold);

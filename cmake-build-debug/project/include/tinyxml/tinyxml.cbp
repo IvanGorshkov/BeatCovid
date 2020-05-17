@@ -25,6 +25,10 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/home/ilya-kalinin/beatcovid/project/include"/>
+					<Add directory="/home/ilya-kalinin/beatcovid/project/include/Animation"/>
+					<Add directory="/home/ilya-kalinin/beatcovid/project/include/Entities"/>
+					<Add directory="/home/ilya-kalinin/beatcovid/project/include/Entities/Armors"/>
+					<Add directory="/home/ilya-kalinin/beatcovid/project/include/Entities/Enemies"/>
 					<Add directory="/home/ilya-kalinin/beatcovid/project/include/tinyxml"/>
 					<Add directory="/usr/include/c++/9"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
@@ -50,6 +54,10 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/home/ilya-kalinin/beatcovid/project/include"/>
+					<Add directory="/home/ilya-kalinin/beatcovid/project/include/Animation"/>
+					<Add directory="/home/ilya-kalinin/beatcovid/project/include/Entities"/>
+					<Add directory="/home/ilya-kalinin/beatcovid/project/include/Entities/Armors"/>
+					<Add directory="/home/ilya-kalinin/beatcovid/project/include/Entities/Enemies"/>
 					<Add directory="/home/ilya-kalinin/beatcovid/project/include/tinyxml"/>
 					<Add directory="/usr/include/c++/9"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>

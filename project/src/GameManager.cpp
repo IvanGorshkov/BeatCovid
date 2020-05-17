@@ -1,12 +1,26 @@
 #include "GameManager.h"
 #include "cmath"
+#include "Interface.h"
 
 GameManager::GameManager(Level &lvl) {
   obj = lvl.GetAllObjects();
-  player = new Player(lvl.GetObject("player"));
+  startPlayerPosition = lvl.GetObject("player");
+  player = new Player(startPlayerPosition);
   for (auto &i : obj) {
-    if (i.name == "police" || i.name == "delivery" || i.name == "breaker" || i.name == "virus") {
-      enemies.emplace_back(i.rect.left, i.rect.top, i.rect.width, i.rect.height);
+    if (i.name == "delivery") {
+      enemies.push_back(new Delivery(i.rect.left, i.rect.top, i.rect.width, i.rect.height));
+    }
+
+    if (i.name == "police") {
+      enemies.push_back(new Police(i.rect.left, i.rect.top, i.rect.width, i.rect.height));
+    }
+
+    if (i.name == "breaker") {
+      enemies.push_back(new Breaker(i.rect.left, i.rect.top, i.rect.width, i.rect.height));
+    }
+
+    if (i.name == "virus") {
+      enemies.push_back(new Virus(i.rect.left, i.rect.top, i.rect.width, i.rect.height));
     }
 
     if (i.name == "antigen") {
@@ -100,8 +114,8 @@ void GameManager::drawBullet(sf::RenderWindow &window) {
 void GameManager::checkHitEnemy() {
   for (playerBulletsIt = playerBullets.begin(); playerBulletsIt != playerBullets.end(); playerBulletsIt++) {
     for (enemiesIt = enemies.begin(); enemiesIt != enemies.end(); enemiesIt++) {
-      if (playerBulletsIt->GetRect().intersects(enemiesIt->GetRect()) && playerBulletsIt->IsLife()) {
-        enemiesIt->TakeDmg(playerBulletsIt->GetDmg());
+      if (playerBulletsIt->GetRect().intersects((*enemiesIt)->GetRect()) && playerBulletsIt->IsLife()) {
+        (*enemiesIt)->TakeDmg(playerBulletsIt->GetDmg());
         break;
       }
     }
@@ -121,14 +135,14 @@ void GameManager::checkHitPlayer() {
 // Начало стрельбы в героя
 void GameManager::bulletPlayer() {
   for (enemiesIt = enemies.begin(); enemiesIt != enemies.end(); enemiesIt++) {
-    if (enemiesIt->GetTimer() > 1000) {
+    if ((*enemiesIt)->GetTimer() > 1000 && (*enemiesIt)->IsLife()) {
       float speed = 0.2;
-      float X = (player->GetRect().left - enemiesIt->GetRect().left) / 16;
-      float Y = (player->GetRect().top - enemiesIt->GetRect().top) / 16;
+      float X = (player->GetRect().left - (*enemiesIt)->GetRect().left) / 16;
+      float Y = (player->GetRect().top - (*enemiesIt)->GetRect().top) / 16;
 
       // Дальность полета пули
       if (std::abs(X) > 30 || std::abs(Y) > 30) {
-        enemiesIt->ResetTimer();
+        (*enemiesIt)->ResetTimer();
         break;
       }
 
@@ -143,10 +157,10 @@ void GameManager::bulletPlayer() {
 
       // Пытаюсь научить дебилов не стрелять сквозь стену, пока не удачно
 //      for (auto &i : obj) {
-//        float currentX = enemiesIt->GetRect().left;
+//        float currentX = (*enemiesIt)->GetRect().left;
 //
-//        if ( enemiesIt->GetRect().top < player->getRect().top) {
-//          for (float currentY = enemiesIt->GetRect().top; currentY < player->getRect().top; currentY += dy * 16) {
+//        if ((*enemiesIt)->GetRect().top < player->GetRect().top) {
+//          for (float currentY = (*enemiesIt)->GetRect().top; currentY < player->GetRect().top; currentY += dy * 16) {
 //            auto currentRect = sf::FloatRect(currentX, currentY, 25, 25);
 //            if (currentRect.intersects(i.rect)) {
 //              break;
@@ -154,7 +168,7 @@ void GameManager::bulletPlayer() {
 //            currentX += dx * 16;
 //          }
 //        } else {
-//          for (float currentY = enemiesIt->GetRect().top; currentY > player->getRect().top; currentY += dy * 16) {
+//          for (float currentY = (*enemiesIt)->GetRect().top; currentY > player->GetRect().top; currentY += dy * 16) {
 //            auto currentRect = sf::FloatRect(currentX, currentY, 25, 25);
 //            if (currentRect.intersects(i.rect)) {
 //              break;
@@ -165,20 +179,20 @@ void GameManager::bulletPlayer() {
 //      }
 
       if (X > 0) {
-        enemyBullets.emplace_back(enemiesIt->GetRect().left + 20,
-                                  enemiesIt->GetRect().top,
+        enemyBullets.emplace_back((*enemiesIt)->GetRect().left + 20,
+                                  (*enemiesIt)->GetRect().top,
                                   dx,
                                   dy,
-                                  enemiesIt->GetDmg());
+                                  (*enemiesIt)->GetDmg());
       } else {
-        enemyBullets.emplace_back(enemiesIt->GetRect().left - 16,
-                                  enemiesIt->GetRect().top,
+        enemyBullets.emplace_back((*enemiesIt)->GetRect().left - 16,
+                                  (*enemiesIt)->GetRect().top,
                                   dx,
                                   dy,
-                                  enemiesIt->GetDmg());
+                                  (*enemiesIt)->GetDmg());
       }
 
-      enemiesIt->ResetTimer();
+      (*enemiesIt)->ResetTimer();
     }
   }
 }
@@ -187,10 +201,16 @@ void GameManager::bulletPlayer() {
 // Обновление Enemy
 void GameManager::updateEnemy(float time) {
   for (enemiesIt = enemies.begin(); enemiesIt != enemies.end(); enemiesIt++) {
-    if (enemiesIt->IsDie()) {
+    if ((*enemiesIt)->IsDie()) {
       enemiesIt = enemies.erase(enemiesIt);
     } else {
-      enemiesIt->Update(time, obj);
+      if (auto *police = dynamic_cast<Police *>(*enemiesIt)) {
+        if (!police->ISMetUser() && police->GetRect().intersects(player->GetRect())) {
+          player->PenaltyPoints(police->Penatly());
+        }
+      }
+
+      (*enemiesIt)->Update(time, obj);
     }
   }
 }
@@ -198,7 +218,18 @@ void GameManager::updateEnemy(float time) {
 // Вывод Enemy на экран
 void GameManager::drawEnemy(sf::RenderWindow &window) {
   for (enemiesIt = enemies.begin(); enemiesIt != enemies.end(); enemiesIt++) {
-    enemiesIt->Draw(window);
+    if (auto *police = dynamic_cast<Police *>(*enemiesIt)) {
+      if (police->IsDrawPenaltyMenu()) {
+        Interface::PenaltyPolice(window);
+      }
+
+      if (police->ISDrawDiedMenu()) {
+        Interface::DiedPolice(window);
+        player->GoToStart(startPlayerPosition);
+      }
+    }
+
+    (*enemiesIt)->Draw(window);
   }
 }
 

@@ -6,7 +6,7 @@
 
 class Antibodies : public Entity {
  public:
-  Antibodies(float x, float y, float w, float h, std::string name);
+  Antibodies(float x, float y, float w, float h, const std::string& name);
   void Update(Player *player);
   void Update(float time, std::vector<Object> &obj) override;
 };

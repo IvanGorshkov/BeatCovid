@@ -1,15 +1,15 @@
 #pragma once
 
 #include "Entity.h"
-class Arrmor : public Entity {
+class Armor : public Entity {
  public:
-  Arrmor() = default;
-  Arrmor(float x, float y, float w, float h);
+  Armor() = default;
+  Armor(float x, float y, float w, float h);
   void Update(float time, std::vector<Object> &obj) override;
-  void SetAnim(std::string name);
+  void SetAnim(const std::string& name);
   void StatusAnim();
   void FlipAnim(bool value);
-  int GetArm();
+  int GetArm() const;
  protected:
   float arm;
 };

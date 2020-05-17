@@ -209,194 +209,437 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-project/src/Animation.o: project/src/Animation.cpp.o
+project/src/Animation/Animation.o: project/src/Animation/Animation.cpp.o
 
-.PHONY : project/src/Animation.o
-
-# target to build an object file
-project/src/Animation.cpp.o:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Animation.cpp.o
-.PHONY : project/src/Animation.cpp.o
-
-project/src/Animation.i: project/src/Animation.cpp.i
-
-.PHONY : project/src/Animation.i
-
-# target to preprocess a source file
-project/src/Animation.cpp.i:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Animation.cpp.i
-.PHONY : project/src/Animation.cpp.i
-
-project/src/Animation.s: project/src/Animation.cpp.s
-
-.PHONY : project/src/Animation.s
-
-# target to generate assembly for a file
-project/src/Animation.cpp.s:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Animation.cpp.s
-.PHONY : project/src/Animation.cpp.s
-
-project/src/AnimationManager.o: project/src/AnimationManager.cpp.o
-
-.PHONY : project/src/AnimationManager.o
+.PHONY : project/src/Animation/Animation.o
 
 # target to build an object file
-project/src/AnimationManager.cpp.o:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/AnimationManager.cpp.o
-.PHONY : project/src/AnimationManager.cpp.o
+project/src/Animation/Animation.cpp.o:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Animation/Animation.cpp.o
+.PHONY : project/src/Animation/Animation.cpp.o
 
-project/src/AnimationManager.i: project/src/AnimationManager.cpp.i
+project/src/Animation/Animation.i: project/src/Animation/Animation.cpp.i
 
-.PHONY : project/src/AnimationManager.i
+.PHONY : project/src/Animation/Animation.i
 
 # target to preprocess a source file
-project/src/AnimationManager.cpp.i:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/AnimationManager.cpp.i
-.PHONY : project/src/AnimationManager.cpp.i
+project/src/Animation/Animation.cpp.i:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Animation/Animation.cpp.i
+.PHONY : project/src/Animation/Animation.cpp.i
 
-project/src/AnimationManager.s: project/src/AnimationManager.cpp.s
+project/src/Animation/Animation.s: project/src/Animation/Animation.cpp.s
 
-.PHONY : project/src/AnimationManager.s
+.PHONY : project/src/Animation/Animation.s
 
 # target to generate assembly for a file
-project/src/AnimationManager.cpp.s:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/AnimationManager.cpp.s
-.PHONY : project/src/AnimationManager.cpp.s
+project/src/Animation/Animation.cpp.s:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Animation/Animation.cpp.s
+.PHONY : project/src/Animation/Animation.cpp.s
 
-project/src/Antibodies.o: project/src/Antibodies.cpp.o
+project/src/Animation/AnimationManager.o: project/src/Animation/AnimationManager.cpp.o
 
-.PHONY : project/src/Antibodies.o
+.PHONY : project/src/Animation/AnimationManager.o
 
 # target to build an object file
-project/src/Antibodies.cpp.o:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Antibodies.cpp.o
-.PHONY : project/src/Antibodies.cpp.o
+project/src/Animation/AnimationManager.cpp.o:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Animation/AnimationManager.cpp.o
+.PHONY : project/src/Animation/AnimationManager.cpp.o
 
-project/src/Antibodies.i: project/src/Antibodies.cpp.i
+project/src/Animation/AnimationManager.i: project/src/Animation/AnimationManager.cpp.i
 
-.PHONY : project/src/Antibodies.i
+.PHONY : project/src/Animation/AnimationManager.i
 
 # target to preprocess a source file
-project/src/Antibodies.cpp.i:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Antibodies.cpp.i
-.PHONY : project/src/Antibodies.cpp.i
+project/src/Animation/AnimationManager.cpp.i:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Animation/AnimationManager.cpp.i
+.PHONY : project/src/Animation/AnimationManager.cpp.i
 
-project/src/Antibodies.s: project/src/Antibodies.cpp.s
+project/src/Animation/AnimationManager.s: project/src/Animation/AnimationManager.cpp.s
 
-.PHONY : project/src/Antibodies.s
+.PHONY : project/src/Animation/AnimationManager.s
 
 # target to generate assembly for a file
-project/src/Antibodies.cpp.s:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Antibodies.cpp.s
-.PHONY : project/src/Antibodies.cpp.s
+project/src/Animation/AnimationManager.cpp.s:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Animation/AnimationManager.cpp.s
+.PHONY : project/src/Animation/AnimationManager.cpp.s
 
-project/src/Arrmor.o: project/src/Arrmor.cpp.o
+project/src/Entities/Antibodies.o: project/src/Entities/Antibodies.cpp.o
 
-.PHONY : project/src/Arrmor.o
+.PHONY : project/src/Entities/Antibodies.o
 
 # target to build an object file
-project/src/Arrmor.cpp.o:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Arrmor.cpp.o
-.PHONY : project/src/Arrmor.cpp.o
+project/src/Entities/Antibodies.cpp.o:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Antibodies.cpp.o
+.PHONY : project/src/Entities/Antibodies.cpp.o
 
-project/src/Arrmor.i: project/src/Arrmor.cpp.i
+project/src/Entities/Antibodies.i: project/src/Entities/Antibodies.cpp.i
 
-.PHONY : project/src/Arrmor.i
+.PHONY : project/src/Entities/Antibodies.i
 
 # target to preprocess a source file
-project/src/Arrmor.cpp.i:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Arrmor.cpp.i
-.PHONY : project/src/Arrmor.cpp.i
+project/src/Entities/Antibodies.cpp.i:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Antibodies.cpp.i
+.PHONY : project/src/Entities/Antibodies.cpp.i
 
-project/src/Arrmor.s: project/src/Arrmor.cpp.s
+project/src/Entities/Antibodies.s: project/src/Entities/Antibodies.cpp.s
 
-.PHONY : project/src/Arrmor.s
+.PHONY : project/src/Entities/Antibodies.s
 
 # target to generate assembly for a file
-project/src/Arrmor.cpp.s:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Arrmor.cpp.s
-.PHONY : project/src/Arrmor.cpp.s
+project/src/Entities/Antibodies.cpp.s:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Antibodies.cpp.s
+.PHONY : project/src/Entities/Antibodies.cpp.s
 
-project/src/Bullet.o: project/src/Bullet.cpp.o
+project/src/Entities/Armors/Armor.o: project/src/Entities/Armors/Armor.cpp.o
 
-.PHONY : project/src/Bullet.o
+.PHONY : project/src/Entities/Armors/Armor.o
 
 # target to build an object file
-project/src/Bullet.cpp.o:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Bullet.cpp.o
-.PHONY : project/src/Bullet.cpp.o
+project/src/Entities/Armors/Armor.cpp.o:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Armors/Armor.cpp.o
+.PHONY : project/src/Entities/Armors/Armor.cpp.o
 
-project/src/Bullet.i: project/src/Bullet.cpp.i
+project/src/Entities/Armors/Armor.i: project/src/Entities/Armors/Armor.cpp.i
 
-.PHONY : project/src/Bullet.i
+.PHONY : project/src/Entities/Armors/Armor.i
 
 # target to preprocess a source file
-project/src/Bullet.cpp.i:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Bullet.cpp.i
-.PHONY : project/src/Bullet.cpp.i
+project/src/Entities/Armors/Armor.cpp.i:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Armors/Armor.cpp.i
+.PHONY : project/src/Entities/Armors/Armor.cpp.i
 
-project/src/Bullet.s: project/src/Bullet.cpp.s
+project/src/Entities/Armors/Armor.s: project/src/Entities/Armors/Armor.cpp.s
 
-.PHONY : project/src/Bullet.s
+.PHONY : project/src/Entities/Armors/Armor.s
 
 # target to generate assembly for a file
-project/src/Bullet.cpp.s:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Bullet.cpp.s
-.PHONY : project/src/Bullet.cpp.s
+project/src/Entities/Armors/Armor.cpp.s:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Armors/Armor.cpp.s
+.PHONY : project/src/Entities/Armors/Armor.cpp.s
 
-project/src/Enemy.o: project/src/Enemy.cpp.o
+project/src/Entities/Armors/Glasses.o: project/src/Entities/Armors/Glasses.cpp.o
 
-.PHONY : project/src/Enemy.o
+.PHONY : project/src/Entities/Armors/Glasses.o
 
 # target to build an object file
-project/src/Enemy.cpp.o:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Enemy.cpp.o
-.PHONY : project/src/Enemy.cpp.o
+project/src/Entities/Armors/Glasses.cpp.o:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Armors/Glasses.cpp.o
+.PHONY : project/src/Entities/Armors/Glasses.cpp.o
 
-project/src/Enemy.i: project/src/Enemy.cpp.i
+project/src/Entities/Armors/Glasses.i: project/src/Entities/Armors/Glasses.cpp.i
 
-.PHONY : project/src/Enemy.i
+.PHONY : project/src/Entities/Armors/Glasses.i
 
 # target to preprocess a source file
-project/src/Enemy.cpp.i:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Enemy.cpp.i
-.PHONY : project/src/Enemy.cpp.i
+project/src/Entities/Armors/Glasses.cpp.i:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Armors/Glasses.cpp.i
+.PHONY : project/src/Entities/Armors/Glasses.cpp.i
 
-project/src/Enemy.s: project/src/Enemy.cpp.s
+project/src/Entities/Armors/Glasses.s: project/src/Entities/Armors/Glasses.cpp.s
 
-.PHONY : project/src/Enemy.s
+.PHONY : project/src/Entities/Armors/Glasses.s
 
 # target to generate assembly for a file
-project/src/Enemy.cpp.s:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Enemy.cpp.s
-.PHONY : project/src/Enemy.cpp.s
+project/src/Entities/Armors/Glasses.cpp.s:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Armors/Glasses.cpp.s
+.PHONY : project/src/Entities/Armors/Glasses.cpp.s
 
-project/src/Entity.o: project/src/Entity.cpp.o
+project/src/Entities/Armors/Gloves.o: project/src/Entities/Armors/Gloves.cpp.o
 
-.PHONY : project/src/Entity.o
+.PHONY : project/src/Entities/Armors/Gloves.o
 
 # target to build an object file
-project/src/Entity.cpp.o:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entity.cpp.o
-.PHONY : project/src/Entity.cpp.o
+project/src/Entities/Armors/Gloves.cpp.o:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Armors/Gloves.cpp.o
+.PHONY : project/src/Entities/Armors/Gloves.cpp.o
 
-project/src/Entity.i: project/src/Entity.cpp.i
+project/src/Entities/Armors/Gloves.i: project/src/Entities/Armors/Gloves.cpp.i
 
-.PHONY : project/src/Entity.i
+.PHONY : project/src/Entities/Armors/Gloves.i
 
 # target to preprocess a source file
-project/src/Entity.cpp.i:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entity.cpp.i
-.PHONY : project/src/Entity.cpp.i
+project/src/Entities/Armors/Gloves.cpp.i:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Armors/Gloves.cpp.i
+.PHONY : project/src/Entities/Armors/Gloves.cpp.i
 
-project/src/Entity.s: project/src/Entity.cpp.s
+project/src/Entities/Armors/Gloves.s: project/src/Entities/Armors/Gloves.cpp.s
 
-.PHONY : project/src/Entity.s
+.PHONY : project/src/Entities/Armors/Gloves.s
 
 # target to generate assembly for a file
-project/src/Entity.cpp.s:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entity.cpp.s
-.PHONY : project/src/Entity.cpp.s
+project/src/Entities/Armors/Gloves.cpp.s:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Armors/Gloves.cpp.s
+.PHONY : project/src/Entities/Armors/Gloves.cpp.s
+
+project/src/Entities/Armors/Mask.o: project/src/Entities/Armors/Mask.cpp.o
+
+.PHONY : project/src/Entities/Armors/Mask.o
+
+# target to build an object file
+project/src/Entities/Armors/Mask.cpp.o:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Armors/Mask.cpp.o
+.PHONY : project/src/Entities/Armors/Mask.cpp.o
+
+project/src/Entities/Armors/Mask.i: project/src/Entities/Armors/Mask.cpp.i
+
+.PHONY : project/src/Entities/Armors/Mask.i
+
+# target to preprocess a source file
+project/src/Entities/Armors/Mask.cpp.i:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Armors/Mask.cpp.i
+.PHONY : project/src/Entities/Armors/Mask.cpp.i
+
+project/src/Entities/Armors/Mask.s: project/src/Entities/Armors/Mask.cpp.s
+
+.PHONY : project/src/Entities/Armors/Mask.s
+
+# target to generate assembly for a file
+project/src/Entities/Armors/Mask.cpp.s:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Armors/Mask.cpp.s
+.PHONY : project/src/Entities/Armors/Mask.cpp.s
+
+project/src/Entities/Armors/Robe.o: project/src/Entities/Armors/Robe.cpp.o
+
+.PHONY : project/src/Entities/Armors/Robe.o
+
+# target to build an object file
+project/src/Entities/Armors/Robe.cpp.o:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Armors/Robe.cpp.o
+.PHONY : project/src/Entities/Armors/Robe.cpp.o
+
+project/src/Entities/Armors/Robe.i: project/src/Entities/Armors/Robe.cpp.i
+
+.PHONY : project/src/Entities/Armors/Robe.i
+
+# target to preprocess a source file
+project/src/Entities/Armors/Robe.cpp.i:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Armors/Robe.cpp.i
+.PHONY : project/src/Entities/Armors/Robe.cpp.i
+
+project/src/Entities/Armors/Robe.s: project/src/Entities/Armors/Robe.cpp.s
+
+.PHONY : project/src/Entities/Armors/Robe.s
+
+# target to generate assembly for a file
+project/src/Entities/Armors/Robe.cpp.s:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Armors/Robe.cpp.s
+.PHONY : project/src/Entities/Armors/Robe.cpp.s
+
+project/src/Entities/Bullet.o: project/src/Entities/Bullet.cpp.o
+
+.PHONY : project/src/Entities/Bullet.o
+
+# target to build an object file
+project/src/Entities/Bullet.cpp.o:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Bullet.cpp.o
+.PHONY : project/src/Entities/Bullet.cpp.o
+
+project/src/Entities/Bullet.i: project/src/Entities/Bullet.cpp.i
+
+.PHONY : project/src/Entities/Bullet.i
+
+# target to preprocess a source file
+project/src/Entities/Bullet.cpp.i:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Bullet.cpp.i
+.PHONY : project/src/Entities/Bullet.cpp.i
+
+project/src/Entities/Bullet.s: project/src/Entities/Bullet.cpp.s
+
+.PHONY : project/src/Entities/Bullet.s
+
+# target to generate assembly for a file
+project/src/Entities/Bullet.cpp.s:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Bullet.cpp.s
+.PHONY : project/src/Entities/Bullet.cpp.s
+
+project/src/Entities/Enemies/Breaker.o: project/src/Entities/Enemies/Breaker.cpp.o
+
+.PHONY : project/src/Entities/Enemies/Breaker.o
+
+# target to build an object file
+project/src/Entities/Enemies/Breaker.cpp.o:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Enemies/Breaker.cpp.o
+.PHONY : project/src/Entities/Enemies/Breaker.cpp.o
+
+project/src/Entities/Enemies/Breaker.i: project/src/Entities/Enemies/Breaker.cpp.i
+
+.PHONY : project/src/Entities/Enemies/Breaker.i
+
+# target to preprocess a source file
+project/src/Entities/Enemies/Breaker.cpp.i:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Enemies/Breaker.cpp.i
+.PHONY : project/src/Entities/Enemies/Breaker.cpp.i
+
+project/src/Entities/Enemies/Breaker.s: project/src/Entities/Enemies/Breaker.cpp.s
+
+.PHONY : project/src/Entities/Enemies/Breaker.s
+
+# target to generate assembly for a file
+project/src/Entities/Enemies/Breaker.cpp.s:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Enemies/Breaker.cpp.s
+.PHONY : project/src/Entities/Enemies/Breaker.cpp.s
+
+project/src/Entities/Enemies/Delivery.o: project/src/Entities/Enemies/Delivery.cpp.o
+
+.PHONY : project/src/Entities/Enemies/Delivery.o
+
+# target to build an object file
+project/src/Entities/Enemies/Delivery.cpp.o:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Enemies/Delivery.cpp.o
+.PHONY : project/src/Entities/Enemies/Delivery.cpp.o
+
+project/src/Entities/Enemies/Delivery.i: project/src/Entities/Enemies/Delivery.cpp.i
+
+.PHONY : project/src/Entities/Enemies/Delivery.i
+
+# target to preprocess a source file
+project/src/Entities/Enemies/Delivery.cpp.i:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Enemies/Delivery.cpp.i
+.PHONY : project/src/Entities/Enemies/Delivery.cpp.i
+
+project/src/Entities/Enemies/Delivery.s: project/src/Entities/Enemies/Delivery.cpp.s
+
+.PHONY : project/src/Entities/Enemies/Delivery.s
+
+# target to generate assembly for a file
+project/src/Entities/Enemies/Delivery.cpp.s:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Enemies/Delivery.cpp.s
+.PHONY : project/src/Entities/Enemies/Delivery.cpp.s
+
+project/src/Entities/Enemies/Enemy.o: project/src/Entities/Enemies/Enemy.cpp.o
+
+.PHONY : project/src/Entities/Enemies/Enemy.o
+
+# target to build an object file
+project/src/Entities/Enemies/Enemy.cpp.o:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Enemies/Enemy.cpp.o
+.PHONY : project/src/Entities/Enemies/Enemy.cpp.o
+
+project/src/Entities/Enemies/Enemy.i: project/src/Entities/Enemies/Enemy.cpp.i
+
+.PHONY : project/src/Entities/Enemies/Enemy.i
+
+# target to preprocess a source file
+project/src/Entities/Enemies/Enemy.cpp.i:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Enemies/Enemy.cpp.i
+.PHONY : project/src/Entities/Enemies/Enemy.cpp.i
+
+project/src/Entities/Enemies/Enemy.s: project/src/Entities/Enemies/Enemy.cpp.s
+
+.PHONY : project/src/Entities/Enemies/Enemy.s
+
+# target to generate assembly for a file
+project/src/Entities/Enemies/Enemy.cpp.s:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Enemies/Enemy.cpp.s
+.PHONY : project/src/Entities/Enemies/Enemy.cpp.s
+
+project/src/Entities/Enemies/Police.o: project/src/Entities/Enemies/Police.cpp.o
+
+.PHONY : project/src/Entities/Enemies/Police.o
+
+# target to build an object file
+project/src/Entities/Enemies/Police.cpp.o:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Enemies/Police.cpp.o
+.PHONY : project/src/Entities/Enemies/Police.cpp.o
+
+project/src/Entities/Enemies/Police.i: project/src/Entities/Enemies/Police.cpp.i
+
+.PHONY : project/src/Entities/Enemies/Police.i
+
+# target to preprocess a source file
+project/src/Entities/Enemies/Police.cpp.i:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Enemies/Police.cpp.i
+.PHONY : project/src/Entities/Enemies/Police.cpp.i
+
+project/src/Entities/Enemies/Police.s: project/src/Entities/Enemies/Police.cpp.s
+
+.PHONY : project/src/Entities/Enemies/Police.s
+
+# target to generate assembly for a file
+project/src/Entities/Enemies/Police.cpp.s:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Enemies/Police.cpp.s
+.PHONY : project/src/Entities/Enemies/Police.cpp.s
+
+project/src/Entities/Enemies/Virus.o: project/src/Entities/Enemies/Virus.cpp.o
+
+.PHONY : project/src/Entities/Enemies/Virus.o
+
+# target to build an object file
+project/src/Entities/Enemies/Virus.cpp.o:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Enemies/Virus.cpp.o
+.PHONY : project/src/Entities/Enemies/Virus.cpp.o
+
+project/src/Entities/Enemies/Virus.i: project/src/Entities/Enemies/Virus.cpp.i
+
+.PHONY : project/src/Entities/Enemies/Virus.i
+
+# target to preprocess a source file
+project/src/Entities/Enemies/Virus.cpp.i:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Enemies/Virus.cpp.i
+.PHONY : project/src/Entities/Enemies/Virus.cpp.i
+
+project/src/Entities/Enemies/Virus.s: project/src/Entities/Enemies/Virus.cpp.s
+
+.PHONY : project/src/Entities/Enemies/Virus.s
+
+# target to generate assembly for a file
+project/src/Entities/Enemies/Virus.cpp.s:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Enemies/Virus.cpp.s
+.PHONY : project/src/Entities/Enemies/Virus.cpp.s
+
+project/src/Entities/Entity.o: project/src/Entities/Entity.cpp.o
+
+.PHONY : project/src/Entities/Entity.o
+
+# target to build an object file
+project/src/Entities/Entity.cpp.o:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Entity.cpp.o
+.PHONY : project/src/Entities/Entity.cpp.o
+
+project/src/Entities/Entity.i: project/src/Entities/Entity.cpp.i
+
+.PHONY : project/src/Entities/Entity.i
+
+# target to preprocess a source file
+project/src/Entities/Entity.cpp.i:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Entity.cpp.i
+.PHONY : project/src/Entities/Entity.cpp.i
+
+project/src/Entities/Entity.s: project/src/Entities/Entity.cpp.s
+
+.PHONY : project/src/Entities/Entity.s
+
+# target to generate assembly for a file
+project/src/Entities/Entity.cpp.s:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Entity.cpp.s
+.PHONY : project/src/Entities/Entity.cpp.s
+
+project/src/Entities/Player.o: project/src/Entities/Player.cpp.o
+
+.PHONY : project/src/Entities/Player.o
+
+# target to build an object file
+project/src/Entities/Player.cpp.o:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Player.cpp.o
+.PHONY : project/src/Entities/Player.cpp.o
+
+project/src/Entities/Player.i: project/src/Entities/Player.cpp.i
+
+.PHONY : project/src/Entities/Player.i
+
+# target to preprocess a source file
+project/src/Entities/Player.cpp.i:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Player.cpp.i
+.PHONY : project/src/Entities/Player.cpp.i
+
+project/src/Entities/Player.s: project/src/Entities/Player.cpp.s
+
+.PHONY : project/src/Entities/Player.s
+
+# target to generate assembly for a file
+project/src/Entities/Player.cpp.s:
+	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Entities/Player.cpp.s
+.PHONY : project/src/Entities/Player.cpp.s
 
 project/src/GameLables.o: project/src/GameLables.cpp.o
 
@@ -452,60 +695,6 @@ project/src/GameManager.cpp.s:
 	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/GameManager.cpp.s
 .PHONY : project/src/GameManager.cpp.s
 
-project/src/Glasses.o: project/src/Glasses.cpp.o
-
-.PHONY : project/src/Glasses.o
-
-# target to build an object file
-project/src/Glasses.cpp.o:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Glasses.cpp.o
-.PHONY : project/src/Glasses.cpp.o
-
-project/src/Glasses.i: project/src/Glasses.cpp.i
-
-.PHONY : project/src/Glasses.i
-
-# target to preprocess a source file
-project/src/Glasses.cpp.i:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Glasses.cpp.i
-.PHONY : project/src/Glasses.cpp.i
-
-project/src/Glasses.s: project/src/Glasses.cpp.s
-
-.PHONY : project/src/Glasses.s
-
-# target to generate assembly for a file
-project/src/Glasses.cpp.s:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Glasses.cpp.s
-.PHONY : project/src/Glasses.cpp.s
-
-project/src/Gloves.o: project/src/Gloves.cpp.o
-
-.PHONY : project/src/Gloves.o
-
-# target to build an object file
-project/src/Gloves.cpp.o:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Gloves.cpp.o
-.PHONY : project/src/Gloves.cpp.o
-
-project/src/Gloves.i: project/src/Gloves.cpp.i
-
-.PHONY : project/src/Gloves.i
-
-# target to preprocess a source file
-project/src/Gloves.cpp.i:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Gloves.cpp.i
-.PHONY : project/src/Gloves.cpp.i
-
-project/src/Gloves.s: project/src/Gloves.cpp.s
-
-.PHONY : project/src/Gloves.s
-
-# target to generate assembly for a file
-project/src/Gloves.cpp.s:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Gloves.cpp.s
-.PHONY : project/src/Gloves.cpp.s
-
 project/src/Interface.o: project/src/Interface.cpp.o
 
 .PHONY : project/src/Interface.o
@@ -560,87 +749,6 @@ project/src/Level_map.cpp.s:
 	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Level_map.cpp.s
 .PHONY : project/src/Level_map.cpp.s
 
-project/src/Mask.o: project/src/Mask.cpp.o
-
-.PHONY : project/src/Mask.o
-
-# target to build an object file
-project/src/Mask.cpp.o:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Mask.cpp.o
-.PHONY : project/src/Mask.cpp.o
-
-project/src/Mask.i: project/src/Mask.cpp.i
-
-.PHONY : project/src/Mask.i
-
-# target to preprocess a source file
-project/src/Mask.cpp.i:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Mask.cpp.i
-.PHONY : project/src/Mask.cpp.i
-
-project/src/Mask.s: project/src/Mask.cpp.s
-
-.PHONY : project/src/Mask.s
-
-# target to generate assembly for a file
-project/src/Mask.cpp.s:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Mask.cpp.s
-.PHONY : project/src/Mask.cpp.s
-
-project/src/Player.o: project/src/Player.cpp.o
-
-.PHONY : project/src/Player.o
-
-# target to build an object file
-project/src/Player.cpp.o:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Player.cpp.o
-.PHONY : project/src/Player.cpp.o
-
-project/src/Player.i: project/src/Player.cpp.i
-
-.PHONY : project/src/Player.i
-
-# target to preprocess a source file
-project/src/Player.cpp.i:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Player.cpp.i
-.PHONY : project/src/Player.cpp.i
-
-project/src/Player.s: project/src/Player.cpp.s
-
-.PHONY : project/src/Player.s
-
-# target to generate assembly for a file
-project/src/Player.cpp.s:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Player.cpp.s
-.PHONY : project/src/Player.cpp.s
-
-project/src/Robe.o: project/src/Robe.cpp.o
-
-.PHONY : project/src/Robe.o
-
-# target to build an object file
-project/src/Robe.cpp.o:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Robe.cpp.o
-.PHONY : project/src/Robe.cpp.o
-
-project/src/Robe.i: project/src/Robe.cpp.i
-
-.PHONY : project/src/Robe.i
-
-# target to preprocess a source file
-project/src/Robe.cpp.i:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Robe.cpp.i
-.PHONY : project/src/Robe.cpp.i
-
-project/src/Robe.s: project/src/Robe.cpp.s
-
-.PHONY : project/src/Robe.s
-
-# target to generate assembly for a file
-project/src/Robe.cpp.s:
-	$(MAKE) -f CMakeFiles/beatcovid.dir/build.make CMakeFiles/beatcovid.dir/project/src/Robe.cpp.s
-.PHONY : project/src/Robe.cpp.s
-
 project/src/SaveGame.o: project/src/SaveGame.cpp.o
 
 .PHONY : project/src/SaveGame.o
@@ -685,54 +793,66 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... project/src/Animation.o"
-	@echo "... project/src/Animation.i"
-	@echo "... project/src/Animation.s"
-	@echo "... project/src/AnimationManager.o"
-	@echo "... project/src/AnimationManager.i"
-	@echo "... project/src/AnimationManager.s"
-	@echo "... project/src/Antibodies.o"
-	@echo "... project/src/Antibodies.i"
-	@echo "... project/src/Antibodies.s"
-	@echo "... project/src/Arrmor.o"
-	@echo "... project/src/Arrmor.i"
-	@echo "... project/src/Arrmor.s"
-	@echo "... project/src/Bullet.o"
-	@echo "... project/src/Bullet.i"
-	@echo "... project/src/Bullet.s"
-	@echo "... project/src/Enemy.o"
-	@echo "... project/src/Enemy.i"
-	@echo "... project/src/Enemy.s"
-	@echo "... project/src/Entity.o"
-	@echo "... project/src/Entity.i"
-	@echo "... project/src/Entity.s"
+	@echo "... project/src/Animation/Animation.o"
+	@echo "... project/src/Animation/Animation.i"
+	@echo "... project/src/Animation/Animation.s"
+	@echo "... project/src/Animation/AnimationManager.o"
+	@echo "... project/src/Animation/AnimationManager.i"
+	@echo "... project/src/Animation/AnimationManager.s"
+	@echo "... project/src/Entities/Antibodies.o"
+	@echo "... project/src/Entities/Antibodies.i"
+	@echo "... project/src/Entities/Antibodies.s"
+	@echo "... project/src/Entities/Armors/Armor.o"
+	@echo "... project/src/Entities/Armors/Armor.i"
+	@echo "... project/src/Entities/Armors/Armor.s"
+	@echo "... project/src/Entities/Armors/Glasses.o"
+	@echo "... project/src/Entities/Armors/Glasses.i"
+	@echo "... project/src/Entities/Armors/Glasses.s"
+	@echo "... project/src/Entities/Armors/Gloves.o"
+	@echo "... project/src/Entities/Armors/Gloves.i"
+	@echo "... project/src/Entities/Armors/Gloves.s"
+	@echo "... project/src/Entities/Armors/Mask.o"
+	@echo "... project/src/Entities/Armors/Mask.i"
+	@echo "... project/src/Entities/Armors/Mask.s"
+	@echo "... project/src/Entities/Armors/Robe.o"
+	@echo "... project/src/Entities/Armors/Robe.i"
+	@echo "... project/src/Entities/Armors/Robe.s"
+	@echo "... project/src/Entities/Bullet.o"
+	@echo "... project/src/Entities/Bullet.i"
+	@echo "... project/src/Entities/Bullet.s"
+	@echo "... project/src/Entities/Enemies/Breaker.o"
+	@echo "... project/src/Entities/Enemies/Breaker.i"
+	@echo "... project/src/Entities/Enemies/Breaker.s"
+	@echo "... project/src/Entities/Enemies/Delivery.o"
+	@echo "... project/src/Entities/Enemies/Delivery.i"
+	@echo "... project/src/Entities/Enemies/Delivery.s"
+	@echo "... project/src/Entities/Enemies/Enemy.o"
+	@echo "... project/src/Entities/Enemies/Enemy.i"
+	@echo "... project/src/Entities/Enemies/Enemy.s"
+	@echo "... project/src/Entities/Enemies/Police.o"
+	@echo "... project/src/Entities/Enemies/Police.i"
+	@echo "... project/src/Entities/Enemies/Police.s"
+	@echo "... project/src/Entities/Enemies/Virus.o"
+	@echo "... project/src/Entities/Enemies/Virus.i"
+	@echo "... project/src/Entities/Enemies/Virus.s"
+	@echo "... project/src/Entities/Entity.o"
+	@echo "... project/src/Entities/Entity.i"
+	@echo "... project/src/Entities/Entity.s"
+	@echo "... project/src/Entities/Player.o"
+	@echo "... project/src/Entities/Player.i"
+	@echo "... project/src/Entities/Player.s"
 	@echo "... project/src/GameLables.o"
 	@echo "... project/src/GameLables.i"
 	@echo "... project/src/GameLables.s"
 	@echo "... project/src/GameManager.o"
 	@echo "... project/src/GameManager.i"
 	@echo "... project/src/GameManager.s"
-	@echo "... project/src/Glasses.o"
-	@echo "... project/src/Glasses.i"
-	@echo "... project/src/Glasses.s"
-	@echo "... project/src/Gloves.o"
-	@echo "... project/src/Gloves.i"
-	@echo "... project/src/Gloves.s"
 	@echo "... project/src/Interface.o"
 	@echo "... project/src/Interface.i"
 	@echo "... project/src/Interface.s"
 	@echo "... project/src/Level_map.o"
 	@echo "... project/src/Level_map.i"
 	@echo "... project/src/Level_map.s"
-	@echo "... project/src/Mask.o"
-	@echo "... project/src/Mask.i"
-	@echo "... project/src/Mask.s"
-	@echo "... project/src/Player.o"
-	@echo "... project/src/Player.i"
-	@echo "... project/src/Player.s"
-	@echo "... project/src/Robe.o"
-	@echo "... project/src/Robe.i"
-	@echo "... project/src/Robe.s"
 	@echo "... project/src/SaveGame.o"
 	@echo "... project/src/SaveGame.i"
 	@echo "... project/src/SaveGame.s"

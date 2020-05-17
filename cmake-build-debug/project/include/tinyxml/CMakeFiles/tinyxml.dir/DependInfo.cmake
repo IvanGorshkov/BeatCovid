@@ -19,6 +19,10 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../project/include"
+  "../project/include/Animation"
+  "../project/include/Entities"
+  "../project/include/Entities/Armors"
+  "../project/include/Entities/Enemies"
   "../project/include/tinyxml"
   )
 
