@@ -11,6 +11,7 @@ Player::Player(const Object &position)
       vaccine(false),
       dmg(1),
       finish(false),
+      isDrive(false),
       bathrobe(position.rect.left, position.rect.top, 50, 40, 1),
       gloves(position.rect.left, position.rect.top, 50, 40, 1),
       glasses(position.rect.left, position.rect.top, 50, 40, 1),
@@ -170,9 +171,11 @@ void Player::Update(float time, std::vector<Object> &obj) {
   glasses.Update(time, obj);
   mask.Update(time, obj);
 }
+
 bool Player::GetFinish() const {
   return finish;
 }
+
 void Player::Collision(int num, std::vector<Object> &objs) {
   for (auto &obj : objs) {
     if (rect.intersects(obj.rect)) {
@@ -223,6 +226,10 @@ void Player::DrawObjs(sf::RenderWindow &window) {
 }
 
 float Player::TakeDamge(float getDmg) {
+  if (getDmg == 0) {
+    return hp;
+  }
+
   if (hp > 0) {
     if (arm > getDmg) {
       --hp;
@@ -245,7 +252,7 @@ bool Player::GetDir() const {
   return dir;
 }
 
-void Player::SetKey(const std::string& name, bool value) {
+void Player::SetKey(const std::string &name, bool value) {
   key[name] = value;
 }
 
@@ -274,6 +281,26 @@ void Player::GoToStart(const Object &position) {
   rect.top = position.rect.top;
 }
 
+void Player::ChangeHP(int getHp) {
+  this->hp = getHp;
+}
+
+void Player::ChangeARM(int getArm) {
+  this->arm = getArm;
+}
+
 AnimationManager Player::GetAnim() {
   return anim;
+}
+
+void Player::SetPosition(float x) {
+  rect.left = x;
+}
+
+void Player::SetDrive() {
+  isDrive = !isDrive;
+}
+
+bool Player::IsDrive() {
+  return isDrive;
 }

@@ -4,15 +4,14 @@
 #include "Player.h"
 #include <list>
 #include <SFML/Graphics.hpp>
-#include "Entity.h"
 #include "Bullet.h"
 #include "Enemy.h"
 #include "Antibodies.h"
 #include "GameLables.h"
-#include "Breaker.h"
 #include "Police.h"
-#include "Delivery.h"
-#include "Virus.h"
+#include "OrdinaryEnemies.h"
+#include "SafeTransport.h"
+#include "UnSafeTransport.h"
 
 class GameManager {
  public:
@@ -24,6 +23,8 @@ class GameManager {
   Player *GetPlayer();
   // Огонь игроком
   void Fire();
+  // Садится в транспорт
+  void TakeTransport();
 
  private:
   std::vector<Object> obj;
@@ -52,11 +53,17 @@ class GameManager {
   std::list<Antibodies> antibodies;
   std::list<Antibodies>::iterator antibodiesIt;
   void drawAntibodies(sf::RenderWindow &window);
-  void updateAntibodies(float time);
+  void updateAntibodies();
 
-  // Методы работы с классом Vaccine
-  std::list<Antibodies> vaccine;
-  std::list<Antibodies>::iterator vaccineIt;
-  void drawVaccine(sf::RenderWindow &window);
-  void updateVaccine(float time);
+  // Методы работы с классом Transport
+  std::list<SafeTransport> safeTransports;
+  std::list<SafeTransport>::iterator safeTransportsIt;
+  std::list<UnSafeTransport> unSafeTransports;
+  std::list<UnSafeTransport>::iterator unSafeTransportsIt;
+  void updateTransport(float time);
+  void updateSafeTransport(float time);
+  void updateUnSafeTransport(float time);
+  void drawTransport(sf::RenderWindow &window);
+  void drawSafeTransport(sf::RenderWindow &window);
+  void drawUnSafeTransport(sf::RenderWindow &window);
 };

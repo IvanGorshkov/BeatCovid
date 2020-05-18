@@ -11,7 +11,6 @@
 
 class Player : public Entity {
  public:
-  Player() = default;
   explicit Player(const Object &position);
   bool GetDir() const;
   void KeyCheck();
@@ -21,7 +20,7 @@ class Player : public Entity {
   int GetDmg() const;
   void Update(float time, std::vector<Object> &obj) override;
   void Collision(int num, std::vector<Object> &objs);
-  void SetKey(const std::string& name, bool value);
+  void SetKey(const std::string &name, bool value);
   void AddPoints(int getPoints);
   int GetPoints() const;
   void PenaltyPoints(int penaltyPoints);
@@ -31,6 +30,11 @@ class Player : public Entity {
   AnimationManager GetAnim();
   void GoToStart(const Object &position);
   bool GetFinish() const;
+  void SetPosition(float x);
+  void ChangeHP(int getHp);
+  void ChangeARM(int getArm);
+  void SetDrive();
+  bool IsDrive();
  private:
   enum {
     STAY,
@@ -42,6 +46,7 @@ class Player : public Entity {
   std::map<std::string, bool> key;
   bool finish;
   bool dir;
+  bool isDrive;
   int dmg;
   float hp;
   float arm;

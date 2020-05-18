@@ -6,7 +6,7 @@ class Armor : public Entity {
   Armor() = default;
   Armor(float x, float y, float w, float h);
   void Update(float time, std::vector<Object> &obj) override;
-  void SetAnim(const std::string& name);
+  void SetAnim(const std::string &name);
   void StatusAnim();
   void FlipAnim(bool value);
   int GetArm() const;

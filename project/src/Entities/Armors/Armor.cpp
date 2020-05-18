@@ -9,7 +9,7 @@ void Armor::Update(float time, std::vector<Object> &obj) {
   rect = obj[0].rect;
 }
 
-void Armor::SetAnim(const std::string& name) {
+void Armor::SetAnim(const std::string &name) {
   anim.Set(name);
 }
 

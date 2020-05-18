@@ -4,6 +4,12 @@
 
 class Save {
  public:
-  Save() = default;
+  int lvl;
+  Save();
   void SaveGame(GameManager &game);
+  void ChangeLvl();
+  std::string GetLvlName();
+  bool SaveExists();
+  int GetLvl() const;
+  void Load(GameManager &game);
 };
