@@ -59,17 +59,29 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
       if (menuNum == 1) {
+        if (save.SaveExists()) {
+          remove("../files/saves/save.txt");
+        }
+        if (save.SaveExistsA()) {
+          remove("../files/saves/save_armor.txt");
+        }
+        if (save.SaveExistsP()) {
+          remove("../files/saves/save_points.txt");
+        }
+
+
         StartNewGame(window, save);
         for (int kI = 0; kI < 100000000; ++kI) {}
       }
 
       if (menuNum == 2) {
-        window.close();
-
+        if (save.SaveExists()) {
+          StartNewGame(window, save);
+        }
       }
 
       if (menuNum == 3) {
-        Shop(window);
+        Shop(window, save);
       }
 
       if (menuNum == 4) {
@@ -85,11 +97,12 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
     window.display();
   }
 }
-bool Interface::Shop(sf::RenderWindow &window) {
-  sf::Texture bg_arrmor, arms, buy;
+bool Interface::Shop(sf::RenderWindow &window, Save &save) {
+  sf::Texture bg_arrmor, arms, buy, back;
   bg_arrmor.loadFromFile("../files/menu/bg_arrmor.png");
   arms.loadFromFile("../files/menu/arrmors.png");
   buy.loadFromFile("../files/menu/upgrade.png");
+  back.loadFromFile("../files/menu/back.png");
   sf::Sprite BgArrmor(bg_arrmor);
   sf::Sprite Arms_glasses(arms);
   sf::Sprite Arms_gloves(arms);
@@ -99,6 +112,7 @@ bool Interface::Shop(sf::RenderWindow &window) {
   sf::Sprite buy_gloves(buy);
   sf::Sprite buy_robe(buy);
   sf::Sprite buy_mask(buy);
+  sf::Sprite backB(back);
 
   sf::Text points;
   sf::Text arm;
@@ -106,6 +120,12 @@ bool Interface::Shop(sf::RenderWindow &window) {
   sf::Text lvl_mask;
   sf::Text lvl_gloves;
   sf::Text lvl_robe;
+
+  sf::Text cost_glasses;
+  sf::Text cost_mask;
+  sf::Text cost_gloves;
+  sf::Text cost_robe;
+
   sf::Font font;
   font.loadFromFile("../files/fonts/Inconsolata-Bold.ttf");
   points.setFont(font);
@@ -137,72 +157,134 @@ bool Interface::Shop(sf::RenderWindow &window) {
   lvl_robe.setStyle(sf::Text::Bold);
   lvl_robe.setColor(sf::Color::White);
 
+  cost_glasses.setFont(font);
+  cost_glasses.setCharacterSize(40);
+  cost_glasses.setStyle(sf::Text::Bold);
+  cost_glasses.setColor(sf::Color::White);
+
+  cost_mask.setFont(font);
+  cost_mask.setCharacterSize(40);
+  cost_mask.setStyle(sf::Text::Bold);
+  cost_mask.setColor(sf::Color::White);
+
+  cost_gloves.setFont(font);
+  cost_gloves.setCharacterSize(40);
+  cost_gloves.setStyle(sf::Text::Bold);
+  cost_gloves.setColor(sf::Color::White);
+
+  cost_robe.setFont(font);
+  cost_robe.setCharacterSize(40);
+  cost_robe.setStyle(sf::Text::Bold);
+  cost_robe.setColor(sf::Color::White);
+
   int menuNum = 0;
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
   BgArrmor.setPosition(center.x - size.x / 2 + 250, center.y - size.y / 2 + 50);
   points.setPosition(center.x - size.x / 2 + 750, center.y - size.y / 2 + 13);
   arm.setPosition(center.x - size.x / 2 + 350, center.y - size.y / 2 + 13);
+
   lvl_glasses.setPosition(center.x - size.x / 2 + 310, center.y - size.y / 2 + 230);
   lvl_mask.setPosition(center.x - size.x / 2 + 820, center.y - size.y / 2 + 230);
   lvl_gloves.setPosition(center.x - size.x / 2 + 310, center.y - size.y / 2 + 610);
   lvl_robe.setPosition(center.x - size.x / 2 + 820, center.y - size.y / 2 + 610);
+
+  backB.setPosition(center.x - size.x / 2 + 20, center.y - size.y / 2 + 750);
 
   buy_glasses.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 130);
   buy_mask.setPosition(center.x - size.x / 2 + 1020, center.y - size.y / 2 + 130);
   buy_gloves.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 510);
   buy_robe.setPosition(center.x - size.x / 2 + 1020, center.y - size.y / 2 + 510);
 
-  Arms_glasses.setPosition(center.x - size.x / 2 + 310, center.y - size.y / 2 + 100);
-  Arms_glasses.setTextureRect(sf::Rect<int>(204 * 1,176,196,169));
-  Arms_gloves.setPosition(center.x - size.x / 2 + 310, center.y - size.y / 2 + 450);
-  Arms_gloves.setTextureRect(sf::Rect<int>(204 * 1,352,196,169));
-  Arms_mask.setPosition(center.x - size.x / 2 + 770, center.y - size.y / 2 + 90);
-  Arms_mask.setTextureRect(sf::Rect<int>(204 * 1,526,196,165));
-  Arms_robe.setPosition(center.x - size.x / 2 + 770, center.y - size.y / 2 + 450);
-  Arms_robe.setTextureRect(sf::Rect<int>(204 * 1,5,195,165));
-
-  std::ostringstream ss;
-  ss << "Points: " << 100;
-  points.setString(ss.str());
-
-  std::ostringstream ssarm;
-  ssarm << "ARM: " << 4;
-  arm.setString(ssarm.str());
-
-  std::ostringstream ss_glass;
-  ss_glass << "LVL:" << 1;
-  lvl_glasses.setString(ss_glass.str());
-
-  std::ostringstream ss_mask;
-  ss_mask << "LVL:" << 1;
-  lvl_mask.setString(ss_mask.str());
-
-  std::ostringstream ss_robe;
-  ss_robe << "LVL:" << 1;
-  lvl_robe.setString(ss_robe.str());
-
-  std::ostringstream ss_gloves;
-  ss_gloves << "LVL:" << 1;
-  lvl_gloves.setString(ss_gloves.str());
+  cost_glasses.setPosition(center.x - size.x / 2 + 145, center.y - size.y / 2 + 260);
+  cost_mask.setPosition(center.x - size.x / 2 + 1060, center.y - size.y / 2 + 260);
+  cost_gloves.setPosition(center.x - size.x / 2 + 145, center.y - size.y / 2 + 640);
+  cost_robe.setPosition(center.x - size.x / 2 + 1060, center.y - size.y / 2 + 640);
 
 
 
   while (window.isOpen()) {
+    std::vector<int> arm_vector = save.GetArmors();
 
-    sf::Event event;
-    while (window.pollEvent(event)) {
-      if (event.type == sf::Event::Closed) {
-        window.close();
-      }
+    std::ostringstream ss;
+    int money = save.GetPonits();
+    ss << "Points: " << money;
+    points.setString(ss.str());
+
+    std::ostringstream ssarm;
+    ssarm << "ARM: " << arm_vector[0] + arm_vector[1] + arm_vector[2] + arm_vector[3];
+    arm.setString(ssarm.str());
+
+    std::ostringstream ss_glass;
+    ss_glass << "LVL:" << arm_vector[0];
+    lvl_glasses.setString(ss_glass.str());
+
+    std::ostringstream ss_mask;
+    ss_mask << "LVL:" << arm_vector[1];
+    lvl_mask.setString(ss_mask.str());
+
+    std::ostringstream ss_robe;
+    ss_robe << "LVL:" << arm_vector[3];
+    lvl_robe.setString(ss_robe.str());
+
+    std::ostringstream ss_gloves;
+    ss_gloves << "LVL:" << arm_vector[2];
+    lvl_gloves.setString(ss_gloves.str());
+
+    std::ostringstream ss_glass_cost;
+    if (arm_vector[0] * 100 + 100 >= 500) {
+      ss_glass_cost  << "max";
+    } else {
+      ss_glass_cost  << arm_vector[0] * 100 + 100;
+    }
+    cost_glasses.setString(ss_glass_cost.str());
+
+
+    std::ostringstream ss_mask_cost;
+    if (arm_vector[1] * 100 + 100 >= 500) {
+      ss_mask_cost  << "max";
+    } else {
+      ss_mask_cost << arm_vector[1] * 100 + 100;
+    }
+    cost_mask.setString(ss_mask_cost.str());
+
+    std::ostringstream ss_robe_cost;
+    if (arm_vector[3] * 100 + 100 >= 500) {
+      ss_robe_cost  << "max";
+    } else {
+      ss_robe_cost << arm_vector[3] * 100 + 100;
+    }
+    cost_robe.setString(ss_robe_cost.str());
+
+    std::ostringstream ss_gloves_cost;
+    if (arm_vector[2] * 100 + 100 >= 500) {
+      ss_gloves_cost  << "max";
+    } else {
+      ss_gloves_cost  << arm_vector[2] * 100 + 100;
     }
 
-    menuNum = 0;
+    cost_gloves.setString(ss_gloves_cost.str());
+
+
+    Arms_glasses.setPosition(center.x - size.x / 2 + 310, center.y - size.y / 2 + 100);
+    Arms_glasses.setTextureRect(sf::Rect<int>(204 * arm_vector[0],176,196,169));
+    Arms_gloves.setPosition(center.x - size.x / 2 + 310, center.y - size.y / 2 + 450);
+    Arms_gloves.setTextureRect(sf::Rect<int>(204 * arm_vector[2],352,196,169));
+    Arms_mask.setPosition(center.x - size.x / 2 + 770, center.y - size.y / 2 + 90);
+    Arms_mask.setTextureRect(sf::Rect<int>(204 * arm_vector[1],526,196,165));
+    Arms_robe.setPosition(center.x - size.x / 2 + 770, center.y - size.y / 2 + 450);
+    Arms_robe.setTextureRect(sf::Rect<int>(204 * arm_vector[3],5,195,165));
+
     window.clear(sf::Color(129, 181, 221));
     buy_glasses.setColor(sf::Color::White);
+    buy_mask.setColor(sf::Color::White);
+    buy_gloves.setColor(sf::Color::White);
+    buy_robe.setColor(sf::Color::White);
+    backB.setColor(sf::Color::White);
+    menuNum = -1;
     if (sf::IntRect(110, 130, 100, 100).contains(sf::Mouse::getPosition(window))) {
       buy_glasses.setColor(sf::Color::Blue);
-      menuNum = 1;
+      menuNum = 0;
     }
 
     if (sf::IntRect(1020, 130, 100, 100).contains(sf::Mouse::getPosition(window))) {
@@ -212,43 +294,78 @@ bool Interface::Shop(sf::RenderWindow &window) {
 
     if (sf::IntRect(110, 510, 100, 100).contains(sf::Mouse::getPosition(window))) {
       buy_gloves.setColor(sf::Color::Blue);
-      menuNum = 1;
+      menuNum = 2;
     }
 
     if (sf::IntRect(1020, 510, 100, 100).contains(sf::Mouse::getPosition(window))) {
       buy_robe.setColor(sf::Color::Blue);
-      menuNum = 1;
+      menuNum = 3;
     }
 
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-      if (menuNum == 1) {
-        return false;
-      }
-      if (menuNum == 2) {
-        return true;
+    if (sf::IntRect(20, 700, 100, 100).contains(sf::Mouse::getPosition(window))) {
+      backB.setColor(sf::Color::Blue);
+      menuNum = 4;
+    }
+
+    sf::Event event;
+    while (window.pollEvent(event)) {
+      if (event.type == sf::Event::Closed) {
+        window.close();
       }
 
+      if (event.type == sf::Event::MouseButtonPressed) {
+        if (event.mouseButton.button == sf::Mouse::Left) {
+          if (menuNum == 1 || menuNum == 0 || menuNum == 2 || menuNum == 3) {
+            if (arm_vector[menuNum] < 4) {
+              int cost = arm_vector[menuNum] * 100 + 100;
+              if (cost <= money) {
+                Buy(arm_vector, menuNum, save);
+                save.SavePoints(money - cost);
+              }
+            }
+          }
+          if (menuNum == 4) {
+            return true;
+          }
+        }
+      }
     }
+
 
     window.draw(BgArrmor);
     window.draw(points);
     window.draw(arm);
+
     window.draw(lvl_glasses);
     window.draw(lvl_mask);
     window.draw(lvl_gloves);
     window.draw(lvl_robe);
+
     window.draw(Arms_glasses);
     window.draw(Arms_gloves);
     window.draw(Arms_robe);
     window.draw(Arms_mask);
+
     window.draw(buy_glasses);
     window.draw(buy_gloves);
     window.draw(buy_robe);
     window.draw(buy_mask);
+
+    window.draw(cost_glasses);
+    window.draw(cost_gloves);
+    window.draw(cost_robe);
+    window.draw(cost_mask);
+
+    window.draw(backB);
     window.display();
   }
 
   return true;
+}
+
+void Interface::Buy(std::vector<int> arm_vector, int index, Save &save) {
+  ++arm_vector[index];
+  save.SaveArmor(arm_vector);
 }
 
 bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
@@ -465,11 +582,12 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
 
   Level lvl;
   lvl.LoadFromFile(save.GetLvlName());
-  GameManager game(lvl);
+  GameManager game(lvl, save.GetArmors());
   sf::Clock clock;
   if (save.SaveExists()) {
     save.Load(game);
   }
+
   while (window.isOpen()) {
     window.clear(sf::Color(107, 140, 255));
     float time = clock.getElapsedTime().asMicroseconds();
@@ -556,6 +674,8 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game)
   sf::Vector2f size = window.getView().getSize();
   MenuContinue.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 30);
   MenuToMenu.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 90);
+  save.ChangeLvl();
+  save.SaveGame(game);
   while (window.isOpen()) {
 
     sf::Event event;
@@ -585,8 +705,7 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game)
         return false;
       }
       if (menuNum == 2) {
-        save.ChangeLvl();
-        save.SaveGame(game);
+
         StartNewGame(window, save);
         return true;
       }

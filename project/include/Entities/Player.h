@@ -11,7 +11,7 @@
 
 class Player : public Entity {
  public:
-  explicit Player(const Object &position);
+  explicit Player(const Object &position, std::vector<int> armors);
   bool GetDir() const;
   void KeyCheck();
   float GetHp() const;
@@ -36,6 +36,10 @@ class Player : public Entity {
   std::vector<int> GetMainData();
   void SetDrive();
   bool IsDrive();
+  Mask GetMsk();
+  Robe GetRobe();
+  Glasses GetGlasses();
+  Gloves GetGloves();
  private:
   enum {
     STAY,

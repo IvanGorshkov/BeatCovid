@@ -2,10 +2,10 @@
 #include "cmath"
 #include "Interface.h"
 
-GameManager::GameManager(Level &lvl) {
+GameManager::GameManager(Level &lvl, std::vector<int> arms) {
   obj = lvl.GetAllObjects();
   startPlayerPosition = lvl.GetObject("player");
-  player = new Player(startPlayerPosition);
+  player = new Player(startPlayerPosition, arms);
 
   for (auto &i : obj) {
     if (i.name == "breaker" || i.name == "delivery" || i.name == "virus") {

@@ -13543,9 +13543,9 @@
   <object name="finish" x="4672" y="480" width="96" height="32"/>
  </objectgroup>
  <objectgroup name="auto" width="150" height="30">
-  <object name="auto" x="928" y="800" width="96" height="32"/>
-  <object name="metro" x="2400" y="896" width="96" height="32"/>
-  <object name="monorail" x="3776" y="607" width="96" height="32"/>
-  <object name="bus" x="1376" y="800" width="96" height="32"/>
+  <object name="auto" x="928" y="768" width="96" height="32"/>
+  <object name="metro" x="2400" y="864" width="96" height="32"/>
+  <object name="bus" x="3776" y="576" width="96" height="32"/>
+  <object name="monorail" x="1376" y="768" width="96" height="32"/>
  </objectgroup>
 </map>

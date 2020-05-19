@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <iostream>
 
-Player::Player(const Object &position)
+Player::Player(const Object &position, std::vector<int> armors)
     : Entity(position.rect.left, position.rect.top, 0.1, 0.1, 50, 40),
       hp(100),
       max_jump(0),
@@ -12,10 +12,10 @@ Player::Player(const Object &position)
       dmg(1),
       isDrive(false),
       finish(false),
-      bathrobe(position.rect.left, position.rect.top, 50, 40, 1),
-      gloves(position.rect.left, position.rect.top, 50, 40, 1),
-      glasses(position.rect.left, position.rect.top, 50, 40, 1),
-      mask(position.rect.left, position.rect.top, 50, 40, 1) {
+      bathrobe(position.rect.left, position.rect.top, 50, 40, armors[3]),
+      gloves(position.rect.left, position.rect.top, 50, 40, armors[2]),
+      glasses(position.rect.left, position.rect.top, 50, 40, armors[0]),
+      mask(position.rect.left, position.rect.top, 50, 40, armors[1]) {
   sf::Texture player_t;
   player_t.loadFromFile("../files/images/fang.png");
   anim = AnimationManager(player_t);
@@ -245,7 +245,7 @@ float Player::GetHp() const {
 }
 
 float Player::GetArm() const {
-  return arm;
+  return bathrobe.GetArm() + glasses.GetArm() + gloves.GetArm() + mask.GetArm();
 }
 
 bool Player::GetDir() const {
@@ -309,6 +309,21 @@ std::vector<int> Player::GetMainData() {
   return data;
 }
 
+Mask Player::GetMsk() {
+  return mask;
+}
+
+Robe Player::GetRobe() {
+  return bathrobe;
+}
+
+Glasses Player::GetGlasses() {
+  return glasses;
+}
+
+Gloves Player::GetGloves() {
+  return gloves;
+}
 
 void Player::SetDrive() {
   isDrive = !isDrive;

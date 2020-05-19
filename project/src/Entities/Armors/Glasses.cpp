@@ -3,11 +3,26 @@
 Glasses::Glasses(float x, float y, float w, float h, int lvl) : Armor(x, y, w, h, lvl) {
   sf::Texture player_t;
   switch (lvl) {
-    case 1:player_t.loadFromFile("../files/images/glasses.png");
+    case 0:
+      player_t.loadFromFile("../files/images/free.png");
+      arm = 0;
+      break;
+    case 1:
+      player_t.loadFromFile("../files/images/glasses.png");
       arm = 1;
       break;
-    case 2: break;
-    case 3: break;
+    case 2:
+      player_t.loadFromFile("../files/images/glasses.png");
+      arm = 2;
+      break;
+    case 3:
+      player_t.loadFromFile("../files/images/glasses.png");
+      arm = 3;
+      break;
+    case 4:
+      player_t.loadFromFile("../files/images/glasses.png");
+      arm = 4;
+      break;
   }
 
   anim = AnimationManager(player_t);
