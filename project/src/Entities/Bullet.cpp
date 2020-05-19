@@ -1,7 +1,9 @@
 #include "Bullet.h"
 
 Bullet::Bullet(float x, float y, float dx, float dy, float dmg)
-    : Entity(x, y, dx, dy, 16, 16), dmg(dmg) {
+    : Entity(x, y, dx, dy, 16, 16), dmg(dmg),
+      timerDie(0),
+      isDie(false) {
   sf::Texture bulletTexture;
   bulletTexture.loadFromFile("../files/images/bullet.png");
   anim = AnimationManager(bulletTexture);
@@ -34,4 +36,12 @@ void Bullet::Update(float time, std::vector<Object> &obj) {
 
 float Bullet::GetDmg() const {
   return dmg;
+}
+
+bool Bullet::IsDie() {
+  if (timerDie > BULLET_TIME_DIE) {
+    isDie = true;
+  }
+
+  return isDie;
 }

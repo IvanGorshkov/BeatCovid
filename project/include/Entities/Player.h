@@ -11,8 +11,7 @@
 
 class Player : public Entity {
  public:
-  Player() = default;
-  explicit Player(const Object &position);
+  explicit Player(const Object &position, std::vector<int> armors);
   bool GetDir() const;
   void KeyCheck();
   float GetHp() const;
@@ -21,7 +20,7 @@ class Player : public Entity {
   int GetDmg() const;
   void Update(float time, std::vector<Object> &obj) override;
   void Collision(int num, std::vector<Object> &objs);
-  void SetKey(const std::string& name, bool value);
+  void SetKey(const std::string &name, bool value);
   void AddPoints(int getPoints);
   int GetPoints() const;
   void PenaltyPoints(int penaltyPoints);
@@ -31,6 +30,16 @@ class Player : public Entity {
   AnimationManager GetAnim();
   void GoToStart(const Object &position);
   bool GetFinish() const;
+  void SetPosition(float x);
+  void ChangeHP(int hp);
+  void ChangeARM(int arm);
+  std::vector<int> GetMainData();
+  void SetDrive();
+  bool IsDrive();
+  Mask GetMsk();
+  Robe GetRobe();
+  Glasses GetGlasses();
+  Gloves GetGloves();
  private:
   enum {
     STAY,
@@ -53,4 +62,5 @@ class Player : public Entity {
   Gloves gloves;
   Glasses glasses;
   Mask mask;
+  bool isDrive;
 };

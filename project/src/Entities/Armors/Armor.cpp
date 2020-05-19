@@ -1,6 +1,6 @@
 #include "Armor.h"
 
-Armor::Armor(float x, float y, float w, float h) : Entity(x, y, 0, 0, w, h) {
+Armor::Armor(float x, float y, float w, float h, int lvl) : Entity(x, y, 0, 0, w, h), lvl(lvl) {
 
 }
 
@@ -23,4 +23,8 @@ void Armor::FlipAnim(bool value) {
 
 int Armor::GetArm() const {
   return arm;
+}
+
+int Armor::Getlvl() const {
+  return lvl;
 }

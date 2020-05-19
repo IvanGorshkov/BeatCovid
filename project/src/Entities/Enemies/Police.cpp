@@ -1,29 +1,17 @@
 #include "Police.h"
 
 Police::Police(float x, float y, int height, int weight)
-    : Enemy(x, y, height, weight, 3, 6), penalty(50)
-    , isMetUser(false)
-    , drawPenaltyMenu(false)
-    , drawDiedMenu(false) {
+    : Enemy(x, y, height, weight, POLICE_HP, POLICE_DMG),
+      penalty(POLICE_PENALTY),
+      isMetUser(false),
+      drawPenaltyMenu(false),
+      drawDiedMenu(false) {
   sf::Texture policeTexture;
   policeTexture.loadFromFile("../files/images/enemy.png");
   anim = AnimationManager(policeTexture);
   anim.Create("move", 0, 0, 16, 16, 2, 0.002, 18);
   anim.Create("dead", 58, 0, 16, 16, 1, 0);
   anim.Set("move");
-}
-
-void Police::Update(float time, std::vector<Object> &obj) {
-  timerHit += time;
-
-  if (hp < 0) {
-    dx = 0;
-    dy = 0;
-    anim.Set("dead");
-    isLife = false;
-  }
-
-  anim.Tick(time);
 }
 
 int Police::Penatly() {
