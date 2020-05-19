@@ -12,4 +12,5 @@ class Save {
   bool SaveExists();
   int GetLvl() const;
   void Load(GameManager &game);
+  void GoToStart();
 };

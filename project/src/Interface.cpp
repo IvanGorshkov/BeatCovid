@@ -52,13 +52,18 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
       if (menuNum == 1) {
+          if (save.SaveExists()) {
+              remove("../files/saves/save.txt");
+              save.GoToStart();
+          }
         StartNewGame(window, save);
         for (int kI = 0; kI < 100000000; ++kI) {}
       }
 
       if (menuNum == 2) {
-        window.close();
-
+          if (save.SaveExists()) {
+              StartNewGame(window, save);
+          }
       }
 
       if (menuNum == 3) {
@@ -76,7 +81,6 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
 
 bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
   sf::Texture menuContinue, menuToMenu, saveGame;
-  Save save;
   menuToMenu.loadFromFile("../files/menu/to_menu.png");
   menuContinue.loadFromFile("../files/menu/continue.png");
   sf::Sprite MenuToMenu(menuToMenu);

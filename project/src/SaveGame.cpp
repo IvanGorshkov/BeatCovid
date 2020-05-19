@@ -20,6 +20,10 @@ std::string Save::GetLvlName() {
     return (lvlname += std::to_string(GetLvl()) + ".tmx");
 }
 
+void Save::GoToStart() {
+    this->lvl = 1;
+}
+
 bool Save::SaveExists() {
     std::fstream save;
     save.open("../files/saves/save.txt");
@@ -48,12 +52,12 @@ void Save::SaveGame(GameManager &game) {
 void Save::Load(GameManager &game) {
     std::ifstream save_file("../files/saves/save.txt");
     char buff[50];
-
-    save_file.getline(buff, 50); // считали строку из файла
-    save_file.getline(buff, 50); // считали строку из файла
+    save_file.getline(buff, 50);
+    this->lvl = atoi(buff);
+    save_file.getline(buff, 50);
     game.GetPlayer()->ChangeHP(atoi(buff));
-    save_file.getline(buff, 50); // считали строку из файла
+    save_file.getline(buff, 50);
     game.GetPlayer()->ChangeARM(atoi(buff));
-    save_file.getline(buff, 50); // считали строку из файла
+    save_file.getline(buff, 50);
     game.GetPlayer()->AddPoints(atoi(buff));
 }

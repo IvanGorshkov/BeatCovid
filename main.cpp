@@ -6,6 +6,5 @@ int main() {
   window.setFramerateLimit(120);
   Save save;
   Interface::MainMenu(window, save);
-  remove("../files/saves/save.txt");
   return 0;
 }
