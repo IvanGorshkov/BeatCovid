@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <iostream>
 
-Player::Player(const Object &position)
+Player::Player(const Object &position, std::vector<int> armors)
     : Entity(position.rect.left, position.rect.top, 0.1, 0.1, 50, 40),
       hp(100),
       max_jump(0),
@@ -10,12 +10,12 @@ Player::Player(const Object &position)
       points(0),
       vaccine(false),
       dmg(1),
-      finish(false),
       isDrive(false),
-      bathrobe(position.rect.left, position.rect.top, 50, 40, 1),
-      gloves(position.rect.left, position.rect.top, 50, 40, 1),
-      glasses(position.rect.left, position.rect.top, 50, 40, 1),
-      mask(position.rect.left, position.rect.top, 50, 40, 1) {
+      finish(false),
+      bathrobe(position.rect.left, position.rect.top, 50, 40, armors[3]),
+      gloves(position.rect.left, position.rect.top, 50, 40, armors[2]),
+      glasses(position.rect.left, position.rect.top, 50, 40, armors[0]),
+      mask(position.rect.left, position.rect.top, 50, 40, armors[1]) {
   sf::Texture player_t;
   player_t.loadFromFile("../files/images/fang.png");
   anim = AnimationManager(player_t);
@@ -245,7 +245,7 @@ float Player::GetHp() const {
 }
 
 float Player::GetArm() const {
-  return arm;
+  return bathrobe.GetArm() + glasses.GetArm() + gloves.GetArm() + mask.GetArm();
 }
 
 bool Player::GetDir() const {
@@ -281,20 +281,48 @@ void Player::GoToStart(const Object &position) {
   rect.top = position.rect.top;
 }
 
-void Player::ChangeHP(int getHp) {
-  this->hp = getHp;
+void Player::ChangeHP(int hp) {
+  this->hp = hp;
 }
 
-void Player::ChangeARM(int getArm) {
-  this->arm = getArm;
+void Player::ChangeARM(int arm) {
+  this->arm = arm;
 }
 
 AnimationManager Player::GetAnim() {
   return anim;
 }
-
 void Player::SetPosition(float x) {
   rect.left = x;
+}
+
+std::vector<int> Player::GetMainData() {
+  std::vector<int> data;
+  data.push_back(hp);
+  data.push_back(points);
+  data.push_back(arm);
+  data.push_back(mask.Getlvl());
+  data.push_back(gloves.Getlvl());
+  data.push_back(glasses.Getlvl());
+  data.push_back(bathrobe.Getlvl());
+
+  return data;
+}
+
+Mask Player::GetMsk() {
+  return mask;
+}
+
+Robe Player::GetRobe() {
+  return bathrobe;
+}
+
+Glasses Player::GetGlasses() {
+  return glasses;
+}
+
+Gloves Player::GetGloves() {
+  return gloves;
 }
 
 void Player::SetDrive() {

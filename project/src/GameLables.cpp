@@ -15,34 +15,6 @@ void GameLables::DrawPlayerData(sf::RenderWindow &window, int points_int, int hp
   drawArm(window, arm_int);
 }
 
-void GameLables::DrawTransportHelp(sf::RenderWindow &window, float x, float y) {
-  points.setPosition(x + 30, y - 60);
-  std::ostringstream ss;
-  ss << "E";
-  points.setString(ss.str());
-  window.draw(points);
-}
-
-void GameLables::DrawSafeTransportFuel(sf::RenderWindow &window, int fuel_int) {
-  sf::Vector2f center = window.getView().getCenter();
-  sf::Vector2f size = window.getView().getSize();
-  points.setPosition(center.x - size.x / 2 + 500, center.y - size.y / 2 + 13);
-  std::ostringstream ss;
-  ss << "Fuel: " << fuel_int << "%";
-  points.setString(ss.str());
-  window.draw(points);
-}
-
-void GameLables::DrawUnSafeTransportDmg(sf::RenderWindow &window, int dmg_int) {
-  sf::Vector2f center = window.getView().getCenter();
-  sf::Vector2f size = window.getView().getSize();
-  points.setPosition(center.x - size.x / 2 + 500, center.y - size.y / 2 + 13);
-  std::ostringstream ss;
-  ss << "Dmg: " << dmg_int;
-  points.setString(ss.str());
-  window.draw(points);
-}
-
 void GameLables::drawPoints(sf::RenderWindow &window, int points_int) {
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
@@ -75,3 +47,32 @@ void GameLables::drawArm(sf::RenderWindow &window, unsigned int arm_int) {
   points.setString(ss.str());
   window.draw(points);
 }
+
+void GameLables::DrawSafeTransportFuel(sf::RenderWindow &window, int fuel_int) {
+  sf::Vector2f center = window.getView().getCenter();
+  sf::Vector2f size = window.getView().getSize();
+  points.setPosition(center.x - size.x / 2 + 500, center.y - size.y / 2 + 13);
+  std::ostringstream ss;
+  ss << "Fuel: " << fuel_int << "%";
+  points.setString(ss.str());
+  window.draw(points);
+}
+
+void GameLables::DrawTransportHelp(sf::RenderWindow &window, float x, float y) {
+  points.setPosition(x + 30, y - 60);
+  std::ostringstream ss;
+  ss << "E";
+  points.setString(ss.str());
+  window.draw(points);
+}
+
+void GameLables::DrawUnSafeTransportDmg(sf::RenderWindow &window, int dmg_int) {
+  sf::Vector2f center = window.getView().getCenter();
+  sf::Vector2f size = window.getView().getSize();
+  points.setPosition(center.x - size.x / 2 + 500, center.y - size.y / 2 + 13);
+  std::ostringstream ss;
+  ss << "Dmg: " << dmg_int;
+  points.setString(ss.str());
+  window.draw(points);
+}
+

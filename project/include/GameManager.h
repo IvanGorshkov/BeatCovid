@@ -3,6 +3,7 @@
 #include "Level_map.h"
 #include "Player.h"
 #include <list>
+#include <vector>
 #include <SFML/Graphics.hpp>
 #include "Bullet.h"
 #include "Enemy.h"
@@ -15,7 +16,7 @@
 
 class GameManager {
  public:
-  explicit GameManager(Level &lvl);
+  explicit GameManager(Level &lvl, std::vector<int> arms);
   // Обновление всех классов
   void Update(float time);
   // Вывод всех классов на экран
