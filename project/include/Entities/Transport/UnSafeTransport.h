@@ -12,7 +12,7 @@ class UnSafeTransport : public Transport {
   explicit UnSafeTransport(float x, float y, int height, int weight, std::string name);
   void Update(float time, std::vector<Object> &obj) override;
   float GetDmg();
-  float PrintDmg();
+  float PrintDmg() const;
  private:
   std::string name;
   float dmg;

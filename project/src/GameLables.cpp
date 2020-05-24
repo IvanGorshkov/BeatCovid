@@ -58,6 +58,7 @@ void GameLables::DrawSafeTransportFuel(sf::RenderWindow &window, int fuel_int) {
   window.draw(points);
 }
 
+
 void GameLables::DrawTransportHelp(sf::RenderWindow &window, float x, float y) {
   points.setPosition(x + 30, y - 60);
   std::ostringstream ss;
