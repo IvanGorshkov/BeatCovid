@@ -5,9 +5,8 @@
 #include "Level_map.h"
 #include "Entity.h"
 #include "Robe.h"
-#include "Gloves.h"
-#include "Glasses.h"
-#include "Mask.h"
+#include "Shoes.h"
+#include "Cap.h"
 
 class Player : public Entity {
  public:
@@ -36,31 +35,34 @@ class Player : public Entity {
   std::vector<int> GetMainData();
   void SetDrive();
   bool IsDrive();
-  Mask GetMsk();
   Robe GetRobe();
-  Glasses GetGlasses();
-  Gloves GetGloves();
+  Cap GetCap();
+  Shoes GetShoes();
  private:
   enum {
     STAY,
     RUN,
     JUMP,
     LAY,
+    WALKLAY,
   } STATE;
 
   std::map<std::string, bool> key;
+  int dmgC;
+  int fireC;
   bool finish;
   bool dir;
+  bool fire;
   int dmg;
   float hp;
   float arm;
   float max_jump;
   int points;
   bool isGround;
+  bool tookDmg;
   bool vaccine;
   Robe bathrobe;
-  Gloves gloves;
-  Glasses glasses;
-  Mask mask;
+  Shoes shoes;
+  Cap cap;
   bool isDrive;
 };

@@ -29,7 +29,7 @@ std::string Save::GetLvlName() {
 }
 
 void Save::GoToStart() {
-    this->lvl = 1;
+    this->lvl = 2;
 }
 
 bool Save::SaveExists() {
@@ -86,7 +86,7 @@ int Save::GetPonits() {
   std::fstream save;
   save.open("../files/saves/save_points.txt");
   if (!save.is_open()) {
-    return 10000;
+    return 0;
   }
 
   char buff[50];
@@ -111,36 +111,29 @@ std::vector<int> Save::GetArmors() {
   std::fstream save;
   save.open("../files/saves/save_armor.txt");
   if (!save.is_open()) {
-    std::vector<int> empty =  {0,0,0,0};
+    std::vector<int> empty =  {0,0,0};
     return empty;
   }
 
   char buff[50];
-  std::vector<int> arms =  {0,0,0,0};
+  std::vector<int> arms =  {0,0,0};
   save.getline(buff, 50);
   arms[0] = atoi(buff);
   save.getline(buff, 50);
   arms[1] = atoi(buff);
   save.getline(buff, 50);
   arms[2] = atoi(buff);
-  save.getline(buff, 50);
-  arms[3] = atoi(buff);
   return arms;
 }
 
 void Save::SaveArmor(std::vector<int> vec) {
   std::ofstream save_armor_file("../files/saves/save_armor.txt");
-  // GetGlasses
   save_armor_file << vec[0];
   save_armor_file << std::endl;
-  // GetGloves
   save_armor_file << vec[1];
   save_armor_file << std::endl;
-  // GetRobe
   save_armor_file << vec[2];
   save_armor_file << std::endl;
-  // GetMsk
-  save_armor_file << vec[3];
-  save_armor_file << std::endl;
+
   save_armor_file.close();
 }

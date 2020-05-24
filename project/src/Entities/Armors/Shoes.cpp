@@ -1,6 +1,6 @@
-#include "Robe.h"
+#include "Shoes.h"
 
-Robe::Robe(float x, float y, float w, float h, int lvl) : Armor(x, y, w, h, lvl) {
+Shoes::Shoes(float x, float y, float w, float h, int lvl) : Armor(x, y, w, h, lvl) {
   sf::Texture player_t;
   switch (lvl) {
     case 0:
@@ -8,19 +8,19 @@ Robe::Robe(float x, float y, float w, float h, int lvl) : Armor(x, y, w, h, lvl)
       arm = 0;
       break;
     case 1:
-      player_t.loadFromFile("../files/images/halat_1.png");
+      player_t.loadFromFile("../files/images/shoes_1.png");
       arm = 1;
       break;
     case 2:
-      player_t.loadFromFile("../files/images/halat_2.png");
+      player_t.loadFromFile("../files/images/shoes_2.png");
       arm = 2;
       break;
     case 3:
-      player_t.loadFromFile("../files/images/halat_3.png");
+      player_t.loadFromFile("../files/images/shoes_3.png");
       arm = 3;
       break;
     case 4:
-      player_t.loadFromFile("../files/images/halat_4.png");
+      player_t.loadFromFile("../files/images/shoes_4.png");
       arm = 4;
       break;
   }

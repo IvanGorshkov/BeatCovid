@@ -13,7 +13,7 @@ GameManager::GameManager(Level &lvl, std::vector<int> arms) {
     }
 
     if (i.name == "police") {
-      enemies.push_back(new Police(i.rect.left, i.rect.top, i.rect.width, i.rect.height));
+      enemies.push_back(new Police(i.rect.left, i.rect.top, 64, 64));
     }
 
     if (i.name == "antigen" || i.name == "vaccine") {
@@ -62,18 +62,21 @@ Player *GameManager::GetPlayer() {
 void GameManager::Fire() {
 
   if (player->GetPoints() > 0) {
+    player->SetKey("SPACE", true);
     if (player->GetDir()) {
       playerBullets.emplace_back(player->GetRect().left - 20,
-                                 player->GetRect().top + 10,
+                                 player->GetRect().top + 20,
                                  -BULLET_DX,
                                  0,
-                                 player->GetDmg());
+                                 player->GetDmg(),
+                                 true);
     } else {
       playerBullets.emplace_back(player->GetRect().left + player->GetRect().width + 10,
-                                 player->GetRect().top + 10,
+                                 player->GetRect().top + 20,
                                  BULLET_DX,
                                  0,
-                                 player->GetDmg());
+                                 player->GetDmg(),
+                                 true);
     }
 
     player->AddPoints(-1);
@@ -159,9 +162,10 @@ void GameManager::bulletPlayer() {
     if ((*enemiesIt)->GetTimer() > 1000 && (*enemiesIt)->IsLife()) {
       float X = (player->GetRect().left - (*enemiesIt)->GetRect().left) / 16;
       float Y = (player->GetRect().top - (*enemiesIt)->GetRect().top) / 16;
-
       // Дальность полета пули
+      (*enemiesIt)->SetFire(true);
       if (std::abs(X) > 30 || std::abs(Y) > 30) {
+        (*enemiesIt)->SetFire(false);
         (*enemiesIt)->ResetTimer();
         break;
       }
@@ -176,19 +180,22 @@ void GameManager::bulletPlayer() {
       }
 
       if (X > 0) {
-        enemyBullets.emplace_back((*enemiesIt)->GetRect().left + 20,
-                                  (*enemiesIt)->GetRect().top,
+        (*enemiesIt)->SetDir(false);
+        enemyBullets.emplace_back((*enemiesIt)->GetRect().left + 70,
+                                  (*enemiesIt)->GetRect().top + 10,
                                   dx,
                                   dy,
-                                  (*enemiesIt)->GetDmg());
+                                  (*enemiesIt)->GetDmg(),
+                                  false);
       } else {
-        enemyBullets.emplace_back((*enemiesIt)->GetRect().left - 16,
-                                  (*enemiesIt)->GetRect().top,
+        (*enemiesIt)->SetDir(true);
+        enemyBullets.emplace_back((*enemiesIt)->GetRect().left - 30,
+                                  (*enemiesIt)->GetRect().top + 10,
                                   dx,
                                   dy,
-                                  (*enemiesIt)->GetDmg());
+                                  (*enemiesIt)->GetDmg(),
+                                  false);
       }
-
       (*enemiesIt)->ResetTimer();
     }
   }
