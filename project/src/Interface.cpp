@@ -9,7 +9,7 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
   menuNewGame.loadFromFile("../files/menu/new_game.png");
   menuLoad.loadFromFile("../files/menu/load.png");
   menuExit.loadFromFile("../files/menu/exit.png");
-  main_menuBackground.loadFromFile("../files/menu/main_menu.jpg");
+  main_menuBackground.loadFromFile("../files/menu/main_menu.png");
   tShop.loadFromFile("../files/menu/shop.png");
   sf::Sprite MenuNewGame(menuNewGame);
   sf::Sprite MenuLoad(menuLoad);
@@ -31,28 +31,28 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
     MenuLoad.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 90);
     SMenu.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 150);
     MenuExit.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 210);
-    MenuBg.setPosition(center.x - size.x / 2 + 345, center.y - size.y / 2 + 0);
+    MenuBg.setPosition(center.x - size.x / 2 + 380, center.y - size.y / 2 + 0);
     MenuNewGame.setColor(sf::Color::White);
     MenuLoad.setColor(sf::Color::White);
     MenuExit.setColor(sf::Color::White);
     SMenu.setColor(sf::Color::White);
     menuNum = 0;
-    window.clear(sf::Color(129, 181, 221));
+    window.clear(sf::Color(68, 101, 219));
 
     if (sf::IntRect(100, 30, 300, 50).contains(sf::Mouse::getPosition(window))) {
-      MenuNewGame.setColor(sf::Color::Blue);
+      MenuNewGame.setColor(sf::Color::Red);
       menuNum = 1;
     }
     if (sf::IntRect(100, 90, 300, 50).contains(sf::Mouse::getPosition(window))) {
-      MenuLoad.setColor(sf::Color::Blue);
+      MenuLoad.setColor(sf::Color::Red);
       menuNum = 2;
     }
     if (sf::IntRect(100, 150, 300, 50).contains(sf::Mouse::getPosition(window))) {
-      SMenu.setColor(sf::Color::Blue);
+      SMenu.setColor(sf::Color::Red);
       menuNum = 3;
     }
     if (sf::IntRect(100, 210, 300, 50).contains(sf::Mouse::getPosition(window))) {
-      MenuExit.setColor(sf::Color::Blue);
+      MenuExit.setColor(sf::Color::Red);
       menuNum = 4;
     }
 
@@ -95,80 +95,74 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
     window.display();
   }
 }
+
 bool Interface::Shop(sf::RenderWindow &window, Save &save) {
   sf::Texture bg_arrmor, arms, buy, back;
   bg_arrmor.loadFromFile("../files/menu/bg_arrmor.png");
   arms.loadFromFile("../files/menu/arrmors.png");
   buy.loadFromFile("../files/menu/upgrade.png");
   back.loadFromFile("../files/menu/back.png");
+
   sf::Sprite BgArrmor(bg_arrmor);
-  sf::Sprite Arms_glasses(arms);
-  sf::Sprite Arms_gloves(arms);
+
+  sf::Sprite Arms_shoes(arms);
+  sf::Sprite Arms_cap(arms);
   sf::Sprite Arms_robe(arms);
-  sf::Sprite Arms_mask(arms);
-  sf::Sprite buy_glasses(buy);
-  sf::Sprite buy_gloves(buy);
+
+  sf::Sprite buy_shoes(buy);
+  sf::Sprite buy_cap(buy);
   sf::Sprite buy_robe(buy);
-  sf::Sprite buy_mask(buy);
+
   sf::Sprite backB(back);
 
   sf::Text points;
   sf::Text arm;
-  sf::Text lvl_glasses;
-  sf::Text lvl_mask;
-  sf::Text lvl_gloves;
+
+  sf::Text lvl_shoes;
+  sf::Text lvl_cap;
   sf::Text lvl_robe;
 
-  sf::Text cost_glasses;
-  sf::Text cost_mask;
-  sf::Text cost_gloves;
+  sf::Text cost_shoes;
+  sf::Text cost_cap;
   sf::Text cost_robe;
 
   sf::Font font;
   font.loadFromFile("../files/fonts/Inconsolata-Bold.ttf");
+
   points.setFont(font);
   points.setCharacterSize(40);
   points.setStyle(sf::Text::Bold);
   points.setColor(sf::Color::White);
+
   arm.setFont(font);
   arm.setCharacterSize(40);
   arm.setStyle(sf::Text::Bold);
   arm.setColor(sf::Color::White);
 
-  lvl_glasses.setFont(font);
-  lvl_glasses.setCharacterSize(40);
-  lvl_glasses.setStyle(sf::Text::Bold);
-  lvl_glasses.setColor(sf::Color::White);
+  lvl_shoes.setFont(font);
+  lvl_shoes.setCharacterSize(40);
+  lvl_shoes.setStyle(sf::Text::Bold);
+  lvl_shoes.setColor(sf::Color::White);
 
-  lvl_mask.setFont(font);
-  lvl_mask.setCharacterSize(40);
-  lvl_mask.setStyle(sf::Text::Bold);
-  lvl_mask.setColor(sf::Color::White);
-
-  lvl_gloves.setFont(font);
-  lvl_gloves.setCharacterSize(40);
-  lvl_gloves.setStyle(sf::Text::Bold);
-  lvl_gloves.setColor(sf::Color::White);
+  lvl_cap.setFont(font);
+  lvl_cap.setCharacterSize(40);
+  lvl_cap.setStyle(sf::Text::Bold);
+  lvl_cap.setColor(sf::Color::White);
 
   lvl_robe.setFont(font);
   lvl_robe.setCharacterSize(40);
   lvl_robe.setStyle(sf::Text::Bold);
   lvl_robe.setColor(sf::Color::White);
 
-  cost_glasses.setFont(font);
-  cost_glasses.setCharacterSize(40);
-  cost_glasses.setStyle(sf::Text::Bold);
-  cost_glasses.setColor(sf::Color::White);
+  cost_shoes.setFont(font);
+  cost_shoes.setCharacterSize(40);
+  cost_shoes.setStyle(sf::Text::Bold);
+  cost_shoes.setColor(sf::Color::White);
 
-  cost_mask.setFont(font);
-  cost_mask.setCharacterSize(40);
-  cost_mask.setStyle(sf::Text::Bold);
-  cost_mask.setColor(sf::Color::White);
-
-  cost_gloves.setFont(font);
-  cost_gloves.setCharacterSize(40);
-  cost_gloves.setStyle(sf::Text::Bold);
-  cost_gloves.setColor(sf::Color::White);
+  cost_cap.setFont(font);
+  cost_cap.setCharacterSize(40);
+  cost_cap.setStyle(sf::Text::Bold);
+  cost_cap.setColor(sf::Color::White);
 
   cost_robe.setFont(font);
   cost_robe.setCharacterSize(40);
@@ -178,26 +172,24 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
   int menuNum = 0;
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
-  BgArrmor.setPosition(center.x - size.x / 2 + 250, center.y - size.y / 2 + 50);
-  points.setPosition(center.x - size.x / 2 + 750, center.y - size.y / 2 + 13);
-  arm.setPosition(center.x - size.x / 2 + 350, center.y - size.y / 2 + 13);
 
-  lvl_glasses.setPosition(center.x - size.x / 2 + 310, center.y - size.y / 2 + 230);
-  lvl_mask.setPosition(center.x - size.x / 2 + 820, center.y - size.y / 2 + 230);
-  lvl_gloves.setPosition(center.x - size.x / 2 + 310, center.y - size.y / 2 + 610);
-  lvl_robe.setPosition(center.x - size.x / 2 + 820, center.y - size.y / 2 + 610);
+  BgArrmor.setPosition(center.x - size.x / 2 + 250, center.y - size.y / 2 + 80);
+  points.setPosition(center.x - size.x / 2 + 800, center.y - size.y / 2 + 13);
+  arm.setPosition(center.x - size.x / 2 + 300, center.y - size.y / 2 + 13);
+
+  lvl_cap.setPosition(center.x - size.x / 2 + 300, center.y - size.y / 2 + 240);
+  lvl_shoes.setPosition(center.x - size.x / 2 + 840, center.y - size.y / 2 + 240);
+  lvl_robe.setPosition(center.x - size.x / 2 + 570, center.y - size.y / 2 + 660);
 
   backB.setPosition(center.x - size.x / 2 + 20, center.y - size.y / 2 + 750);
 
-  buy_glasses.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 130);
-  buy_mask.setPosition(center.x - size.x / 2 + 1020, center.y - size.y / 2 + 130);
-  buy_gloves.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 510);
-  buy_robe.setPosition(center.x - size.x / 2 + 1020, center.y - size.y / 2 + 510);
+  buy_cap.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 160);
+  buy_shoes.setPosition(center.x - size.x / 2 + 1010, center.y - size.y / 2 + 160);
+  buy_robe.setPosition(center.x - size.x / 2 + 370, center.y - size.y / 2 + 580);
 
-  cost_glasses.setPosition(center.x - size.x / 2 + 145, center.y - size.y / 2 + 260);
-  cost_mask.setPosition(center.x - size.x / 2 + 1060, center.y - size.y / 2 + 260);
-  cost_gloves.setPosition(center.x - size.x / 2 + 145, center.y - size.y / 2 + 640);
-  cost_robe.setPosition(center.x - size.x / 2 + 1060, center.y - size.y / 2 + 640);
+  cost_cap.setPosition(center.x - size.x / 2 + 145, center.y - size.y / 2 + 290);
+  cost_shoes.setPosition(center.x - size.x / 2 + 1045, center.y - size.y / 2 + 290);
+  cost_robe.setPosition(center.x - size.x / 2 + 400, center.y - size.y / 2 + 710);
 
   while (window.isOpen()) {
     std::vector<int> arm_vector = save.GetArmors();
@@ -208,96 +200,77 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
     points.setString(ss.str());
 
     std::ostringstream ssarm;
-    ssarm << "ARM: " << arm_vector[0] + arm_vector[1] + arm_vector[2] + arm_vector[3];
+    ssarm << "ARM: " << arm_vector[0] + arm_vector[1] + arm_vector[2];
     arm.setString(ssarm.str());
 
-    std::ostringstream ss_glass;
-    ss_glass << "LVL:" << arm_vector[0];
-    lvl_glasses.setString(ss_glass.str());
+    std::ostringstream ss_cap;
+    ss_cap << "LVL:" << arm_vector[0];
+    lvl_cap.setString(ss_cap.str());
 
-    std::ostringstream ss_mask;
-    ss_mask << "LVL:" << arm_vector[1];
-    lvl_mask.setString(ss_mask.str());
+    std::ostringstream ss_shoes;
+    ss_shoes << "LVL:" << arm_vector[1];
+    lvl_shoes.setString(ss_shoes.str());
 
     std::ostringstream ss_robe;
-    ss_robe << "LVL:" << arm_vector[3];
+    ss_robe << "LVL:" << arm_vector[2];
     lvl_robe.setString(ss_robe.str());
 
-    std::ostringstream ss_gloves;
-    ss_gloves << "LVL:" << arm_vector[2];
-    lvl_gloves.setString(ss_gloves.str());
-
-    std::ostringstream ss_glass_cost;
+    std::ostringstream ss_cap_cost;
     if (arm_vector[0] * 100 + 100 >= 500) {
-      ss_glass_cost << "max";
+      ss_cap_cost << "max";
     } else {
-      ss_glass_cost << arm_vector[0] * 100 + 100;
+      ss_cap_cost << arm_vector[0] * 100 + 100;
     }
-    cost_glasses.setString(ss_glass_cost.str());
+    cost_cap.setString(ss_cap_cost.str());
 
-    std::ostringstream ss_mask_cost;
+    std::ostringstream ss_shoes_cost;
     if (arm_vector[1] * 100 + 100 >= 500) {
-      ss_mask_cost << "max";
+      ss_shoes_cost << "max";
     } else {
-      ss_mask_cost << arm_vector[1] * 100 + 100;
+      ss_shoes_cost << arm_vector[1] * 100 + 100;
     }
-    cost_mask.setString(ss_mask_cost.str());
+    cost_shoes.setString(ss_shoes_cost.str());
 
     std::ostringstream ss_robe_cost;
-    if (arm_vector[3] * 100 + 100 >= 500) {
+    if (arm_vector[2] * 100 + 100 >= 500) {
       ss_robe_cost << "max";
     } else {
-      ss_robe_cost << arm_vector[3] * 100 + 100;
+      ss_robe_cost << arm_vector[2] * 100 + 100;
     }
     cost_robe.setString(ss_robe_cost.str());
 
-    std::ostringstream ss_gloves_cost;
-    if (arm_vector[2] * 100 + 100 >= 500) {
-      ss_gloves_cost << "max";
-    } else {
-      ss_gloves_cost << arm_vector[2] * 100 + 100;
-    }
+    Arms_cap.setPosition(center.x - size.x / 2 + 260, center.y - size.y / 2 + 140);
+    Arms_cap.setTextureRect(sf::Rect<int>(204 * arm_vector[0], 41, 196, 85));
 
-    cost_gloves.setString(ss_gloves_cost.str());
+    Arms_shoes.setPosition(center.x - size.x / 2 + 790, center.y - size.y / 2 + 100);
+    Arms_shoes.setTextureRect(sf::Rect<int>(204 * arm_vector[1], 352, 196, 169));
 
-    Arms_glasses.setPosition(center.x - size.x / 2 + 310, center.y - size.y / 2 + 100);
-    Arms_glasses.setTextureRect(sf::Rect<int>(204 * arm_vector[0], 176, 196, 169));
-    Arms_gloves.setPosition(center.x - size.x / 2 + 310, center.y - size.y / 2 + 450);
-    Arms_gloves.setTextureRect(sf::Rect<int>(204 * arm_vector[2], 352, 196, 169));
-    Arms_mask.setPosition(center.x - size.x / 2 + 770, center.y - size.y / 2 + 90);
-    Arms_mask.setTextureRect(sf::Rect<int>(204 * arm_vector[1], 526, 196, 165));
-    Arms_robe.setPosition(center.x - size.x / 2 + 770, center.y - size.y / 2 + 450);
-    Arms_robe.setTextureRect(sf::Rect<int>(204 * arm_vector[3], 5, 195, 165));
+    Arms_robe.setPosition(center.x - size.x / 2 + 530, center.y - size.y / 2 + 540);
+    Arms_robe.setTextureRect(sf::Rect<int>(204 * arm_vector[2], 200, 195, 165));
 
-    window.clear(sf::Color(129, 181, 221));
-    buy_glasses.setColor(sf::Color::White);
-    buy_mask.setColor(sf::Color::White);
-    buy_gloves.setColor(sf::Color::White);
+    window.clear(sf::Color(68, 101, 219));
+    buy_shoes.setColor(sf::Color::White);
+    buy_cap.setColor(sf::Color::White);
     buy_robe.setColor(sf::Color::White);
     backB.setColor(sf::Color::White);
     menuNum = -1;
-    if (sf::IntRect(110, 130, 100, 100).contains(sf::Mouse::getPosition(window))) {
-      buy_glasses.setColor(sf::Color::Blue);
+    if (sf::IntRect(110, 160, 100, 100).contains(sf::Mouse::getPosition(window))) {
+      buy_cap.setColor(sf::Color::Red);
       menuNum = 0;
     }
 
-    if (sf::IntRect(1020, 130, 100, 100).contains(sf::Mouse::getPosition(window))) {
-      buy_mask.setColor(sf::Color::Blue);
+    if (sf::IntRect(1010, 160, 100, 100).contains(sf::Mouse::getPosition(window))) {
+      buy_shoes.setColor(sf::Color::Red);
       menuNum = 1;
     }
 
-    if (sf::IntRect(110, 510, 100, 100).contains(sf::Mouse::getPosition(window))) {
-      buy_gloves.setColor(sf::Color::Blue);
+    if (sf::IntRect(370, 580, 100, 100).contains(sf::Mouse::getPosition(window))) {
+      buy_robe.setColor(sf::Color::Red);
       menuNum = 2;
     }
 
-    if (sf::IntRect(1020, 510, 100, 100).contains(sf::Mouse::getPosition(window))) {
-      buy_robe.setColor(sf::Color::Blue);
-      menuNum = 3;
-    }
-
     if (sf::IntRect(20, 700, 100, 100).contains(sf::Mouse::getPosition(window))) {
-      backB.setColor(sf::Color::Blue);
+      backB.setColor(sf::Color::Red);
       menuNum = 4;
     }
 
@@ -329,25 +302,21 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
     window.draw(points);
     window.draw(arm);
 
-    window.draw(lvl_glasses);
-    window.draw(lvl_mask);
-    window.draw(lvl_gloves);
+    window.draw(lvl_shoes);
+    window.draw(lvl_cap);
     window.draw(lvl_robe);
 
-    window.draw(Arms_glasses);
-    window.draw(Arms_gloves);
+    window.draw(Arms_shoes);
+    window.draw(Arms_cap);
     window.draw(Arms_robe);
-    window.draw(Arms_mask);
 
-    window.draw(buy_glasses);
-    window.draw(buy_gloves);
+    window.draw(buy_shoes);
+    window.draw(buy_cap);
     window.draw(buy_robe);
-    window.draw(buy_mask);
 
-    window.draw(cost_glasses);
-    window.draw(cost_gloves);
+    window.draw(cost_shoes);
+    window.draw(cost_cap);
     window.draw(cost_robe);
-    window.draw(cost_mask);
 
     window.draw(backB);
     window.display();
@@ -362,55 +331,60 @@ void Interface::Buy(std::vector<int> arm_vector, int index, Save &save) {
 }
 
 bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
+  sf::Font font;
+  font.loadFromFile("../files/fonts/Inconsolata-Bold.ttf");
   sf::Texture menuContinue, menuToMenu, saveGame, bg_arrmor, arms;
+  //Изображение Меню
   menuToMenu.loadFromFile("../files/menu/to_menu.png");
+  //Изображение Продолжить
   menuContinue.loadFromFile("../files/menu/continue.png");
+  //Изображение Фон для брони
   bg_arrmor.loadFromFile("../files/menu/bg_arrmor.png");
+  //Изображение Брони
   arms.loadFromFile("../files/menu/arrmors.png");
+
   sf::Sprite MenuToMenu(menuToMenu);
   sf::Sprite MenuContinue(menuContinue);
   sf::Sprite BgArrmor(bg_arrmor);
-  sf::Sprite Arms_glasses(arms);
-  sf::Sprite Arms_gloves(arms);
-  sf::Sprite Arms_robe(arms);
-  sf::Sprite Arms_mask(arms);
 
+  sf::Sprite Arms_cap(arms);
+  sf::Sprite Arms_shoes(arms);
+  sf::Sprite Arms_robe(arms);
+
+  // Текст тасты
   sf::Text points;
   sf::Text hp;
   sf::Text arm;
-  sf::Text lvl_glasses;
-  sf::Text lvl_mask;
-  sf::Text lvl_gloves;
+
+  // Текст уровня брони
+  sf::Text lvl_cap;
+  sf::Text lvl_shoes;
   sf::Text lvl_robe;
-  sf::Font font;
-  font.loadFromFile("../files/fonts/Inconsolata-Bold.ttf");
+
   points.setFont(font);
   points.setCharacterSize(40);
   points.setStyle(sf::Text::Bold);
   points.setColor(sf::Color::White);
+
   hp.setFont(font);
   hp.setCharacterSize(40);
   hp.setStyle(sf::Text::Bold);
   hp.setColor(sf::Color::White);
+
   arm.setFont(font);
   arm.setCharacterSize(40);
   arm.setStyle(sf::Text::Bold);
   arm.setColor(sf::Color::White);
 
-  lvl_glasses.setFont(font);
-  lvl_glasses.setCharacterSize(40);
-  lvl_glasses.setStyle(sf::Text::Bold);
-  lvl_glasses.setColor(sf::Color::White);
+  lvl_cap.setFont(font);
+  lvl_cap.setCharacterSize(40);
+  lvl_cap.setStyle(sf::Text::Bold);
+  lvl_cap.setColor(sf::Color::White);
 
-  lvl_mask.setFont(font);
-  lvl_mask.setCharacterSize(40);
-  lvl_mask.setStyle(sf::Text::Bold);
-  lvl_mask.setColor(sf::Color::White);
-
-  lvl_gloves.setFont(font);
-  lvl_gloves.setCharacterSize(40);
-  lvl_gloves.setStyle(sf::Text::Bold);
-  lvl_gloves.setColor(sf::Color::White);
+  lvl_shoes.setFont(font);
+  lvl_shoes.setCharacterSize(40);
+  lvl_shoes.setStyle(sf::Text::Bold);
+  lvl_shoes.setColor(sf::Color::White);
 
   lvl_robe.setFont(font);
   lvl_robe.setCharacterSize(40);
@@ -421,24 +395,35 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
   std::vector<int> data = game.GetPlayer()->GetMainData();
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
-  MenuContinue.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 30);
-  MenuToMenu.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 150);
-  BgArrmor.setPosition(center.x - size.x / 2 + 500, center.y - size.y / 2 + 50);
+
+  //Корд. продолжть
+  MenuContinue.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 630);
+  //Корд. меню
+  MenuToMenu.setPosition(center.x - size.x / 2 + 150, center.y - size.y / 2 + 700);
+  //Корд. Фон для оружия
+  BgArrmor.setPosition(center.x - size.x / 2 + 500, center.y - size.y / 2 + 100);
+  //Корд. Статы
   points.setPosition(center.x - size.x / 2 + 1000, center.y - size.y / 2 + 13);
   hp.setPosition(center.x - size.x / 2 + 800, center.y - size.y / 2 + 13);
   arm.setPosition(center.x - size.x / 2 + 600, center.y - size.y / 2 + 13);
-  lvl_glasses.setPosition(center.x - size.x / 2 + 560, center.y - size.y / 2 + 230);
-  lvl_mask.setPosition(center.x - size.x / 2 + 1070, center.y - size.y / 2 + 230);
-  lvl_gloves.setPosition(center.x - size.x / 2 + 560, center.y - size.y / 2 + 610);
-  lvl_robe.setPosition(center.x - size.x / 2 + 1070, center.y - size.y / 2 + 610);
-  Arms_glasses.setPosition(center.x - size.x / 2 + 520, center.y - size.y / 2 + 100);
-  Arms_glasses.setTextureRect(sf::Rect<int>(204 * data[5], 176, 196, 169));
-  Arms_gloves.setPosition(center.x - size.x / 2 + 520, center.y - size.y / 2 + 450);
-  Arms_gloves.setTextureRect(sf::Rect<int>(204 * data[4], 352, 196, 169));
-  Arms_mask.setPosition(center.x - size.x / 2 + 1020, center.y - size.y / 2 + 90);
-  Arms_mask.setTextureRect(sf::Rect<int>(204 * data[3], 526, 196, 165));
-  Arms_robe.setPosition(center.x - size.x / 2 + 1020, center.y - size.y / 2 + 450);
-  Arms_robe.setTextureRect(sf::Rect<int>(204 * data[6], 5, 195, 165));
+  //Корд. Уровни брони шапка
+  lvl_cap.setPosition(center.x - size.x / 2 + 560, center.y - size.y / 2 + 260);
+  //Корд. Уровни брони батинки
+  lvl_shoes.setPosition(center.x - size.x / 2 + 1090, center.y - size.y / 2 + 260);
+  //Корд. Уровни брони халат
+  lvl_robe.setPosition(center.x - size.x / 2 + 820, center.y - size.y / 2 + 680);
+
+  //Корд. Рисунок брони батинки
+  Arms_shoes.setPosition(center.x - size.x / 2 + 1050, center.y - size.y / 2 + 120);
+  Arms_shoes.setTextureRect(sf::Rect<int>(204 * data[3], 352, 196, 169));
+
+  //Корд. Рисунок брони шапка
+  Arms_cap.setPosition(center.x - size.x / 2 + 520, center.y - size.y / 2 + 150);
+  Arms_cap.setTextureRect(sf::Rect<int>(204 * data[4], 41, 196, 85));
+
+  //Корд. Рисунок брони халат
+  Arms_robe.setPosition(center.x - size.x / 2 + 780, center.y - size.y / 2 + 560);
+  Arms_robe.setTextureRect(sf::Rect<int>(204 * data[5], 200, 195, 165));
 
   std::ostringstream ss;
   ss << "Points: " << data[1];
@@ -453,20 +438,16 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
   arm.setString(ssarm.str());
 
   std::ostringstream ss_glass;
-  ss_glass << "LVL:" << data[5];
-  lvl_glasses.setString(ss_glass.str());
+  ss_glass << "LVL:" << data[4];
+  lvl_cap.setString(ss_glass.str());
 
   std::ostringstream ss_mask;
-  ss_mask << "LVL:" << data[4];
-  lvl_mask.setString(ss_mask.str());
+  ss_mask << "LVL:" << data[3];
+  lvl_shoes.setString(ss_mask.str());
 
   std::ostringstream ss_robe;
-  ss_robe << "LVL:" << data[3];
+  ss_robe << "LVL:" << data[5];
   lvl_robe.setString(ss_robe.str());
-
-  std::ostringstream ss_gloves;
-  ss_gloves << "LVL:" << data[6];
-  lvl_gloves.setString(ss_gloves.str());
 
   while (window.isOpen()) {
 
@@ -480,15 +461,15 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
     MenuContinue.setColor(sf::Color::White);
     MenuToMenu.setColor(sf::Color::White);
     menuNum = 0;
-    window.clear(sf::Color(129, 181, 221));
+    window.clear(sf::Color(68, 101, 219));
 
-    if (sf::IntRect(100, 150, 300, 50).contains(sf::Mouse::getPosition(window))) {
-      MenuToMenu.setColor(sf::Color::Blue);
+    if (sf::IntRect(150, 700, 300, 50).contains(sf::Mouse::getPosition(window))) {
+      MenuToMenu.setColor(sf::Color::Red);
       menuNum = 1;
     }
 
-    if (sf::IntRect(100, 30, 300, 50).contains(sf::Mouse::getPosition(window))) {
-      MenuContinue.setColor(sf::Color::Blue);
+    if (sf::IntRect(100, 630, 300, 50).contains(sf::Mouse::getPosition(window))) {
+      MenuContinue.setColor(sf::Color::Red);
       menuNum = 2;
     }
 
@@ -508,14 +489,12 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
     window.draw(points);
     window.draw(hp);
     window.draw(arm);
-    window.draw(lvl_glasses);
-    window.draw(lvl_mask);
-    window.draw(lvl_gloves);
+    window.draw(lvl_cap);
+    window.draw(lvl_shoes);
     window.draw(lvl_robe);
-    window.draw(Arms_glasses);
-    window.draw(Arms_gloves);
+    window.draw(Arms_shoes);
+    window.draw(Arms_cap);
     window.draw(Arms_robe);
-    window.draw(Arms_mask);
     window.display();
   }
 
@@ -533,8 +512,8 @@ bool Interface::DiedMenu(sf::RenderWindow &window, Save &save) {
 
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
-  menu1.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 30);
-  menu2.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 90);
+  menu1.setPosition(center.x - size.x / 2 + 540, center.y - size.y / 2 + 330);
+  menu2.setPosition(center.x - size.x / 2 + 570, center.y - size.y / 2 + 390);
   while (window.isOpen()) {
     sf::Event event;
     while (window.pollEvent(event)) {
@@ -545,10 +524,10 @@ bool Interface::DiedMenu(sf::RenderWindow &window, Save &save) {
     menu1.setColor(sf::Color::White);
     menu2.setColor(sf::Color::White);
     menuNum = 0;
-    window.clear(sf::Color(129, 181, 221));
+    window.clear(sf::Color(68, 101, 219));
 
-    if (sf::IntRect(100, 90, 300, 50).contains(sf::Mouse::getPosition(window))) {
-      menu2.setColor(sf::Color::Blue);
+    if (sf::IntRect(570, 390, 300, 50).contains(sf::Mouse::getPosition(window))) {
+      menu2.setColor(sf::Color::Red);
       menuNum = 1;
     }
 
@@ -595,6 +574,7 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
 
       if (event.type == sf::Event::KeyPressed) {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+          game.GetPlayer()->SetKey("SPACE", true);
           game.Fire();
         }
       }
@@ -629,7 +609,7 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
       }
 
     }
-    if (game.GetPlayer()->GetAnim().GetCurrentFrame() == 6 && game.GetPlayer()->GetHp() <= 0) {
+    if (game.GetPlayer()->GetAnim().GetCurrentFrame() == 3 && game.GetPlayer()->GetHp() <= 0) {
       bool status = DiedMenu(window, save);
       if (status) {
         break;
@@ -661,8 +641,8 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game)
 
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
-  MenuContinue.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 30);
-  MenuToMenu.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 90);
+  MenuContinue.setPosition(center.x - size.x / 2 + 450, center.y - size.y / 2 + 330);
+  MenuToMenu.setPosition(center.x - size.x / 2 + 570, center.y - size.y / 2 + 390);
   save.ChangeLvl();
   save.SaveGame(game);
   while (window.isOpen()) {
@@ -677,15 +657,15 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game)
     MenuContinue.setColor(sf::Color::White);
     MenuToMenu.setColor(sf::Color::White);
     menuNum = 0;
-    window.clear(sf::Color(129, 181, 221));
+    window.clear(sf::Color(68, 101, 219));
 
-    if (sf::IntRect(100, 90, 300, 50).contains(sf::Mouse::getPosition(window))) {
-      MenuToMenu.setColor(sf::Color::Blue);
+    if (sf::IntRect(550, 390, 300, 50).contains(sf::Mouse::getPosition(window))) {
+      MenuToMenu.setColor(sf::Color::Red);
       menuNum = 1;
     }
 
-    if (sf::IntRect(100, 30, 300, 50).contains(sf::Mouse::getPosition(window))) {
-      MenuContinue.setColor(sf::Color::Blue);
+    if (sf::IntRect(450, 330, 300, 50).contains(sf::Mouse::getPosition(window))) {
+      MenuContinue.setColor(sf::Color::Red);
       menuNum = 2;
     }
 
@@ -732,10 +712,10 @@ bool Interface::PenaltyPolice(sf::RenderWindow &window) {
     menu1.setColor(sf::Color::White);
     menu2.setColor(sf::Color::White);
     menuNum = 0;
-    window.clear(sf::Color(129, 181, 221));
+    window.clear(sf::Color(68, 101, 219));
 
     if (sf::IntRect(100, 90, 300, 50).contains(sf::Mouse::getPosition(window))) {
-      menu2.setColor(sf::Color::Blue);
+      menu2.setColor(sf::Color::Red);
       menuNum = 1;
     }
 
@@ -776,10 +756,10 @@ bool Interface::DiedPolice(sf::RenderWindow &window) {
     menu1.setColor(sf::Color::White);
     menu2.setColor(sf::Color::White);
     menuNum = 0;
-    window.clear(sf::Color(129, 181, 221));
+    window.clear(sf::Color(68, 101, 219));
 
     if (sf::IntRect(100, 90, 300, 50).contains(sf::Mouse::getPosition(window))) {
-      menu2.setColor(sf::Color::Blue);
+      menu2.setColor(sf::Color::Red);
       menuNum = 1;
     }
 

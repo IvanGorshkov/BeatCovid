@@ -13,14 +13,18 @@ UnSafeTransport::UnSafeTransport(float x, float y, int height, int weight, std::
 }
 
 void UnSafeTransport::Update(float time, std::vector<Object> &obj) {
-  if (isDrive) {
+  if (isDrive && !isHitWall) {
     rect.left += dx * time;
     timerHit += time;
   }
 
   for (auto &i : obj) {
     if (i.rect.intersects(this->GetRect()) && i.name == "wall") {
-      isDrive = false;
+      isHitWall = true;
+    }
+
+    if (i.rect.intersects(this->rect) && (i.name == "bus" || i.name == "metro")) {
+      i.rect = this->rect;
     }
   }
 
@@ -36,7 +40,7 @@ float UnSafeTransport::GetDmg() {
   return 0;
 }
 
-float UnSafeTransport::PrintDmg() {
+float UnSafeTransport::PrintDmg() const {
   return dmg;
 }
 

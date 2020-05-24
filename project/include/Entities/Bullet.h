@@ -6,7 +6,7 @@
 
 class Bullet : public Entity {
  public:
-  explicit Bullet(float x, float y, float dx, float dy, float dmg);
+  explicit Bullet(float x, float y, float dx, float dy, float dmg, bool player);
   void Update(float time, std::vector<Object> &obj) override;
   float GetDmg() const;
   bool IsDie();
