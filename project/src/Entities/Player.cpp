@@ -2,7 +2,7 @@
 #include <iostream>
 
 Player::Player(const Object &position, std::vector<int> armors)
-    : Entity(position.rect.left, position.rect.top, 0.1, 0.1, 40, 64),
+    : Entity(position.rect.left, position.rect.top, 0.1, 0.1, 64, 64),
       hp(100),
       max_jump(0),
       STATE(STAY),
@@ -144,11 +144,6 @@ void Player::Update(float time, std::vector<Object> &obj) {
 
     if (dmgC == 0) {
       tookDmg = false;
-      if (dir) {
-        rect.left += 10;
-      } else {
-        rect.left += -10;
-      }
     }
   }
 
