@@ -9,7 +9,13 @@ GameLables::GameLables() {
   points.setColor(sf::Color::White);
 }
 
-void GameLables::DrawPoints(sf::RenderWindow &window, int points_int) {
+void GameLables::DrawPlayerData(sf::RenderWindow &window, int points_int, int hp_int, unsigned int arm_int) {
+  drawPoints(window, points_int);
+  drawHp(window, hp_int);
+  drawArm(window, arm_int);
+}
+
+void GameLables::drawPoints(sf::RenderWindow &window, int points_int) {
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
   points.setPosition(center.x - size.x / 2 + 1000, center.y - size.y / 2 + 13);
@@ -19,7 +25,7 @@ void GameLables::DrawPoints(sf::RenderWindow &window, int points_int) {
   window.draw(points);
 }
 
-void GameLables::DrawHp(sf::RenderWindow &window, int hp_int) {
+void GameLables::drawHp(sf::RenderWindow &window, int hp_int) {
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
   points.setPosition(center.x - size.x / 2 + 10, center.y - size.y / 2 + 13);
@@ -32,7 +38,7 @@ void GameLables::DrawHp(sf::RenderWindow &window, int hp_int) {
   window.draw(points);
 }
 
-void GameLables::DrawArm(sf::RenderWindow &window, unsigned int arm_int) {
+void GameLables::drawArm(sf::RenderWindow &window, unsigned int arm_int) {
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
   points.setPosition(center.x - size.x / 2 + 200, center.y - size.y / 2 + 13);
@@ -41,3 +47,33 @@ void GameLables::DrawArm(sf::RenderWindow &window, unsigned int arm_int) {
   points.setString(ss.str());
   window.draw(points);
 }
+
+void GameLables::DrawSafeTransportFuel(sf::RenderWindow &window, int fuel_int) {
+  sf::Vector2f center = window.getView().getCenter();
+  sf::Vector2f size = window.getView().getSize();
+  points.setPosition(center.x - size.x / 2 + 500, center.y - size.y / 2 + 13);
+  std::ostringstream ss;
+  ss << "Fuel: " << fuel_int << "%";
+  points.setString(ss.str());
+  window.draw(points);
+}
+
+
+void GameLables::DrawTransportHelp(sf::RenderWindow &window, float x, float y) {
+  points.setPosition(x + 30, y - 60);
+  std::ostringstream ss;
+  ss << "E";
+  points.setString(ss.str());
+  window.draw(points);
+}
+
+void GameLables::DrawUnSafeTransportDmg(sf::RenderWindow &window, int dmg_int) {
+  sf::Vector2f center = window.getView().getCenter();
+  sf::Vector2f size = window.getView().getSize();
+  points.setPosition(center.x - size.x / 2 + 500, center.y - size.y / 2 + 13);
+  std::ostringstream ss;
+  ss << "Dmg: " << dmg_int;
+  points.setString(ss.str());
+  window.draw(points);
+}
+

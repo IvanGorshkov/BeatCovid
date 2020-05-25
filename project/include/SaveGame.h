@@ -4,13 +4,20 @@
 
 class Save {
  public:
-  int lvl;
   Save();
-  void SaveGame(GameManager &game);
+  void SaveGame(GameManager &game) const;
   void ChangeLvl();
   std::string GetLvlName();
-  bool SaveExists();
+  static bool SaveExists();
   int GetLvl() const;
   void Load(GameManager &game);
+  static std::vector<int> GetArmors();
   void GoToStart();
+  static void SaveArmor(std::vector<int> vec);
+  static void SavePoints(int points);
+  static int GetPonits();
+  static bool SaveExistsP();
+  static bool SaveExistsA();
+ private:
+  int lvl;
 };

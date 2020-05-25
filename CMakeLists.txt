@@ -7,6 +7,7 @@ include_directories(project/include/Animation)
 include_directories(project/include/Entities)
 include_directories(project/include/Entities/Armors)
 include_directories(project/include/Entities/Enemies)
+include_directories(project/include/Entities/Transport)
 include_directories(project/include/tinyxml)
 add_subdirectory(project/include/tinyxml)
 
@@ -24,15 +25,15 @@ add_executable(beatcovid
         project/src/Entities/Bullet.cpp
         project/src/Entities/Player.cpp
         project/src/Entities/Armors/Armor.cpp
-        project/src/Entities/Armors/Glasses.cpp
-        project/src/Entities/Armors/Gloves.cpp
-        project/src/Entities/Armors/Mask.cpp
+        project/src/Entities/Armors/Cap.cpp
+        project/src/Entities/Armors/Shoes.cpp
         project/src/Entities/Armors/Robe.cpp
         project/src/Entities/Enemies/Enemy.cpp
-        project/src/Entities/Enemies/Breaker.cpp
-        project/src/Entities/Enemies/Delivery.cpp
+        project/src/Entities/Enemies/OrdinaryEnemies.cpp
         project/src/Entities/Enemies/Police.cpp
-        project/src/Entities/Enemies/Virus.cpp)
+        project/src/Entities/Transport/Transport.cpp
+        project/src/Entities/Transport/SafeTransport.cpp
+        project/src/Entities/Transport/UnSafeTransport.cpp)
 
 find_package(SFML REQUIRED system window graphics network audio)
 target_link_libraries(beatcovid sfml-graphics sfml-audio tinyxml)

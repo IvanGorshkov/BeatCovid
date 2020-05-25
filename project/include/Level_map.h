@@ -25,7 +25,7 @@ struct Layer {
 
 class Level {
  public:
-  bool LoadFromFile(std::string filename);
+    bool LoadFromFile(std::string filename);
   Object GetObject(std::string name);
   std::vector<Object> GetObjects(std::string name);
   std::vector<Object> GetAllObjects();

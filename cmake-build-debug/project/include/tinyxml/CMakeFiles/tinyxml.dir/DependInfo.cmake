@@ -23,6 +23,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../project/include/Entities"
   "../project/include/Entities/Armors"
   "../project/include/Entities/Enemies"
+  "../project/include/Entities/Transport"
   "../project/include/tinyxml"
   )
 
