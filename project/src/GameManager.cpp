@@ -1,57 +1,74 @@
 #include "GameManager.h"
+
+#include <utility>
 #include "cmath"
 #include "Interface.h"
 
 GameManager::GameManager(Level &lvl, std::vector<int> arms) {
   obj = lvl.GetAllObjects();
   startPlayerPosition = lvl.GetObject("player");
-  player = new Player(startPlayerPosition, arms);
+  player = new Player(startPlayerPosition, std::move(arms));
 
   for (auto &i : obj) {
     if (i.name == "breaker" || i.name == "delivery" || i.name == "virus") {
-      enemies.push_back(new OrdinaryEnemies(i.rect.left, i.rect.top, i.rect.width, i.rect.height, i.name));
+      enemies.push_back(new OrdinaryEnemies(i.rect.left, i.rect.top, 40, 64, i.name));
+      i.rect.width = 40;
+      i.rect.height = 64;
     }
 
     if (i.name == "police") {
-      enemies.push_back(new Police(i.rect.left, i.rect.top, 64, 64));
+      enemies.push_back(new Police(i.rect.left, i.rect.top, 40, 64));
+      i.rect.width = 40;
+      i.rect.height = 64;
     }
 
     if (i.name == "antigen" || i.name == "vaccine") {
       antibodies.emplace_back(i.rect.left, i.rect.top, 32, 32, i.name);
     }
 
-    if (i.name == "auto" || i.name == "monorail") {
-      safeTransports.emplace_back(i.rect.left, i.rect.top, i.rect.width, i.rect.height, i.name);
+    if (i.name == "auto") {
+      safeTransports.emplace_back(i.rect.left, i.rect.top - 10, 200, 100, i.name);
     }
 
-    if (i.name == "bus" || i.name == "metro") {
-      unSafeTransports.emplace_back(i.rect.left, i.rect.top, i.rect.width, i.rect.height, i.name);
+    if (i.name == "monorail") {
+      safeTransports.emplace_back(i.rect.left, i.rect.top + 40, 976, 140, i.name);
     }
+
+    if (i.name == "bus") {
+      unSafeTransports.emplace_back(i.rect.left, i.rect.top - 10, 393, 100, i.name);
+    }
+    if (i.name == "metro") {
+      unSafeTransports.emplace_back(i.rect.left, i.rect.top - 15, 924, 140, i.name);
+    }
+
   }
 }
 
 // Обновление всех классов
 void GameManager::Update(float time) {
   player->Update(time, obj);
+  bulletPlayer();
   updateBullet(time);
   updateEnemy(time);
   updateAntibodies();
   updateTransport(time);
-  bulletPlayer();
   checkHitPlayer();
   checkHitEnemy();
 }
 
 // Вывод всех классов на экран
 void GameManager::Draw(sf::RenderWindow &window) {
-  if (!player->IsDrive()) {
-    player->DrawObjs(window);
-  }
   drawBullet(window);
   drawEnemy(window);
   drawAntibodies(window);
   drawTransport(window);
   lables.DrawPlayerData(window, player->GetPoints(), player->GetHp(), player->GetArm());
+  if (player->IsFinishPosition()) {
+    lables.DrawNoVaccine(window);
+  }
+  if (!player->IsDrive()) {
+    player->DrawObjs(window);
+  }
 }
 
 Player *GameManager::GetPlayer() {
@@ -64,15 +81,15 @@ void GameManager::Fire() {
   if (player->GetPoints() > 0) {
     player->SetKey("SPACE", true);
     if (player->GetDir()) {
-      playerBullets.emplace_back(player->GetRect().left - 20,
-                                 player->GetRect().top + 20,
+      playerBullets.emplace_back(player->GetRect().left - 25,
+                                 player->GetRect().top + 40,
                                  -BULLET_DX,
                                  0,
                                  player->GetDmg(),
                                  true);
     } else {
       playerBullets.emplace_back(player->GetRect().left + player->GetRect().width + 10,
-                                 player->GetRect().top + 20,
+                                 player->GetRect().top + 40,
                                  BULLET_DX,
                                  0,
                                  player->GetDmg(),
@@ -164,10 +181,10 @@ void GameManager::bulletPlayer() {
       float Y = (player->GetRect().top - (*enemiesIt)->GetRect().top) / 16;
       // Дальность полета пули
       (*enemiesIt)->SetFire(true);
-      if (std::abs(X) > 30 || std::abs(Y) > 30) {
+      if (std::abs(X) > 30 || std::abs(Y) > 10) {
         (*enemiesIt)->SetFire(false);
         (*enemiesIt)->ResetTimer();
-        break;
+        continue;
       }
 
       float dx, dy;
@@ -272,7 +289,7 @@ void GameManager::updateSafeTransport(float time) {
   for (safeTransportsIt = safeTransports.begin(); safeTransportsIt != safeTransports.end(); safeTransportsIt++) {
     safeTransportsIt->Update(time, obj);
     if (safeTransportsIt->IsDrive()) {
-      player->SetPosition(safeTransportsIt->GetRect().left, safeTransportsIt->GetRect().top);
+      player->SetPosition(safeTransportsIt->GetRect().left + safeTransportsIt->GetRect().width - 100, safeTransportsIt->GetRect().top);
       break;
     }
   }
@@ -283,7 +300,7 @@ void GameManager::updateUnSafeTransport(float time) {
        unSafeTransportsIt++) {
     unSafeTransportsIt->Update(time, obj);
     if (unSafeTransportsIt->IsDrive()) {
-      player->SetPosition(unSafeTransportsIt->GetRect().left, unSafeTransportsIt->GetRect().top);
+      player->SetPosition(unSafeTransportsIt->GetRect().left + unSafeTransportsIt->GetRect().width - 100, unSafeTransportsIt->GetRect().top);
       player->TakeDamge(unSafeTransportsIt->GetDmg());
       break;
     }

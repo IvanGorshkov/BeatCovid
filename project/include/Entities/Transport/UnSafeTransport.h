@@ -3,9 +3,9 @@
 #include "Transport.h"
 #define HP_TIME_LOSS 2000
 #define BUS_DMG 6
-#define BUS_DX 0.12
+#define BUS_DX 0.3
 #define METRO_DMG 7
-#define METRO_DX 0.1
+#define METRO_DX 0.4
 
 class UnSafeTransport : public Transport {
  public:

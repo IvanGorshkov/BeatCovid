@@ -2,10 +2,10 @@
 
 #include "Transport.h"
 #define FUEL_LOSS 0.1
-#define AUTO_FUEL 100
-#define AUTO_DX 0.12
-#define MONORAIL_FUEL 100
-#define MONORAIL_DX 0.1
+#define AUTO_FUEL 10
+#define AUTO_DX 0.3
+#define MONORAIL_FUEL 20
+#define MONORAIL_DX 0.4
 
 class SafeTransport : public Transport {
  public:

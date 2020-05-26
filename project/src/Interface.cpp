@@ -550,6 +550,7 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
 
   Level lvl;
   lvl.LoadFromFile(save.GetLvlName());
+
   GameManager game(lvl, save.GetArmors());
   sf::Clock clock;
   if (save.SaveExists()) {
@@ -557,14 +558,14 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
   }
 
   while (window.isOpen()) {
-    window.clear(sf::Color(107, 140, 255));
+    window.clear(sf::Color(0, 0, 0));
     float time = clock.getElapsedTime().asMicroseconds();
     clock.restart();
 
-    time = time / 500;
+    time = time / 400;
 
-    if (time > 40) {
-      time = 40;
+    if (time > 70) {
+      time = 70;
     }
 
     sf::Event event;
@@ -629,6 +630,7 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
     window.setView(view);
     window.display();
   }
+  delete game.GetPlayer();
 }
 
 bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game) {
@@ -643,7 +645,11 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game)
   sf::Vector2f size = window.getView().getSize();
   MenuContinue.setPosition(center.x - size.x / 2 + 450, center.y - size.y / 2 + 330);
   MenuToMenu.setPosition(center.x - size.x / 2 + 570, center.y - size.y / 2 + 390);
-  save.ChangeLvl();
+  if (save.GetLvl() == 2) {
+
+  } else {
+    save.ChangeLvl();
+  }
   save.SaveGame(game);
   while (window.isOpen()) {
 
@@ -671,10 +677,12 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game)
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
       if (menuNum == 1) {
-        return false;
+        MainMenu(window, save);
       }
       if (menuNum == 2) {
-
+        if (save.GetLvl() == 3) {
+          MainMenu(window, save);
+        }
         StartNewGame(window, save);
         return true;
       }
