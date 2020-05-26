@@ -1,6 +1,6 @@
 #include "UnSafeTransport.h"
 
-UnSafeTransport::UnSafeTransport(float x, float y, int height, int weight, std::string name)
+UnSafeTransport::UnSafeTransport(float x, float y, int height, int weight, const std::string& name)
     : Transport(x, y, height, weight),
       name(name) {
   if (name == "bus") {
@@ -14,12 +14,17 @@ UnSafeTransport::UnSafeTransport(float x, float y, int height, int weight, std::
 
 void UnSafeTransport::Update(float time, std::vector<Object> &obj) {
   if (isDrive && !isHitWall) {
-    rect.left += dx * time;
+    if (!dir) {
+      rect.left += dx * time;
+    } else {
+      rect.left -= dx * time;
+    }
+
     timerHit += time;
   }
 
   for (auto &i : obj) {
-    if (i.rect.intersects(this->GetRect()) && i.name == "wall") {
+    if (i.rect.intersects(this->GetRect()) && i.name == "wall" && isDrive) {
       isHitWall = true;
     }
 
@@ -28,6 +33,7 @@ void UnSafeTransport::Update(float time, std::vector<Object> &obj) {
     }
   }
 
+  anim.Flip(dir);
   anim.Tick(time);
 }
 
