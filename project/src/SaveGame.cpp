@@ -2,17 +2,16 @@
 
 #include <fstream>
 
-
 Save::Save() {
-    this->lvl = 1;
+  this->lvl = 1;
 }
 
 void Save::ChangeLvl() {
-    this->lvl += 1;
+  this->lvl += 1;
 }
 
 int Save::GetLvl() const {
-    return this->lvl;
+  return this->lvl;
 }
 
 std::string Save::GetLvlName() {
@@ -29,41 +28,28 @@ std::string Save::GetLvlName() {
 }
 
 void Save::GoToStart() {
-    this->lvl = 2;
+  this->lvl = 1;
 }
 
 bool Save::SaveExists() {
-    std::fstream save;
-    save.open("../files/saves/save.txt");
-    if (save.is_open()) {
-        return true;
-    } else {
-        return false;
-    }
+  std::fstream save;
+  save.open("../files/saves/save.txt");
+  return save.is_open();
 }
 
 bool Save::SaveExistsP() {
   std::fstream save;
   save.open("../files/saves/save_points.txt");
-  if (save.is_open()) {
-    return true;
-  } else {
-    return false;
-  }
+  return save.is_open();
 }
 
 bool Save::SaveExistsA() {
   std::fstream save;
   save.open("../files/saves/save_armor.txt");
-  if (save.is_open()) {
-    return true;
-  } else {
-    return false;
-  }
+  return save.is_open();
 }
 
-
-void Save::SaveGame(GameManager &game) {
+void Save::SaveGame(GameManager &game) const {
   std::ofstream save_file("../files/saves/save.txt");
   // lvl
   save_file << this->lvl;
@@ -72,7 +58,7 @@ void Save::SaveGame(GameManager &game) {
   save_file << game.GetPlayer()->GetArm();
   save_file << std::endl;
   save_file.close();
-  SavePoints( game.GetPlayer()->GetPoints());
+  SavePoints(game.GetPlayer()->GetPoints());
 }
 
 void Save::SavePoints(int points) {
@@ -86,7 +72,7 @@ int Save::GetPonits() {
   std::fstream save;
   save.open("../files/saves/save_points.txt");
   if (!save.is_open()) {
-    return 0;
+    return 10000;
   }
 
   char buff[50];
@@ -96,27 +82,26 @@ int Save::GetPonits() {
   return points;
 }
 
-
 void Save::Load(GameManager &game) {
-    std::ifstream save_file("../files/saves/save.txt");
-    char buff[50];
-    save_file.getline(buff, 50);
-    this->lvl = atoi(buff);
-    save_file.getline(buff, 50);
-    game.GetPlayer()->ChangeARM(atoi(buff));
-    game.GetPlayer()->AddPoints(GetPonits());
+  std::ifstream save_file("../files/saves/save.txt");
+  char buff[50];
+  save_file.getline(buff, 50);
+  this->lvl = atoi(buff);
+  save_file.getline(buff, 50);
+  game.GetPlayer()->ChangeARM(atoi(buff));
+  game.GetPlayer()->AddPoints(GetPonits());
 }
 
 std::vector<int> Save::GetArmors() {
   std::fstream save;
   save.open("../files/saves/save_armor.txt");
   if (!save.is_open()) {
-    std::vector<int> empty =  {0,0,0};
+    std::vector<int> empty = {0, 0, 0};
     return empty;
   }
 
   char buff[50];
-  std::vector<int> arms =  {0,0,0};
+  std::vector<int> arms = {0, 0, 0};
   save.getline(buff, 50);
   arms[0] = atoi(buff);
   save.getline(buff, 50);

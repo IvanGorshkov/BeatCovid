@@ -9,7 +9,7 @@ class GameLables {
   void DrawTransportHelp(sf::RenderWindow &window, float x, float y);
   void DrawSafeTransportFuel(sf::RenderWindow &window, int fuel_int);
   void DrawUnSafeTransportDmg(sf::RenderWindow &window, int dmg_int);
-
+  void DrawNoVaccine(sf::RenderWindow &window);
  private:
   void drawPoints(sf::RenderWindow &window, int points_int);
   void drawHp(sf::RenderWindow &window, int hp_int);

@@ -77,3 +77,12 @@ void GameLables::DrawUnSafeTransportDmg(sf::RenderWindow &window, int dmg_int) {
   window.draw(points);
 }
 
+void GameLables::DrawNoVaccine(sf::RenderWindow &window) {
+  sf::Vector2f center = window.getView().getCenter();
+  sf::Vector2f size = window.getView().getSize();
+  points.setPosition(center.x - size.x / 2 + 500, center.y - size.y / 2 + 13);
+  std::ostringstream ss;
+  ss << "No vaccine";
+  points.setString(ss.str());
+  window.draw(points);
+}

@@ -56,7 +56,6 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
       menuNum = 4;
     }
 
-
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
       if (menuNum == 1) {
         if (save.SaveExists()) {
@@ -68,7 +67,6 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
         if (save.SaveExistsP()) {
           remove("../files/saves/save_points.txt");
         }
-
 
         StartNewGame(window, save);
         for (int kI = 0; kI < 100000000; ++kI) {}
@@ -146,7 +144,6 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
   lvl_shoes.setStyle(sf::Text::Bold);
   lvl_shoes.setColor(sf::Color::White);
 
-
   lvl_cap.setFont(font);
   lvl_cap.setCharacterSize(40);
   lvl_cap.setStyle(sf::Text::Bold);
@@ -194,8 +191,6 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
   cost_shoes.setPosition(center.x - size.x / 2 + 1045, center.y - size.y / 2 + 290);
   cost_robe.setPosition(center.x - size.x / 2 + 400, center.y - size.y / 2 + 710);
 
-
-
   while (window.isOpen()) {
     std::vector<int> arm_vector = save.GetArmors();
 
@@ -207,7 +202,6 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
     std::ostringstream ssarm;
     ssarm << "ARM: " << arm_vector[0] + arm_vector[1] + arm_vector[2];
     arm.setString(ssarm.str());
-
 
     std::ostringstream ss_cap;
     ss_cap << "LVL:" << arm_vector[0];
@@ -221,40 +215,38 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
     ss_robe << "LVL:" << arm_vector[2];
     lvl_robe.setString(ss_robe.str());
 
-
     std::ostringstream ss_cap_cost;
     if (arm_vector[0] * 100 + 100 >= 500) {
-      ss_cap_cost  << "max";
+      ss_cap_cost << "max";
     } else {
-      ss_cap_cost  << arm_vector[0] * 100 + 100;
+      ss_cap_cost << arm_vector[0] * 100 + 100;
     }
     cost_cap.setString(ss_cap_cost.str());
 
     std::ostringstream ss_shoes_cost;
     if (arm_vector[1] * 100 + 100 >= 500) {
-      ss_shoes_cost  << "max";
+      ss_shoes_cost << "max";
     } else {
-      ss_shoes_cost  << arm_vector[1] * 100 + 100;
+      ss_shoes_cost << arm_vector[1] * 100 + 100;
     }
     cost_shoes.setString(ss_shoes_cost.str());
 
     std::ostringstream ss_robe_cost;
     if (arm_vector[2] * 100 + 100 >= 500) {
-      ss_robe_cost  << "max";
+      ss_robe_cost << "max";
     } else {
       ss_robe_cost << arm_vector[2] * 100 + 100;
     }
     cost_robe.setString(ss_robe_cost.str());
 
     Arms_cap.setPosition(center.x - size.x / 2 + 260, center.y - size.y / 2 + 140);
-    Arms_cap.setTextureRect(sf::Rect<int>(204 * arm_vector[0],41,196,85));
+    Arms_cap.setTextureRect(sf::Rect<int>(204 * arm_vector[0], 41, 196, 85));
 
     Arms_shoes.setPosition(center.x - size.x / 2 + 790, center.y - size.y / 2 + 100);
-    Arms_shoes.setTextureRect(sf::Rect<int>(204 * arm_vector[1],352,196,169));
-
+    Arms_shoes.setTextureRect(sf::Rect<int>(204 * arm_vector[1], 352, 196, 169));
 
     Arms_robe.setPosition(center.x - size.x / 2 + 530, center.y - size.y / 2 + 540);
-    Arms_robe.setTextureRect(sf::Rect<int>(204 * arm_vector[2],200,195,165));
+    Arms_robe.setTextureRect(sf::Rect<int>(204 * arm_vector[2], 200, 195, 165));
 
     window.clear(sf::Color(68, 101, 219));
     buy_shoes.setColor(sf::Color::White);
@@ -305,7 +297,6 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
         }
       }
     }
-
 
     window.draw(BgArrmor);
     window.draw(points);
@@ -424,15 +415,15 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
 
   //Корд. Рисунок брони батинки
   Arms_shoes.setPosition(center.x - size.x / 2 + 1050, center.y - size.y / 2 + 120);
-  Arms_shoes.setTextureRect(sf::Rect<int>(204 * data[3],352,196,169));
+  Arms_shoes.setTextureRect(sf::Rect<int>(204 * data[3], 352, 196, 169));
 
   //Корд. Рисунок брони шапка
   Arms_cap.setPosition(center.x - size.x / 2 + 520, center.y - size.y / 2 + 150);
-  Arms_cap.setTextureRect(sf::Rect<int>(204 * data[4],41,196,85));
+  Arms_cap.setTextureRect(sf::Rect<int>(204 * data[4], 41, 196, 85));
 
   //Корд. Рисунок брони халат
   Arms_robe.setPosition(center.x - size.x / 2 + 780, center.y - size.y / 2 + 560);
-  Arms_robe.setTextureRect(sf::Rect<int>(204 * data[5],200,195,165));
+  Arms_robe.setTextureRect(sf::Rect<int>(204 * data[5], 200, 195, 165));
 
   std::ostringstream ss;
   ss << "Points: " << data[1];
@@ -457,8 +448,6 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
   std::ostringstream ss_robe;
   ss_robe << "LVL:" << data[5];
   lvl_robe.setString(ss_robe.str());
-
-
 
   while (window.isOpen()) {
 
@@ -561,6 +550,7 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
 
   Level lvl;
   lvl.LoadFromFile(save.GetLvlName());
+
   GameManager game(lvl, save.GetArmors());
   sf::Clock clock;
   if (save.SaveExists()) {
@@ -568,14 +558,14 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
   }
 
   while (window.isOpen()) {
-    window.clear(sf::Color(107, 140, 255));
+    window.clear(sf::Color(0, 0, 0));
     float time = clock.getElapsedTime().asMicroseconds();
     clock.restart();
 
-    time = time / 500;
+    time = time / 400;
 
-    if (time > 40) {
-      time = 40;
+    if (time > 70) {
+      time = 70;
     }
 
     sf::Event event;
@@ -640,6 +630,7 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
     window.setView(view);
     window.display();
   }
+  delete game.GetPlayer();
 }
 
 bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game) {
@@ -654,7 +645,11 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game)
   sf::Vector2f size = window.getView().getSize();
   MenuContinue.setPosition(center.x - size.x / 2 + 450, center.y - size.y / 2 + 330);
   MenuToMenu.setPosition(center.x - size.x / 2 + 570, center.y - size.y / 2 + 390);
-  save.ChangeLvl();
+  if (save.GetLvl() == 2) {
+
+  } else {
+    save.ChangeLvl();
+  }
   save.SaveGame(game);
   while (window.isOpen()) {
 
@@ -682,10 +677,12 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game)
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
       if (menuNum == 1) {
-        return false;
+        MainMenu(window, save);
       }
       if (menuNum == 2) {
-
+        if (save.GetLvl() == 3) {
+          MainMenu(window, save);
+        }
         StartNewGame(window, save);
         return true;
       }

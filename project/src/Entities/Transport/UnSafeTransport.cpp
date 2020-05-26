@@ -13,14 +13,18 @@ UnSafeTransport::UnSafeTransport(float x, float y, int height, int weight, std::
 }
 
 void UnSafeTransport::Update(float time, std::vector<Object> &obj) {
-  if (isDrive) {
+  if (isDrive && !isHitWall) {
     rect.left += dx * time;
     timerHit += time;
   }
 
   for (auto &i : obj) {
     if (i.rect.intersects(this->GetRect()) && i.name == "wall") {
-      isDrive = false;
+      isHitWall = true;
+    }
+
+    if (i.rect.intersects(this->rect) && (i.name == "bus" || i.name == "metro")) {
+      i.rect = this->rect;
     }
   }
 
@@ -36,7 +40,7 @@ float UnSafeTransport::GetDmg() {
   return 0;
 }
 
-float UnSafeTransport::PrintDmg() {
+float UnSafeTransport::PrintDmg() const {
   return dmg;
 }
 
@@ -45,9 +49,9 @@ void UnSafeTransport::setBus() {
   dmg = BUS_DMG;
 
   sf::Texture autoTexture;
-  autoTexture.loadFromFile("../files/images/unSafe.png");
+  autoTexture.loadFromFile("../files/images/bus.png");
   anim = AnimationManager(autoTexture);
-  anim.Create("move", 0, 0, 145, 48, 1, 0);
+  anim.Create("move", 4, 4, 393, 100, 2, 0.005,397);
   anim.Set("move");
 }
 
@@ -56,8 +60,8 @@ void UnSafeTransport::setMetro() {
   dmg = METRO_DMG;
 
   sf::Texture autoTexture;
-  autoTexture.loadFromFile("../files/images/unSafe.png");
+  autoTexture.loadFromFile("../files/images/metro.png");
   anim = AnimationManager(autoTexture);
-  anim.Create("move", 0, 0, 145, 48, 1, 0);
+  anim.Create("move", 64, 2, 924, 140, 2, 0.005,994);
   anim.Set("move");
 }

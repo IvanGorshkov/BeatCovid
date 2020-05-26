@@ -2,7 +2,7 @@
 #include <iostream>
 
 Player::Player(const Object &position, std::vector<int> armors)
-    : Entity(position.rect.left, position.rect.top, 0.1, 0.1, 40, 64),
+    : Entity(position.rect.left, position.rect.top, 0.1, 0.1, 64, 64),
       hp(100),
       max_jump(0),
       STATE(STAY),
@@ -65,7 +65,7 @@ void Player::KeyCheck() {
       if (STATE == RUN) {
         STATE = WALKLAY;
       } else {
-      STATE = LAY;
+        STATE = LAY;
       }
     }
   }
@@ -88,8 +88,7 @@ void Player::KeyCheck() {
     fire = true;
   }
 
-
-  key["R"] = key["L"] = key["UP"] = key["DOWN"] =  key["SPACE"] = false;
+  key["R"] = key["L"] = key["UP"] = key["DOWN"] = key["SPACE"] = false;
 }
 
 int Player::GetDmg() const {
@@ -144,18 +143,11 @@ void Player::Update(float time, std::vector<Object> &obj) {
     --dmgC;
 
     if (dmgC == 0) {
-       tookDmg = false;
-      if (dir) {
-        rect.left += 10;
-      } else {
-        rect.left += -10;
-      }
+      tookDmg = false;
     }
   }
 
-
   Collision(0, obj);
-
 
   if (fire) {
     anim.Set("fire");
@@ -171,7 +163,6 @@ void Player::Update(float time, std::vector<Object> &obj) {
   bathrobe.FlipAnim(dir);
   shoes.FlipAnim(dir);
   cap.FlipAnim(dir);
-
 
   if (STATE != JUMP) {
     if ((STATE == STAY || STATE == RUN || STATE == LAY) && !isGround) {
@@ -248,12 +239,16 @@ void Player::Collision(int num, std::vector<Object> &objs) {
       }
 
       finish = false;
-      if (obj.name == "finish" && vaccine) {
-        anim.Set("win");
-        bathrobe.SetAnim("win");
-        shoes.SetAnim("win");
-        cap.SetAnim("win");
-        finish = true;
+      isFinishPosition = false;
+      if (obj.name == "finish") {
+        isFinishPosition = true;
+        if (vaccine) {
+          anim.Set("win");
+          bathrobe.SetAnim("win");
+          shoes.SetAnim("win");
+          cap.SetAnim("win");
+          finish = true;
+        }
       }
     }
   }
@@ -324,19 +319,20 @@ void Player::GoToStart(const Object &position) {
   rect.top = position.rect.top;
 }
 
-void Player::ChangeHP(int hp) {
-  this->hp = hp;
+void Player::ChangeHP(float getHp) {
+  this->hp = getHp;
 }
 
-void Player::ChangeARM(int arm) {
-  this->arm = arm;
+void Player::ChangeARM(float getArm) {
+  this->arm = getArm;
 }
 
 AnimationManager Player::GetAnim() {
   return anim;
 }
-void Player::SetPosition(float x) {
+void Player::SetPosition(float x, float y) {
   rect.left = x;
+  rect.top = y;
 }
 
 std::vector<int> Player::GetMainData() {
@@ -350,7 +346,6 @@ std::vector<int> Player::GetMainData() {
 
   return data;
 }
-
 
 Robe Player::GetRobe() {
   return bathrobe;
@@ -368,6 +363,13 @@ void Player::SetDrive() {
   isDrive = !isDrive;
 }
 
-bool Player::IsDrive() {
+bool Player::IsDrive() const {
   return isDrive;
+}
+
+bool Player::IsFinishPosition() const {
+  if (finish) {
+    return false;
+  }
+  return isFinishPosition;
 }

@@ -29,15 +29,16 @@ class Player : public Entity {
   AnimationManager GetAnim();
   void GoToStart(const Object &position);
   bool GetFinish() const;
-  void SetPosition(float x);
-  void ChangeHP(int hp);
-  void ChangeARM(int arm);
+  void SetPosition(float x, float y);
+  void ChangeHP(float getHp);
+  void ChangeARM(float getArm);
   std::vector<int> GetMainData();
   void SetDrive();
-  bool IsDrive();
+  bool IsDrive() const;
   Robe GetRobe();
   Cap GetCap();
   Shoes GetShoes();
+  bool IsFinishPosition() const;
  private:
   enum {
     STAY,
@@ -65,4 +66,5 @@ class Player : public Entity {
   Shoes shoes;
   Cap cap;
   bool isDrive;
+  bool isFinishPosition;
 };

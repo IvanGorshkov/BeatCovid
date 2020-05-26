@@ -12,11 +12,11 @@ class Enemy : public Entity {
   void TakeDmg(float getDmg);
   float GetTimer() const;
   void ResetTimer();
-  void SetFire(bool fire);
-  void SetDir(bool dir);
+  void SetFire(bool getFire);
+  void SetDir(bool getDir);
 
  protected:
-  bool  fire;
+  bool fire;
   bool dir;
   float dmg;
   float hp;

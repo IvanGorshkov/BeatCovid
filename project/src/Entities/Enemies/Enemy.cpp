@@ -54,11 +54,11 @@ void Enemy::TakeDmg(float getDmg) {
   hp -= getDmg;
 }
 
-void Enemy::SetFire(bool fire) {
-  this->fire  = fire;
+void Enemy::SetFire(bool getFire) {
+  this->fire  = getFire;
 }
 
-void Enemy::SetDir(bool dir) {
-  this->dir  = dir;
+void Enemy::SetDir(bool getDir) {
+  this->dir  = getDir;
 }
 
