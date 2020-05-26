@@ -343,6 +343,7 @@ std::vector<int> Player::GetMainData() {
   data.push_back(shoes.Getlvl());
   data.push_back(cap.Getlvl());
   data.push_back(bathrobe.Getlvl());
+  data.push_back(vaccine);
 
   return data;
 }
