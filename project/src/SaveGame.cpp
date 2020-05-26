@@ -28,7 +28,7 @@ std::string Save::GetLvlName() {
 }
 
 void Save::GoToStart() {
-  this->lvl = 2;
+  this->lvl = 1;
 }
 
 bool Save::SaveExists() {

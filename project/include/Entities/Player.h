@@ -38,6 +38,7 @@ class Player : public Entity {
   Robe GetRobe();
   Cap GetCap();
   Shoes GetShoes();
+  bool IsFinishPosition() const;
  private:
   enum {
     STAY,
@@ -65,4 +66,5 @@ class Player : public Entity {
   Shoes shoes;
   Cap cap;
   bool isDrive;
+  bool isFinishPosition;
 };

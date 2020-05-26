@@ -8,11 +8,11 @@ Bullet::Bullet(float x, float y, float dx, float dy, float dmg, bool player)
   bulletTexture.loadFromFile("../files/images/bullets.png");
   anim = AnimationManager(bulletTexture);
   if (player) {
-    anim.Create("move", 4, 25, 15, 15, 1, 0);
-    anim.Create("explode", 19, 25, 15, 15, 3, 0.01, 17);
+    anim.Create("move", 8, 50, 30, 30, 1, 0);
+    anim.Create("explode", 38, 50, 30, 30, 3, 0.01, 34);
   } else {
-    anim.Create("move", 4, 4, 15, 15, 1, 0);
-    anim.Create("explode", 19, 4, 15, 15, 3, 0.01, 17);
+    anim.Create("move", 8, 8, 30, 30, 1, 0);
+    anim.Create("explode", 38, 8, 30, 30, 3, 0.01, 34);
   }
   anim.Set("move");
 }

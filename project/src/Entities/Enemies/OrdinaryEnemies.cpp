@@ -22,7 +22,7 @@ void OrdinaryEnemies::setBreaker() {
   breakerTexture.loadFromFile("../files/images/breaker.png");
   anim = AnimationManager(breakerTexture);
   anim.Create("move", 4, 4, 64, 64, 6, 0.002, 72);
-  anim.Create("fire", 4, 72, 64, 64, 3, 0.004, 72);
+  anim.Create("fire", 68, 72, 64, 64, 2, 0.004, 72);
   anim.Set("move");
 }
 
