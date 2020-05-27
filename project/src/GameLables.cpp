@@ -9,10 +9,11 @@ GameLables::GameLables() {
   points.setColor(sf::Color::White);
 }
 
-void GameLables::DrawPlayerData(sf::RenderWindow &window, int points_int, int hp_int, unsigned int arm_int) {
+void GameLables::DrawPlayerData(sf::RenderWindow &window, int points_int, int hp_int, unsigned int arm_int, bool vaccine) {
   drawPoints(window, points_int);
   drawHp(window, hp_int);
   drawArm(window, arm_int);
+  drawVaccine(window, vaccine);
 }
 
 void GameLables::drawPoints(sf::RenderWindow &window, int points_int) {
@@ -48,10 +49,20 @@ void GameLables::drawArm(sf::RenderWindow &window, unsigned int arm_int) {
   window.draw(points);
 }
 
+void GameLables::drawVaccine(sf::RenderWindow &window, bool vaccine) {
+  sf::Vector2f center = window.getView().getCenter();
+  sf::Vector2f size = window.getView().getSize();
+  points.setPosition(center.x - size.x / 2 + 350, center.y - size.y / 2 + 13);
+  std::ostringstream ss;
+  ss << "V: " << vaccine;
+  points.setString(ss.str());
+  window.draw(points);
+}
+
 void GameLables::DrawSafeTransportFuel(sf::RenderWindow &window, int fuel_int) {
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
-  points.setPosition(center.x - size.x / 2 + 500, center.y - size.y / 2 + 13);
+  points.setPosition(center.x - size.x / 2 + 600, center.y - size.y / 2 + 13);
   std::ostringstream ss;
   ss << "Fuel: " << fuel_int << "%";
   points.setString(ss.str());
@@ -70,10 +81,19 @@ void GameLables::DrawTransportHelp(sf::RenderWindow &window, float x, float y) {
 void GameLables::DrawUnSafeTransportDmg(sf::RenderWindow &window, int dmg_int) {
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
-  points.setPosition(center.x - size.x / 2 + 500, center.y - size.y / 2 + 13);
+  points.setPosition(center.x - size.x / 2 + 600, center.y - size.y / 2 + 13);
   std::ostringstream ss;
   ss << "Dmg: " << dmg_int;
   points.setString(ss.str());
   window.draw(points);
 }
 
+void GameLables::DrawNoVaccine(sf::RenderWindow &window) {
+  sf::Vector2f center = window.getView().getCenter();
+  sf::Vector2f size = window.getView().getSize();
+  points.setPosition(center.x - size.x / 2 + 600, center.y - size.y / 2 + 13);
+  std::ostringstream ss;
+  ss << "No vaccine";
+  points.setString(ss.str());
+  window.draw(points);
+}

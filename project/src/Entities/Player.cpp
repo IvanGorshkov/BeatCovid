@@ -239,12 +239,16 @@ void Player::Collision(int num, std::vector<Object> &objs) {
       }
 
       finish = false;
-      if (obj.name == "finish" && vaccine) {
-        anim.Set("win");
-        bathrobe.SetAnim("win");
-        shoes.SetAnim("win");
-        cap.SetAnim("win");
-        finish = true;
+      isFinishPosition = false;
+      if (obj.name == "finish") {
+        isFinishPosition = true;
+        if (vaccine) {
+          anim.Set("win");
+          bathrobe.SetAnim("win");
+          shoes.SetAnim("win");
+          cap.SetAnim("win");
+          finish = true;
+        }
       }
     }
   }
@@ -339,6 +343,7 @@ std::vector<int> Player::GetMainData() {
   data.push_back(shoes.Getlvl());
   data.push_back(cap.Getlvl());
   data.push_back(bathrobe.Getlvl());
+  data.push_back(vaccine);
 
   return data;
 }
@@ -361,4 +366,11 @@ void Player::SetDrive() {
 
 bool Player::IsDrive() const {
   return isDrive;
+}
+
+bool Player::IsFinishPosition() const {
+  if (finish) {
+    return false;
+  }
+  return isFinishPosition;
 }
