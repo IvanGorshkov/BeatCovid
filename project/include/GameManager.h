@@ -13,6 +13,7 @@
 #include "OrdinaryEnemies.h"
 #include "SafeTransport.h"
 #include "UnSafeTransport.h"
+#include "Sick.h"
 
 class GameManager {
  public:
@@ -26,10 +27,12 @@ class GameManager {
   void Fire();
   // Садится в транспорт
   void TakeTransport();
+  Sick *GetSick();
 
  private:
   std::vector<Object> obj;
   Player *player;
+  Sick *sick;
   Object startPlayerPosition;
   GameLables lables;
 

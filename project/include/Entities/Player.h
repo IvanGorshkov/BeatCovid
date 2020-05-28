@@ -39,6 +39,9 @@ class Player : public Entity {
   Cap GetCap();
   Shoes GetShoes();
   bool IsFinishPosition() const;
+  bool GetAlive();
+  void SetFinish(bool finish = true);
+
  private:
   enum {
     STAY,
@@ -51,7 +54,10 @@ class Player : public Entity {
   std::map<std::string, bool> key;
   int dmgC;
   int fireC;
+  int treatC;
+  bool treat;
   bool finish;
+  bool alive;
   bool dir;
   bool fire;
   int dmg;

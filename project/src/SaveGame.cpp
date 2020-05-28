@@ -72,7 +72,7 @@ int Save::GetPonits() {
   std::fstream save;
   save.open("../files/saves/save_points.txt");
   if (!save.is_open()) {
-    return 10000;
+    return 0;
   }
 
   char buff[50];

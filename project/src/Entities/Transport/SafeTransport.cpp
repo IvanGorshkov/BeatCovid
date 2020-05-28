@@ -14,12 +14,17 @@ SafeTransport::SafeTransport(float x, float y, int height, int weight, const std
 
 void SafeTransport::Update(float time, std::vector<Object> &obj) {
   if (isDrive && !isHitWall && fuel > 0) {
-    rect.left += dx * time;
+    if (!dir) {
+      rect.left += dx * time;
+    } else {
+      rect.left -= dx * time;
+    }
+
     fuel -= FUEL_LOSS;
   }
 
   for (auto &i : obj) {
-    if (i.rect.intersects(this->rect) && i.name == "wall") {
+    if (i.rect.intersects(this->rect) && i.name == "wall" && isDrive) {
       isHitWall = true;
     }
 
@@ -28,6 +33,7 @@ void SafeTransport::Update(float time, std::vector<Object> &obj) {
     }
   }
 
+  anim.Flip(dir);
   anim.Tick(time);
 }
 
@@ -49,7 +55,7 @@ void SafeTransport::setMonorail() {
   sf::Texture autoTexture;
   autoTexture.loadFromFile("../files/images/mono.png");
   anim = AnimationManager(autoTexture);
-  anim.Create("move", 39, 2, 976, 140, 2, 0.005,986);
+  anim.Create("move", 39, 2, 976, 140, 2, 0.002,986);
   anim.Set("move");
 }
 float SafeTransport::GetFuel() {

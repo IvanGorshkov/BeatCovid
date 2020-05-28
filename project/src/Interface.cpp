@@ -355,6 +355,7 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
   sf::Text points;
   sf::Text hp;
   sf::Text arm;
+  sf::Text vaccine;
 
   // Текст уровня брони
   sf::Text lvl_cap;
@@ -375,6 +376,11 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
   arm.setCharacterSize(40);
   arm.setStyle(sf::Text::Bold);
   arm.setColor(sf::Color::White);
+
+  vaccine.setFont(font);
+  vaccine.setCharacterSize(40);
+  vaccine.setStyle(sf::Text::Bold);
+  vaccine.setColor(sf::Color::White);
 
   lvl_cap.setFont(font);
   lvl_cap.setCharacterSize(40);
@@ -403,9 +409,10 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
   //Корд. Фон для оружия
   BgArrmor.setPosition(center.x - size.x / 2 + 500, center.y - size.y / 2 + 100);
   //Корд. Статы
+  hp.setPosition(center.x - size.x / 2 + 10, center.y - size.y / 2 + 13);
+  arm.setPosition(center.x - size.x / 2 + 200, center.y - size.y / 2 + 13);
+  vaccine.setPosition(center.x - size.x / 2 + 350, center.y - size.y / 2 + 13);
   points.setPosition(center.x - size.x / 2 + 1000, center.y - size.y / 2 + 13);
-  hp.setPosition(center.x - size.x / 2 + 800, center.y - size.y / 2 + 13);
-  arm.setPosition(center.x - size.x / 2 + 600, center.y - size.y / 2 + 13);
   //Корд. Уровни брони шапка
   lvl_cap.setPosition(center.x - size.x / 2 + 560, center.y - size.y / 2 + 260);
   //Корд. Уровни брони батинки
@@ -425,17 +432,21 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
   Arms_robe.setPosition(center.x - size.x / 2 + 780, center.y - size.y / 2 + 560);
   Arms_robe.setTextureRect(sf::Rect<int>(204 * data[5], 200, 195, 165));
 
-  std::ostringstream ss;
-  ss << "Points: " << data[1];
-  points.setString(ss.str());
-
   std::ostringstream sshp;
-  sshp << "HP: " << data[0];
+  sshp << "HP: " << data[0] << "%";
   hp.setString(sshp.str());
 
   std::ostringstream ssarm;
   ssarm << "ARM: " << data[2];
   arm.setString(ssarm.str());
+
+  std::ostringstream ssvaccine;
+  ssvaccine << "Vaccine: " << data[6];
+  vaccine.setString(ssvaccine.str());
+
+  std::ostringstream sspoints;
+  sspoints << "Points: " << data[1];
+  points.setString(sspoints.str());
 
   std::ostringstream ss_glass;
   ss_glass << "LVL:" << data[4];
@@ -489,6 +500,7 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
     window.draw(points);
     window.draw(hp);
     window.draw(arm);
+    window.draw(vaccine);
     window.draw(lvl_cap);
     window.draw(lvl_shoes);
     window.draw(lvl_robe);
@@ -550,7 +562,6 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
 
   Level lvl;
   lvl.LoadFromFile(save.GetLvlName());
-
   GameManager game(lvl, save.GetArmors());
   sf::Clock clock;
   if (save.SaveExists()) {
@@ -635,19 +646,29 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
 
 bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game) {
   sf::Texture menuContinue, menuToMenu;
-  menuToMenu.loadFromFile("../files/menu/to_menu.png");
-  menuContinue.loadFromFile("../files/menu/next_mission.png");
+  if (save.GetLvl() == 2) {
+    menuToMenu.loadFromFile("../files/menu/to_menu.png");
+    menuContinue.loadFromFile("../files/menu/winner.png");
+  } else {
+    menuToMenu.loadFromFile("../files/menu/to_menu.png");
+    menuContinue.loadFromFile("../files/menu/next_mission.png");
+  }
+
+
   sf::Sprite MenuToMenu(menuToMenu);
   sf::Sprite MenuContinue(menuContinue);
   int menuNum = 0;
 
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
-  MenuContinue.setPosition(center.x - size.x / 2 + 450, center.y - size.y / 2 + 330);
-  MenuToMenu.setPosition(center.x - size.x / 2 + 570, center.y - size.y / 2 + 390);
   if (save.GetLvl() == 2) {
-
+    MenuContinue.setPosition(center.x - size.x / 2 + 20, center.y - size.y / 2 + 200);
+    MenuContinue.scale(0.9f, 0.9f);
   } else {
+    MenuContinue.setPosition(center.x - size.x / 2 + 450, center.y - size.y / 2 + 330);
+  }
+  MenuToMenu.setPosition(center.x - size.x / 2 + 570, center.y - size.y / 2 + 390);
+  if (save.GetLvl() != 2) {
     save.ChangeLvl();
   }
   save.SaveGame(game);
@@ -669,10 +690,11 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game)
       MenuToMenu.setColor(sf::Color::Red);
       menuNum = 1;
     }
-
-    if (sf::IntRect(450, 330, 300, 50).contains(sf::Mouse::getPosition(window))) {
-      MenuContinue.setColor(sf::Color::Red);
-      menuNum = 2;
+    if (save.GetLvl() != 3) {
+      if (sf::IntRect(450, 330, 300, 50).contains(sf::Mouse::getPosition(window))) {
+        MenuContinue.setColor(sf::Color::Red);
+        menuNum = 2;
+      }
     }
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {

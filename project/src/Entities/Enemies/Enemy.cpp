@@ -30,7 +30,7 @@ void Enemy::Update(float time, std::vector<Object> &obj) {
   if (hp < 0) {
     dx = 0;
     dy = 0;
-    anim.Set("move");
+    anim.Set("dead");
     isLife = false;
   }
 

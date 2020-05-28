@@ -15,6 +15,8 @@ Player::Player(const Object &position, std::vector<int> armors)
       finish(false),
       tookDmg(false),
       fire(false),
+      treat(false),
+      alive(false),
       bathrobe(position.rect.left, position.rect.top, 64, 64, armors[2]),
       shoes(position.rect.left, position.rect.top, 64, 64, armors[1]),
       cap(position.rect.left, position.rect.top, 64, 64, armors[0]) {
@@ -30,6 +32,7 @@ Player::Player(const Object &position, std::vector<int> armors)
   anim.Create("fire", 4, 147, 64, 64, 3, 0.007, 72);
   anim.Create("die", 4, 219, 64, 64, 4, 0.004, 72);
   anim.Create("win", 0, 744, 33, 76, 4, 0.0045, 38);
+  anim.Create("treat", 4, 651, 64, 64, 5, 0.002, 72);
 
   arm = bathrobe.GetArm() + shoes.GetArm() + cap.GetArm();
 }
@@ -40,6 +43,7 @@ void Player::KeyCheck() {
     if (STATE == STAY) {
       STATE = RUN;
       dx = -0.1;
+      treat = false;
     }
   }
 
@@ -48,6 +52,7 @@ void Player::KeyCheck() {
     if (STATE == STAY) {
       STATE = RUN;
       dx = 0.1;
+      treat = false;
     }
   }
 
@@ -56,6 +61,7 @@ void Player::KeyCheck() {
       if (STATE == STAY || STATE == RUN) {
         dy = -0.2;
         STATE = JUMP;
+        treat = false;
       }
     }
   }
@@ -67,6 +73,7 @@ void Player::KeyCheck() {
       } else {
         STATE = LAY;
       }
+      treat = false;
     }
   }
 
@@ -198,6 +205,19 @@ void Player::Update(float time, std::vector<Object> &obj) {
     }
   }
 
+  if (treat && !alive) {
+    anim.Set("treat");
+    bathrobe.SetAnim("treat");
+    shoes.SetAnim("treat");
+    cap.SetAnim("treat");
+    --treatC;
+    std::cout << treatC << std::endl;
+    if (treatC <= 0) {
+      alive = true;
+      treat = false;
+    }
+  }
+
   anim.Tick(time);
   obj[0].rect = rect;
   bathrobe.Update(time, obj);
@@ -210,6 +230,7 @@ bool Player::GetFinish() const {
 }
 
 void Player::Collision(int num, std::vector<Object> &objs) {
+  sf::Rect<float> finishPosition;
   for (auto &obj : objs) {
     if (rect.intersects(obj.rect)) {
       if (obj.name == "wall") {
@@ -242,12 +263,10 @@ void Player::Collision(int num, std::vector<Object> &objs) {
       isFinishPosition = false;
       if (obj.name == "finish") {
         isFinishPosition = true;
-        if (vaccine) {
-          anim.Set("win");
-          bathrobe.SetAnim("win");
-          shoes.SetAnim("win");
-          cap.SetAnim("win");
-          finish = true;
+        finishPosition = obj.rect;
+        if (vaccine && treat == false) {
+          treat = true;
+          treatC = 200;
         }
       }
     }
@@ -343,6 +362,7 @@ std::vector<int> Player::GetMainData() {
   data.push_back(shoes.Getlvl());
   data.push_back(cap.Getlvl());
   data.push_back(bathrobe.Getlvl());
+  data.push_back(vaccine);
 
   return data;
 }
@@ -372,4 +392,11 @@ bool Player::IsFinishPosition() const {
     return false;
   }
   return isFinishPosition;
+}
+
+bool Player::GetAlive() {
+  return alive;
+}
+void Player::SetFinish(bool finish) {
+  this->finish = finish;
 }

@@ -1,11 +1,13 @@
 #include "GameManager.h"
+
+#include <utility>
 #include "cmath"
 #include "Interface.h"
 
 GameManager::GameManager(Level &lvl, std::vector<int> arms) {
   obj = lvl.GetAllObjects();
   startPlayerPosition = lvl.GetObject("player");
-  player = new Player(startPlayerPosition, arms);
+  player = new Player(startPlayerPosition, std::move(arms));
 
   for (auto &i : obj) {
     if (i.name == "breaker" || i.name == "delivery" || i.name == "virus") {
@@ -35,8 +37,13 @@ GameManager::GameManager(Level &lvl, std::vector<int> arms) {
     if (i.name == "bus") {
       unSafeTransports.emplace_back(i.rect.left, i.rect.top - 10, 393, 100, i.name);
     }
+
     if (i.name == "metro") {
       unSafeTransports.emplace_back(i.rect.left, i.rect.top - 15, 924, 140, i.name);
+    }
+
+    if (i.name == "finish") {
+      sick = new Sick(i.rect.left - 15, i.rect.top - 32, 0, 0, 128, 64);
     }
 
   }
@@ -52,6 +59,10 @@ void GameManager::Update(float time) {
   updateTransport(time);
   checkHitPlayer();
   checkHitEnemy();
+  if (player->GetAlive()) {
+    sick->SetAlive();
+  }
+  sick->Update(time, obj);
 }
 
 // Вывод всех классов на экран
@@ -60,12 +71,17 @@ void GameManager::Draw(sf::RenderWindow &window) {
   drawEnemy(window);
   drawAntibodies(window);
   drawTransport(window);
-  lables.DrawPlayerData(window, player->GetPoints(), player->GetHp(), player->GetArm());
+  lables.DrawPlayerData(window, player->GetPoints(), player->GetHp(), player->GetArm(), player->GetVaccine());
   if (player->IsFinishPosition()) {
     lables.DrawNoVaccine(window);
   }
   if (!player->IsDrive()) {
     player->DrawObjs(window);
+  }
+  sick->Draw(window);
+
+  if (sick->GetEnd()) {
+    player->SetFinish();
   }
 }
 
@@ -179,7 +195,7 @@ void GameManager::bulletPlayer() {
       float Y = (player->GetRect().top - (*enemiesIt)->GetRect().top) / 16;
       // Дальность полета пули
       (*enemiesIt)->SetFire(true);
-      if (std::abs(X) > 20 || std::abs(Y) > 10) {
+      if (std::abs(X) > 30 || std::abs(Y) > 10) {
         (*enemiesIt)->SetFire(false);
         (*enemiesIt)->ResetTimer();
         continue;
@@ -287,7 +303,12 @@ void GameManager::updateSafeTransport(float time) {
   for (safeTransportsIt = safeTransports.begin(); safeTransportsIt != safeTransports.end(); safeTransportsIt++) {
     safeTransportsIt->Update(time, obj);
     if (safeTransportsIt->IsDrive()) {
-      player->SetPosition(safeTransportsIt->GetRect().left + safeTransportsIt->GetRect().width - 100, safeTransportsIt->GetRect().top);
+      if (!safeTransportsIt->GetDir()) {
+        player->SetPosition(safeTransportsIt->GetRect().left + safeTransportsIt->GetRect().width - 100,
+                            safeTransportsIt->GetRect().top + 32);
+      } else {
+        player->SetPosition(safeTransportsIt->GetRect().left + 30, safeTransportsIt->GetRect().top + 32);
+      }
       break;
     }
   }
@@ -298,7 +319,12 @@ void GameManager::updateUnSafeTransport(float time) {
        unSafeTransportsIt++) {
     unSafeTransportsIt->Update(time, obj);
     if (unSafeTransportsIt->IsDrive()) {
-      player->SetPosition(unSafeTransportsIt->GetRect().left + unSafeTransportsIt->GetRect().width - 100, unSafeTransportsIt->GetRect().top);
+      if (!unSafeTransportsIt->GetDir()) {
+        player->SetPosition(unSafeTransportsIt->GetRect().left + unSafeTransportsIt->GetRect().width - 100,
+                            unSafeTransportsIt->GetRect().top + 32);
+      } else {
+        player->SetPosition(unSafeTransportsIt->GetRect().left + 30, unSafeTransportsIt->GetRect().top + 32);
+      }
       player->TakeDamge(unSafeTransportsIt->GetDmg());
       break;
     }
@@ -339,3 +365,8 @@ void GameManager::drawUnSafeTransport(sf::RenderWindow &window) {
     }
   }
 }
+
+Sick* GameManager::GetSick() {
+  return sick;
+}
+
