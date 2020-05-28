@@ -650,7 +650,7 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
 
 bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game) {
   sf::Texture menuContinue, menuToMenu;
-  
+
   if (save.GetLvl() == MAX_LVL) {
     menuToMenu.loadFromFile("../files/menu/to_menu.png");
     menuContinue.loadFromFile("../files/menu/winner.png");

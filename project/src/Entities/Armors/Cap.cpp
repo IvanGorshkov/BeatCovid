@@ -44,6 +44,7 @@ Cap::Cap(float x, float y, float w, float h, int lvl)
   anim.Create("dmg", 4, 435, 64, 64, 2, 0.004, 72);
   anim.Create("fire", 4, 147, 64, 64, 3, 0.007, 72);
   anim.Create("die", 4, 219, 64, 64, 4, 0.004, 72);
+  anim.Create("treat", 4, 651, 64, 64, 5, 0.002, 72);
   anim.Create("win", 0, 744, 33, 76, 4, 0.0045, 38);
   anim.Set("stay");
 }
