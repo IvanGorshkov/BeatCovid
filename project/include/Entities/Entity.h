@@ -1,8 +1,8 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "AnimationManager.h"
 #include <list>
+#include "AnimationManager.h"
 #include "Level_map.h"
 
 class Entity {

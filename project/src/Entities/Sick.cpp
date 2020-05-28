@@ -5,6 +5,7 @@ Sick::Sick(float x, float y, float dx, float dy, int weight, int height)
       aliveC(100),
       alive(false),
       end(false) {
+
   sf::Texture bulletTexture;
   bulletTexture.loadFromFile("../files/images/ill.png");
   anim = AnimationManager(bulletTexture);

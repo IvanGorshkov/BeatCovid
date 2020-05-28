@@ -4,6 +4,7 @@ Bullet::Bullet(float x, float y, float dx, float dy, float dmg, bool player)
     : Entity(x, y, dx, dy, 16, 16), dmg(dmg),
       timerDie(0),
       isDie(false) {
+
   sf::Texture bulletTexture;
   bulletTexture.loadFromFile("../files/images/bullets.png");
   anim = AnimationManager(bulletTexture);

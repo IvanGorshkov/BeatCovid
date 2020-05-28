@@ -17,22 +17,22 @@
 
 class GameManager {
  public:
-  explicit GameManager(Level &lvl, std::vector<int> arms);
+  explicit GameManager(Level &lvl, const std::vector<int>& arms);
   // Обновление всех классов
   void Update(float time);
   // Вывод всех классов на экран
   void Draw(sf::RenderWindow &window);
-  Player *GetPlayer();
+  // Получение игрока
+  std::shared_ptr<Player> GetPlayer();
   // Огонь игроком
   void Fire();
   // Садится в транспорт
   void TakeTransport();
-  Sick *GetSick();
 
  private:
   std::vector<Object> obj;
-  Player *player;
-  Sick *sick;
+  std::shared_ptr<Player> player;
+  std::shared_ptr<Sick> sick;
   GameLables lables;
 
   // Методы работы с классом Bullet
@@ -47,8 +47,8 @@ class GameManager {
   void bulletPlayer();
 
   // Методы работы с классом Enemy
-  std::list<Enemy *> enemies;
-  std::list<Enemy *>::iterator enemiesIt;
+  std::list<std::shared_ptr<Enemy>> enemies;
+  std::list<std::shared_ptr<Enemy>>::iterator enemiesIt;
   void updateEnemy(float time);
   void drawEnemy(sf::RenderWindow &window);
 

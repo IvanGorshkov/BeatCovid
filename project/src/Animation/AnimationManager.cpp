@@ -1,6 +1,8 @@
 #include "AnimationManager.h"
 
-AnimationManager::AnimationManager(sf::Texture &texture) : texture(texture) {}
+AnimationManager::AnimationManager(sf::Texture &texture)
+    : texture(texture) {
+}
 
 void AnimationManager::Create(const std::string &name, int x, int y, int w, int h, int count, float speed, int step) {
   animList[name] = Animation(texture, x, y, w, h, count, speed, step);
@@ -30,11 +32,4 @@ void AnimationManager::Pause() {
 
 int AnimationManager::GetCurrentFrame() {
   return animList[currentAnim].GetCurrentFrame();
-}
-float AnimationManager::GetH() {
-  return animList[currentAnim].GetFrames()[0].height;
-}
-
-float AnimationManager::GetW() {
-  return animList[currentAnim].GetFrames()[0].width;
 }

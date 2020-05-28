@@ -6,6 +6,7 @@ Police::Police(float x, float y, int height, int weight)
       isMetUser(false),
       drawPenaltyMenu(false),
       drawDiedMenu(false) {
+
   sf::Texture policeTexture;
   policeTexture.loadFromFile("../files/images/policemen.png");
   anim = AnimationManager(policeTexture);

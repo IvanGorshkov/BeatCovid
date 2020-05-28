@@ -2,6 +2,8 @@
 
 #include "Entity.h"
 
+#define ENEMY_HIT_TIME 1000
+
 class Enemy : public Entity {
  public:
   explicit Enemy(float x, float y, int height, int weight, float hp, float dmg);

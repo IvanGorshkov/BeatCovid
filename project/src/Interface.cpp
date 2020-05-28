@@ -1,6 +1,6 @@
-#include "Interface.h"
 #include <sstream>
 #include <SFML/Graphics.hpp>
+#include "Interface.h"
 #include "Level_map.h"
 
 // Вывод главного меню
@@ -16,7 +16,6 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
   sf::Sprite MenuExit(menuExit);
   sf::Sprite MenuBg(main_menuBackground);
   sf::Sprite SMenu(tShop);
-  int menuNum = 0;
 
   while (window.isOpen()) {
     sf::Event event{};
@@ -25,6 +24,7 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
         window.close();
       }
     }
+
     sf::Vector2f center = window.getView().getCenter();
     sf::Vector2f size = window.getView().getSize();
     MenuNewGame.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 30);
@@ -36,21 +36,24 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
     MenuLoad.setColor(sf::Color::White);
     MenuExit.setColor(sf::Color::White);
     SMenu.setColor(sf::Color::White);
-    menuNum = 0;
+    int menuNum = 0;
     window.clear(sf::Color(68, 101, 219));
 
     if (sf::IntRect(100, 30, 300, 50).contains(sf::Mouse::getPosition(window))) {
       MenuNewGame.setColor(sf::Color::Red);
       menuNum = 1;
     }
+
     if (sf::IntRect(100, 90, 300, 50).contains(sf::Mouse::getPosition(window))) {
       MenuLoad.setColor(sf::Color::Red);
       menuNum = 2;
     }
+
     if (sf::IntRect(100, 150, 300, 50).contains(sf::Mouse::getPosition(window))) {
       SMenu.setColor(sf::Color::Red);
       menuNum = 3;
     }
+
     if (sf::IntRect(100, 210, 300, 50).contains(sf::Mouse::getPosition(window))) {
       MenuExit.setColor(sf::Color::Red);
       menuNum = 4;
@@ -61,9 +64,11 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
         if (Save::SaveExists()) {
           remove("../files/saves/save.txt");
         }
+
         if (Save::SaveExistsA()) {
           remove("../files/saves/save_armor.txt");
         }
+
         if (Save::SaveExistsP()) {
           remove("../files/saves/save_points.txt");
         }
@@ -132,44 +137,43 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
   points.setFont(font);
   points.setCharacterSize(40);
   points.setStyle(sf::Text::Bold);
-  points.setColor(sf::Color::White);
+  points.setFillColor(sf::Color::White);
 
   arm.setFont(font);
   arm.setCharacterSize(40);
   arm.setStyle(sf::Text::Bold);
-  arm.setColor(sf::Color::White);
+  arm.setFillColor(sf::Color::White);
 
   lvl_shoes.setFont(font);
   lvl_shoes.setCharacterSize(40);
   lvl_shoes.setStyle(sf::Text::Bold);
-  lvl_shoes.setColor(sf::Color::White);
+  lvl_shoes.setFillColor(sf::Color::White);
 
   lvl_cap.setFont(font);
   lvl_cap.setCharacterSize(40);
   lvl_cap.setStyle(sf::Text::Bold);
-  lvl_cap.setColor(sf::Color::White);
+  lvl_cap.setFillColor(sf::Color::White);
 
   lvl_robe.setFont(font);
   lvl_robe.setCharacterSize(40);
   lvl_robe.setStyle(sf::Text::Bold);
-  lvl_robe.setColor(sf::Color::White);
+  lvl_robe.setFillColor(sf::Color::White);
 
   cost_shoes.setFont(font);
   cost_shoes.setCharacterSize(40);
   cost_shoes.setStyle(sf::Text::Bold);
-  cost_shoes.setColor(sf::Color::White);
+  cost_shoes.setFillColor(sf::Color::White);
 
   cost_cap.setFont(font);
   cost_cap.setCharacterSize(40);
   cost_cap.setStyle(sf::Text::Bold);
-  cost_cap.setColor(sf::Color::White);
+  cost_cap.setFillColor(sf::Color::White);
 
   cost_robe.setFont(font);
   cost_robe.setCharacterSize(40);
   cost_robe.setStyle(sf::Text::Bold);
-  cost_robe.setColor(sf::Color::White);
+  cost_robe.setFillColor(sf::Color::White);
 
-  int menuNum = 0;
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
 
@@ -194,10 +198,10 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
   while (window.isOpen()) {
     std::vector<int> arm_vector = Save::GetArmors();
 
-    std::ostringstream ss;
+    std::ostringstream ss_points;
     int money = Save::GetPonits();
-    ss << "Points: " << money;
-    points.setString(ss.str());
+    ss_points << "Points: " << money;
+    points.setString(ss_points.str());
 
     std::ostringstream ssarm;
     ssarm << "ARM: " << arm_vector[0] + arm_vector[1] + arm_vector[2];
@@ -253,7 +257,8 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
     buy_cap.setColor(sf::Color::White);
     buy_robe.setColor(sf::Color::White);
     backB.setColor(sf::Color::White);
-    menuNum = -1;
+    int menuNum = -1;
+
     if (sf::IntRect(110, 160, 100, 100).contains(sf::Mouse::getPosition(window))) {
       buy_cap.setColor(sf::Color::Red);
       menuNum = 0;
@@ -365,39 +370,38 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
   points.setFont(font);
   points.setCharacterSize(40);
   points.setStyle(sf::Text::Bold);
-  points.setColor(sf::Color::White);
+  points.setFillColor(sf::Color::White);
 
   hp.setFont(font);
   hp.setCharacterSize(40);
   hp.setStyle(sf::Text::Bold);
-  hp.setColor(sf::Color::White);
+  hp.setFillColor(sf::Color::White);
 
   arm.setFont(font);
   arm.setCharacterSize(40);
   arm.setStyle(sf::Text::Bold);
-  arm.setColor(sf::Color::White);
+  arm.setFillColor(sf::Color::White);
 
   vaccine.setFont(font);
   vaccine.setCharacterSize(40);
   vaccine.setStyle(sf::Text::Bold);
-  vaccine.setColor(sf::Color::White);
+  vaccine.setFillColor(sf::Color::White);
 
   lvl_cap.setFont(font);
   lvl_cap.setCharacterSize(40);
   lvl_cap.setStyle(sf::Text::Bold);
-  lvl_cap.setColor(sf::Color::White);
+  lvl_cap.setFillColor(sf::Color::White);
 
   lvl_shoes.setFont(font);
   lvl_shoes.setCharacterSize(40);
   lvl_shoes.setStyle(sf::Text::Bold);
-  lvl_shoes.setColor(sf::Color::White);
+  lvl_shoes.setFillColor(sf::Color::White);
 
   lvl_robe.setFont(font);
   lvl_robe.setCharacterSize(40);
   lvl_robe.setStyle(sf::Text::Bold);
-  lvl_robe.setColor(sf::Color::White);
+  lvl_robe.setFillColor(sf::Color::White);
 
-  int menuNum = 0;
   std::vector<int> data = game.GetPlayer()->GetMainData();
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
@@ -471,7 +475,7 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
 
     MenuContinue.setColor(sf::Color::White);
     MenuToMenu.setColor(sf::Color::White);
-    menuNum = 0;
+    int menuNum = 0;
     window.clear(sf::Color(68, 101, 219));
 
     if (sf::IntRect(150, 700, 300, 50).contains(sf::Mouse::getPosition(window))) {
@@ -488,6 +492,7 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
       if (menuNum == 1) {
         return false;
       }
+
       if (menuNum == 2) {
         return true;
       }
@@ -520,12 +525,12 @@ bool Interface::DiedMenu(sf::RenderWindow &window) {
   menuToMenu.loadFromFile("../files/menu/to_menu.png");
   sf::Sprite menu1(deathMsg);
   sf::Sprite menu2(menuToMenu);
-  int menuNum = 0;
 
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
   menu1.setPosition(center.x - size.x / 2 + 540, center.y - size.y / 2 + 330);
   menu2.setPosition(center.x - size.x / 2 + 570, center.y - size.y / 2 + 390);
+
   while (window.isOpen()) {
     sf::Event event{};
     while (window.pollEvent(event)) {
@@ -533,9 +538,10 @@ bool Interface::DiedMenu(sf::RenderWindow &window) {
         window.close();
       }
     }
+
     menu1.setColor(sf::Color::White);
     menu2.setColor(sf::Color::White);
-    menuNum = 0;
+    int menuNum = 0;
     window.clear(sf::Color(68, 101, 219));
 
     if (sf::IntRect(570, 390, 300, 50).contains(sf::Mouse::getPosition(window))) {
@@ -589,9 +595,7 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
           game.GetPlayer()->SetKey("SPACE", true);
           game.Fire();
         }
-      }
 
-      if (event.type == sf::Event::KeyPressed) {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
           game.TakeTransport();
         }
@@ -634,6 +638,7 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
         break;
       }
     }
+
     game.Update(time);
     lvl.Draw(window);
     game.Draw(window);
@@ -641,8 +646,6 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
     window.setView(view);
     window.display();
   }
-
-  delete game.GetPlayer();
 }
 
 bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game) {
@@ -655,10 +658,8 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game)
     menuContinue.loadFromFile("../files/menu/next_mission.png");
   }
 
-
   sf::Sprite MenuToMenu(menuToMenu);
   sf::Sprite MenuContinue(menuContinue);
-  int menuNum = 0;
 
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
@@ -668,13 +669,14 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game)
   } else {
     MenuContinue.setPosition(center.x - size.x / 2 + 450, center.y - size.y / 2 + 330);
   }
+
   MenuToMenu.setPosition(center.x - size.x / 2 + 570, center.y - size.y / 2 + 390);
   if (save.GetLvl() != 2) {
     save.ChangeLvl();
   }
+
   save.SaveGame(game);
   while (window.isOpen()) {
-
     sf::Event event{};
     while (window.pollEvent(event)) {
       if (event.type == sf::Event::Closed) {
@@ -684,13 +686,14 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game)
 
     MenuContinue.setColor(sf::Color::White);
     MenuToMenu.setColor(sf::Color::White);
-    menuNum = 0;
+    int menuNum = 0;
     window.clear(sf::Color(68, 101, 219));
 
     if (sf::IntRect(550, 390, 300, 50).contains(sf::Mouse::getPosition(window))) {
       MenuToMenu.setColor(sf::Color::Red);
       menuNum = 1;
     }
+
     if (save.GetLvl() != 3) {
       if (sf::IntRect(450, 330, 300, 50).contains(sf::Mouse::getPosition(window))) {
         MenuContinue.setColor(sf::Color::Red);
@@ -702,10 +705,12 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game)
       if (menuNum == 1) {
         MainMenu(window, save);
       }
+
       if (menuNum == 2) {
         if (save.GetLvl() == 3) {
           MainMenu(window, save);
         }
+
         StartNewGame(window, save);
         return true;
       }
@@ -713,7 +718,6 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game)
 
     window.draw(MenuToMenu);
     window.draw(MenuContinue);
-
     window.display();
   }
 
@@ -727,12 +731,12 @@ bool Interface::PenaltyPolice(sf::RenderWindow &window) {
   menuToMenu.loadFromFile("../files/menu/continue.png");
   sf::Sprite menu1(deathMsg);
   sf::Sprite menu2(menuToMenu);
-  int menuNum = 0;
 
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
   menu1.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 30);
   menu2.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 90);
+
   while (window.isOpen()) {
     sf::Event event{};
     while (window.pollEvent(event)) {
@@ -740,9 +744,10 @@ bool Interface::PenaltyPolice(sf::RenderWindow &window) {
         window.close();
       }
     }
+
     menu1.setColor(sf::Color::White);
     menu2.setColor(sf::Color::White);
-    menuNum = 0;
+    int menuNum = 0;
     window.clear(sf::Color(68, 101, 219));
 
     if (sf::IntRect(100, 90, 300, 50).contains(sf::Mouse::getPosition(window))) {
@@ -771,12 +776,12 @@ bool Interface::DiedPolice(sf::RenderWindow &window) {
   menuToMenu.loadFromFile("../files/menu/continue.png");
   sf::Sprite menu1(deathMsg);
   sf::Sprite menu2(menuToMenu);
-  int menuNum = 0;
 
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
   menu1.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 30);
   menu2.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 90);
+
   while (window.isOpen()) {
     sf::Event event{};
     while (window.pollEvent(event)) {
@@ -784,9 +789,10 @@ bool Interface::DiedPolice(sf::RenderWindow &window) {
         window.close();
       }
     }
+
     menu1.setColor(sf::Color::White);
     menu2.setColor(sf::Color::White);
-    menuNum = 0;
+    int menuNum = 0;
     window.clear(sf::Color(68, 101, 219));
 
     if (sf::IntRect(100, 90, 300, 50).contains(sf::Mouse::getPosition(window))) {
@@ -804,6 +810,5 @@ bool Interface::DiedPolice(sf::RenderWindow &window) {
     window.draw(menu2);
     window.display();
   }
-
   return false;
 }

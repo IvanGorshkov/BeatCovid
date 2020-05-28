@@ -18,6 +18,7 @@ class Save {
   static int GetPonits();
   static bool SaveExistsP();
   static bool SaveExistsA();
+
  private:
   int lvl;
 };

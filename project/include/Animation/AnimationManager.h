@@ -15,8 +15,7 @@ class AnimationManager {
   void Tick(float time);
   void Pause();
   int GetCurrentFrame();
-  float GetH();
-  float GetW();
+
  private:
   std::map<sf::String, Animation> animList;
   sf::String currentAnim;
