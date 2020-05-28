@@ -122368,11 +122368,11 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -122770,7 +122770,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="8"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -123170,7 +123170,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="8"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -123570,7 +123570,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="8"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -123970,7 +123970,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="8"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -124370,7 +124370,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="8"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -124770,7 +124770,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="8"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -125170,7 +125170,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="8"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -125570,7 +125570,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="8"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -125968,11 +125968,11 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="8"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -130707,16 +130707,16 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="188"/>
+   <tile gid="186"/>
+   <tile gid="204"/>
+   <tile gid="202"/>
+   <tile gid="190"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="189"/>
+   <tile gid="197"/>
+   <tile gid="199"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -133907,18 +133907,18 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="196"/>
+   <tile gid="194"/>
+   <tile gid="197"/>
+   <tile gid="194"/>
+   <tile gid="203"/>
+   <tile gid="190"/>
+   <tile gid="189"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="191"/>
+   <tile gid="204"/>
+   <tile gid="190"/>
+   <tile gid="196"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -160063,7 +160063,7 @@
   <object name="wall" x="9056" y="3840" width="32" height="32"/>
   <object name="wall" x="9024" y="3808" width="32" height="32"/>
   <object name="wall" x="8992" y="3776" width="32" height="32"/>
-  <object name="wall" x="11488" y="3648" width="160" height="32"/>
+  <object name="wall" x="11488" y="3360" width="160" height="32"/>
  </objectgroup>
  <objectgroup name="obj" width="400" height="200">
   <object name="antigen" x="2880" y="3904" width="32" height="32"/>
@@ -160085,5 +160085,8 @@
   <object name="auto" x="8719" y="3685" width="32" height="32"/>
   <object name="bus" x="9430" y="4098" width="32" height="32"/>
   <object name="auto" x="9430" y="4352" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="death" width="400" height="200">
+  <object name="death" x="0" y="4768" width="103000" height="32"/>
  </objectgroup>
 </map>
