@@ -30,7 +30,7 @@ void Enemy::Update(float time, std::vector<Object> &obj) {
   if (hp < 0) {
     dx = 0;
     dy = 0;
-    anim.Set("move");
+    anim.Set("dead");
     isLife = false;
   }
 
@@ -55,10 +55,10 @@ void Enemy::TakeDmg(float getDmg) {
 }
 
 void Enemy::SetFire(bool getFire) {
-  this->fire  = getFire;
+  this->fire = getFire;
 }
 
 void Enemy::SetDir(bool getDir) {
-  this->dir  = getDir;
+  this->dir = getDir;
 }
 

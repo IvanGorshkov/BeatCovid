@@ -19,7 +19,7 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
   int menuNum = 0;
 
   while (window.isOpen()) {
-    sf::Event event;
+    sf::Event event{};
     while (window.pollEvent(event)) {
       if (event.type == sf::Event::Closed) {
         window.close();
@@ -58,13 +58,13 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
       if (menuNum == 1) {
-        if (save.SaveExists()) {
+        if (Save::SaveExists()) {
           remove("../files/saves/save.txt");
         }
-        if (save.SaveExistsA()) {
+        if (Save::SaveExistsA()) {
           remove("../files/saves/save_armor.txt");
         }
-        if (save.SaveExistsP()) {
+        if (Save::SaveExistsP()) {
           remove("../files/saves/save_points.txt");
         }
 
@@ -73,7 +73,7 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
       }
 
       if (menuNum == 2) {
-        if (save.SaveExists()) {
+        if (Save::SaveExists()) {
           StartNewGame(window, save);
         }
       }
@@ -192,10 +192,10 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
   cost_robe.setPosition(center.x - size.x / 2 + 400, center.y - size.y / 2 + 710);
 
   while (window.isOpen()) {
-    std::vector<int> arm_vector = save.GetArmors();
+    std::vector<int> arm_vector = Save::GetArmors();
 
     std::ostringstream ss;
-    int money = save.GetPonits();
+    int money = Save::GetPonits();
     ss << "Points: " << money;
     points.setString(ss.str());
 
@@ -274,7 +274,7 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
       menuNum = 4;
     }
 
-    sf::Event event;
+    sf::Event event{};
     while (window.pollEvent(event)) {
       if (event.type == sf::Event::Closed) {
         window.close();
@@ -286,8 +286,8 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
             if (arm_vector[menuNum] < 4) {
               int cost = arm_vector[menuNum] * 100 + 100;
               if (cost <= money) {
-                Buy(arm_vector, menuNum, save);
-                save.SavePoints(money - cost);
+                Buy(arm_vector, menuNum);
+                Save::SavePoints(money - cost);
               }
             }
           }
@@ -325,9 +325,9 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
   return true;
 }
 
-void Interface::Buy(std::vector<int> arm_vector, int index, Save &save) {
+void Interface::Buy(std::vector<int> arm_vector, int index) {
   ++arm_vector[index];
-  save.SaveArmor(arm_vector);
+  Save::SaveArmor(arm_vector);
 }
 
 bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
@@ -462,7 +462,7 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
 
   while (window.isOpen()) {
 
-    sf::Event event;
+    sf::Event event{};
     while (window.pollEvent(event)) {
       if (event.type == sf::Event::Closed) {
         window.close();
@@ -514,7 +514,7 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
 }
 
 // Экран смерти
-bool Interface::DiedMenu(sf::RenderWindow &window, Save &save) {
+bool Interface::DiedMenu(sf::RenderWindow &window) {
   sf::Texture deathMsg, menuToMenu;
   deathMsg.loadFromFile("../files/menu/dead.png");
   menuToMenu.loadFromFile("../files/menu/to_menu.png");
@@ -527,7 +527,7 @@ bool Interface::DiedMenu(sf::RenderWindow &window, Save &save) {
   menu1.setPosition(center.x - size.x / 2 + 540, center.y - size.y / 2 + 330);
   menu2.setPosition(center.x - size.x / 2 + 570, center.y - size.y / 2 + 390);
   while (window.isOpen()) {
-    sf::Event event;
+    sf::Event event{};
     while (window.pollEvent(event)) {
       if (event.type == sf::Event::Closed) {
         window.close();
@@ -562,10 +562,9 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
 
   Level lvl;
   lvl.LoadFromFile(save.GetLvlName());
-
-  GameManager game(lvl, save.GetArmors());
+  GameManager game(lvl, Save::GetArmors());
   sf::Clock clock;
-  if (save.SaveExists()) {
+  if (Save::SaveExists()) {
     save.Load(game);
   }
 
@@ -580,7 +579,7 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
       time = 70;
     }
 
-    sf::Event event;
+    sf::Event event{};
     while (window.pollEvent(event)) {
       if (event.type == sf::Event::Closed)
         window.close();
@@ -623,7 +622,7 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
 
     }
     if (game.GetPlayer()->GetAnim().GetCurrentFrame() == 3 && game.GetPlayer()->GetHp() <= 0) {
-      bool status = DiedMenu(window, save);
+      bool status = DiedMenu(window);
       if (status) {
         break;
       }
@@ -642,30 +641,41 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
     window.setView(view);
     window.display();
   }
+
   delete game.GetPlayer();
 }
 
 bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game) {
   sf::Texture menuContinue, menuToMenu;
-  menuToMenu.loadFromFile("../files/menu/to_menu.png");
-  menuContinue.loadFromFile("../files/menu/next_mission.png");
+  if (save.GetLvl() == 2) {
+    menuToMenu.loadFromFile("../files/menu/to_menu.png");
+    menuContinue.loadFromFile("../files/menu/winner.png");
+  } else {
+    menuToMenu.loadFromFile("../files/menu/to_menu.png");
+    menuContinue.loadFromFile("../files/menu/next_mission.png");
+  }
+
+
   sf::Sprite MenuToMenu(menuToMenu);
   sf::Sprite MenuContinue(menuContinue);
   int menuNum = 0;
 
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
-  MenuContinue.setPosition(center.x - size.x / 2 + 450, center.y - size.y / 2 + 330);
-  MenuToMenu.setPosition(center.x - size.x / 2 + 570, center.y - size.y / 2 + 390);
   if (save.GetLvl() == 2) {
-
+    MenuContinue.setPosition(center.x - size.x / 2 + 20, center.y - size.y / 2 + 200);
+    MenuContinue.scale(0.9f, 0.9f);
   } else {
+    MenuContinue.setPosition(center.x - size.x / 2 + 450, center.y - size.y / 2 + 330);
+  }
+  MenuToMenu.setPosition(center.x - size.x / 2 + 570, center.y - size.y / 2 + 390);
+  if (save.GetLvl() != 2) {
     save.ChangeLvl();
   }
   save.SaveGame(game);
   while (window.isOpen()) {
 
-    sf::Event event;
+    sf::Event event{};
     while (window.pollEvent(event)) {
       if (event.type == sf::Event::Closed) {
         window.close();
@@ -681,10 +691,11 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game)
       MenuToMenu.setColor(sf::Color::Red);
       menuNum = 1;
     }
-
-    if (sf::IntRect(450, 330, 300, 50).contains(sf::Mouse::getPosition(window))) {
-      MenuContinue.setColor(sf::Color::Red);
-      menuNum = 2;
+    if (save.GetLvl() != 3) {
+      if (sf::IntRect(450, 330, 300, 50).contains(sf::Mouse::getPosition(window))) {
+        MenuContinue.setColor(sf::Color::Red);
+        menuNum = 2;
+      }
     }
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
@@ -723,7 +734,7 @@ bool Interface::PenaltyPolice(sf::RenderWindow &window) {
   menu1.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 30);
   menu2.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 90);
   while (window.isOpen()) {
-    sf::Event event;
+    sf::Event event{};
     while (window.pollEvent(event)) {
       if (event.type == sf::Event::Closed) {
         window.close();
@@ -767,7 +778,7 @@ bool Interface::DiedPolice(sf::RenderWindow &window) {
   menu1.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 30);
   menu2.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 90);
   while (window.isOpen()) {
-    sf::Event event;
+    sf::Event event{};
     while (window.pollEvent(event)) {
       if (event.type == sf::Event::Closed) {
         window.close();

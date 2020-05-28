@@ -6,19 +6,19 @@
 #include "tinyxml.h"
 #include "Level_map.h"
 
-int Object::GetPropertyInt(std::string getName) {
+int Object::GetPropertyInt(const std::string &getName) {
   return atoi(properties[getName].c_str());
 }
 
-float Object::GetPropertyFloat(std::string getName) {
-  return strtod(properties[getName].c_str(), NULL);
+float Object::GetPropertyFloat(const std::string &getName) {
+  return strtod(properties[getName].c_str(), nullptr);
 }
 
-std::string Object::GetPropertyString(std::string getName) {
+std::string Object::GetPropertyString(const std::string &getName) {
   return properties[getName];
 }
 
-bool Level::LoadFromFile(std::string filename) {
+bool Level::LoadFromFile(const std::string &filename) {
   TiXmlDocument levelFile(filename.c_str());
   // Загружаем XML-карту
   if (!levelFile.LoadFile()) {
@@ -82,8 +82,8 @@ bool Level::LoadFromFile(std::string filename) {
   while (layerElement) {
     Layer layer;
     // Если присутствует opacity, то задаем прозрачность слоя, иначе он полностью непрозрачен
-    if (layerElement->Attribute("opacity") != NULL) {
-      float opacity = strtod(layerElement->Attribute("opacity"), NULL);
+    if (layerElement->Attribute("opacity") != nullptr) {
+      float opacity = strtod(layerElement->Attribute("opacity"), nullptr);
       layer.opacity = 255 * opacity;
     } else {
       layer.opacity = 255;
@@ -92,7 +92,7 @@ bool Level::LoadFromFile(std::string filename) {
     TiXmlElement *layerDataElement;
     layerDataElement = layerElement->FirstChildElement("data");
 
-    if (layerDataElement == NULL) {
+    if (layerDataElement == nullptr) {
       std::cout << "Bad map. No layer information found." << std::endl;
     }
 
@@ -100,7 +100,7 @@ bool Level::LoadFromFile(std::string filename) {
     TiXmlElement *tileElement;
     tileElement = layerDataElement->FirstChildElement("tile");
 
-    if (tileElement == NULL) {
+    if (tileElement == nullptr) {
       std::cout << "Bad map. No tile information found." << std::endl;
       return false;
     }
@@ -144,7 +144,7 @@ bool Level::LoadFromFile(std::string filename) {
   TiXmlElement *objectGroupElement;
 
   // Если есть слои объектов
-  if (map->FirstChildElement("objectgroup") != NULL) {
+  if (map->FirstChildElement("objectgroup") != nullptr) {
     objectGroupElement = map->FirstChildElement("objectgroup");
     while (objectGroupElement) {
       // Контейнер <object>
@@ -154,11 +154,11 @@ bool Level::LoadFromFile(std::string filename) {
       while (objectElement) {
         // Получаем все данные - тип, имя, позиция, etc
         std::string objectType;
-        if (objectElement->Attribute("type") != NULL) {
+        if (objectElement->Attribute("type") != nullptr) {
           objectType = objectElement->Attribute("type");
         }
         std::string objectName;
-        if (objectElement->Attribute("name") != NULL) {
+        if (objectElement->Attribute("name") != nullptr) {
           objectName = objectElement->Attribute("name");
         }
         int x = atoi(objectElement->Attribute("x"));
@@ -171,7 +171,7 @@ bool Level::LoadFromFile(std::string filename) {
         sprite.setTextureRect(sf::Rect<int>(0, 0, 0, 0));
         sprite.setPosition(x, y);
 
-        if (objectElement->Attribute("width") != NULL) {
+        if (objectElement->Attribute("width") != nullptr) {
           width = atoi(objectElement->Attribute("width"));
           height = atoi(objectElement->Attribute("height"));
         } else {
@@ -196,10 +196,10 @@ bool Level::LoadFromFile(std::string filename) {
         // "Переменные" объекта
         TiXmlElement *properties;
         properties = objectElement->FirstChildElement("properties");
-        if (properties != NULL) {
+        if (properties != nullptr) {
           TiXmlElement *prop;
           prop = properties->FirstChildElement("property");
-          if (prop != NULL) {
+          if (prop != nullptr) {
             while (prop) {
               std::string propertyName = prop->Attribute("name");
               std::string propertyValue = prop->Attribute("value");
@@ -222,21 +222,21 @@ bool Level::LoadFromFile(std::string filename) {
   return true;
 }
 
-Object Level::GetObject(std::string name) {
+Object Level::GetObject(const std::string &name) {
   // Только первый объект с заданным именем
-  for (int i = 0; i < objects.size(); i++) {
-    if (objects[i].name == name) {
-      return objects[i];
+  for (auto &object : objects) {
+    if (object.name == name) {
+      return object;
     }
   }
 }
 
-std::vector<Object> Level::GetObjects(std::string name) {
+std::vector<Object> Level::GetObjects(const std::string &name) {
   // Все объекты с заданным именем
   std::vector<Object> vec;
-  for (int i = 0; i < objects.size(); i++) {
-    if (objects[i].name == name) {
-      vec.push_back(objects[i]);
+  for (auto &object : objects) {
+    if (object.name == name) {
+      vec.push_back(object);
     }
   }
   return vec;
@@ -246,15 +246,15 @@ std::vector<Object> Level::GetAllObjects() {
   return objects;
 }
 
-sf::Vector2i Level::GetTileSize() {
-  return sf::Vector2i(tileWidth, tileHeight);
+sf::Vector2i Level::GetTileSize() const {
+  return {tileWidth, tileHeight};
 }
 
 void Level::Draw(sf::RenderWindow &window) {
   // Рисуем все тайлы (объекты НЕ рисуем!)
-  for (int layer = 0; layer < layers.size(); layer++) {
-    for (int tile = 0; tile < layers[layer].tiles.size(); tile++) {
-      window.draw(layers[layer].tiles[tile]);
+  for (auto &layer : layers) {
+    for (const auto &tile : layer.tiles) {
+      window.draw(tile);
     }
   }
 }

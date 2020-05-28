@@ -27,7 +27,7 @@ class Player : public Entity {
   void SetVaccine(bool value);
   void DrawObjs(sf::RenderWindow &window);
   AnimationManager GetAnim();
-  void GoToStart(const Object &position);
+  void GoToStart();
   bool GetFinish() const;
   void SetPosition(float x, float y);
   void ChangeHP(float getHp);
@@ -39,6 +39,9 @@ class Player : public Entity {
   Cap GetCap();
   Shoes GetShoes();
   bool IsFinishPosition() const;
+  bool GetAlive() const;
+  void SetFinish(bool getFinish = true);
+
  private:
   enum {
     STAY,
@@ -49,9 +52,13 @@ class Player : public Entity {
   } STATE;
 
   std::map<std::string, bool> key;
+  Object startPlayerPosition;
   int dmgC;
   int fireC;
+  int treatC;
+  bool treat;
   bool finish;
+  bool alive;
   bool dir;
   bool fire;
   int dmg;

@@ -1,6 +1,6 @@
 #include "UnSafeTransport.h"
 
-UnSafeTransport::UnSafeTransport(float x, float y, int height, int weight, const std::string& name)
+UnSafeTransport::UnSafeTransport(float x, float y, int height, int weight, const std::string &name)
     : Transport(x, y, height, weight),
       name(name) {
   if (name == "bus") {
@@ -57,7 +57,7 @@ void UnSafeTransport::setBus() {
   sf::Texture autoTexture;
   autoTexture.loadFromFile("../files/images/bus.png");
   anim = AnimationManager(autoTexture);
-  anim.Create("move", 4, 4, 393, 100, 2, 0.005,397);
+  anim.Create("move", 4, 4, 393, 100, 2, 0.005, 397);
   anim.Set("move");
 }
 
@@ -68,6 +68,6 @@ void UnSafeTransport::setMetro() {
   sf::Texture autoTexture;
   autoTexture.loadFromFile("../files/images/metro.png");
   anim = AnimationManager(autoTexture);
-  anim.Create("move", 64, 2, 924, 140, 2, 0.005,994);
+  anim.Create("move", 64, 2, 924, 140, 2, 0.002, 994);
   anim.Set("move");
 }
