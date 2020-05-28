@@ -8,9 +8,9 @@
 #include "tinyxml.h"
 
 struct Object {
-  int GetPropertyInt(std::string getName);
-  float GetPropertyFloat(std::string getName);
-  std::string GetPropertyString(std::string getName);
+  int GetPropertyInt(const std::string &getName);
+  float GetPropertyFloat(const std::string &getName);
+  std::string GetPropertyString(const std::string &getName);
   std::string name;
   std::string type;
   sf::Rect<float> rect;
@@ -25,12 +25,12 @@ struct Layer {
 
 class Level {
  public:
-    bool LoadFromFile(std::string filename);
-  Object GetObject(std::string name);
-  std::vector<Object> GetObjects(std::string name);
+  bool LoadFromFile(const std::string &filename);
+  Object GetObject(const std::string &name);
+  std::vector<Object> GetObjects(const std::string &name);
   std::vector<Object> GetAllObjects();
   void Draw(sf::RenderWindow &window);
-  sf::Vector2i GetTileSize();
+  sf::Vector2i GetTileSize() const;
 
  private:
   int width, height, tileWidth, tileHeight;

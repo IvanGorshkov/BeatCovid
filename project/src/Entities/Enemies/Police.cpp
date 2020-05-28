@@ -11,15 +11,15 @@ Police::Police(float x, float y, int height, int weight)
   anim = AnimationManager(policeTexture);
   anim.Create("move", 4, 4, 64, 64, 3, 0.002, 72);
   anim.Create("fire", 4, 147, 64, 64, 3, 0.004, 72);
-  anim.Create("dead", 58, 0, 16, 16, 1, 0);
+  anim.Create("dead", 4, 363, 64, 64, 3, 0.002, 72);
   anim.Set("move");
 }
 
 int Police::Penatly() {
   isMetUser = true;
-  auto rand = std::rand() % 2;
+  auto rand = std::rand() % 4;
 
-  if (rand == 1) {
+  if (rand != 0) {
     rand = penalty;
     drawPenaltyMenu = true;
 

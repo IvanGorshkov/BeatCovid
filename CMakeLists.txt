@@ -33,7 +33,8 @@ add_executable(beatcovid
         project/src/Entities/Enemies/Police.cpp
         project/src/Entities/Transport/Transport.cpp
         project/src/Entities/Transport/SafeTransport.cpp
-        project/src/Entities/Transport/UnSafeTransport.cpp)
+        project/src/Entities/Transport/UnSafeTransport.cpp
+        project/src/Entities/Sick.cpp)
 
 find_package(SFML REQUIRED system window graphics network audio)
 target_link_libraries(beatcovid sfml-graphics sfml-audio tinyxml)

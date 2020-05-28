@@ -1,13 +1,11 @@
 #include "GameManager.h"
 
-#include <utility>
 #include "cmath"
 #include "Interface.h"
 
 GameManager::GameManager(Level &lvl, std::vector<int> arms) {
   obj = lvl.GetAllObjects();
-  startPlayerPosition = lvl.GetObject("player");
-  player = new Player(startPlayerPosition, std::move(arms));
+  player = new Player(lvl.GetObject("player"), std::move(arms));
 
   for (auto &i : obj) {
     if (i.name == "breaker" || i.name == "delivery" || i.name == "virus") {
@@ -37,8 +35,13 @@ GameManager::GameManager(Level &lvl, std::vector<int> arms) {
     if (i.name == "bus") {
       unSafeTransports.emplace_back(i.rect.left, i.rect.top - 10, 393, 100, i.name);
     }
+
     if (i.name == "metro") {
       unSafeTransports.emplace_back(i.rect.left, i.rect.top - 15, 924, 140, i.name);
+    }
+
+    if (i.name == "finish") {
+      sick = new Sick(i.rect.left - 15, i.rect.top - 32, 0, 0, 128, 64);
     }
 
   }
@@ -54,6 +57,10 @@ void GameManager::Update(float time) {
   updateTransport(time);
   checkHitPlayer();
   checkHitEnemy();
+  if (player->GetAlive()) {
+    sick->SetAlive();
+  }
+  sick->Update(time, obj);
 }
 
 // Вывод всех классов на экран
@@ -68,6 +75,11 @@ void GameManager::Draw(sf::RenderWindow &window) {
   }
   if (!player->IsDrive()) {
     player->DrawObjs(window);
+  }
+  sick->Draw(window);
+
+  if (sick->GetEnd()) {
+    player->SetFinish();
   }
 }
 
@@ -181,7 +193,7 @@ void GameManager::bulletPlayer() {
       float Y = (player->GetRect().top - (*enemiesIt)->GetRect().top) / 16;
       // Дальность полета пули
       (*enemiesIt)->SetFire(true);
-      if (std::abs(X) > 30 || std::abs(Y) > 10) {
+      if (std::abs(X) > 30 || std::abs(Y) > 30) {
         (*enemiesIt)->SetFire(false);
         (*enemiesIt)->ResetTimer();
         continue;
@@ -242,7 +254,7 @@ void GameManager::drawEnemy(sf::RenderWindow &window) {
 
       if (police->ISDrawDiedMenu()) {
         Interface::DiedPolice(window);
-        player->GoToStart(startPlayerPosition);
+        player->GoToStart();
       }
     }
 
@@ -351,3 +363,8 @@ void GameManager::drawUnSafeTransport(sf::RenderWindow &window) {
     }
   }
 }
+
+Sick *GameManager::GetSick() {
+  return sick;
+}
+
