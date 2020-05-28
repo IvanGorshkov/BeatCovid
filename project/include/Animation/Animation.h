@@ -1,4 +1,5 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
 
 class Animation {
@@ -9,8 +10,7 @@ class Animation {
   void SetFlip(bool value);
   void SetPlay(bool value);
   float GetCurrentFrame() const;
-  std::vector<sf::IntRect> GetFrames();
-  void SetSpritePosition(int x, int y);
+  void SetSpritePosition(float x, float y);
   sf::Sprite GetSprite();
 
  private:

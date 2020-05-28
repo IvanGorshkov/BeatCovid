@@ -3,19 +3,19 @@
 #include "cmath"
 #include "Interface.h"
 
-GameManager::GameManager(Level &lvl, std::vector<int> arms) {
-  obj = lvl.GetAllObjects();
-  player = new Player(lvl.GetObject("player"), std::move(arms));
+GameManager::GameManager(Level &lvl, const std::vector<int> &arms)
+    : obj(lvl.GetAllObjects()),
+      player(std::make_shared<Player>(lvl.GetObject("player"), arms)) {
 
   for (auto &i : obj) {
     if (i.name == "breaker" || i.name == "delivery" || i.name == "virus") {
-      enemies.push_back(new OrdinaryEnemies(i.rect.left, i.rect.top, 40, 64, i.name));
+      enemies.push_back(std::make_shared<OrdinaryEnemies>(i.rect.left, i.rect.top, 40, 64, i.name));
       i.rect.width = 40;
       i.rect.height = 64;
     }
 
     if (i.name == "police") {
-      enemies.push_back(new Police(i.rect.left, i.rect.top, 40, 64));
+      enemies.push_back(std::make_shared<Police>(i.rect.left, i.rect.top, 40, 64));
       i.rect.width = 40;
       i.rect.height = 64;
     }
@@ -41,7 +41,7 @@ GameManager::GameManager(Level &lvl, std::vector<int> arms) {
     }
 
     if (i.name == "finish") {
-      sick = new Sick(i.rect.left - 15, i.rect.top - 32, 0, 0, 128, 64);
+      sick = std::make_shared<Sick>(i.rect.left - 15, i.rect.top - 32, 0, 0, 128, 64);
     }
 
   }
@@ -83,7 +83,7 @@ void GameManager::Draw(sf::RenderWindow &window) {
   }
 }
 
-Player *GameManager::GetPlayer() {
+std::shared_ptr<Player> GameManager::GetPlayer() {
   return player;
 }
 
@@ -114,7 +114,7 @@ void GameManager::Fire() {
 
 // Садится в транспорт
 void GameManager::TakeTransport() {
-  for (safeTransportsIt = safeTransports.begin(); safeTransportsIt != safeTransports.end(); safeTransportsIt++) {
+  for (safeTransportsIt = safeTransports.begin(); safeTransportsIt != safeTransports.end(); ++safeTransportsIt) {
     if (safeTransportsIt->GetRect().intersects(player->GetRect())) {
       safeTransportsIt->SetDrive();
       player->SetDrive();
@@ -123,7 +123,7 @@ void GameManager::TakeTransport() {
   }
 
   for (unSafeTransportsIt = unSafeTransports.begin(); unSafeTransportsIt != unSafeTransports.end();
-       unSafeTransportsIt++) {
+       ++unSafeTransportsIt) {
     if (unSafeTransportsIt->GetRect().intersects(player->GetRect())) {
       unSafeTransportsIt->SetDrive();
       player->SetDrive();
@@ -135,7 +135,7 @@ void GameManager::TakeTransport() {
 // Методы работы с классом Bullet
 // Обновление Bullet
 void GameManager::updateBullet(float time) {
-  for (enemyBulletsIt = enemyBullets.begin(); enemyBulletsIt != enemyBullets.end(); enemyBulletsIt++) {
+  for (enemyBulletsIt = enemyBullets.begin(); enemyBulletsIt != enemyBullets.end(); ++enemyBulletsIt) {
     if (enemyBulletsIt->IsDie()) {
       enemyBulletsIt = enemyBullets.erase(enemyBulletsIt);
     } else {
@@ -143,7 +143,7 @@ void GameManager::updateBullet(float time) {
     }
   }
 
-  for (playerBulletsIt = playerBullets.begin(); playerBulletsIt != playerBullets.end(); playerBulletsIt++) {
+  for (playerBulletsIt = playerBullets.begin(); playerBulletsIt != playerBullets.end(); ++playerBulletsIt) {
     if (playerBulletsIt->IsDie()) {
       playerBulletsIt = playerBullets.erase(playerBulletsIt);
     } else {
@@ -154,19 +154,19 @@ void GameManager::updateBullet(float time) {
 
 // Вывод Bullet на экран
 void GameManager::drawBullet(sf::RenderWindow &window) {
-  for (enemyBulletsIt = enemyBullets.begin(); enemyBulletsIt != enemyBullets.end(); enemyBulletsIt++) {
+  for (enemyBulletsIt = enemyBullets.begin(); enemyBulletsIt != enemyBullets.end(); ++enemyBulletsIt) {
     enemyBulletsIt->Draw(window);
   }
 
-  for (playerBulletsIt = playerBullets.begin(); playerBulletsIt != playerBullets.end(); playerBulletsIt++) {
+  for (playerBulletsIt = playerBullets.begin(); playerBulletsIt != playerBullets.end(); ++playerBulletsIt) {
     playerBulletsIt->Draw(window);
   }
 }
 
 // Проверка на попадание во врага
 void GameManager::checkHitEnemy() {
-  for (playerBulletsIt = playerBullets.begin(); playerBulletsIt != playerBullets.end(); playerBulletsIt++) {
-    for (enemiesIt = enemies.begin(); enemiesIt != enemies.end(); enemiesIt++) {
+  for (playerBulletsIt = playerBullets.begin(); playerBulletsIt != playerBullets.end(); ++playerBulletsIt) {
+    for (enemiesIt = enemies.begin(); enemiesIt != enemies.end(); ++enemiesIt) {
       if (playerBulletsIt->GetRect().intersects((*enemiesIt)->GetRect()) && playerBulletsIt->IsLife()) {
         (*enemiesIt)->TakeDmg(playerBulletsIt->GetDmg());
         break;
@@ -177,7 +177,7 @@ void GameManager::checkHitEnemy() {
 
 // Проверка на попадание в героя
 void GameManager::checkHitPlayer() {
-  for (enemyBulletsIt = enemyBullets.begin(); enemyBulletsIt != enemyBullets.end(); enemyBulletsIt++) {
+  for (enemyBulletsIt = enemyBullets.begin(); enemyBulletsIt != enemyBullets.end(); ++enemyBulletsIt) {
     if (enemyBulletsIt->GetRect().intersects(player->GetRect()) && enemyBulletsIt->IsLife()) {
       player->TakeDamge(enemyBulletsIt->GetDmg());
       break;
@@ -187,8 +187,8 @@ void GameManager::checkHitPlayer() {
 
 // Начало стрельбы в героя
 void GameManager::bulletPlayer() {
-  for (enemiesIt = enemies.begin(); enemiesIt != enemies.end(); enemiesIt++) {
-    if ((*enemiesIt)->GetTimer() > 1000 && (*enemiesIt)->IsLife()) {
+  for (enemiesIt = enemies.begin(); enemiesIt != enemies.end(); ++enemiesIt) {
+    if ((*enemiesIt)->GetTimer() > ENEMY_HIT_TIME && (*enemiesIt)->IsLife()) {
       float X = (player->GetRect().left - (*enemiesIt)->GetRect().left) / 16;
       float Y = (player->GetRect().top - (*enemiesIt)->GetRect().top) / 16;
       // Дальность полета пули
@@ -233,8 +233,8 @@ void GameManager::bulletPlayer() {
 // Методы для работы с Enemy
 // Обновление Enemy
 void GameManager::updateEnemy(float time) {
-  for (enemiesIt = enemies.begin(); enemiesIt != enemies.end(); enemiesIt++) {
-    if (auto *police = dynamic_cast<Police *>(*enemiesIt)) {
+  for (enemiesIt = enemies.begin(); enemiesIt != enemies.end(); ++enemiesIt) {
+    if (auto police = std::dynamic_pointer_cast<Police>(*enemiesIt)) {
       if (!police->ISMetUser() && police->GetRect().intersects(player->GetRect())) {
         player->PenaltyPoints(police->Penatly());
       }
@@ -246,8 +246,8 @@ void GameManager::updateEnemy(float time) {
 
 // Вывод Enemy на экран
 void GameManager::drawEnemy(sf::RenderWindow &window) {
-  for (enemiesIt = enemies.begin(); enemiesIt != enemies.end(); enemiesIt++) {
-    if (auto *police = dynamic_cast<Police *>(*enemiesIt)) {
+  for (enemiesIt = enemies.begin(); enemiesIt != enemies.end(); ++enemiesIt) {
+    if (auto police = std::dynamic_pointer_cast<Police>(*enemiesIt)) {
       if (police->IsDrawPenaltyMenu()) {
         Interface::PenaltyPolice(window);
       }
@@ -265,7 +265,7 @@ void GameManager::drawEnemy(sf::RenderWindow &window) {
 // Методы для работы с Antibodies
 // Обновление Antibodies
 void GameManager::updateAntibodies() {
-  for (antibodiesIt = antibodies.begin(); antibodiesIt != antibodies.end(); antibodiesIt++) {
+  for (antibodiesIt = antibodies.begin(); antibodiesIt != antibodies.end(); ++antibodiesIt) {
     if (!antibodiesIt->IsLife()) {
       if (antibodiesIt->GetName() == "antigen") {
         player->AddPoints(ANTIGEN_POINTS);
@@ -285,7 +285,7 @@ void GameManager::updateAntibodies() {
 
 // Вывод Antibodies на экран
 void GameManager::drawAntibodies(sf::RenderWindow &window) {
-  for (antibodiesIt = antibodies.begin(); antibodiesIt != antibodies.end(); antibodiesIt++) {
+  for (antibodiesIt = antibodies.begin(); antibodiesIt != antibodies.end(); ++antibodiesIt) {
     antibodiesIt->Draw(window);
   }
 }
@@ -298,7 +298,7 @@ void GameManager::updateTransport(float time) {
 }
 
 void GameManager::updateSafeTransport(float time) {
-  for (safeTransportsIt = safeTransports.begin(); safeTransportsIt != safeTransports.end(); safeTransportsIt++) {
+  for (safeTransportsIt = safeTransports.begin(); safeTransportsIt != safeTransports.end(); ++safeTransportsIt) {
     safeTransportsIt->Update(time, obj);
     if (safeTransportsIt->IsDrive()) {
       if (!safeTransportsIt->GetDir()) {
@@ -314,7 +314,7 @@ void GameManager::updateSafeTransport(float time) {
 
 void GameManager::updateUnSafeTransport(float time) {
   for (unSafeTransportsIt = unSafeTransports.begin(); unSafeTransportsIt != unSafeTransports.end();
-       unSafeTransportsIt++) {
+       ++unSafeTransportsIt) {
     unSafeTransportsIt->Update(time, obj);
     if (unSafeTransportsIt->IsDrive()) {
       if (!unSafeTransportsIt->GetDir()) {
@@ -336,7 +336,7 @@ void GameManager::drawTransport(sf::RenderWindow &window) {
 }
 
 void GameManager::drawSafeTransport(sf::RenderWindow &window) {
-  for (safeTransportsIt = safeTransports.begin(); safeTransportsIt != safeTransports.end(); safeTransportsIt++) {
+  for (safeTransportsIt = safeTransports.begin(); safeTransportsIt != safeTransports.end(); ++safeTransportsIt) {
     safeTransportsIt->Draw(window);
 
     if (safeTransportsIt->GetRect().intersects(player->GetRect())) {
@@ -351,7 +351,7 @@ void GameManager::drawSafeTransport(sf::RenderWindow &window) {
 
 void GameManager::drawUnSafeTransport(sf::RenderWindow &window) {
   for (unSafeTransportsIt = unSafeTransports.begin(); unSafeTransportsIt != unSafeTransports.end();
-       unSafeTransportsIt++) {
+       ++unSafeTransportsIt) {
     unSafeTransportsIt->Draw(window);
 
     if (unSafeTransportsIt->GetRect().intersects(player->GetRect())) {
@@ -363,8 +363,3 @@ void GameManager::drawUnSafeTransport(sf::RenderWindow &window) {
     }
   }
 }
-
-Sick *GameManager::GetSick() {
-  return sick;
-}
-

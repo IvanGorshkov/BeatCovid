@@ -231,7 +231,6 @@ bool Player::GetFinish() const {
 }
 
 void Player::Collision(int num, std::vector<Object> &objs) {
-  sf::Rect<float> finishPosition;
   for (auto &obj : objs) {
     if (rect.intersects(obj.rect)) {
       if (obj.name == "wall") {
@@ -269,7 +268,6 @@ void Player::Collision(int num, std::vector<Object> &objs) {
       isFinishPosition = false;
       if (obj.name == "finish") {
         isFinishPosition = true;
-        finishPosition = obj.rect;
         if (vaccine && !treat) {
           treat = true;
           treatC = 200;

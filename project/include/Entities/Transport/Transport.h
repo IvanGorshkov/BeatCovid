@@ -8,6 +8,7 @@ class Transport : public Entity {
   void SetDrive();
   bool IsDrive() const;
   bool GetDir() const;
+
  protected:
   bool dir;
   bool isDrive;

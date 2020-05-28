@@ -1,6 +1,5 @@
-#include "SaveGame.h"
-
 #include <fstream>
+#include "SaveGame.h"
 
 Save::Save() {
   this->lvl = 1;

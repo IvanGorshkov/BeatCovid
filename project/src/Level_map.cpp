@@ -222,6 +222,10 @@ bool Level::LoadFromFile(const std::string &filename) {
   return true;
 }
 
+bool Containt(std::string name) {
+  return (name == "player");
+}
+
 Object Level::GetObject(const std::string &name) {
   // Только первый объект с заданным именем
   for (auto &object : objects) {

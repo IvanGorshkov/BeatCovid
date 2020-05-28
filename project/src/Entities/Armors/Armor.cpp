@@ -1,7 +1,8 @@
 #include "Armor.h"
 
-Armor::Armor(float x, float y, float w, float h, int lvl) : Entity(x, y, 0, 0, w, h), lvl(lvl) {
-
+Armor::Armor(float x, float y, float w, float h, int lvl)
+    : Entity(x, y, 0, 0, w, h),
+      lvl(lvl) {
 }
 
 void Armor::Update(float time, std::vector<Object> &obj) {
@@ -9,7 +10,7 @@ void Armor::Update(float time, std::vector<Object> &obj) {
   rect = obj[0].rect;
 }
 
-void Armor::SetAnim(const std::string& name) {
+void Armor::SetAnim(const std::string &name) {
   anim.Set(name);
 }
 

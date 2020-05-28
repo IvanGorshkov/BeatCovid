@@ -1,28 +1,38 @@
 #include "Cap.h"
 
-Cap::Cap(float x, float y, float w, float h, int lvl) : Armor(x, y, w, h, lvl) {
+Cap::Cap(float x, float y, float w, float h, int lvl)
+    : Armor(x, y, w, h, lvl) {
   sf::Texture player_t;
   switch (lvl) {
-    case 0:
+    case 0: {
       player_t.loadFromFile("../files/images/free.png");
       arm = 0;
       break;
-    case 1:
+    }
+
+    case 1: {
       player_t.loadFromFile("../files/images/cap_1.png");
       arm = 1;
       break;
-    case 2:
+    }
+
+    case 2: {
       player_t.loadFromFile("../files/images/cap_2.png");
       arm = 2;
       break;
-    case 3:
+    }
+
+    case 3: {
       player_t.loadFromFile("../files/images/cap_3.png");
       arm = 3;
       break;
-    case 4:
+    }
+
+    case 4: {
       player_t.loadFromFile("../files/images/cap_4.png");
       arm = 4;
       break;
+    }
   }
 
   anim = AnimationManager(player_t);

@@ -6,7 +6,7 @@ GameLables::GameLables() {
   points.setFont(font);
   points.setCharacterSize(40);
   points.setStyle(sf::Text::Bold);
-  points.setColor(sf::Color::White);
+  points.setFillColor(sf::Color::White);
 }
 
 void GameLables::DrawPlayerData(sf::RenderWindow &window, int points_int, int hp_int, unsigned int arm_int, bool vaccine) {
@@ -68,7 +68,6 @@ void GameLables::DrawSafeTransportFuel(sf::RenderWindow &window, int fuel_int) {
   points.setString(ss.str());
   window.draw(points);
 }
-
 
 void GameLables::DrawTransportHelp(sf::RenderWindow &window, float x, float y) {
   points.setPosition(x + 30, y - 60);
