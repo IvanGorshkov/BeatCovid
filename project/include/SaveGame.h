@@ -2,6 +2,8 @@
 
 #include "GameManager.h"
 
+#define MAX_LVL 2
+
 class Save {
  public:
   Save();

@@ -212,7 +212,6 @@ void Player::Update(float time, std::vector<Object> &obj) {
     shoes.SetAnim("treat");
     cap.SetAnim("treat");
     --treatC;
-    std::cout << treatC << std::endl;
     if (treatC <= 0) {
       alive = true;
       treat = false;
