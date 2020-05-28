@@ -650,7 +650,8 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
 
 bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game) {
   sf::Texture menuContinue, menuToMenu;
-  if (save.GetLvl() == 2) {
+  
+  if (save.GetLvl() == MAX_LVL) {
     menuToMenu.loadFromFile("../files/menu/to_menu.png");
     menuContinue.loadFromFile("../files/menu/winner.png");
   } else {
@@ -663,7 +664,7 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game)
 
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
-  if (save.GetLvl() == 2) {
+  if (save.GetLvl() == MAX_LVL) {
     MenuContinue.setPosition(center.x - size.x / 2 + 20, center.y - size.y / 2 + 200);
     MenuContinue.scale(0.9f, 0.9f);
   } else {
@@ -671,7 +672,7 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game)
   }
 
   MenuToMenu.setPosition(center.x - size.x / 2 + 570, center.y - size.y / 2 + 390);
-  if (save.GetLvl() != 2) {
+  if (save.GetLvl() != MAX_LVL) {
     save.ChangeLvl();
   }
 
@@ -694,7 +695,7 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game)
       menuNum = 1;
     }
 
-    if (save.GetLvl() != 3) {
+    if (save.GetLvl() != MAX_LVL + 1) {
       if (sf::IntRect(450, 330, 300, 50).contains(sf::Mouse::getPosition(window))) {
         MenuContinue.setColor(sf::Color::Red);
         menuNum = 2;
@@ -707,7 +708,7 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game)
       }
 
       if (menuNum == 2) {
-        if (save.GetLvl() == 3) {
+        if (save.GetLvl() == MAX_LVL + 1) {
           MainMenu(window, save);
         }
 

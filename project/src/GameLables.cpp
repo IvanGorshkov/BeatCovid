@@ -54,7 +54,7 @@ void GameLables::drawVaccine(sf::RenderWindow &window, bool vaccine) {
   sf::Vector2f size = window.getView().getSize();
   points.setPosition(center.x - size.x / 2 + 350, center.y - size.y / 2 + 13);
   std::ostringstream ss;
-  ss << "V: " << vaccine;
+  ss << " V: " << vaccine;
   points.setString(ss.str());
   window.draw(points);
 }
