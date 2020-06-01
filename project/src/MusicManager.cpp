@@ -2,7 +2,7 @@
 #include "iostream"
 
 MusicManager::MusicManager() {
-  backgroundGameMusic.openFromFile("../files/music/2.wav");
+  backgroundGameMusic.openFromFile("../files/music/1.wav");
 //  backgroundMenuMusic.openFromFile();
   hitPlayerBuffer.loadFromFile("../files/music/1.wav");
 //  hitEnemyBuffer.loadFromFile();
