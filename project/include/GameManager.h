@@ -2,6 +2,7 @@
 
 #include "Level_map.h"
 #include "Player.h"
+#include "MusicManager.h"
 #include <list>
 #include <vector>
 #include <SFML/Graphics.hpp>
@@ -30,6 +31,8 @@ class GameManager {
   void TakeTransport();
 
  private:
+  MusicManager music;
+
   std::vector<Object> obj;
   std::shared_ptr<Player> player;
   std::shared_ptr<Sick> sick;

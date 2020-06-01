@@ -43,8 +43,9 @@ GameManager::GameManager(Level &lvl, const std::vector<int> &arms)
     if (i.name == "finish") {
       sick = std::make_shared<Sick>(i.rect.left - 15, i.rect.top - 32, 0, 0, 128, 64);
     }
-
   }
+
+  music.PlayBackgroundGameMusic();
 }
 
 // Обновление всех классов
@@ -89,6 +90,7 @@ std::shared_ptr<Player> GameManager::GetPlayer() {
 
 // Огонь игроком
 void GameManager::Fire() {
+  music.PlayHitPlayerSound();
 
   if (player->GetPoints() > 0) {
     player->SetKey("SPACE", true);

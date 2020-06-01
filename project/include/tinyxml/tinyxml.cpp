@@ -1040,7 +1040,7 @@ bool TiXmlDocument::LoadFile( FILE* file, TiXmlEncoding encoding )
 
 	// Process the buffer in place to normalize new lines. (See comment above.)
 	// Copies from the 'p' to 'q' pointer, where p can advance faster if
-	// a newline-carriage return is hit.
+	// a newline-carriage return is hitPlayerBuffer.
 	//
 	// Wikipedia:
 	// Systems based on ASCII or a compatible character Set use either LF  (Line feed, '\n', 0x0A, 10 in decimal) or
