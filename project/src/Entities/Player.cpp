@@ -132,6 +132,7 @@ void Player::Update(float time, std::vector<Object> &obj) {
     shoes.SetAnim("lay");
     cap.SetAnim("lay");
   }
+
   if (STATE == WALKLAY) {
     anim.Set("walklay");
     bathrobe.SetAnim("walklay");
@@ -403,4 +404,12 @@ bool Player::GetAlive() const {
 }
 void Player::SetFinish(bool getFinish) {
   this->finish = getFinish;
+}
+
+bool Player::GetTreat() const {
+  return treat;
+}
+
+PLAYER_STATE Player::GetPLayerState() {
+  return STATE;
 }

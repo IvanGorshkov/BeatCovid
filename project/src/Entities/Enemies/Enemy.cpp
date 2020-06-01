@@ -6,7 +6,8 @@ Enemy::Enemy(float x, float y, int height, int weight, float hp, float dmg)
       dmg(dmg),
       timerHit(0),
       fire(false),
-      dir(false) {
+      dir(false),
+      dieSound(false) {
 }
 
 Enemy::Enemy(float x, float y, int height, int weight)
@@ -27,11 +28,16 @@ void Enemy::Update(float time, std::vector<Object> &obj) {
     anim.Set("move");
   }
 
-  if (hp < 0) {
+  if (!isLife) {
+    anim.Set("dead");
+  }
+
+  if (hp < 0 && isLife) {
     dx = 0;
     dy = 0;
     anim.Set("dead");
     isLife = false;
+    dieSound = true;
   }
 
   anim.Flip(dir);
@@ -60,5 +66,13 @@ void Enemy::SetFire(bool getFire) {
 
 void Enemy::SetDir(bool getDir) {
   this->dir = getDir;
+}
+
+bool Enemy::GetDieSound() const {
+  return dieSound;
+}
+
+void Enemy::SetDieSound() {
+  dieSound = false;
 }
 
