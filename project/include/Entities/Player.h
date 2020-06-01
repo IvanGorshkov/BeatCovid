@@ -8,6 +8,14 @@
 #include "Shoes.h"
 #include "Cap.h"
 
+enum PLAYER_STATE {
+  STAY,
+  RUN,
+  JUMP,
+  LAY,
+  WALKLAY,
+};
+
 class Player : public Entity {
  public:
   explicit Player(const Object &position, std::vector<int> armors);
@@ -41,15 +49,11 @@ class Player : public Entity {
   bool IsFinishPosition() const;
   bool GetAlive() const;
   void SetFinish(bool getFinish = true);
+  bool GetTreat() const;
+  PLAYER_STATE GetPLayerState();
 
  private:
-  enum {
-    STAY,
-    RUN,
-    JUMP,
-    LAY,
-    WALKLAY,
-  } STATE;
+  PLAYER_STATE STATE;
 
   std::map<std::string, bool> key;
   Object startPlayerPosition;

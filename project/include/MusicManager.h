@@ -39,6 +39,7 @@ class MusicManager {
   // Движение трансопрта
   sf::SoundBuffer transportBuffer;
   sf::Sound transportSound;
+  bool isDrive;
 
   // Движение игрока
   sf::SoundBuffer walkPlayerBuffer;

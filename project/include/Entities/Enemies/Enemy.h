@@ -16,8 +16,11 @@ class Enemy : public Entity {
   void ResetTimer();
   void SetFire(bool getFire);
   void SetDir(bool getDir);
+  bool GetDieSound() const;
+  void SetDieSound();
 
  protected:
+  bool dieSound;
   bool fire;
   bool dir;
   float dmg;

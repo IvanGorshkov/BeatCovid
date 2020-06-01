@@ -45,12 +45,17 @@ GameManager::GameManager(Level &lvl, const std::vector<int> &arms)
     }
   }
 
-  music.PlayBackgroundGameMusic();
+//  music.PlayBackgroundGameMusic();
 }
 
 // Обновление всех классов
 void GameManager::Update(float time) {
   player->Update(time, obj);
+
+//  if (!player->GetTreat()) {
+//    music.PlayTreatPatientSound();
+//  }
+
   bulletPlayer();
   updateBullet(time);
   updateEnemy(time);
@@ -74,6 +79,7 @@ void GameManager::Draw(sf::RenderWindow &window) {
   if (player->IsFinishPosition()) {
     lables.DrawNoVaccine(window);
   }
+
   if (!player->IsDrive()) {
     player->DrawObjs(window);
   }
@@ -90,7 +96,7 @@ std::shared_ptr<Player> GameManager::GetPlayer() {
 
 // Огонь игроком
 void GameManager::Fire() {
-  music.PlayHitPlayerSound();
+//  music.PlayHitPlayerSound();
 
   if (player->GetPoints() > 0) {
     player->SetKey("SPACE", true);
@@ -120,6 +126,7 @@ void GameManager::TakeTransport() {
     if (safeTransportsIt->GetRect().intersects(player->GetRect())) {
       safeTransportsIt->SetDrive();
       player->SetDrive();
+//      music.PlayTransportSound();
       break;
     }
   }
@@ -129,6 +136,7 @@ void GameManager::TakeTransport() {
     if (unSafeTransportsIt->GetRect().intersects(player->GetRect())) {
       unSafeTransportsIt->SetDrive();
       player->SetDrive();
+//      music.PlayTransportSound();
       break;
     }
   }
@@ -228,6 +236,8 @@ void GameManager::bulletPlayer() {
                                   false);
       }
       (*enemiesIt)->ResetTimer();
+
+//      music.PlayHitEnemySound();
     }
   }
 }
@@ -243,6 +253,11 @@ void GameManager::updateEnemy(float time) {
     }
 
     (*enemiesIt)->Update(time, obj);
+
+//    if ((*enemiesIt)->GetDieSound()) {
+//      music.PlayDiedEnemySound();
+//      (*enemiesIt)->SetDieSound();
+//    }
   }
 }
 
@@ -271,10 +286,12 @@ void GameManager::updateAntibodies() {
     if (!antibodiesIt->IsLife()) {
       if (antibodiesIt->GetName() == "antigen") {
         player->AddPoints(ANTIGEN_POINTS);
+//        music.PlayGetAntibodiesSound();
       }
 
       if (antibodiesIt->GetName() == "vaccine") {
         player->SetVaccine(true);
+//        music.PlayGetAntibodiesSound();
       }
 
       antibodiesIt = antibodies.erase(antibodiesIt);
