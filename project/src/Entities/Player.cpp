@@ -17,6 +17,7 @@ Player::Player(const Object &position, std::vector<int> armors)
       fire(false),
       treat(false),
       alive(false),
+      playFinishMusic(0),
       startPlayerPosition(position),
       bathrobe(position.rect.left, position.rect.top, 64, 64, armors[2]),
       shoes(position.rect.left, position.rect.top, 64, 64, armors[1]),
@@ -208,6 +209,14 @@ void Player::Update(float time, std::vector<Object> &obj) {
   }
 
   if (treat && !alive) {
+    if (playFinishMusic == 2) {
+      playFinishMusic = 3;
+    }
+
+    if (playFinishMusic == 1) {
+      playFinishMusic = 2;
+    }
+
     anim.Set("treat");
     bathrobe.SetAnim("treat");
     shoes.SetAnim("treat");
@@ -269,11 +278,16 @@ void Player::Collision(int num, std::vector<Object> &objs) {
       if (obj.name == "finish") {
         isFinishPosition = true;
         if (vaccine && !treat) {
+          playFinishMusic = 1;
           treat = true;
           treatC = 200;
         }
       }
     }
+  }
+
+  if (!isFinishPosition) {
+    playFinishMusic = 0;
   }
 }
 
@@ -412,4 +426,8 @@ bool Player::GetTreat() const {
 
 PLAYER_STATE Player::GetPLayerState() {
   return STATE;
+}
+
+int Player::PlayFinishMusic() const {
+  return playFinishMusic;
 }

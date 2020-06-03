@@ -1,8 +1,7 @@
 #include "UnSafeTransport.h"
 
 UnSafeTransport::UnSafeTransport(float x, float y, int height, int weight, const std::string &name)
-    : Transport(x, y, height, weight),
-      name(name) {
+    : Transport(x, y, height, weight, name) {
   if (name == "bus") {
     setBus();
   }

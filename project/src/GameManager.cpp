@@ -3,8 +3,9 @@
 #include "cmath"
 #include "Interface.h"
 
-GameManager::GameManager(Level &lvl, const std::vector<int> &arms)
+GameManager::GameManager(Level &lvl, const std::vector<int> &arms, MusicManager &music)
     : obj(lvl.GetAllObjects()),
+      music(music),
       player(std::make_shared<Player>(lvl.GetObject("player"), arms)) {
 
   for (auto &i : obj) {
@@ -45,16 +46,20 @@ GameManager::GameManager(Level &lvl, const std::vector<int> &arms)
     }
   }
 
-//  music.PlayBackgroundGameMusic();
+  music.PlayBackgroundGameMusic();
 }
 
 // Обновление всех классов
 void GameManager::Update(float time) {
   player->Update(time, obj);
 
-//  if (!player->GetTreat()) {
-//    music.PlayTreatPatientSound();
-//  }
+  if ((player->PlayFinishMusic() == 1 || player->PlayFinishMusic() == 2) && !player->GetAlive()) {
+    music.PlayTreatPatientSound();
+  }
+
+  if (player->PlayFinishMusic() == 0) {
+    music.StopTreatPatientSound();
+  }
 
   bulletPlayer();
   updateBullet(time);
@@ -96,7 +101,7 @@ std::shared_ptr<Player> GameManager::GetPlayer() {
 
 // Огонь игроком
 void GameManager::Fire() {
-//  music.PlayHitPlayerSound();
+  music.PlayHitPlayerSound();
 
   if (player->GetPoints() > 0) {
     player->SetKey("SPACE", true);
@@ -126,7 +131,11 @@ void GameManager::TakeTransport() {
     if (safeTransportsIt->GetRect().intersects(player->GetRect())) {
       safeTransportsIt->SetDrive();
       player->SetDrive();
-//      music.PlayTransportSound();
+      if (safeTransportsIt->GetName() == "auto") {
+        music.PlayCarSound();
+      } else {
+        music.PlayMetroSound();
+      }
       break;
     }
   }
@@ -136,7 +145,11 @@ void GameManager::TakeTransport() {
     if (unSafeTransportsIt->GetRect().intersects(player->GetRect())) {
       unSafeTransportsIt->SetDrive();
       player->SetDrive();
-//      music.PlayTransportSound();
+      if (unSafeTransportsIt->GetName() == "bus") {
+        music.PlayCarSound();
+      } else {
+        music.PlayMetroSound();
+      }
       break;
     }
   }
@@ -237,7 +250,7 @@ void GameManager::bulletPlayer() {
       }
       (*enemiesIt)->ResetTimer();
 
-//      music.PlayHitEnemySound();
+      music.PlayHitEnemySound();
     }
   }
 }
@@ -254,10 +267,10 @@ void GameManager::updateEnemy(float time) {
 
     (*enemiesIt)->Update(time, obj);
 
-//    if ((*enemiesIt)->GetDieSound()) {
-//      music.PlayDiedEnemySound();
-//      (*enemiesIt)->SetDieSound();
-//    }
+    if ((*enemiesIt)->GetDieSound()) {
+      music.PlayDiedEnemySound();
+      (*enemiesIt)->SetDieSound();
+    }
   }
 }
 
@@ -286,12 +299,12 @@ void GameManager::updateAntibodies() {
     if (!antibodiesIt->IsLife()) {
       if (antibodiesIt->GetName() == "antigen") {
         player->AddPoints(ANTIGEN_POINTS);
-//        music.PlayGetAntibodiesSound();
+        music.PlayGetAntibodiesSound();
       }
 
       if (antibodiesIt->GetName() == "vaccine") {
         player->SetVaccine(true);
-//        music.PlayGetAntibodiesSound();
+        music.PlayGetVaccineSound();
       }
 
       antibodiesIt = antibodies.erase(antibodiesIt);

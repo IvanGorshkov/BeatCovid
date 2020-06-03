@@ -51,6 +51,7 @@ class Player : public Entity {
   void SetFinish(bool getFinish = true);
   bool GetTreat() const;
   PLAYER_STATE GetPLayerState();
+  int PlayFinishMusic() const;
 
  private:
   PLAYER_STATE STATE;
@@ -76,6 +77,7 @@ class Player : public Entity {
   Robe bathrobe;
   Shoes shoes;
   Cap cap;
+  int playFinishMusic;
   bool isDrive;
   bool isFinishPosition;
 };

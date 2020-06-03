@@ -17,6 +17,9 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
   sf::Sprite MenuBg(main_menuBackground);
   sf::Sprite SMenu(tShop);
 
+  MusicManager menuMusic;
+  menuMusic.PlayBackgroundMenuMusic();
+
   while (window.isOpen()) {
     sf::Event event{};
     while (window.pollEvent(event)) {
@@ -73,13 +76,15 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
           remove("../files/saves/save_points.txt");
         }
 
-        StartNewGame(window, save);
+        StartNewGame(window, save, menuMusic);
+        menuMusic.PlayBackgroundMenuMusic();
         for (int kI = 0; kI < 100000000; ++kI) {}
       }
 
       if (menuNum == 2) {
         if (Save::SaveExists()) {
-          StartNewGame(window, save);
+          StartNewGame(window, save, menuMusic);
+          menuMusic.PlayBackgroundMenuMusic();
         }
       }
 
@@ -335,8 +340,10 @@ void Interface::Buy(std::vector<int> arm_vector, int index) {
   Save::SaveArmor(arm_vector);
 }
 
-bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game) {
+bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game, MusicManager &menuMusic) {
   sf::Font font;
+
+  menuMusic.StopBackgroundMenuMusic();
   font.loadFromFile("../files/fonts/Inconsolata-Bold.ttf");
   sf::Texture menuContinue, menuToMenu, saveGame, bg_arrmor, arms;
   //Изображение Меню
@@ -563,12 +570,14 @@ bool Interface::DiedMenu(sf::RenderWindow &window) {
 }
 
 // Старт новой игры
-void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
+void Interface::StartNewGame(sf::RenderWindow &window, Save &save, MusicManager &menuMusic) {
   sf::View view(sf::FloatRect(0, 0, 1280, 800));
+
+  menuMusic.StopBackgroundMenuMusic();
 
   Level lvl;
   lvl.LoadFromFile(save.GetLvlName());
-  GameManager game(lvl, Save::GetArmors());
+  GameManager game(lvl, Save::GetArmors(), menuMusic);
   sf::Clock clock;
   if (Save::SaveExists()) {
     save.Load(game);
@@ -619,13 +628,14 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-      bool status = GameMenu(window, game);
+      bool status = GameMenu(window, game, menuMusic);
       if (!status) {
         break;
       }
 
     }
     if (game.GetPlayer()->GetAnim().GetCurrentFrame() == 3 && game.GetPlayer()->GetHp() <= 0) {
+      menuMusic.PlayDiedPlayerSound();
       bool status = DiedMenu(window);
       if (status) {
         break;
@@ -633,7 +643,7 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
     }
 
     if (game.GetPlayer()->GetFinish()) {
-      bool status = WinMenu(window, save, game);
+      bool status = WinMenu(window, save, game, menuMusic);
       if (status) {
         break;
       }
@@ -648,7 +658,7 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save) {
   }
 }
 
-bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game) {
+bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game, MusicManager &menuMusic) {
   sf::Texture menuContinue, menuToMenu;
 
   if (save.GetLvl() == MAX_LVL) {
@@ -712,7 +722,7 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game)
           MainMenu(window, save);
         }
 
-        StartNewGame(window, save);
+        StartNewGame(window, save, menuMusic);
         return true;
       }
     }

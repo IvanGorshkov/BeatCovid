@@ -16,7 +16,6 @@ class UnSafeTransport : public Transport {
   float PrintDmg() const;
 
  private:
-  std::string name;
   float dmg;
   float timerHit;
   void setBus();
