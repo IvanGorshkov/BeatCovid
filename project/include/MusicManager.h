@@ -6,6 +6,7 @@ class MusicManager {
  public:
   MusicManager();
   void PlayBackgroundGameMusic();
+  void StopBackgroundGameMusic();
   void PlayBackgroundMenuMusic();
   void StopBackgroundMenuMusic();
   void PlayHitPlayerSound();

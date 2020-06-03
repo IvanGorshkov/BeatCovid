@@ -41,12 +41,18 @@ MusicManager::MusicManager()
 }
 
 void MusicManager::PlayBackgroundGameMusic() {
+  backgroundMenuMusic.stop();
   backgroundGameMusic.setVolume(4);
   backgroundGameMusic.setLoop(true);
   backgroundGameMusic.play();
 }
 
+void MusicManager::StopBackgroundGameMusic() {
+  backgroundGameMusic.stop();
+}
+
 void MusicManager::PlayBackgroundMenuMusic() {
+  backgroundGameMusic.stop();
   backgroundMenuMusic.setVolume(10);
   backgroundMenuMusic.setLoop(true);
   backgroundMenuMusic.play();
