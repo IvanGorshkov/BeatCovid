@@ -18,7 +18,7 @@
 
 class GameManager {
  public:
-  explicit GameManager(Level &lvl, const std::vector<int>& arms);
+  explicit GameManager(Level &lvl, const std::vector<int> &arms, MusicManager &music);
   // Обновление всех классов
   void Update(float time);
   // Вывод всех классов на экран
@@ -31,7 +31,7 @@ class GameManager {
   void TakeTransport();
 
  private:
-  MusicManager music;
+  MusicManager &music;
 
   std::vector<Object> obj;
   std::shared_ptr<Player> player;

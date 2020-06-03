@@ -7,15 +7,19 @@ class MusicManager {
   MusicManager();
   void PlayBackgroundGameMusic();
   void PlayBackgroundMenuMusic();
+  void StopBackgroundMenuMusic();
   void PlayHitPlayerSound();
   void PlayHitEnemySound();
   void PlayDiedEnemySound();
-  void PlayTransportSound();
+  void PlayDiedPlayerSound();
+  void PlayMetroSound();
+  void PlayCarSound();
   void PlayWalkPlayerSound();
   void PlayJumpPlayerSound();
   void PlayGetAntibodiesSound();
   void PlayGetVaccineSound();
   void PlayTreatPatientSound();
+  void StopTreatPatientSound();
 
  private:
   // Звук игры
@@ -36,10 +40,19 @@ class MusicManager {
   sf::SoundBuffer diedEnemyBuffer;
   sf::Sound diedEnemySound;
 
-  // Движение трансопрта
-  sf::SoundBuffer transportBuffer;
-  sf::Sound transportSound;
-  bool isDrive;
+  // Смерть игрока
+  sf::SoundBuffer diedPlayerBuffer;
+  sf::Sound diedPlayerSound;
+
+  // Движение поезда
+  sf::SoundBuffer metroBuffer;
+  sf::Sound metroSound;
+  bool isDriveMetro;
+
+  // Движение машин
+  sf::SoundBuffer carBuffer;
+  sf::Sound carSound;
+  bool isDriveCar;
 
   // Движение игрока
   sf::SoundBuffer walkPlayerBuffer;

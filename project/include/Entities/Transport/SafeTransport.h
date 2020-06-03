@@ -15,8 +15,7 @@ class SafeTransport : public Transport {
   float GetFuel();
 
  private:
-  std::string name;
-  float fuel{};
+  float fuel;
   void setAuto();
   void setMonorail();
 };

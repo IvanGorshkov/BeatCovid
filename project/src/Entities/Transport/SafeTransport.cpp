@@ -1,8 +1,7 @@
 #include "SafeTransport.h"
 
 SafeTransport::SafeTransport(float x, float y, int height, int weight, const std::string &name)
-    : Transport(x, y, height, weight),
-      name(name) {
+    : Transport(x, y, height, weight, name) {
   if (name == "auto") {
     setAuto();
   }
