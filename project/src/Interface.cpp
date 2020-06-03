@@ -714,11 +714,13 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game,
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
       if (menuNum == 1) {
+        menuMusic.StopBackgroundGameMusic();
         MainMenu(window, save);
       }
 
       if (menuNum == 2) {
         if (save.GetLvl() == MAX_LVL + 1) {
+          menuMusic.StopBackgroundGameMusic();
           MainMenu(window, save);
         }
 
