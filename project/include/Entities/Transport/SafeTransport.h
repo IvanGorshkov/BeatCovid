@@ -12,7 +12,7 @@ class SafeTransport : public Transport {
  public:
   explicit SafeTransport(float x, float y, int height, int weight, const std::string &name);
   void Update(float time, std::vector<Object> &obj) override;
-  float GetFuel();
+  float GetFuel() const;
 
  private:
   float fuel;

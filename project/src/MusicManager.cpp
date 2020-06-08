@@ -3,40 +3,40 @@
 MusicManager::MusicManager()
     : isDriveMetro(false),
       isDriveCar(false) {
-  backgroundGameMusic.openFromFile("../files/music/gameBack.wav");
-  backgroundMenuMusic.openFromFile("../files/music/menuBack.wav");
+  backgroundGameMusic.openFromFile(FILES_PATH"files/music/gameBack.wav");
+  backgroundMenuMusic.openFromFile(FILES_PATH"files/music/menuBack.wav");
 
-  hitPlayerBuffer.loadFromFile("../files/music/playerHit.wav");
+  hitPlayerBuffer.loadFromFile(FILES_PATH"files/music/playerHit.wav");
   hitPlayerSound.setBuffer(hitPlayerBuffer);
 
-  hitEnemyBuffer.loadFromFile("../files/music/enemyHit.wav");
+  hitEnemyBuffer.loadFromFile(FILES_PATH"files/music/enemyHit.wav");
   hitEnemySound.setBuffer(hitEnemyBuffer);
 
-  diedEnemyBuffer.loadFromFile("../files/music/enemyDie.wav");
+  diedEnemyBuffer.loadFromFile(FILES_PATH"files/music/enemyDie.wav");
   diedEnemySound.setBuffer(diedEnemyBuffer);
 
-  diedPlayerBuffer.loadFromFile("../files/music/playerDie.wav");
+  diedPlayerBuffer.loadFromFile(FILES_PATH"files/music/playerDie.wav");
   diedPlayerSound.setBuffer(diedPlayerBuffer);
 
-  metroBuffer.loadFromFile("../files/music/metroSound.wav");
+  metroBuffer.loadFromFile(FILES_PATH"files/music/metroSound.wav");
   metroSound.setBuffer(metroBuffer);
 
-  carBuffer.loadFromFile("../files/music/carSound.wav");
+  carBuffer.loadFromFile(FILES_PATH"files/music/carSound.wav");
   carSound.setBuffer(carBuffer);
 
-  walkPlayerBuffer.loadFromFile("../files/music/1.wav");
-  walkPlayerSound.setBuffer(walkPlayerBuffer);
+//  walkPlayerBuffer.loadFromFile(FILES_PATH"files/music/1.wav");
+//  walkPlayerSound.setBuffer(walkPlayerBuffer);
+//
+//  jumpPlayerBuffer.loadFromFile(FILES_PATH"files/music/1.wav");
+//  jumpPlayerSound.setBuffer(jumpPlayerBuffer);
 
-  jumpPlayerBuffer.loadFromFile("../files/music/1.wav");
-  jumpPlayerSound.setBuffer(jumpPlayerBuffer);
-
-  getAntibodiesBuffer.loadFromFile("../files/music/getAntibodies.wav");
+  getAntibodiesBuffer.loadFromFile(FILES_PATH"files/music/getAntibodies.wav");
   getAntibodiesSound.setBuffer(getAntibodiesBuffer);
 
-  getVaccineBuffer.loadFromFile("../files/music/getVaccine.wav");
+  getVaccineBuffer.loadFromFile(FILES_PATH"files/music/getVaccine.wav");
   getVaccineSound.setBuffer(getVaccineBuffer);
 
-  treatPatientBuffer.loadFromFile("../files/music/treatPatient.wav");
+  treatPatientBuffer.loadFromFile(FILES_PATH"files/music/treatPatient.wav");
   treatPatientSound.setBuffer(treatPatientBuffer);
 }
 

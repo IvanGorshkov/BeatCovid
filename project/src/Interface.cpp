@@ -6,11 +6,12 @@
 // Вывод главного меню
 void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
   sf::Texture menuNewGame, menuLoad, menuExit, aboutTexture, main_menuBackground, tShop;
-  menuNewGame.loadFromFile("../files/menu/new_game.png");
-  menuLoad.loadFromFile("../files/menu/load.png");
-  menuExit.loadFromFile("../files/menu/exit.png");
-  main_menuBackground.loadFromFile("../files/menu/main_menu.png");
-  tShop.loadFromFile("../files/menu/shop.png");
+  menuNewGame.loadFromFile(FILES_PATH"files/menu/new_game.png");
+  menuLoad.loadFromFile(FILES_PATH"files/menu/load.png");
+  menuExit.loadFromFile(FILES_PATH"files/menu/exit.png");
+  main_menuBackground.loadFromFile(FILES_PATH"files/menu/main_menu.png");
+  tShop.loadFromFile(FILES_PATH"files/menu/shop.png");
+
   sf::Sprite MenuNewGame(menuNewGame);
   sf::Sprite MenuLoad(menuLoad);
   sf::Sprite MenuExit(menuExit);
@@ -65,15 +66,15 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
       if (menuNum == 1) {
         if (Save::SaveExists()) {
-          remove("../files/saves/save.txt");
+          remove(FILES_PATH"files/saves/save.txt");
         }
 
         if (Save::SaveExistsA()) {
-          remove("../files/saves/save_armor.txt");
+          remove(FILES_PATH"files/saves/save_armor.txt");
         }
 
         if (Save::SaveExistsP()) {
-          remove("../files/saves/save_points.txt");
+          remove(FILES_PATH"files/saves/save_points.txt");
         }
 
         StartNewGame(window, save, menuMusic);
@@ -108,10 +109,10 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
 
 bool Interface::Shop(sf::RenderWindow &window, Save &save) {
   sf::Texture bg_arrmor, arms, buy, back;
-  bg_arrmor.loadFromFile("../files/menu/bg_arrmor.png");
-  arms.loadFromFile("../files/menu/arrmors.png");
-  buy.loadFromFile("../files/menu/upgrade.png");
-  back.loadFromFile("../files/menu/back.png");
+  bg_arrmor.loadFromFile(FILES_PATH"files/menu/bg_arrmor.png");
+  arms.loadFromFile(FILES_PATH"files/menu/arrmors.png");
+  buy.loadFromFile(FILES_PATH"files/menu/upgrade.png");
+  back.loadFromFile(FILES_PATH"files/menu/back.png");
 
   sf::Sprite BgArrmor(bg_arrmor);
 
@@ -137,7 +138,7 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
   sf::Text cost_robe;
 
   sf::Font font;
-  font.loadFromFile("../files/fonts/Inconsolata-Bold.ttf");
+  font.loadFromFile(FILES_PATH"files/fonts/Inconsolata-Bold.ttf");
 
   points.setFont(font);
   points.setCharacterSize(40);
@@ -344,16 +345,16 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game, MusicManag
   sf::Font font;
 
   menuMusic.StopBackgroundMenuMusic();
-  font.loadFromFile("../files/fonts/Inconsolata-Bold.ttf");
+  font.loadFromFile(FILES_PATH"files/fonts/Inconsolata-Bold.ttf");
   sf::Texture menuContinue, menuToMenu, saveGame, bg_arrmor, arms;
   //Изображение Меню
-  menuToMenu.loadFromFile("../files/menu/to_menu.png");
+  menuToMenu.loadFromFile(FILES_PATH"files/menu/to_menu.png");
   //Изображение Продолжить
-  menuContinue.loadFromFile("../files/menu/continue.png");
+  menuContinue.loadFromFile(FILES_PATH"files/menu/continue.png");
   //Изображение Фон для брони
-  bg_arrmor.loadFromFile("../files/menu/bg_arrmor.png");
+  bg_arrmor.loadFromFile(FILES_PATH"files/menu/bg_arrmor.png");
   //Изображение Брони
-  arms.loadFromFile("../files/menu/arrmors.png");
+  arms.loadFromFile(FILES_PATH"files/menu/arrmors.png");
 
   sf::Sprite MenuToMenu(menuToMenu);
   sf::Sprite MenuContinue(menuContinue);
@@ -528,8 +529,8 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game, MusicManag
 // Экран смерти
 bool Interface::DiedMenu(sf::RenderWindow &window) {
   sf::Texture deathMsg, menuToMenu;
-  deathMsg.loadFromFile("../files/menu/dead.png");
-  menuToMenu.loadFromFile("../files/menu/to_menu.png");
+  deathMsg.loadFromFile(FILES_PATH"files/menu/dead.png");
+  menuToMenu.loadFromFile(FILES_PATH"files/menu/to_menu.png");
   sf::Sprite menu1(deathMsg);
   sf::Sprite menu2(menuToMenu);
 
@@ -662,11 +663,11 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game,
   sf::Texture menuContinue, menuToMenu;
 
   if (save.GetLvl() == MAX_LVL) {
-    menuToMenu.loadFromFile("../files/menu/to_menu.png");
-    menuContinue.loadFromFile("../files/menu/winner.png");
+    menuToMenu.loadFromFile(FILES_PATH"files/menu/to_menu.png");
+    menuContinue.loadFromFile(FILES_PATH"files/menu/winner.png");
   } else {
-    menuToMenu.loadFromFile("../files/menu/to_menu.png");
-    menuContinue.loadFromFile("../files/menu/next_mission.png");
+    menuToMenu.loadFromFile(FILES_PATH"files/menu/to_menu.png");
+    menuContinue.loadFromFile(FILES_PATH"files/menu/next_mission.png");
   }
 
   sf::Sprite MenuToMenu(menuToMenu);
@@ -740,8 +741,8 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game,
 // Экран штраф от полицейского
 bool Interface::PenaltyPolice(sf::RenderWindow &window) {
   sf::Texture deathMsg, menuToMenu;
-  deathMsg.loadFromFile("../files/menu/penalty_police.png");
-  menuToMenu.loadFromFile("../files/menu/continue.png");
+  deathMsg.loadFromFile(FILES_PATH"files/menu/penalty_police.png");
+  menuToMenu.loadFromFile(FILES_PATH"files/menu/continue.png");
   sf::Sprite menu1(deathMsg);
   sf::Sprite menu2(menuToMenu);
 
@@ -785,8 +786,8 @@ bool Interface::PenaltyPolice(sf::RenderWindow &window) {
 // Экран умер от полицейского
 bool Interface::DiedPolice(sf::RenderWindow &window) {
   sf::Texture deathMsg, menuToMenu;
-  deathMsg.loadFromFile("../files/menu/died_police.png");
-  menuToMenu.loadFromFile("../files/menu/continue.png");
+  deathMsg.loadFromFile(FILES_PATH"files/menu/died_police.png");
+  menuToMenu.loadFromFile(FILES_PATH"files/menu/continue.png");
   sf::Sprite menu1(deathMsg);
   sf::Sprite menu2(menuToMenu);
 

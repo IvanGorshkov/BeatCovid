@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 project(beatcovid)
+
 set(CMAKE_CXX_STANDARD 14)
 
 include_directories(project/include)
@@ -10,6 +11,8 @@ include_directories(project/include/Entities/Enemies)
 include_directories(project/include/Entities/Transport)
 include_directories(project/include/tinyxml)
 add_subdirectory(project/include/tinyxml)
+
+add_definitions(-DFILES_PATH="/Applications/BeatCovid.app/Contents/Resources/")
 
 add_executable(beatcovid
         main.cpp

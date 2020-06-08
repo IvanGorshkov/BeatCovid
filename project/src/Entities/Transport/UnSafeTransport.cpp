@@ -54,7 +54,7 @@ void UnSafeTransport::setBus() {
   dmg = BUS_DMG;
 
   sf::Texture autoTexture;
-  autoTexture.loadFromFile("../files/images/bus.png");
+  autoTexture.loadFromFile(FILES_PATH"files/images/bus.png");
   anim = AnimationManager(autoTexture);
   anim.Create("move", 4, 4, 393, 100, 2, 0.005, 397);
   anim.Set("move");
@@ -65,7 +65,7 @@ void UnSafeTransport::setMetro() {
   dmg = METRO_DMG;
 
   sf::Texture autoTexture;
-  autoTexture.loadFromFile("../files/images/metro.png");
+  autoTexture.loadFromFile(FILES_PATH"files/images/metro.png");
   anim = AnimationManager(autoTexture);
   anim.Create("move", 64, 2, 924, 140, 2, 0.002, 994);
   anim.Set("move");

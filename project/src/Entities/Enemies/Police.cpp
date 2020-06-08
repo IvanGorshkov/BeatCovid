@@ -8,7 +8,7 @@ Police::Police(float x, float y, int height, int weight)
       drawDiedMenu(false) {
 
   sf::Texture policeTexture;
-  policeTexture.loadFromFile("../files/images/policemen.png");
+  policeTexture.loadFromFile(FILES_PATH"files/images/policemen.png");
   anim = AnimationManager(policeTexture);
   anim.Create("move", 4, 4, 64, 64, 3, 0.002, 72);
   anim.Create("fire", 4, 147, 64, 64, 3, 0.004, 72);

@@ -20,7 +20,7 @@ OrdinaryEnemies::OrdinaryEnemies(float x, float y, int height, int weight, const
 void OrdinaryEnemies::setBreaker() {
   SetHpGmg(BREAKER_HP, BREAKER_DMG);
   sf::Texture breakerTexture;
-  breakerTexture.loadFromFile("../files/images/breaker.png");
+  breakerTexture.loadFromFile(FILES_PATH"files/images/breaker.png");
   anim = AnimationManager(breakerTexture);
   anim.Create("move", 4, 4, 64, 64, 6, 0.002, 72);
   anim.Create("fire", 68, 72, 64, 64, 2, 0.004, 72);
@@ -31,7 +31,7 @@ void OrdinaryEnemies::setBreaker() {
 void OrdinaryEnemies::setDelivery() {
   SetHpGmg(DELIVERY_HP, DELIVERY_DMG);
   sf::Texture deliveryTexture;
-  deliveryTexture.loadFromFile("../files/images/delivery.png");
+  deliveryTexture.loadFromFile(FILES_PATH"files/images/delivery.png");
   anim = AnimationManager(deliveryTexture);
   anim.Create("move", 4, 4, 64, 64, 4, 0.002, 72);
   anim.Create("fire", 4, 72, 64, 64, 4, 0.004, 72);
@@ -42,7 +42,7 @@ void OrdinaryEnemies::setDelivery() {
 void OrdinaryEnemies::setVirus() {
   SetHpGmg(VIRUS_HP, VIRUS_DMG);
   sf::Texture virusTexture;
-  virusTexture.loadFromFile("../files/images/virus.png");
+  virusTexture.loadFromFile(FILES_PATH"files/images/virus.png");
   anim = AnimationManager(virusTexture);
   anim.Create("move", 4, 4, 64, 64, 4, 0.002, 72);
   anim.Create("fire", 4, 72, 64, 64, 3, 0.004, 72);
