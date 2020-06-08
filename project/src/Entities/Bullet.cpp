@@ -6,7 +6,7 @@ Bullet::Bullet(float x, float y, float dx, float dy, float dmg, bool player)
       isDie(false) {
 
   sf::Texture bulletTexture;
-  bulletTexture.loadFromFile("../files/images/bullets.png");
+  bulletTexture.loadFromFile(FILES_PATH"files/images/bullets.png");
   anim = AnimationManager(bulletTexture);
   if (player) {
     anim.Create("move", 8, 50, 30, 30, 1, 0);

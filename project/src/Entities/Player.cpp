@@ -23,7 +23,7 @@ Player::Player(const Object &position, std::vector<int> armors)
       shoes(position.rect.left, position.rect.top, 64, 64, armors[1]),
       cap(position.rect.left, position.rect.top, 64, 64, armors[0]) {
   sf::Texture player_t;
-  player_t.loadFromFile("../files/images/doctor.png");
+  player_t.loadFromFile(FILES_PATH"files/images/doctor.png");
   anim = AnimationManager(player_t);
   anim.Create("walk", 76, 76, 64, 64, 7, 0.005, 72);
   anim.Create("stay", 4, 4, 64, 64, 8, 0.0005, 72);

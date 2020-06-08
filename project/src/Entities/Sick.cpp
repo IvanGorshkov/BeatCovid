@@ -7,7 +7,7 @@ Sick::Sick(float x, float y, float dx, float dy, int weight, int height)
       end(false) {
 
   sf::Texture bulletTexture;
-  bulletTexture.loadFromFile("../files/images/ill.png");
+  bulletTexture.loadFromFile(FILES_PATH"files/images/ill.png");
   anim = AnimationManager(bulletTexture);
   anim.Create("ill", 2, 0, 75, 64, 3, 0.003, 79);
   anim.Create("alive", 1, 71, 90, 64, 3, 0.001, 94);

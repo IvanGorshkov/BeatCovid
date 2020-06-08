@@ -5,31 +5,31 @@ Cap::Cap(float x, float y, float w, float h, int lvl)
   sf::Texture player_t;
   switch (lvl) {
     case 0: {
-      player_t.loadFromFile("../files/images/free.png");
+      player_t.loadFromFile(FILES_PATH"files/images/free.png");
       arm = 0;
       break;
     }
 
     case 1: {
-      player_t.loadFromFile("../files/images/cap_1.png");
+      player_t.loadFromFile(FILES_PATH"files/images/cap_1.png");
       arm = 1;
       break;
     }
 
     case 2: {
-      player_t.loadFromFile("../files/images/cap_2.png");
+      player_t.loadFromFile(FILES_PATH"files/images/cap_2.png");
       arm = 2;
       break;
     }
 
     case 3: {
-      player_t.loadFromFile("../files/images/cap_3.png");
+      player_t.loadFromFile(FILES_PATH"files/images/cap_3.png");
       arm = 3;
       break;
     }
 
     case 4: {
-      player_t.loadFromFile("../files/images/cap_4.png");
+      player_t.loadFromFile(FILES_PATH"files/images/cap_4.png");
       arm = 4;
       break;
     }
