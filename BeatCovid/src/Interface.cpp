@@ -64,18 +64,24 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
       menuNum = 4;
     }
 
+    std::ostringstream txt_save;
+      txt_save << resourcePath() << "files/saves/save.txt";
+      std::ostringstream save_armor;
+      save_armor << resourcePath() << "files/saves/save_armor.txt";
+      std::ostringstream save_points;
+      save_points << resourcePath() << "files/saves/save_points.txt";
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
       if (menuNum == 1) {
         if (Save::SaveExists()) {
-          remove("../Resources/files/saves/save.txt");
+            remove(txt_save.str().c_str());
         }
 
         if (Save::SaveExistsA()) {
-          remove("../Resources/files/saves/save_armor.txt");
+          remove(save_armor.str().c_str());
         }
 
         if (Save::SaveExistsP()) {
-          remove("../Resources/files/saves/save_points.txt");
+          remove(save_points.str().c_str());
         }
 
         StartNewGame(window, save, menuMusic);

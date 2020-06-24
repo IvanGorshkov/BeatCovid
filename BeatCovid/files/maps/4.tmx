@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="500" height="100" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="city_tiles" tilewidth="32" tileheight="32">
-  <image source="/Applications/BeatCovid.app/Contents/Resources/files/maps/map_tiles.png" width="256" height="616"/>
+  <image source="files/maps/map_tiles.png" width="256" height="616"/>
  </tileset>
  <layer name="sky" width="500" height="100">
   <data>
