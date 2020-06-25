@@ -2,7 +2,7 @@
 
 #include "GameManager.h"
 
-#define MAX_LVL 2
+#define MAX_LVL 3
 
 class Save {
  public:
