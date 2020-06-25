@@ -64,29 +64,10 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
       menuNum = 4;
     }
 
-    std::ostringstream txt_save;
-      txt_save << resourcePath() << "files/saves/save.txt";
-      std::ostringstream save_armor;
-      save_armor << resourcePath() << "files/saves/save_armor.txt";
-      std::ostringstream save_points;
-      save_points << resourcePath() << "files/saves/save_points.txt";
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
       if (menuNum == 1) {
-        if (Save::SaveExists()) {
-            remove(txt_save.str().c_str());
-        }
-
-        if (Save::SaveExistsA()) {
-          remove(save_armor.str().c_str());
-        }
-
-        if (Save::SaveExistsP()) {
-          remove(save_points.str().c_str());
-        }
-
-        StartNewGame(window, save, menuMusic);
-        menuMusic.PlayBackgroundMenuMusic();
-        for (int kI = 0; kI < 100000000; ++kI) {}
+          
+          NewGameWarningMenu(window, menuMusic, save);
       }
 
       if (menuNum == 2) {
@@ -112,6 +93,117 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
     window.draw(MenuExit);
     window.display();
   }
+}
+
+bool Interface::NewGameWarningMenu(sf::RenderWindow &window, MusicManager &menuMusic, Save &save) {
+    if (!Save::SaveExists() && !Save::SaveExistsA() && !Save::SaveExistsP()) {
+        StartNewGame(window, save, menuMusic);
+        menuMusic.PlayBackgroundMenuMusic();
+        for (int kI = 0; kI < 100000000; ++kI) {}
+        return false;
+    }
+    
+    sf::Vector2f center = window.getView().getCenter();
+    sf::Vector2f size = window.getView().getSize();
+    
+    sf::Text newGame;
+    sf::Text sureGame;
+    sf::Font font;
+    
+    font.loadFromFile(resourcePath() + "files/fonts/Inconsolata-Bold.ttf");
+    newGame.setFont(font);
+    newGame.setCharacterSize(40);
+    newGame.setStyle(sf::Text::Bold);
+    newGame.setFillColor(sf::Color::White);
+    
+    newGame.setPosition(center.x - size.x / 2 + 180, center.y - size.y / 2 + 250);
+    std::ostringstream ss1;
+    ss1 << "Are you sure you want to start a new game?";
+    newGame.setString(ss1.str());
+    
+    sureGame.setFont(font);
+    sureGame.setCharacterSize(40);
+    sureGame.setStyle(sf::Text::Bold);
+    sureGame.setFillColor(sf::Color::White);
+    
+    sureGame.setPosition(center.x - size.x / 2 + 350, center.y - size.y / 2 + 310);
+    std::ostringstream ss2;
+    ss2 << "All your saves will be lost";
+    sureGame.setString(ss2.str());
+    
+    sf::Texture yesTexture, noTexture;
+    yesTexture.loadFromFile(resourcePath() + "files/menu/new_game.png");
+    noTexture.loadFromFile(resourcePath() + "files/menu/load.png");
+    
+    sf::Sprite yesSprite(yesTexture);
+    sf::Sprite noSprite(noTexture);
+    
+    yesSprite.setPosition(center.x - size.x / 2 + 800, center.y - size.y / 2 + 400);
+    noSprite.setPosition(center.x - size.x / 2 + 200, center.y - size.y / 2 + 400);
+
+    while (window.isOpen()) {
+      sf::Event event{};
+      while (window.pollEvent(event)) {
+        if (event.type == sf::Event::Closed) {
+          window.close();
+        }
+      }
+
+      yesSprite.setColor(sf::Color::White);
+      noSprite.setColor(sf::Color::White);
+        
+      int menuNum = 0;
+        
+      window.clear(sf::Color(68, 101, 219));
+        
+        if (sf::IntRect(800, 400, 300, 50).contains(sf::Mouse::getPosition(window))) {
+          yesSprite.setColor(sf::Color::Red);
+          menuNum = 1;
+        }
+        
+        if (sf::IntRect(200, 400, 300, 50).contains(sf::Mouse::getPosition(window))) {
+          noSprite.setColor(sf::Color::Red);
+          menuNum = 2;
+        }
+        
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if (menuNum == 2) {
+                return true;
+            }
+            
+            if (menuNum == 1) {
+                std::ostringstream txt_save;
+                txt_save << resourcePath() << "files/saves/save.txt";
+                std::ostringstream save_armor;
+                save_armor << resourcePath() << "files/saves/save_armor.txt";
+                std::ostringstream save_points;
+                save_points << resourcePath() << "files/saves/save_points.txt";
+                
+                if (Save::SaveExists()) {
+                    remove(txt_save.str().c_str());
+                }
+                
+                if (Save::SaveExistsA()) {
+                    remove(save_armor.str().c_str());
+                }
+                
+                if (Save::SaveExistsP()) {
+                    remove(save_points.str().c_str());
+                }
+                
+                StartNewGame(window, save, menuMusic);
+                menuMusic.PlayBackgroundMenuMusic();
+                for (int kI = 0; kI < 100000000; ++kI) {}
+                return false;
+            }
+        }
+
+      window.draw(yesSprite);
+      window.draw(noSprite);
+      window.draw(newGame);
+      window.draw(sureGame);
+      window.display();
+    }
 }
 
 bool Interface::Shop(sf::RenderWindow &window, Save &save) {
