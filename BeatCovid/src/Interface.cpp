@@ -18,7 +18,7 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
   LoadGameTexture.loadFromFile(resourcePath() + "files/menu/load_game.png");
   ShopTexture.loadFromFile(resourcePath() + "files/menu/shop.png");
   ExitTexture.loadFromFile(resourcePath() + "files/menu/exit.png");
-  AboutTexture.loadFromFile(resourcePath() + "files/menu/exit.png");
+  AboutTexture.loadFromFile(resourcePath() + "files/menu/about.png");
 
   sf::Sprite BackImageSprite(BackImageTexture);
   sf::Sprite NewGameSprite(NewGameTexture);
@@ -130,7 +130,7 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
       }
 
       if (menuNum == 5) {
-        AboutMenu(window, menuMusic);
+//        AboutMenu(window, menuMusic);
       }
     }
 
@@ -153,43 +153,25 @@ bool Interface::NewGameWarningMenu(sf::RenderWindow &window, MusicManager &menuM
     return false;
   }
 
-  sf::Vector2f center = window.getView().getCenter();
-  sf::Vector2f size = window.getView().getSize();
+  sf::Texture yesTexture,
+      noTexture,
+      newGameWarningTexture;
 
-  sf::Text newGame;
-  sf::Text sureGame;
-  sf::Font font;
-
-  font.loadFromFile(resourcePath() + "files/fonts/Inconsolata-Bold.ttf");
-  newGame.setFont(font);
-  newGame.setCharacterSize(40);
-  newGame.setStyle(sf::Text::Bold);
-  newGame.setFillColor(sf::Color::White);
-
-  newGame.setPosition(center.x - size.x / 2 + 180, center.y - size.y / 2 + 250);
-  std::ostringstream ss1;
-  ss1 << "Are you sure you want to start a new game?";
-  newGame.setString(ss1.str());
-
-  sureGame.setFont(font);
-  sureGame.setCharacterSize(40);
-  sureGame.setStyle(sf::Text::Bold);
-  sureGame.setFillColor(sf::Color::White);
-
-  sureGame.setPosition(center.x - size.x / 2 + 350, center.y - size.y / 2 + 310);
-  std::ostringstream ss2;
-  ss2 << "All your saves will be lost";
-  sureGame.setString(ss2.str());
-
-  sf::Texture yesTexture, noTexture;
-  yesTexture.loadFromFile(resourcePath() + "files/menu/new_game.png");
-  noTexture.loadFromFile(resourcePath() + "files/menu/load_game.png");
+  yesTexture.loadFromFile(resourcePath() + "files/menu/yes.png");
+  noTexture.loadFromFile(resourcePath() + "files/menu/no.png");
+  newGameWarningTexture.loadFromFile(resourcePath() + "files/menu/new_game_warning.png");
 
   sf::Sprite yesSprite(yesTexture);
   sf::Sprite noSprite(noTexture);
+  sf::Sprite newGameWarningSprite(newGameWarningTexture);
+
+  sf::Vector2f center = window.getView().getCenter();
+  sf::Vector2f size = window.getView().getSize();
 
   yesSprite.setPosition(center.x - size.x / 2 + 800, center.y - size.y / 2 + 400);
   noSprite.setPosition(center.x - size.x / 2 + 200, center.y - size.y / 2 + 400);
+  newGameWarningSprite.setPosition(center.x - size.x / 2 + 10, center.y - size.y / 2 + 200);
+  newGameWarningSprite.scale(0.9f, 0.9f);
 
   while (window.isOpen()) {
     sf::Event event{};
@@ -206,12 +188,22 @@ bool Interface::NewGameWarningMenu(sf::RenderWindow &window, MusicManager &menuM
 
     window.clear(sf::Color(68, 101, 219));
 
-    if (sf::IntRect(800, 400, 300, 50).contains(sf::Mouse::getPosition(window))) {
+    if (sf::IntRect(800,
+                    400,
+                    yesSprite.getTextureRect().width,
+                    yesSprite.getTextureRect().height).
+        contains(sf::Mouse::getPosition(window))) {
+
       yesSprite.setColor(sf::Color::Red);
       menuNum = 1;
     }
 
-    if (sf::IntRect(200, 400, 300, 50).contains(sf::Mouse::getPosition(window))) {
+    if (sf::IntRect(200,
+        400,
+                    noSprite.getTextureRect().width,
+                    noSprite.getTextureRect().height).
+        contains(sf::Mouse::getPosition(window))) {
+
       noSprite.setColor(sf::Color::Red);
       menuNum = 2;
     }
@@ -223,7 +215,7 @@ bool Interface::NewGameWarningMenu(sf::RenderWindow &window, MusicManager &menuM
 
       if (menuNum == 1) {
         std::ostringstream txt_save;
-        txt_save << resourcePath()  << "files/saves/save.txt";
+        txt_save << resourcePath() << "files/saves/save.txt";
         std::ostringstream save_armor;
         save_armor << resourcePath()  << "files/saves/save_armor.txt";
         std::ostringstream save_points;
@@ -250,10 +242,11 @@ bool Interface::NewGameWarningMenu(sf::RenderWindow &window, MusicManager &menuM
 
     window.draw(yesSprite);
     window.draw(noSprite);
-    window.draw(newGame);
-    window.draw(sureGame);
+    window.draw(newGameWarningSprite);
     window.display();
   }
+
+  return false;
 }
 
 bool Interface::Shop(sf::RenderWindow &window, Save &save) {
@@ -592,8 +585,8 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game, MusicManag
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
 
-  menuSprite.setPosition(center.x - size.x / 2 + 150, center.y - size.y / 2 + 700);
-  continueSprite.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 630);
+  continueSprite.setPosition(center.x - size.x / 2 + 140, center.y - size.y / 2 + 580);
+  menuSprite.setPosition(center.x - size.x / 2 + 190, center.y - size.y / 2 + 650);
   armorListSprite.setPosition(center.x - size.x / 2 + 500, center.y - size.y / 2 + 100);
 
   armorShoesSprite.setPosition(center.x - size.x / 2 + 1050, center.y - size.y / 2 + 120);
@@ -658,8 +651,8 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game, MusicManag
 
     window.clear(sf::Color(68, 101, 219));
 
-    if (sf::IntRect(150,
-                    700,
+    if (sf::IntRect(190,
+                    650,
                     menuSprite.getTextureRect().width,
                     menuSprite.getTextureRect().height).
         contains(sf::Mouse::getPosition(window))) {
@@ -668,8 +661,8 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game, MusicManag
       menuNum = 1;
     }
 
-    if (sf::IntRect(100,
-                    630,
+    if (sf::IntRect(140,
+                    580,
                     continueSprite.getTextureRect().width,
                     continueSprite.getTextureRect().height).
         contains(sf::Mouse::getPosition(window))) {
@@ -886,9 +879,7 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game,
 
   menuSprite.setPosition(center.x - size.x / 2 + 570, center.y - size.y / 2 + 390);
 
-  if (save.GetLvl() != MAX_LVL) {
-    save.ChangeLvl();
-  }
+  save.ChangeLvl();
 
   save.SaveGame(game);
 
@@ -936,11 +927,6 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game,
       }
 
       if (menuNum == 2) {
-        if (save.GetLvl() == MAX_LVL + 1) {
-          menuMusic.StopBackgroundGameMusic();
-          MainMenu(window, save);
-        }
-
         StartNewGame(window, save, menuMusic);
         return true;
       }
