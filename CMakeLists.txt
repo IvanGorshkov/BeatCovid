@@ -8,11 +8,10 @@ include_directories(project/include/Animation)
 include_directories(project/include/Entities)
 include_directories(project/include/Entities/Armors)
 include_directories(project/include/Entities/Enemies)
-include_directories(project/include/Entities/Transport)
-include_directories(project/include/tinyxml)
-add_subdirectory(project/include/tinyxml)
+include_directories(project/include/Entities/Transports)
+include_directories(project/include/Tinyxml)
 
-add_definitions(-DFILES_PATH="/Applications/BeatCovid.app/Contents/Resources/")
+add_definitions(-DFILES_PATH="../")
 
 add_executable(beatcovid
         main.cpp
@@ -34,11 +33,15 @@ add_executable(beatcovid
         project/src/Entities/Enemies/Enemy.cpp
         project/src/Entities/Enemies/OrdinaryEnemies.cpp
         project/src/Entities/Enemies/Police.cpp
-        project/src/Entities/Transport/Transport.cpp
-        project/src/Entities/Transport/SafeTransport.cpp
-        project/src/Entities/Transport/UnSafeTransport.cpp
+        project/src/Entities/Transports/Transport.cpp
+        project/src/Entities/Transports/SafeTransport.cpp
+        project/src/Entities/Transports/UnSafeTransport.cpp
         project/src/Entities/Sick.cpp
-        project/src/MusicManager.cpp)
+        project/src/MusicManager.cpp
+        project/src/Tinyxml/tinyxml.cpp
+        project/src/Tinyxml/tinystr.cpp
+        project/src/Tinyxml/tinyxmlparser.cpp
+        project/src/Tinyxml/tinyxmlerror.cpp)
 
 find_package(SFML REQUIRED system window graphics network audio)
-target_link_libraries(beatcovid sfml-graphics sfml-audio tinyxml)
+target_link_libraries(beatcovid sfml-graphics sfml-audio)
