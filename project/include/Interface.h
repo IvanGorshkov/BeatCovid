@@ -6,6 +6,7 @@
 #include "SaveGame.h"
 #include "MusicManager.h"
 #include "InterfaceText.h"
+#include "InterfaceSprite.h"
 
 class Interface {
  public:

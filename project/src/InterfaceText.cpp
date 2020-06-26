@@ -1,7 +1,7 @@
 #include "InterfaceText.h"
 #include <sstream>
 
-InterfaceText::InterfaceText(const std::string& fontFile, int size, float x, float y) {
+InterfaceText::InterfaceText(const std::string& fontPath, int size, float x, float y) {
   font.loadFromFile(FILES_PATH"files/fonts/Inconsolata-Bold.ttf");
 
   text.setFont(font);
@@ -12,7 +12,7 @@ InterfaceText::InterfaceText(const std::string& fontFile, int size, float x, flo
   text.setPosition(x, y);
 }
 
-InterfaceText::InterfaceText(const std::string &fontFile, int size, float x, float y, std::ostringstream &ss) {
+InterfaceText::InterfaceText(const std::string &fontPath, int size, float x, float y, std::ostringstream &ss) {
   font.loadFromFile(FILES_PATH"files/fonts/Inconsolata-Bold.ttf");
 
   text.setFont(font);

@@ -2,12 +2,12 @@
 
 #include "Enemy.h"
 
-//#define BREAKER_HP 3
-//#define BREAKER_DMG 1
-//#define DELIVERY_HP 3
-//#define DELIVERY_DMG 1
-//#define VIRUS_HP 3
-//#define VIRUS_DMG 1
+#define BREAKER_HP 3
+#define BREAKER_DMG 1
+#define DELIVERY_HP 3
+#define DELIVERY_DMG 1
+#define VIRUS_HP 3
+#define VIRUS_DMG 1
 
 class OrdinaryEnemies : public Enemy {
  public:
