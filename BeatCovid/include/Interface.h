@@ -15,9 +15,10 @@ class Interface {
   static bool GameMenu(sf::RenderWindow &window, GameManager &game, MusicManager &menuMusic);
   static void Buy(std::vector<int> arm_vector, int index);
   static void StartNewGame(sf::RenderWindow &window, Save &save, MusicManager &menuMusic);
-  static bool DiedMenu(sf::RenderWindow &window);
+  static bool DiedMenu(sf::RenderWindow &window, GameManager &game);
   static bool WinMenu(sf::RenderWindow &window, Save &save, GameManager &game, MusicManager &menuMusic);
   static bool PenaltyPolice(sf::RenderWindow &window);
   static bool DiedPolice(sf::RenderWindow &window);
   static bool AboutMenu(sf::RenderWindow &window, MusicManager &menuMusic);
+  static bool StatisticMenu(sf::RenderWindow &window, MusicManager &menuMusic);
 };

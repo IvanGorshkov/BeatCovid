@@ -2,8 +2,7 @@
 #include "ResourcePath.hpp"
 
 OrdinaryEnemies::OrdinaryEnemies(float x, float y, int height, int weight, const std::string &name)
-    : Enemy(x, y, height, weight),
-      name(name) {
+    : Enemy(x, y, height, weight, name) {
 
   if (name == "breaker") {
     setBreaker();

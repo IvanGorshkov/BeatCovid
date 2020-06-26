@@ -16,12 +16,19 @@ int Save::GetLvl() const {
 
 std::string Save::GetLvlName() {
   std::ifstream save_file(resourcePath() + "files/saves/save.txt");
+  std::ifstream save_stat(resourcePath() + "files/saves/save_stat.txt");
+
   if (save_file.is_open()) {
     char buff[50];
     save_file.getline(buff, 50);
     this->lvl = atoi(buff);
   } else {
     GoToStart();
+    char buff[50];
+    save_stat.getline(buff, 50);
+    if (save_stat.is_open() && atoi(buff) != 0) {
+      ChangeLvl();
+    }
   }
   std::string lvlname = resourcePath() + "files/maps/";
   return (lvlname += std::to_string(GetLvl()) + ".tmx");
@@ -121,4 +128,34 @@ void Save::SaveArmor(std::vector<int> vec) {
   save_armor_file << std::endl;
 
   save_armor_file.close();
+}
+
+std::vector<int> Save::LoadStat() {
+  std::fstream saveStatFile(resourcePath() + "files/saves/save_stat.txt");
+  std::vector<int> stat = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+  if (!saveStatFile.is_open()) {
+    return stat;
+  } else {
+
+    char buff[1000];
+    for (int i = 0; i < 13; i++) {
+      saveStatFile.getline(buff, 1000);
+      stat[i] = atoi(buff);
+    }
+
+    saveStatFile.close();
+    return stat;
+  }
+}
+
+void Save::SaveStat(const std::vector<int> &stat) {
+  std::ofstream saveStatFile(resourcePath() + "files/saves/save_stat.txt");
+
+  for (int i = 0; i < 13; i++) {
+    saveStatFile << stat[i];
+    saveStatFile << std::endl;
+  }
+
+  saveStatFile.close();
 }

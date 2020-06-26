@@ -1,18 +1,25 @@
 #include "Enemy.h"
 
-Enemy::Enemy(float x, float y, int height, int weight, float hp, float dmg)
+#include <utility>
+
+Enemy::Enemy(float x, float y, int height, int weight, float hp, float dmg, std::string name)
     : Entity(x, y, 0, 0, height, weight),
       hp(hp),
       dmg(dmg),
       timerHit(0),
       fire(false),
       dir(false),
-      dieSound(false) {
+      dieSound(false),
+      name(std::move(name)) {
 }
 
-Enemy::Enemy(float x, float y, int height, int weight)
+Enemy::Enemy(float x, float y, int height, int weight, std::string name)
     : Entity(x, y, 0, 0, height, weight),
-      timerHit(0) {
+      timerHit(0),
+      name(std::move(name)),
+      dieSound(false),
+      dir(false),
+      fire(false) {
 }
 
 void Enemy::SetHpGmg(float getHp, float getDmg) {
@@ -74,5 +81,9 @@ bool Enemy::GetDieSound() const {
 
 void Enemy::SetDieSound() {
   dieSound = false;
+}
+
+std::string Enemy::GetName() {
+  return name;
 }
 
