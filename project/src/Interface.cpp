@@ -129,7 +129,7 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
       }
 
       if (menuNum == 5) {
-//        AboutMenu(window, menuMusic);
+//        AboutMenu(window, menuMusic)
       }
     }
 
@@ -198,7 +198,7 @@ bool Interface::NewGameWarningMenu(sf::RenderWindow &window, MusicManager &menuM
     }
 
     if (sf::IntRect(200,
-        400,
+                    400,
                     noSprite.getTextureRect().width,
                     noSprite.getTextureRect().height).
         contains(sf::Mouse::getPosition(window))) {
@@ -672,6 +672,8 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game, MusicManag
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
       if (menuNum == 1) {
+        std::vector<int> stat = game.GetStat();
+        Save::SaveStat(stat);
         return false;
       }
 
@@ -712,7 +714,7 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save, MusicManager 
 
   Level lvl;
   lvl.LoadFromFile(save.GetLvlName());
-  GameManager game(lvl, Save::GetArmors(), menuMusic);
+  GameManager game(lvl, Save::GetArmors(), menuMusic, Save::LoadStat());
   sf::Clock clock;
   if (Save::SaveExists()) {
     save.Load(game);
@@ -771,7 +773,7 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save, MusicManager 
     }
     if (game.GetPlayer()->GetAnim().GetCurrentFrame() == 3 && game.GetPlayer()->GetHp() <= 0) {
       menuMusic.PlayDiedPlayerSound();
-      bool status = DiedMenu(window);
+      bool status = DiedMenu(window, game);
       if (status) {
         break;
       }
@@ -794,7 +796,7 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save, MusicManager 
 }
 
 // Экран смерти
-bool Interface::DiedMenu(sf::RenderWindow &window) {
+bool Interface::DiedMenu(sf::RenderWindow &window, GameManager &game) {
   sf::Texture wastedTexutre,
       menuTexture;
 
@@ -837,6 +839,8 @@ bool Interface::DiedMenu(sf::RenderWindow &window) {
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
       if (menuNum == 1) {
+        std::vector<int> stat = game.GetStat();
+        Save::SaveStat(stat);
         return true;
       }
     }
@@ -922,10 +926,18 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game,
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
       if (menuNum == 1) {
         menuMusic.StopBackgroundGameMusic();
+        std::vector<int> stat = game.GetStat();
+        stat[0]++;
+        std::cout << "Patient: " << stat[0] << std::endl;
+        save.SaveStat(stat);
         MainMenu(window, save);
       }
 
       if (menuNum == 2) {
+        std::vector<int> stat = game.GetStat();
+        stat[0]++;
+        std::cout << "Patient: " << stat[0] << std::endl;
+        save.SaveStat(stat);
         StartNewGame(window, save, menuMusic);
         return true;
       }

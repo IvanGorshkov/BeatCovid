@@ -1,7 +1,7 @@
 #include "Police.h"
 
 Police::Police(float x, float y, int height, int weight)
-    : Enemy(x, y, height, weight, POLICE_HP, POLICE_DMG),
+    : Enemy(x, y, height, weight, POLICE_HP, POLICE_DMG, "police"),
       penalty(POLICE_PENALTY),
       isMetUser(false),
       drawPenaltyMenu(false),

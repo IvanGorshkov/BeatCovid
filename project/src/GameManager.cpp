@@ -3,9 +3,10 @@
 #include "cmath"
 #include "Interface.h"
 
-GameManager::GameManager(Level &lvl, const std::vector<int> &arms, MusicManager &music)
+GameManager::GameManager(Level &lvl, const std::vector<int> &arms, MusicManager &music, const std::vector<int>& stat)
     : obj(lvl.GetAllObjects()),
       music(music),
+      stat(stat),
       player(std::make_shared<Player>(lvl.GetObject("player"), arms)) {
 
   for (auto &i : obj) {
@@ -129,6 +130,18 @@ void GameManager::Fire() {
 void GameManager::TakeTransport() {
   for (safeTransportsIt = safeTransports.begin(); safeTransportsIt != safeTransports.end(); ++safeTransportsIt) {
     if (safeTransportsIt->GetRect().intersects(player->GetRect())) {
+      if (safeTransportsIt->IsDrive()) {
+        if (safeTransportsIt->GetName() == "auto") {
+          stat[7]++;
+          std::cout << "auto: " << stat[7] << std::endl;
+        }
+
+        if (safeTransportsIt->GetName() == "monorail") {
+          stat[8]++;
+          std::cout << "monorail: " << stat[8] << std::endl;
+        }
+      }
+
       safeTransportsIt->SetDrive();
       player->SetDrive();
       if (safeTransportsIt->GetName() == "auto") {
@@ -143,6 +156,18 @@ void GameManager::TakeTransport() {
   for (unSafeTransportsIt = unSafeTransports.begin(); unSafeTransportsIt != unSafeTransports.end();
        ++unSafeTransportsIt) {
     if (unSafeTransportsIt->GetRect().intersects(player->GetRect())) {
+      if (unSafeTransportsIt->IsDrive()) {
+        if (unSafeTransportsIt->GetName() == "bus") {
+          stat[9]++;
+          std::cout << "bus: " << stat[9] << std::endl;
+        }
+
+        if (unSafeTransportsIt->GetName() == "metro") {
+          stat[10]++;
+          std::cout << "metro: " << stat[10] << std::endl;
+        }
+      }
+
       unSafeTransportsIt->SetDrive();
       player->SetDrive();
       if (unSafeTransportsIt->GetName() == "bus") {
@@ -153,6 +178,10 @@ void GameManager::TakeTransport() {
       break;
     }
   }
+}
+
+std::vector<int> GameManager::GetStat() {
+  return stat;
 }
 
 // Методы работы с классом Bullet
@@ -268,6 +297,26 @@ void GameManager::updateEnemy(float time) {
     (*enemiesIt)->Update(time, obj);
 
     if ((*enemiesIt)->GetDieSound()) {
+      if ((*enemiesIt)->GetName() == "police") {
+        stat[3]++;
+        std::cout << "police: " << stat[3] << std::endl;
+      }
+
+      if ((*enemiesIt)->GetName() == "virus") {
+        stat[4]++;
+        std::cout << "virus: " << stat[4] << std::endl;
+      }
+
+      if ((*enemiesIt)->GetName() == "delivery") {
+        stat[5]++;
+        std::cout << "delivery: " << stat[5] << std::endl;
+      }
+
+      if ((*enemiesIt)->GetName() == "breaker") {
+        stat[6]++;
+        std::cout << "breaker: " << stat[6] << std::endl;
+      }
+
       music.PlayDiedEnemySound();
       (*enemiesIt)->SetDieSound();
     }
@@ -298,11 +347,15 @@ void GameManager::updateAntibodies() {
   for (antibodiesIt = antibodies.begin(); antibodiesIt != antibodies.end(); ++antibodiesIt) {
     if (!antibodiesIt->IsLife()) {
       if (antibodiesIt->GetName() == "antigen") {
+        stat[2]++;
+        std::cout << "antigen: " << stat[2] << std::endl;
         player->AddPoints(ANTIGEN_POINTS);
         music.PlayGetAntibodiesSound();
       }
 
       if (antibodiesIt->GetName() == "vaccine") {
+        stat[1]++;
+        std::cout << "vaccine: " << stat[1] << std::endl;
         player->SetVaccine(true);
         music.PlayGetVaccineSound();
       }
