@@ -1,9 +1,9 @@
 #include "Police.h"
 #include "ResourcePath.hpp"
 
-Police::Police(float x, float y, int height, int weight)
-    : Enemy(x, y, height, weight, POLICE_HP, POLICE_DMG, "police"),
-      penalty(POLICE_PENALTY),
+Police::Police(float x, float y, int height, int weight, int hp, int dmg, int penalty)
+    : Enemy(x, y, height, weight, hp, dmg, "police"),
+      penalty(penalty),
       isMetUser(false),
       drawPenaltyMenu(false),
       drawDiedMenu(false) {

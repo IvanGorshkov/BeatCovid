@@ -8,7 +8,7 @@
 
 class Police : public Enemy {
  public:
-  explicit Police(float x, float y, int height, int weight);
+  explicit Police(float x, float y, int height, int weight, int hp, int dmg, int penalty);
   int Penatly();
   bool IsDrawPenaltyMenu();
   bool ISDrawDiedMenu();

@@ -1,8 +1,11 @@
 #include "SafeTransport.h"
 #include "ResourcePath.hpp"
+#include <utility>
 
-SafeTransport::SafeTransport(float x, float y, int height, int weight, const std::string &name)
-    : Transport(x, y, height, weight, name) {
+SafeTransport::SafeTransport(float x, float y, int height, int weight, const std::string &name, std::vector<float> config)
+    : Transport(x, y, height, weight, name),
+    config(std::move(config)) {
+
   if (name == "auto") {
     setAuto();
   }
@@ -39,7 +42,7 @@ void SafeTransport::Update(float time, std::vector<Object> &obj) {
 
 void SafeTransport::setAuto() {
   dx = AUTO_DX;
-  fuel = AUTO_FUEL;
+  fuel = config[11];
 
   sf::Texture autoTexture;
   autoTexture.loadFromFile(resourcePath() + "files/images/safe.png");
@@ -50,7 +53,7 @@ void SafeTransport::setAuto() {
 
 void SafeTransport::setMonorail() {
   dx = MONORAIL_DX;
-  fuel = MONORAIL_FUEL;
+  fuel = config[12];
 
   sf::Texture autoTexture;
   autoTexture.loadFromFile(resourcePath() + "files/images/mono.png");

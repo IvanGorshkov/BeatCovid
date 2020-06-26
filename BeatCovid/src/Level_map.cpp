@@ -5,7 +5,6 @@
 #include <SFML/Graphics.hpp>
 #include "tinyxml.h"
 #include "Level_map.h"
-#include "ResourcePath.hpp"
 
 int Object::GetPropertyInt(const std::string &getName) {
   return atoi(properties[getName].c_str());
@@ -46,7 +45,7 @@ bool Level::LoadFromFile(const std::string &filename) {
   // source - путь до картинки в контейнере image
   TiXmlElement *image;
   image = tilesetElement->FirstChildElement("image");
-  std::string imagepath = resourcePath() + image->Attribute("source");
+  std::string imagepath = image->Attribute("source");
 
   // Пытаемся загрузить тайлсет
   sf::Image img;

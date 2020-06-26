@@ -56,6 +56,16 @@ bool Save::SaveExistsA() {
   return save.is_open();
 }
 
+void Save::Load(GameManager &game) {
+  std::ifstream save_file(resourcePath() + "files/saves/save.txt");
+  char buff[50];
+  save_file.getline(buff, 50);
+  this->lvl = atoi(buff);
+  save_file.getline(buff, 50);
+  game.GetPlayer()->ChangeARM(atoi(buff));
+  game.GetPlayer()->AddPoints(LoadPoints());
+}
+
 void Save::SaveGame(GameManager &game) const {
   std::ofstream save_file(resourcePath() + "files/saves/save.txt");
   // lvl
@@ -68,16 +78,38 @@ void Save::SaveGame(GameManager &game) const {
   SavePoints(game.GetPlayer()->GetPoints());
 }
 
-void Save::SavePoints(int points) {
-  std::ofstream save_file(resourcePath() + "files/saves/save_points.txt");
-  // points
-  save_file << points;
-  save_file.close();
+std::vector<int> Save::LoadArmors() {
+  std::fstream saveArmorsFile(resourcePath() + "files/saves/save_armor.txt");
+  std::vector<int> armors;
+  armors.resize(3, 0);
+
+  if (!saveArmorsFile.is_open()) {
+    return armors;
+  }
+
+  char buff[50];
+  for (int i = 0; i < armors.size(); i++) {
+    saveArmorsFile.getline(buff, 50);
+    armors[i] = atoi(buff);
+  }
+
+  saveArmorsFile.close();
+  return armors;
 }
 
-int Save::GetPonits() {
-  std::fstream save;
-  save.open(resourcePath() + "files/saves/save_points.txt");
+void Save::SaveArmor(std::vector<int> armors) {
+  std::ofstream saveArmorsFile(resourcePath() + "files/saves/save_armor.txt");
+
+  for (int i = 0; i < armors.size(); i++) {
+    saveArmorsFile << armors[i];
+    saveArmorsFile << std::endl;
+  }
+
+  saveArmorsFile.close();
+}
+
+int Save::LoadPoints() {
+  std::fstream save(resourcePath() + "files/saves/save_points.txt");
   if (!save.is_open()) {
     return 0;
   }
@@ -89,59 +121,25 @@ int Save::GetPonits() {
   return points;
 }
 
-void Save::Load(GameManager &game) {
-  std::ifstream save_file(resourcePath() + "files/saves/save.txt");
-  char buff[50];
-  save_file.getline(buff, 50);
-  this->lvl = atoi(buff);
-  save_file.getline(buff, 50);
-  game.GetPlayer()->ChangeARM(atoi(buff));
-  game.GetPlayer()->AddPoints(GetPonits());
-}
-
-std::vector<int> Save::GetArmors() {
-  std::fstream save;
-  save.open(resourcePath() + "files/saves/save_armor.txt");
-  if (!save.is_open()) {
-    std::vector<int> empty = {0, 0, 0};
-    return empty;
-  }
-
-  char buff[50];
-  std::vector<int> arms = {0, 0, 0};
-  save.getline(buff, 50);
-  arms[0] = atoi(buff);
-  save.getline(buff, 50);
-  arms[1] = atoi(buff);
-  save.getline(buff, 50);
-  arms[2] = atoi(buff);
-  return arms;
-}
-
-void Save::SaveArmor(std::vector<int> vec) {
-  std::ofstream save_armor_file(resourcePath() + "files/saves/save_armor.txt");
-  save_armor_file << vec[0];
-  save_armor_file << std::endl;
-  save_armor_file << vec[1];
-  save_armor_file << std::endl;
-  save_armor_file << vec[2];
-  save_armor_file << std::endl;
-
-  save_armor_file.close();
+void Save::SavePoints(int points) {
+  std::ofstream save_file(resourcePath() + "files/saves/save_points.txt");
+  save_file << points;
+  save_file.close();
 }
 
 std::vector<int> Save::LoadStat() {
   std::fstream saveStatFile(resourcePath() + "files/saves/save_stat.txt");
-  std::vector<int> stat = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+  std::vector<int> stat;
+  stat.resize(14, 0);
 
   if (!saveStatFile.is_open()) {
     return stat;
   } else {
 
     char buff[1000];
-    for (int i = 0; i < 13; i++) {
+    for (int &i : stat) {
       saveStatFile.getline(buff, 1000);
-      stat[i] = atoi(buff);
+      i = atoi(buff);
     }
 
     saveStatFile.close();
@@ -152,10 +150,41 @@ std::vector<int> Save::LoadStat() {
 void Save::SaveStat(const std::vector<int> &stat) {
   std::ofstream saveStatFile(resourcePath() + "files/saves/save_stat.txt");
 
-  for (int i = 0; i < 13; i++) {
-    saveStatFile << stat[i];
+  for (int i : stat) {
+    saveStatFile << i;
     saveStatFile << std::endl;
   }
 
   saveStatFile.close();
+}
+
+std::vector<float> Save::LoadConfig() {
+  std::fstream saveConfigFile(resourcePath() + "files/saves/save_config.txt");
+  std::vector<float> config;
+  config.resize(20, 0);
+
+  if (!saveConfigFile.is_open()) {
+    return config;
+  } else {
+
+    char buff[100];
+    for (float &i : config) {
+      saveConfigFile.getline(buff, 100);
+      i = atoi(buff);
+    }
+
+    saveConfigFile.close();
+    return config;
+  }
+}
+
+void Save::SaveConfig(const std::vector<float> &config) {
+  std::fstream saveConfigFile(resourcePath() + "files/saves/save_config.txt");
+
+  for (float i : config) {
+    saveConfigFile << i;
+    saveConfigFile << std::endl;
+  }
+
+  saveConfigFile.close();
 }

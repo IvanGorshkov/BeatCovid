@@ -5,6 +5,8 @@
 #include "GameManager.h"
 #include "SaveGame.h"
 #include "MusicManager.h"
+#include "InterfaceText.h"
+#include "InterfaceSprite.h"
 
 class Interface {
  public:
@@ -21,4 +23,5 @@ class Interface {
   static bool DiedPolice(sf::RenderWindow &window);
   static bool AboutMenu(sf::RenderWindow &window, MusicManager &menuMusic);
   static bool StatisticMenu(sf::RenderWindow &window, MusicManager &menuMusic);
+  static bool ConfigMenu(sf::RenderWindow &window, MusicManager &menuMusic);
 };

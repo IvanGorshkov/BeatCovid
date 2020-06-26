@@ -10,12 +10,13 @@
 
 class UnSafeTransport : public Transport {
  public:
-  explicit UnSafeTransport(float x, float y, int height, int weight, const std::string &name);
+  explicit UnSafeTransport(float x, float y, int height, int weight, const std::string &name, std::vector<float> config);
   void Update(float time, std::vector<Object> &obj) override;
   float GetDmg();
   float PrintDmg() const;
 
  private:
+  std::vector<float> config;
   float dmg;
   float timerHit;
   void setBus();

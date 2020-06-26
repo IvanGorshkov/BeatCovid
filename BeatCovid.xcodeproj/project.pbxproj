@@ -10,6 +10,8 @@
 		AC0B220C249ED1F6000CE7AC /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = AC0B220B249ED1F6000CE7AC /* ResourcePath.mm */; };
 		AC0B220F249ED1F6000CE7AC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC0B220E249ED1F6000CE7AC /* main.cpp */; };
 		AC5A7D9F24A37B5D00F54A6E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC5A7D9E24A37B5D00F54A6E /* Images.xcassets */; };
+		AC6355DB24A6A27900611736 /* InterfaceSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC6355D924A6A27900611736 /* InterfaceSprite.cpp */; };
+		AC6355DC24A6A27900611736 /* InterfaceText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC6355DA24A6A27900611736 /* InterfaceText.cpp */; };
 		AC86CCC224A3D9C0007D9C2D /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCBF24A3D9C0007D9C2D /* tinyxmlerror.cpp */; };
 		AC86CCC324A3D9C0007D9C2D /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCC024A3D9C0007D9C2D /* tinyxml.cpp */; };
 		AC86CCC424A3D9C0007D9C2D /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCC124A3D9C0007D9C2D /* tinyxmlparser.cpp */; };
@@ -49,6 +51,10 @@
 		AC0B220E249ED1F6000CE7AC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		AC0B221E249ED204000CE7AC /* BeatCovid.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeatCovid.entitlements; sourceTree = "<group>"; };
 		AC5A7D9E24A37B5D00F54A6E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		AC6355D724A6A26500611736 /* InterfaceSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceSprite.h; sourceTree = "<group>"; };
+		AC6355D824A6A26500611736 /* InterfaceText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceText.h; sourceTree = "<group>"; };
+		AC6355D924A6A27900611736 /* InterfaceSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InterfaceSprite.cpp; sourceTree = "<group>"; };
+		AC6355DA24A6A27900611736 /* InterfaceText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InterfaceText.cpp; sourceTree = "<group>"; };
 		AC86CC9F24A3D92A007D9C2D /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interface.h; sourceTree = "<group>"; };
 		AC86CCA024A3D92A007D9C2D /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
 		AC86CCA124A3D92A007D9C2D /* Level_map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level_map.h; sourceTree = "<group>"; };
@@ -174,6 +180,8 @@
 				AC86CCDC24A3DAB5007D9C2D /* GameLables.cpp */,
 				AC86CCDE24A3DAB6007D9C2D /* GameManager.cpp */,
 				AC86CCDD24A3DAB5007D9C2D /* Interface.cpp */,
+				AC6355DA24A6A27900611736 /* InterfaceText.cpp */,
+				AC6355D924A6A27900611736 /* InterfaceSprite.cpp */,
 				AC86CCDF24A3DAB6007D9C2D /* Level_map.cpp */,
 				AC86CCE024A3DAB6007D9C2D /* MusicManager.cpp */,
 				AC86CCE124A3DAB6007D9C2D /* SaveGame.cpp */,
@@ -190,6 +198,8 @@
 				AC86CCA424A3D92A007D9C2D /* GameLables.h */,
 				AC86CCA024A3D92A007D9C2D /* GameManager.h */,
 				AC86CC9F24A3D92A007D9C2D /* Interface.h */,
+				AC6355D824A6A26500611736 /* InterfaceText.h */,
+				AC6355D724A6A26500611736 /* InterfaceSprite.h */,
 				AC86CCA124A3D92A007D9C2D /* Level_map.h */,
 				AC86CCA324A3D92A007D9C2D /* MusicManager.h */,
 				AC86CCA224A3D92A007D9C2D /* SaveGame.h */,
@@ -398,6 +408,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC86CD0824A3DAD9007D9C2D /* AnimationManager.cpp in Sources */,
+				AC6355DC24A6A27900611736 /* InterfaceText.cpp in Sources */,
 				AC86CCE324A3DAB6007D9C2D /* Interface.cpp in Sources */,
 				AC86CCF524A3DAC7007D9C2D /* Enemy.cpp in Sources */,
 				AC86CD0524A3DAD3007D9C2D /* Cap.cpp in Sources */,
@@ -415,6 +426,7 @@
 				AC86CCF724A3DAC7007D9C2D /* OrdinaryEnemies.cpp in Sources */,
 				AC0B220F249ED1F6000CE7AC /* main.cpp in Sources */,
 				AC86CCED24A3DAC1007D9C2D /* Antibodies.cpp in Sources */,
+				AC6355DB24A6A27900611736 /* InterfaceSprite.cpp in Sources */,
 				AC86CCC424A3D9C0007D9C2D /* tinyxmlparser.cpp in Sources */,
 				AC86CCE724A3DAB6007D9C2D /* SaveGame.cpp in Sources */,
 				AC86CCEE24A3DAC1007D9C2D /* Player.cpp in Sources */,
