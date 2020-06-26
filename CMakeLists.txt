@@ -38,6 +38,8 @@ add_executable(beatcovid
         project/src/Entities/Transports/UnSafeTransport.cpp
         project/src/Entities/Sick.cpp
         project/src/MusicManager.cpp
+        project/src/InterfaceText.cpp
+        project/src/InterfaceSprite.cpp
         project/src/Tinyxml/tinyxml.cpp
         project/src/Tinyxml/tinystr.cpp
         project/src/Tinyxml/tinyxmlparser.cpp

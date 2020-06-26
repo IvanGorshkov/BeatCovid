@@ -132,13 +132,11 @@ void GameManager::TakeTransport() {
     if (safeTransportsIt->GetRect().intersects(player->GetRect())) {
       if (safeTransportsIt->IsDrive()) {
         if (safeTransportsIt->GetName() == "auto") {
-          stat[7]++;
-          std::cout << "auto: " << stat[7] << std::endl;
+          stat[8]++;
         }
 
         if (safeTransportsIt->GetName() == "monorail") {
-          stat[8]++;
-          std::cout << "monorail: " << stat[8] << std::endl;
+          stat[9]++;
         }
       }
 
@@ -158,13 +156,11 @@ void GameManager::TakeTransport() {
     if (unSafeTransportsIt->GetRect().intersects(player->GetRect())) {
       if (unSafeTransportsIt->IsDrive()) {
         if (unSafeTransportsIt->GetName() == "bus") {
-          stat[9]++;
-          std::cout << "bus: " << stat[9] << std::endl;
+          stat[10]++;
         }
 
         if (unSafeTransportsIt->GetName() == "metro") {
-          stat[10]++;
-          std::cout << "metro: " << stat[10] << std::endl;
+          stat[11]++;
         }
       }
 
@@ -294,13 +290,11 @@ void GameManager::updateEnemy(float time) {
         player->PenaltyPoints(penalty);
 
         if (penalty != 0) {
-          stat[11]++;
-          std::cout << "penalty: " << stat[3] << std::endl;
+          stat[12]++;
         }
 
         if (penalty == 0) {
-          stat[12]++;
-          std::cout << "caught: " << stat[3] << std::endl;
+          stat[13]++;
         }
       }
     }
@@ -309,23 +303,20 @@ void GameManager::updateEnemy(float time) {
 
     if ((*enemiesIt)->GetDieSound()) {
       if ((*enemiesIt)->GetName() == "police") {
-        stat[3]++;
-        std::cout << "police: " << stat[3] << std::endl;
-      }
-
-      if ((*enemiesIt)->GetName() == "virus") {
         stat[4]++;
-        std::cout << "virus: " << stat[4] << std::endl;
-      }
-
-      if ((*enemiesIt)->GetName() == "delivery") {
-        stat[5]++;
-        std::cout << "delivery: " << stat[5] << std::endl;
       }
 
       if ((*enemiesIt)->GetName() == "breaker") {
+        stat[5]++;
+      }
+
+
+      if ((*enemiesIt)->GetName() == "delivery") {
         stat[6]++;
-        std::cout << "breaker: " << stat[6] << std::endl;
+      }
+
+      if ((*enemiesIt)->GetName() == "virus") {
+        stat[7]++;
       }
 
       music.PlayDiedEnemySound();
@@ -358,15 +349,13 @@ void GameManager::updateAntibodies() {
   for (antibodiesIt = antibodies.begin(); antibodiesIt != antibodies.end(); ++antibodiesIt) {
     if (!antibodiesIt->IsLife()) {
       if (antibodiesIt->GetName() == "antigen") {
-        stat[2]++;
-        std::cout << "antigen: " << stat[2] << std::endl;
+        stat[3]++;
         player->AddPoints(antigenPoints);
         music.PlayGetAntibodiesSound();
       }
 
       if (antibodiesIt->GetName() == "vaccine") {
-        stat[1]++;
-        std::cout << "vaccine: " << stat[1] << std::endl;
+        stat[2]++;
         player->SetVaccine(true);
         music.PlayGetVaccineSound();
       }

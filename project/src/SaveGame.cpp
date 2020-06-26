@@ -129,7 +129,7 @@ void Save::SavePoints(int points) {
 std::vector<int> Save::LoadStat() {
   std::fstream saveStatFile(FILES_PATH"files/saves/save_stat.txt");
   std::vector<int> stat;
-  stat.resize(13, 0);
+  stat.resize(14, 0);
 
   if (!saveStatFile.is_open()) {
     return stat;

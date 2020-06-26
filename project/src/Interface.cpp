@@ -40,11 +40,16 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
       }
     }
 
-    if (event.type == sf::Event::TextEntered)
-    {
-      if (event.text.unicode >= 48 && event.text.unicode <= 57)
-        std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << std::endl;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && sf::Keyboard::isKeyPressed(sf::Keyboard::G)
+        && sf::Keyboard::isKeyPressed(sf::Keyboard::K)) {
+      ConfigMenu(window, menuMusic);
     }
+
+//    if (event.type == sf::Event::TextEntered)
+//    {
+//      if (event.text.unicode >= 48 && event.text.unicode <= 57)
+//        std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << std::endl;
+//    }
 
     sf::Vector2f center = window.getView().getCenter();
     sf::Vector2f size = window.getView().getSize();
@@ -297,6 +302,9 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
   sf::Sprite buyRobeSprite(buyTexture);
 
   sf::Sprite backSprite(backTexture);
+
+  std::string fontPath = FILES_PATH;
+  fontPath += "files/fonts/Inconsolata-Bold.ttf";
 
   sf::Text pointsText;
   sf::Text armText;
@@ -867,6 +875,7 @@ bool Interface::DiedMenu(sf::RenderWindow &window, GameManager &game) {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
       if (menuNum == 1) {
         std::vector<int> stat = game.GetStat();
+        stat[1]++;
         Save::SaveStat(stat);
         return true;
       }
@@ -955,16 +964,14 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game,
         menuMusic.StopBackgroundGameMusic();
         std::vector<int> stat = game.GetStat();
         stat[0]++;
-        std::cout << "patient: " << stat[0] << std::endl;
-        save.SaveStat(stat);
+        Save::SaveStat(stat);
         MainMenu(window, save);
       }
 
       if (menuNum == 2) {
         std::vector<int> stat = game.GetStat();
         stat[0]++;
-        std::cout << "patient: " << stat[0] << std::endl;
-        save.SaveStat(stat);
+        Save::SaveStat(stat);
         StartNewGame(window, save, menuMusic);
         return true;
       }
@@ -1145,166 +1152,92 @@ bool Interface::StatisticMenu(sf::RenderWindow &window, MusicManager &menuMusic)
   backTexture.loadFromFile(FILES_PATH"files/menu/back.png");
   sf::Sprite backSprite(backTexture);
 
-  sf::Text patientText;
-  sf::Text vaccineText;
-  sf::Text antigenText;
-
-  sf::Text policeText;
-  sf::Text virusText;
-  sf::Text deliveryText;
-  sf::Text breakerText;
-
-  sf::Text autoText;
-  sf::Text monorailText;
-  sf::Text busText;
-  sf::Text metroText;
-
-  sf::Text penaltyText;
-  sf::Text caughtText;
-
-  sf::Font font;
-  font.loadFromFile(FILES_PATH"files/fonts/Inconsolata-Bold.ttf");
-
-  patientText.setFont(font);
-  patientText.setCharacterSize(40);
-  patientText.setStyle(sf::Text::Bold);
-  patientText.setFillColor(sf::Color::White);
-
-  vaccineText.setFont(font);
-  vaccineText.setCharacterSize(40);
-  vaccineText.setStyle(sf::Text::Bold);
-  vaccineText.setFillColor(sf::Color::White);
-
-  antigenText.setFont(font);
-  antigenText.setCharacterSize(40);
-  antigenText.setStyle(sf::Text::Bold);
-  antigenText.setFillColor(sf::Color::White);
-
-  policeText.setFont(font);
-  policeText.setCharacterSize(40);
-  policeText.setStyle(sf::Text::Bold);
-  policeText.setFillColor(sf::Color::White);
-
-  virusText.setFont(font);
-  virusText.setCharacterSize(40);
-  virusText.setStyle(sf::Text::Bold);
-  virusText.setFillColor(sf::Color::White);
-
-  deliveryText.setFont(font);
-  deliveryText.setCharacterSize(40);
-  deliveryText.setStyle(sf::Text::Bold);
-  deliveryText.setFillColor(sf::Color::White);
-
-  breakerText.setFont(font);
-  breakerText.setCharacterSize(40);
-  breakerText.setStyle(sf::Text::Bold);
-  breakerText.setFillColor(sf::Color::White);
-
-  autoText.setFont(font);
-  autoText.setCharacterSize(40);
-  autoText.setStyle(sf::Text::Bold);
-  autoText.setFillColor(sf::Color::White);
-
-  monorailText.setFont(font);
-  monorailText.setCharacterSize(40);
-  monorailText.setStyle(sf::Text::Bold);
-  monorailText.setFillColor(sf::Color::White);
-
-  busText.setFont(font);
-  busText.setCharacterSize(40);
-  busText.setStyle(sf::Text::Bold);
-  busText.setFillColor(sf::Color::White);
-
-  metroText.setFont(font);
-  metroText.setCharacterSize(40);
-  metroText.setStyle(sf::Text::Bold);
-  metroText.setFillColor(sf::Color::White);
-
-  penaltyText.setFont(font);
-  penaltyText.setCharacterSize(40);
-  penaltyText.setStyle(sf::Text::Bold);
-  penaltyText.setFillColor(sf::Color::White);
-
-  caughtText.setFont(font);
-  caughtText.setCharacterSize(40);
-  caughtText.setStyle(sf::Text::Bold);
-  caughtText.setFillColor(sf::Color::White);
-
-  sf::Vector2f center = window.getView().getCenter();
-  sf::Vector2f size = window.getView().getSize();
-
-  backSprite.setPosition(center.x - size.x / 2 + 20, center.y - size.y / 2 + 740);
-
-  patientText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 10);
-  vaccineText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 60);
-  antigenText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 110);
-
-  policeText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 160);
-  virusText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 210);
-  deliveryText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 260);
-  breakerText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 310);
-
-  autoText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 360);
-  monorailText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 410);
-  busText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 460);
-  metroText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 510);
-
-  penaltyText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 560);
-  caughtText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 610);
+  std::string fontPath = FILES_PATH;
+  fontPath += "files/fonts/Inconsolata-Bold.ttf";
 
   std::vector<int> stat = Save::LoadStat();
 
   std::ostringstream ssPatient;
   ssPatient << "Patients saved: " << stat[0];
-  patientText.setString(ssPatient.str());
+
+  std::ostringstream ssDied;
+  ssDied << "Hippocrates died: " << stat[1];
 
   std::ostringstream ssVaccine;
-  ssVaccine << "Vaccine collected: " << stat[1];
-  vaccineText.setString(ssVaccine.str());
+  ssVaccine << "Vaccine collected: " << stat[2];
 
   std::ostringstream ssAntigen;
-  ssAntigen << "Antigen collected: " << stat[2];
-  antigenText.setString(ssAntigen.str());
+  ssAntigen << "Antigen collected: " << stat[3];
 
   std::ostringstream ssPolice;
-  ssPolice << "Police cured: " << stat[3];
-  policeText.setString(ssPolice.str());
-
-  std::ostringstream ssVirus;
-  ssVirus << "Virus cured: " << stat[4];
-  virusText.setString(ssVirus.str());
-
-  std::ostringstream ssDelivery;
-  ssDelivery << "Delivery cured: " << stat[5];
-  deliveryText.setString(ssDelivery.str());
+  ssPolice << "Police cured: " << stat[4];
 
   std::ostringstream ssBreaker;
-  ssBreaker << "Breaker cured: " << stat[6];
-  breakerText.setString(ssBreaker.str());
+  ssBreaker << "Breaker cured: " << stat[5];
+
+  std::ostringstream ssDelivery;
+  ssDelivery << "Delivery cured: " << stat[6];
+
+  std::ostringstream ssVirus;
+  ssVirus << "Virus cured: " << stat[7];
 
   std::ostringstream ssAuto;
-  ssAuto << "Ambulance trips: " << stat[7];
-  autoText.setString(ssAuto.str());
+  ssAuto << "Ambulance trips: " << stat[8];
 
   std::ostringstream ssMonorail;
-  ssMonorail << "Monorail trips: " << stat[8];
-  monorailText.setString(ssMonorail.str());
+  ssMonorail << "Monorail trips: " << stat[9];
 
   std::ostringstream ssBus;
-  ssBus << "Bus trips: " << stat[9];
-  busText.setString(ssBus.str());
+  ssBus << "Bus trips: " << stat[10];
 
   std::ostringstream ssMetro;
-  ssMetro << "Metro trips: " << stat[10];
-  metroText.setString(ssMetro.str());
+  ssMetro << "Metro trips: " << stat[11];
 
   std::ostringstream ssPenalty;
-  ssPenalty << "Penalty time: " << stat[11];
-  penaltyText.setString(ssPenalty.str());
+  ssPenalty << "Penalty time: " << stat[12];
 
   std::ostringstream ssCaught;
-  ssCaught << "Caught time: " << stat[12];
-  caughtText.setString(ssCaught.str());
+  ssCaught << "Caught time: " << stat[13];
+
+  sf::Vector2f center = window.getView().getCenter();
+  sf::Vector2f size = window.getView().getSize();
+
+  float xPosition = center.x - size.x / 2;
+  float yPosition = center.y - size.y / 2;
+
+  float left = 150;
+  float right = 700;
+  float y = 170;
+
+  backSprite.setPosition(xPosition + 20, yPosition + 740);
+
+  InterfaceText patientText(fontPath, 40, xPosition + left, yPosition + y, ssPatient);
+  InterfaceText diedText(fontPath, 40, xPosition + right, yPosition + y, ssDied);
+  y+= 60;
+
+  InterfaceText vaccineText(fontPath, 40, xPosition + left, yPosition + y, ssVaccine);
+  InterfaceText antigenText(fontPath, 40, xPosition + right, yPosition + y, ssAntigen);
+  y+= 60;
+
+  InterfaceText policeText(fontPath, 40, xPosition + left, yPosition + y, ssPolice);
+  InterfaceText breakerText(fontPath, 40, xPosition + right, yPosition + y, ssBreaker);
+  y+= 60;
+
+  InterfaceText deliveryText(fontPath, 40, xPosition + left, yPosition + y, ssDelivery);
+  InterfaceText virusText(fontPath, 40, xPosition + right, yPosition + y, ssVirus);
+  y+= 60;
+
+  InterfaceText autoText(fontPath, 40, xPosition + left, yPosition + y, ssAuto);
+  InterfaceText monorailText(fontPath, 40, xPosition + right, yPosition + y, ssMonorail);
+  y+= 60;
+
+  InterfaceText busText(fontPath, 40, xPosition + left, yPosition + y, ssBus);
+  InterfaceText metroText(fontPath, 40, xPosition + right, yPosition + y, ssMetro);
+  y+= 60;
+
+  InterfaceText penaltyText(fontPath, 40, xPosition + left, yPosition + y, ssPenalty);
+  InterfaceText caughtText(fontPath, 40, xPosition + right, yPosition + y, ssCaught);
+  y+= 60;
 
   while (window.isOpen()) {
     sf::Event event{};
@@ -1338,22 +1271,209 @@ bool Interface::StatisticMenu(sf::RenderWindow &window, MusicManager &menuMusic)
 
     window.draw(backSprite);
 
-    window.draw(patientText);
-    window.draw(vaccineText);
-    window.draw(antigenText);
+    patientText.Draw(window);
+    diedText.Draw(window);
+    vaccineText.Draw(window);
+    antigenText.Draw(window);
 
-    window.draw(policeText);
-    window.draw(virusText);
-    window.draw(deliveryText);
-    window.draw(breakerText);
+    policeText.Draw(window);
+    virusText.Draw(window);
+    deliveryText.Draw(window);
+    breakerText.Draw(window);
 
-    window.draw(autoText);
-    window.draw(monorailText);
-    window.draw(busText);
-    window.draw(metroText);
+    autoText.Draw(window);
+    monorailText.Draw(window);
+    busText.Draw(window);
+    metroText.Draw(window);
 
-    window.draw(penaltyText);
-    window.draw(caughtText);
+    penaltyText.Draw(window);
+    caughtText.Draw(window);
+
+    window.display();
+  }
+
+  return false;
+}
+
+bool Interface::ConfigMenu(sf::RenderWindow &window, MusicManager &menuMusic) {
+  sf::Texture backTexture;
+  backTexture.loadFromFile(FILES_PATH"files/menu/back.png");
+  sf::Sprite backSprite(backTexture);
+
+  std::string fontPath = FILES_PATH;
+  fontPath += "files/fonts/Inconsolata-Bold.ttf";
+
+  int points = Save::LoadPoints();
+  std::vector<int> armors = Save::LoadArmors();
+  std::vector<float> config = Save::LoadConfig();
+
+  std::ostringstream ssCurrentLvl;
+  ssCurrentLvl << "Current lvl: " << 0;
+
+  std::ostringstream ssPlayerHp;
+  ssPlayerHp << "Player hp: " << config[0];
+
+  std::ostringstream ssCurrentPoints;
+  ssCurrentPoints << "Current points: " << points;
+
+  std::ostringstream ssAntigenPoints;
+  ssAntigenPoints << "Antigen Points: " << config[1];
+
+  std::ostringstream ssCapLvl;
+  ssCapLvl << "Cap lvl: " << armors[0];
+
+  std::ostringstream ssShoesLvl;
+  ssShoesLvl << "Shoes lvl: " << armors[1];
+
+  std::ostringstream ssRobeLvl;
+  ssRobeLvl << "Robe lvl: " << armors[2];
+
+  std::ostringstream ssPoliceHp;
+  ssPoliceHp << "Police hp: " << config[2];
+
+  std::ostringstream ssPoliceDmg;
+  ssPoliceDmg << "Police dmg: " << config[3];
+
+  std::ostringstream ssPolicePenalty;
+  ssPolicePenalty << "Police penalty: " << config[4];
+
+  std::ostringstream ssBreakerHp;
+  ssBreakerHp << "Breaker hp: " << config[5];
+
+  std::ostringstream ssBreakerDmg;
+  ssBreakerDmg << "Breaker dmg: " << config[6];
+
+  std::ostringstream ssDeliveryHp;
+  ssDeliveryHp << "Delivery hp: " << config[7];
+
+  std::ostringstream ssDeliveryDmg;
+  ssDeliveryDmg << "Delivery dmg: " << config[8];
+
+  std::ostringstream ssVirusHp;
+  ssVirusHp << "Virus hp: " << config[9];
+
+  std::ostringstream ssVirusDmg;
+  ssVirusDmg << "Virus dmg: " << config[10];
+
+  std::ostringstream ssAutoFuel;
+  ssAutoFuel << "Ambulance fuel: " << config[11];
+
+  std::ostringstream ssMonorailFuel;
+  ssMonorailFuel << "Monorail fuel: " << config[12];
+
+  std::ostringstream ssBusDmg;
+  ssBusDmg << "Bus dmg: " << config[13];
+
+  std::ostringstream ssMetroDmg;
+  ssMetroDmg << "Metro dmg: " << config[14];
+
+  sf::Vector2f center = window.getView().getCenter();
+  sf::Vector2f size = window.getView().getSize();
+
+  float xPosition = center.x - size.x / 2;
+  float yPosition = center.y - size.y / 2;
+
+  float left = 150;
+  float right = 700;
+  float y = 100;
+
+  backSprite.setPosition(xPosition + 20, yPosition + 740);
+
+  InterfaceText currentLvlText(fontPath, 40, xPosition + left, yPosition + y, ssCurrentLvl);
+  InterfaceText playerHpText(fontPath, 40, xPosition + right, yPosition + y, ssPlayerHp);
+  y += 60;
+
+  InterfaceText currentPointsText(fontPath, 40, xPosition + left, yPosition + y, ssCurrentPoints);
+  InterfaceText antigenPointsText(fontPath, 40, xPosition + right, yPosition + y, ssAntigenPoints);
+  y += 60;
+
+  InterfaceText capLvlText(fontPath, 40, xPosition + left, yPosition + y, ssCapLvl);
+  InterfaceText shoesLvlText(fontPath, 40, xPosition + right, yPosition + y, ssShoesLvl);
+  y += 60;
+
+  InterfaceText robeLvlText(fontPath, 40, xPosition + left, yPosition + y, ssRobeLvl);
+  InterfaceText policeHpText(fontPath, 40, xPosition + right, yPosition + y, ssPoliceHp);
+  y += 60;
+
+  InterfaceText policeDmgText(fontPath, 40, xPosition + left, yPosition + y, ssPoliceDmg);
+  InterfaceText policePenaltyText(fontPath, 40, xPosition + right, yPosition + y, ssPolicePenalty);
+  y += 60;
+
+  InterfaceText breakerHpText(fontPath, 40, xPosition + left, yPosition + y, ssBreakerHp);
+  InterfaceText breakerDmgText(fontPath, 40, xPosition + right, yPosition + y, ssBreakerDmg);
+  y += 60;
+
+  InterfaceText deliveryHpText(fontPath, 40, xPosition + left, yPosition + y, ssDeliveryHp);
+  InterfaceText deliveryDmgText(fontPath, 40, xPosition + right, yPosition + y, ssDeliveryDmg);
+  y += 60;
+
+  InterfaceText virusHpText(fontPath, 40, xPosition + left, yPosition + y, ssVirusHp);
+  InterfaceText virusDmgText(fontPath, 40, xPosition + right, yPosition + y, ssVirusDmg);
+  y += 60;
+
+  InterfaceText autoFuelText(fontPath, 40, xPosition + left, yPosition + y, ssAutoFuel);
+  InterfaceText monorailFuelText(fontPath, 40, xPosition + right, yPosition + y, ssMonorailFuel);
+  y += 60;
+
+  InterfaceText busDmgText(fontPath, 40, xPosition + left, yPosition + y, ssBusDmg);
+  InterfaceText metroDmgText(fontPath, 40, xPosition + right, yPosition + y, ssMetroDmg);
+  y += 60;
+
+  while (window.isOpen()) {
+    sf::Event event{};
+    while (window.pollEvent(event)) {
+      if (event.type == sf::Event::Closed) {
+        window.close();
+      }
+    }
+
+    backSprite.setColor(sf::Color::White);
+
+    int menuNum = 0;
+
+    window.clear(sf::Color(68, 101, 219));
+
+    if (sf::IntRect(20,
+                    740,
+                    backSprite.getTextureRect().width,
+                    backSprite.getTextureRect().height).
+        contains(sf::Mouse::getPosition(window))) {
+
+      backSprite.setColor(sf::Color::Red);
+      menuNum = 1;
+    }
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+      if (menuNum == 1) {
+        return true;
+      }
+    }
+
+    window.draw(backSprite);
+
+    currentLvlText.Draw(window);
+    playerHpText.Draw(window);
+    currentPointsText.Draw(window);
+    antigenPointsText.Draw(window);
+
+    capLvlText.Draw(window);
+    shoesLvlText.Draw(window);
+    robeLvlText.Draw(window);
+
+    policeHpText.Draw(window);
+    policeDmgText.Draw(window);
+    policePenaltyText.Draw(window);
+    breakerHpText.Draw(window);
+    breakerDmgText.Draw(window);
+    deliveryHpText.Draw(window);
+    deliveryDmgText.Draw(window);
+    virusHpText.Draw(window);
+    virusDmgText.Draw(window);
+
+    autoFuelText.Draw(window);
+    monorailFuelText.Draw(window);
+    busDmgText.Draw(window);
+    metroDmgText.Draw(window);
 
     window.display();
   }

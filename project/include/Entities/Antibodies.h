@@ -4,7 +4,7 @@
 #include "Entity.h"
 #include "Player.h"
 
-#define ANTIGEN_POINTS 100
+//#define ANTIGEN_POINTS 100
 
 class Antibodies : public Entity {
  public:
