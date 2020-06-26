@@ -1,9 +1,9 @@
 #include "Player.h"
 #include <iostream>
 
-Player::Player(const Object &position, std::vector<int> armors)
+Player::Player(const Object &position, std::vector<int> armors, float hp)
     : Entity(position.rect.left, position.rect.top, 0.1, 0.1, 64, 64),
-      hp(100),
+      hp(hp),
       max_jump(0),
       STATE(STAY),
       isGround(true),

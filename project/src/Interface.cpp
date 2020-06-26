@@ -40,6 +40,12 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
       }
     }
 
+    if (event.type == sf::Event::TextEntered)
+    {
+      if (event.text.unicode >= 48 && event.text.unicode <= 57)
+        std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << std::endl;
+    }
+
     sf::Vector2f center = window.getView().getCenter();
     sf::Vector2f size = window.getView().getSize();
 
@@ -369,10 +375,10 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
   costRobeText.setPosition(center.x - size.x / 2 + 400, center.y - size.y / 2 + 710);
 
   while (window.isOpen()) {
-    std::vector<int> arm_vector = Save::GetArmors();
+    std::vector<int> arm_vector = Save::LoadArmors();
 
     std::ostringstream ssPoints;
-    int money = Save::GetPonits();
+    int money = Save::LoadPoints();
     ssPoints << "Points: " << money;
     pointsText.setString(ssPoints.str());
 
@@ -735,7 +741,7 @@ void Interface::StartNewGame(sf::RenderWindow &window, Save &save, MusicManager 
 
   Level lvl;
   lvl.LoadFromFile(save.GetLvlName());
-  GameManager game(lvl, Save::GetArmors(), menuMusic, Save::LoadStat());
+  GameManager game(lvl, Save::LoadArmors(), menuMusic, Save::LoadStat(), Save::LoadConfig());
   sf::Clock clock;
   if (Save::SaveExists()) {
     save.Load(game);

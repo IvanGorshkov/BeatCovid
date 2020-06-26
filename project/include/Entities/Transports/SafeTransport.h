@@ -10,11 +10,12 @@
 
 class SafeTransport : public Transport {
  public:
-  explicit SafeTransport(float x, float y, int height, int weight, const std::string &name);
+  explicit SafeTransport(float x, float y, int height, int weight, const std::string &name, std::vector<float> config);
   void Update(float time, std::vector<Object> &obj) override;
   float GetFuel() const;
 
  private:
+  std::vector<float> config;
   float fuel;
   void setAuto();
   void setMonorail();

@@ -1,23 +1,23 @@
 #include "GameManager.h"
-
 #include "cmath"
 #include "Interface.h"
 
-GameManager::GameManager(Level &lvl, const std::vector<int> &arms, MusicManager &music, const std::vector<int> &stat)
+GameManager::GameManager(Level &lvl, const std::vector<int> &arms, MusicManager &music, std::vector<int> stat, const std::vector<float> &config)
     : obj(lvl.GetAllObjects()),
       music(music),
-      stat(stat),
-      player(std::make_shared<Player>(lvl.GetObject("player"), arms)) {
+      stat(std::move(stat)),
+      antigenPoints(config[1]),
+      player(std::make_shared<Player>(lvl.GetObject("player"), arms, config[0])) {
 
   for (auto &i : obj) {
     if (i.name == "breaker" || i.name == "delivery" || i.name == "virus") {
-      enemies.push_back(std::make_shared<OrdinaryEnemies>(i.rect.left, i.rect.top, 40, 64, i.name));
+      enemies.push_back(std::make_shared<OrdinaryEnemies>(i.rect.left, i.rect.top, 40, 64, i.name, config));
       i.rect.width = 40;
       i.rect.height = 64;
     }
 
     if (i.name == "police") {
-      enemies.push_back(std::make_shared<Police>(i.rect.left, i.rect.top, 40, 64));
+      enemies.push_back(std::make_shared<Police>(i.rect.left, i.rect.top, 40, 64, config[2], config[3], config[4]));
       i.rect.width = 40;
       i.rect.height = 64;
     }
@@ -27,19 +27,19 @@ GameManager::GameManager(Level &lvl, const std::vector<int> &arms, MusicManager 
     }
 
     if (i.name == "auto") {
-      safeTransports.emplace_back(i.rect.left, i.rect.top - 10, 200, 100, i.name);
+      safeTransports.emplace_back(i.rect.left, i.rect.top - 10, 200, 100, i.name, config);
     }
 
     if (i.name == "monorail") {
-      safeTransports.emplace_back(i.rect.left, i.rect.top + 40, 976, 140, i.name);
+      safeTransports.emplace_back(i.rect.left, i.rect.top + 40, 976, 140, i.name, config);
     }
 
     if (i.name == "bus") {
-      unSafeTransports.emplace_back(i.rect.left, i.rect.top - 10, 393, 100, i.name);
+      unSafeTransports.emplace_back(i.rect.left, i.rect.top - 10, 393, 100, i.name, config);
     }
 
     if (i.name == "metro") {
-      unSafeTransports.emplace_back(i.rect.left, i.rect.top - 15, 924, 140, i.name);
+      unSafeTransports.emplace_back(i.rect.left, i.rect.top - 15, 924, 140, i.name, config);
     }
 
     if (i.name == "finish") {
@@ -360,7 +360,7 @@ void GameManager::updateAntibodies() {
       if (antibodiesIt->GetName() == "antigen") {
         stat[2]++;
         std::cout << "antigen: " << stat[2] << std::endl;
-        player->AddPoints(ANTIGEN_POINTS);
+        player->AddPoints(antigenPoints);
         music.PlayGetAntibodiesSound();
       }
 

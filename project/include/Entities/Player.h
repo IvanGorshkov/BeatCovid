@@ -18,7 +18,7 @@ enum PLAYER_STATE {
 
 class Player : public Entity {
  public:
-  explicit Player(const Object &position, std::vector<int> armors);
+  explicit Player(const Object &position, std::vector<int> armors, float hp);
   bool GetDir() const;
   void KeyCheck();
   float GetHp() const;

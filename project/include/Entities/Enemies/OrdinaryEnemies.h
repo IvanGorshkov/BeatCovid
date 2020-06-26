@@ -11,9 +11,10 @@
 
 class OrdinaryEnemies : public Enemy {
  public:
-  explicit OrdinaryEnemies(float x, float y, int height, int weight, const std::string &name);
+  explicit OrdinaryEnemies(float x, float y, int height, int weight, const std::string &name, std::vector<float> config);
 
  private:
+  std::vector<float> config;
   void setBreaker();
   void setDelivery();
   void setVirus();

@@ -1,7 +1,11 @@
 #include "UnSafeTransport.h"
 
-UnSafeTransport::UnSafeTransport(float x, float y, int height, int weight, const std::string &name)
-    : Transport(x, y, height, weight, name) {
+#include <utility>
+
+UnSafeTransport::UnSafeTransport(float x, float y, int height, int weight, const std::string &name, std::vector<float> config)
+    : Transport(x, y, height, weight, name),
+    config(std::move(config)) {
+
   if (name == "bus") {
     setBus();
   }
@@ -51,7 +55,7 @@ float UnSafeTransport::PrintDmg() const {
 
 void UnSafeTransport::setBus() {
   dx = BUS_DX;
-  dmg = BUS_DMG;
+  dmg = config[13];
 
   sf::Texture autoTexture;
   autoTexture.loadFromFile(FILES_PATH"files/images/bus.png");
@@ -62,7 +66,7 @@ void UnSafeTransport::setBus() {
 
 void UnSafeTransport::setMetro() {
   dx = METRO_DX;
-  dmg = METRO_DMG;
+  dmg = config[14];
 
   sf::Texture autoTexture;
   autoTexture.loadFromFile(FILES_PATH"files/images/metro.png");

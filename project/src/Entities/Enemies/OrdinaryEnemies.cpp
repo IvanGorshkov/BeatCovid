@@ -1,7 +1,10 @@
 #include "OrdinaryEnemies.h"
 
-OrdinaryEnemies::OrdinaryEnemies(float x, float y, int height, int weight, const std::string &name)
-    : Enemy(x, y, height, weight, name) {
+#include <utility>
+
+OrdinaryEnemies::OrdinaryEnemies(float x, float y, int height, int weight, const std::string &name, std::vector<float> config)
+    : Enemy(x, y, height, weight, name),
+    config(std::move(config)) {
 
   if (name == "breaker") {
     setBreaker();
@@ -17,7 +20,7 @@ OrdinaryEnemies::OrdinaryEnemies(float x, float y, int height, int weight, const
 }
 
 void OrdinaryEnemies::setBreaker() {
-  SetHpGmg(BREAKER_HP, BREAKER_DMG);
+  SetHpGmg(config[5], config[6]);
   sf::Texture breakerTexture;
   breakerTexture.loadFromFile(FILES_PATH"files/images/breaker.png");
   anim = AnimationManager(breakerTexture);
@@ -28,7 +31,7 @@ void OrdinaryEnemies::setBreaker() {
 }
 
 void OrdinaryEnemies::setDelivery() {
-  SetHpGmg(DELIVERY_HP, DELIVERY_DMG);
+  SetHpGmg(config[7], config[8]);
   sf::Texture deliveryTexture;
   deliveryTexture.loadFromFile(FILES_PATH"files/images/delivery.png");
   anim = AnimationManager(deliveryTexture);
@@ -39,7 +42,7 @@ void OrdinaryEnemies::setDelivery() {
 }
 
 void OrdinaryEnemies::setVirus() {
-  SetHpGmg(VIRUS_HP, VIRUS_DMG);
+  SetHpGmg(config[9], config[10]);
   sf::Texture virusTexture;
   virusTexture.loadFromFile(FILES_PATH"files/images/virus.png");
   anim = AnimationManager(virusTexture);
