@@ -20,4 +20,5 @@ class Interface {
   static bool PenaltyPolice(sf::RenderWindow &window);
   static bool DiedPolice(sf::RenderWindow &window);
   static bool AboutMenu(sf::RenderWindow &window, MusicManager &menuMusic);
+  static bool StatisticMenu(sf::RenderWindow &window, MusicManager &menuMusic);
 };

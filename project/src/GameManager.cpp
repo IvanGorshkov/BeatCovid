@@ -3,7 +3,7 @@
 #include "cmath"
 #include "Interface.h"
 
-GameManager::GameManager(Level &lvl, const std::vector<int> &arms, MusicManager &music, const std::vector<int>& stat)
+GameManager::GameManager(Level &lvl, const std::vector<int> &arms, MusicManager &music, const std::vector<int> &stat)
     : obj(lvl.GetAllObjects()),
       music(music),
       stat(stat),
@@ -290,7 +290,18 @@ void GameManager::updateEnemy(float time) {
   for (enemiesIt = enemies.begin(); enemiesIt != enemies.end(); ++enemiesIt) {
     if (auto police = std::dynamic_pointer_cast<Police>(*enemiesIt)) {
       if (!police->ISMetUser() && police->GetRect().intersects(player->GetRect())) {
-        player->PenaltyPoints(police->Penatly());
+        int penalty = police->Penatly();
+        player->PenaltyPoints(penalty);
+
+        if (penalty != 0) {
+          stat[11]++;
+          std::cout << "penalty: " << stat[3] << std::endl;
+        }
+
+        if (penalty == 0) {
+          stat[12]++;
+          std::cout << "caught: " << stat[3] << std::endl;
+        }
       }
     }
 

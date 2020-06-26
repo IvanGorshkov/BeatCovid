@@ -5,26 +5,29 @@
 
 // Вывод главного меню
 void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
-  sf::Texture BackImageTexture,
-      NewGameTexture,
-      LoadGameTexture,
-      ShopTexture,
-      ExitTexture,
-      AboutTexture;
+  sf::Texture backImageTexture,
+      newGameTexture,
+      loadGameTexture,
+      statisticTexture,
+      shopTexture,
+      exitTexture,
+      aboutTexture;
 
-  BackImageTexture.loadFromFile(FILES_PATH"files/menu/back_image.png");
-  NewGameTexture.loadFromFile(FILES_PATH"files/menu/new_game.png");
-  LoadGameTexture.loadFromFile(FILES_PATH"files/menu/load_game.png");
-  ShopTexture.loadFromFile(FILES_PATH"files/menu/shop.png");
-  ExitTexture.loadFromFile(FILES_PATH"files/menu/exit.png");
-  AboutTexture.loadFromFile(FILES_PATH"files/menu/about.png");
+  backImageTexture.loadFromFile(FILES_PATH"files/menu/back_image.png");
+  newGameTexture.loadFromFile(FILES_PATH"files/menu/new_game.png");
+  loadGameTexture.loadFromFile(FILES_PATH"files/menu/load_game.png");
+  shopTexture.loadFromFile(FILES_PATH"files/menu/shop.png");
+  exitTexture.loadFromFile(FILES_PATH"files/menu/exit.png");
+  aboutTexture.loadFromFile(FILES_PATH"files/menu/about.png");
+  statisticTexture.loadFromFile(FILES_PATH"files/menu/statistic.png");
 
-  sf::Sprite BackImageSprite(BackImageTexture);
-  sf::Sprite NewGameSprite(NewGameTexture);
-  sf::Sprite LoadGameSprite(LoadGameTexture);
-  sf::Sprite ShopSprite(ShopTexture);
-  sf::Sprite ExitSprite(ExitTexture);
-  sf::Sprite AboutSprite(AboutTexture);
+  sf::Sprite backImageSprite(backImageTexture);
+  sf::Sprite newGameSprite(newGameTexture);
+  sf::Sprite loadGameSprite(loadGameTexture);
+  sf::Sprite statisticSprite(statisticTexture);
+  sf::Sprite shopSprite(shopTexture);
+  sf::Sprite exitSprite(exitTexture);
+  sf::Sprite aboutSprite(aboutTexture);
 
   MusicManager menuMusic;
   menuMusic.PlayBackgroundMenuMusic();
@@ -40,18 +43,20 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
     sf::Vector2f center = window.getView().getCenter();
     sf::Vector2f size = window.getView().getSize();
 
-    BackImageSprite.setPosition(center.x - size.x / 2 + 380, center.y - size.y / 2 + 0);
-    NewGameSprite.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 30);
-    LoadGameSprite.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 90);
-    ShopSprite.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 150);
-    ExitSprite.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 210);
-    AboutSprite.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 700);
+    backImageSprite.setPosition(center.x - size.x / 2 + 380, center.y - size.y / 2 + 0);
+    newGameSprite.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 30);
+    loadGameSprite.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 90);
+    statisticSprite.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 150);
+    shopSprite.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 210);
+    exitSprite.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 270);
+    aboutSprite.setPosition(center.x - size.x / 2 + 100, center.y - size.y / 2 + 700);
 
-    NewGameSprite.setColor(sf::Color::White);
-    LoadGameSprite.setColor(sf::Color::White);
-    ShopSprite.setColor(sf::Color::White);
-    ExitSprite.setColor(sf::Color::White);
-    AboutSprite.setColor(sf::Color::White);
+    newGameSprite.setColor(sf::Color::White);
+    loadGameSprite.setColor(sf::Color::White);
+    statisticSprite.setColor(sf::Color::White);
+    shopSprite.setColor(sf::Color::White);
+    exitSprite.setColor(sf::Color::White);
+    aboutSprite.setColor(sf::Color::White);
 
     int menuNum = 0;
 
@@ -59,52 +64,62 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
 
     if (sf::IntRect(100,
                     30,
-                    NewGameSprite.getTextureRect().width,
-                    NewGameSprite.getTextureRect().height).
+                    newGameSprite.getTextureRect().width,
+                    newGameSprite.getTextureRect().height).
         contains(sf::Mouse::getPosition(window))) {
 
-      NewGameSprite.setColor(sf::Color::Red);
+      newGameSprite.setColor(sf::Color::Red);
       menuNum = 1;
     }
 
     if (sf::IntRect(100,
                     90,
-                    LoadGameSprite.getTextureRect().width,
-                    LoadGameSprite.getTextureRect().height).
+                    loadGameSprite.getTextureRect().width,
+                    loadGameSprite.getTextureRect().height).
         contains(sf::Mouse::getPosition(window))) {
 
-      LoadGameSprite.setColor(sf::Color::Red);
+      loadGameSprite.setColor(sf::Color::Red);
       menuNum = 2;
     }
 
     if (sf::IntRect(100,
                     150,
-                    ShopSprite.getTextureRect().width,
-                    ShopSprite.getTextureRect().height).
+                    statisticSprite.getTextureRect().width,
+                    statisticSprite.getTextureRect().height).
         contains(sf::Mouse::getPosition(window))) {
 
-      ShopSprite.setColor(sf::Color::Red);
+      statisticSprite.setColor(sf::Color::Red);
       menuNum = 3;
     }
 
     if (sf::IntRect(100,
                     210,
-                    ExitSprite.getTextureRect().width,
-                    ExitSprite.getTextureRect().height).
+                    shopSprite.getTextureRect().width,
+                    shopSprite.getTextureRect().height).
         contains(sf::Mouse::getPosition(window))) {
 
-      ExitSprite.setColor(sf::Color::Red);
+      shopSprite.setColor(sf::Color::Red);
       menuNum = 4;
     }
 
     if (sf::IntRect(100,
-                    700,
-                    AboutSprite.getTextureRect().width,
-                    AboutSprite.getTextureRect().height).
+                    270,
+                    exitSprite.getTextureRect().width,
+                    exitSprite.getTextureRect().height).
         contains(sf::Mouse::getPosition(window))) {
 
-      AboutSprite.setColor(sf::Color::Red);
+      exitSprite.setColor(sf::Color::Red);
       menuNum = 5;
+    }
+
+    if (sf::IntRect(100,
+                    700,
+                    aboutSprite.getTextureRect().width,
+                    aboutSprite.getTextureRect().height).
+        contains(sf::Mouse::getPosition(window))) {
+
+      aboutSprite.setColor(sf::Color::Red);
+      menuNum = 6;
     }
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
@@ -121,24 +136,30 @@ void Interface::MainMenu(sf::RenderWindow &window, Save &save) {
       }
 
       if (menuNum == 3) {
-        Shop(window, save);
+        StatisticMenu(window, menuMusic);
       }
 
       if (menuNum == 4) {
-        window.close();
+        Shop(window, save);
       }
 
       if (menuNum == 5) {
-//        AboutMenu(window, menuMusic)
+        window.close();
       }
+
+      if (menuNum == 6) {
+//        AboutMenu(window, menuMusic);
+      }
+
     }
 
-    window.draw(BackImageSprite);
-    window.draw(NewGameSprite);
-    window.draw(LoadGameSprite);
-    window.draw(ShopSprite);
-    window.draw(ExitSprite);
-    window.draw(AboutSprite);
+    window.draw(backImageSprite);
+    window.draw(newGameSprite);
+    window.draw(loadGameSprite);
+    window.draw(shopSprite);
+    window.draw(exitSprite);
+    window.draw(aboutSprite);
+    window.draw(statisticSprite);
     window.display();
   }
 }
@@ -249,30 +270,30 @@ bool Interface::NewGameWarningMenu(sf::RenderWindow &window, MusicManager &menuM
 }
 
 bool Interface::Shop(sf::RenderWindow &window, Save &save) {
-  sf::Texture ArmorListTexture,
-      ArmorsTexture,
-      BuyTexture,
-      BackTexture;
+  sf::Texture armorListTexture,
+      armorsTexture,
+      buyTexture,
+      backTexture;
 
-  ArmorListTexture.loadFromFile(FILES_PATH"files/menu/armor_list.png");
-  ArmorsTexture.loadFromFile(FILES_PATH"files/menu/armors.png");
-  BuyTexture.loadFromFile(FILES_PATH"files/menu/upgrade.png");
-  BackTexture.loadFromFile(FILES_PATH"files/menu/back.png");
+  armorListTexture.loadFromFile(FILES_PATH"files/menu/armor_list.png");
+  armorsTexture.loadFromFile(FILES_PATH"files/menu/armors.png");
+  buyTexture.loadFromFile(FILES_PATH"files/menu/upgrade.png");
+  backTexture.loadFromFile(FILES_PATH"files/menu/back.png");
 
-  sf::Sprite ArmorListSprite(ArmorListTexture);
+  sf::Sprite armorListSprite(armorListTexture);
 
-  sf::Sprite ArmorShoesSprite(ArmorsTexture);
-  sf::Sprite ArmorCapSprite(ArmorsTexture);
-  sf::Sprite ArmorRobeSprite(ArmorsTexture);
+  sf::Sprite armorShoesSprite(armorsTexture);
+  sf::Sprite armorCapSprite(armorsTexture);
+  sf::Sprite armorRobeSprite(armorsTexture);
 
-  sf::Sprite BuyShoesSprite(BuyTexture);
-  sf::Sprite BuyCapSprite(BuyTexture);
-  sf::Sprite BuyRobeSprite(BuyTexture);
+  sf::Sprite buyShoesSprite(buyTexture);
+  sf::Sprite buyCapSprite(buyTexture);
+  sf::Sprite buyRobeSprite(buyTexture);
 
-  sf::Sprite BackSprite(BackTexture);
+  sf::Sprite backSprite(backTexture);
 
-  sf::Text PointsText;
-  sf::Text ArmText;
+  sf::Text pointsText;
+  sf::Text armText;
 
   sf::Text lvlShoesText;
   sf::Text lvlCapText;
@@ -285,15 +306,15 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
   sf::Font font;
   font.loadFromFile(FILES_PATH"files/fonts/Inconsolata-Bold.ttf");
 
-  PointsText.setFont(font);
-  PointsText.setCharacterSize(40);
-  PointsText.setStyle(sf::Text::Bold);
-  PointsText.setFillColor(sf::Color::White);
+  pointsText.setFont(font);
+  pointsText.setCharacterSize(40);
+  pointsText.setStyle(sf::Text::Bold);
+  pointsText.setFillColor(sf::Color::White);
 
-  ArmText.setFont(font);
-  ArmText.setCharacterSize(40);
-  ArmText.setStyle(sf::Text::Bold);
-  ArmText.setFillColor(sf::Color::White);
+  armText.setFont(font);
+  armText.setCharacterSize(40);
+  armText.setStyle(sf::Text::Bold);
+  armText.setFillColor(sf::Color::White);
 
   lvlShoesText.setFont(font);
   lvlShoesText.setCharacterSize(40);
@@ -328,16 +349,16 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
 
-  ArmorListSprite.setPosition(center.x - size.x / 2 + 250, center.y - size.y / 2 + 80);
+  armorListSprite.setPosition(center.x - size.x / 2 + 250, center.y - size.y / 2 + 80);
 
-  BuyCapSprite.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 160);
-  BuyShoesSprite.setPosition(center.x - size.x / 2 + 1010, center.y - size.y / 2 + 160);
-  BuyRobeSprite.setPosition(center.x - size.x / 2 + 370, center.y - size.y / 2 + 580);
+  buyCapSprite.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 160);
+  buyShoesSprite.setPosition(center.x - size.x / 2 + 1010, center.y - size.y / 2 + 160);
+  buyRobeSprite.setPosition(center.x - size.x / 2 + 370, center.y - size.y / 2 + 580);
 
-  BackSprite.setPosition(center.x - size.x / 2 + 20, center.y - size.y / 2 + 740);
+  backSprite.setPosition(center.x - size.x / 2 + 20, center.y - size.y / 2 + 740);
 
-  PointsText.setPosition(center.x - size.x / 2 + 800, center.y - size.y / 2 + 13);
-  ArmText.setPosition(center.x - size.x / 2 + 300, center.y - size.y / 2 + 13);
+  pointsText.setPosition(center.x - size.x / 2 + 800, center.y - size.y / 2 + 13);
+  armText.setPosition(center.x - size.x / 2 + 300, center.y - size.y / 2 + 13);
 
   lvlCapText.setPosition(center.x - size.x / 2 + 300, center.y - size.y / 2 + 240);
   lvlShoesText.setPosition(center.x - size.x / 2 + 840, center.y - size.y / 2 + 240);
@@ -353,11 +374,11 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
     std::ostringstream ssPoints;
     int money = Save::GetPonits();
     ssPoints << "Points: " << money;
-    PointsText.setString(ssPoints.str());
+    pointsText.setString(ssPoints.str());
 
     std::ostringstream ssArm;
     ssArm << "ARM: " << arm_vector[0] + arm_vector[1] + arm_vector[2];
-    ArmText.setString(ssArm.str());
+    armText.setString(ssArm.str());
 
     std::ostringstream ssCap;
     ssCap << "LVL:" << arm_vector[0];
@@ -395,61 +416,61 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
     }
     costRobeText.setString(ssRobeCost.str());
 
-    ArmorCapSprite.setPosition(center.x - size.x / 2 + 260, center.y - size.y / 2 + 140);
-    ArmorCapSprite.setTextureRect(sf::Rect<int>(204 * arm_vector[0], 41, 196, 85));
+    armorCapSprite.setPosition(center.x - size.x / 2 + 260, center.y - size.y / 2 + 140);
+    armorCapSprite.setTextureRect(sf::Rect<int>(204 * arm_vector[0], 41, 196, 85));
 
-    ArmorShoesSprite.setPosition(center.x - size.x / 2 + 790, center.y - size.y / 2 + 100);
-    ArmorShoesSprite.setTextureRect(sf::Rect<int>(204 * arm_vector[1], 352, 196, 169));
+    armorShoesSprite.setPosition(center.x - size.x / 2 + 790, center.y - size.y / 2 + 100);
+    armorShoesSprite.setTextureRect(sf::Rect<int>(204 * arm_vector[1], 352, 196, 169));
 
-    ArmorRobeSprite.setPosition(center.x - size.x / 2 + 530, center.y - size.y / 2 + 540);
-    ArmorRobeSprite.setTextureRect(sf::Rect<int>(204 * arm_vector[2], 200, 195, 165));
+    armorRobeSprite.setPosition(center.x - size.x / 2 + 530, center.y - size.y / 2 + 540);
+    armorRobeSprite.setTextureRect(sf::Rect<int>(204 * arm_vector[2], 200, 195, 165));
 
     window.clear(sf::Color(68, 101, 219));
 
-    BuyShoesSprite.setColor(sf::Color::White);
-    BuyCapSprite.setColor(sf::Color::White);
-    BuyRobeSprite.setColor(sf::Color::White);
-    BackSprite.setColor(sf::Color::White);
+    buyShoesSprite.setColor(sf::Color::White);
+    buyCapSprite.setColor(sf::Color::White);
+    buyRobeSprite.setColor(sf::Color::White);
+    backSprite.setColor(sf::Color::White);
 
     int menuNum = -1;
 
     if (sf::IntRect(110,
                     160,
-                    BuyCapSprite.getTextureRect().width,
-                    BuyCapSprite.getTextureRect().height).
+                    buyCapSprite.getTextureRect().width,
+                    buyCapSprite.getTextureRect().height).
         contains(sf::Mouse::getPosition(window))) {
 
-      BuyCapSprite.setColor(sf::Color::Red);
+      buyCapSprite.setColor(sf::Color::Red);
       menuNum = 0;
     }
 
     if (sf::IntRect(1010,
                     160,
-                    BuyShoesSprite.getTextureRect().width,
-                    BuyShoesSprite.getTextureRect().height).
+                    buyShoesSprite.getTextureRect().width,
+                    buyShoesSprite.getTextureRect().height).
         contains(sf::Mouse::getPosition(window))) {
 
-      BuyShoesSprite.setColor(sf::Color::Red);
+      buyShoesSprite.setColor(sf::Color::Red);
       menuNum = 1;
     }
 
     if (sf::IntRect(370,
                     580,
-                    BuyRobeSprite.getTextureRect().width,
-                    BuyRobeSprite.getTextureRect().height).
+                    buyRobeSprite.getTextureRect().width,
+                    buyRobeSprite.getTextureRect().height).
         contains(sf::Mouse::getPosition(window))) {
 
-      BuyRobeSprite.setColor(sf::Color::Red);
+      buyRobeSprite.setColor(sf::Color::Red);
       menuNum = 2;
     }
 
     if (sf::IntRect(20,
                     740,
-                    BackSprite.getTextureRect().width,
-                    BackSprite.getTextureRect().height).
+                    backSprite.getTextureRect().width,
+                    backSprite.getTextureRect().height).
         contains(sf::Mouse::getPosition(window))) {
 
-      BackSprite.setColor(sf::Color::Red);
+      backSprite.setColor(sf::Color::Red);
       menuNum = 4;
     }
 
@@ -478,20 +499,20 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
       }
     }
 
-    window.draw(ArmorListSprite);
+    window.draw(armorListSprite);
 
-    window.draw(ArmorShoesSprite);
-    window.draw(ArmorCapSprite);
-    window.draw(ArmorRobeSprite);
+    window.draw(armorShoesSprite);
+    window.draw(armorCapSprite);
+    window.draw(armorRobeSprite);
 
-    window.draw(BuyShoesSprite);
-    window.draw(BuyCapSprite);
-    window.draw(BuyRobeSprite);
+    window.draw(buyShoesSprite);
+    window.draw(buyCapSprite);
+    window.draw(buyRobeSprite);
 
-    window.draw(BackSprite);
+    window.draw(backSprite);
 
-    window.draw(PointsText);
-    window.draw(ArmText);
+    window.draw(pointsText);
+    window.draw(armText);
 
     window.draw(lvlShoesText);
     window.draw(lvlCapText);
@@ -928,7 +949,7 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game,
         menuMusic.StopBackgroundGameMusic();
         std::vector<int> stat = game.GetStat();
         stat[0]++;
-        std::cout << "Patient: " << stat[0] << std::endl;
+        std::cout << "patient: " << stat[0] << std::endl;
         save.SaveStat(stat);
         MainMenu(window, save);
       }
@@ -936,7 +957,7 @@ bool Interface::WinMenu(sf::RenderWindow &window, Save &save, GameManager &game,
       if (menuNum == 2) {
         std::vector<int> stat = game.GetStat();
         stat[0]++;
-        std::cout << "Patient: " << stat[0] << std::endl;
+        std::cout << "patient: " << stat[0] << std::endl;
         save.SaveStat(stat);
         StartNewGame(window, save, menuMusic);
         return true;
@@ -1107,6 +1128,227 @@ bool Interface::AboutMenu(sf::RenderWindow &window, MusicManager &menuMusic) {
     }
 
     window.draw(backSprite);
+    window.display();
+  }
+
+  return false;
+}
+
+bool Interface::StatisticMenu(sf::RenderWindow &window, MusicManager &menuMusic) {
+  sf::Texture backTexture;
+  backTexture.loadFromFile(FILES_PATH"files/menu/back.png");
+  sf::Sprite backSprite(backTexture);
+
+  sf::Text patientText;
+  sf::Text vaccineText;
+  sf::Text antigenText;
+
+  sf::Text policeText;
+  sf::Text virusText;
+  sf::Text deliveryText;
+  sf::Text breakerText;
+
+  sf::Text autoText;
+  sf::Text monorailText;
+  sf::Text busText;
+  sf::Text metroText;
+
+  sf::Text penaltyText;
+  sf::Text caughtText;
+
+  sf::Font font;
+  font.loadFromFile(FILES_PATH"files/fonts/Inconsolata-Bold.ttf");
+
+  patientText.setFont(font);
+  patientText.setCharacterSize(40);
+  patientText.setStyle(sf::Text::Bold);
+  patientText.setFillColor(sf::Color::White);
+
+  vaccineText.setFont(font);
+  vaccineText.setCharacterSize(40);
+  vaccineText.setStyle(sf::Text::Bold);
+  vaccineText.setFillColor(sf::Color::White);
+
+  antigenText.setFont(font);
+  antigenText.setCharacterSize(40);
+  antigenText.setStyle(sf::Text::Bold);
+  antigenText.setFillColor(sf::Color::White);
+
+  policeText.setFont(font);
+  policeText.setCharacterSize(40);
+  policeText.setStyle(sf::Text::Bold);
+  policeText.setFillColor(sf::Color::White);
+
+  virusText.setFont(font);
+  virusText.setCharacterSize(40);
+  virusText.setStyle(sf::Text::Bold);
+  virusText.setFillColor(sf::Color::White);
+
+  deliveryText.setFont(font);
+  deliveryText.setCharacterSize(40);
+  deliveryText.setStyle(sf::Text::Bold);
+  deliveryText.setFillColor(sf::Color::White);
+
+  breakerText.setFont(font);
+  breakerText.setCharacterSize(40);
+  breakerText.setStyle(sf::Text::Bold);
+  breakerText.setFillColor(sf::Color::White);
+
+  autoText.setFont(font);
+  autoText.setCharacterSize(40);
+  autoText.setStyle(sf::Text::Bold);
+  autoText.setFillColor(sf::Color::White);
+
+  monorailText.setFont(font);
+  monorailText.setCharacterSize(40);
+  monorailText.setStyle(sf::Text::Bold);
+  monorailText.setFillColor(sf::Color::White);
+
+  busText.setFont(font);
+  busText.setCharacterSize(40);
+  busText.setStyle(sf::Text::Bold);
+  busText.setFillColor(sf::Color::White);
+
+  metroText.setFont(font);
+  metroText.setCharacterSize(40);
+  metroText.setStyle(sf::Text::Bold);
+  metroText.setFillColor(sf::Color::White);
+
+  penaltyText.setFont(font);
+  penaltyText.setCharacterSize(40);
+  penaltyText.setStyle(sf::Text::Bold);
+  penaltyText.setFillColor(sf::Color::White);
+
+  caughtText.setFont(font);
+  caughtText.setCharacterSize(40);
+  caughtText.setStyle(sf::Text::Bold);
+  caughtText.setFillColor(sf::Color::White);
+
+  sf::Vector2f center = window.getView().getCenter();
+  sf::Vector2f size = window.getView().getSize();
+
+  backSprite.setPosition(center.x - size.x / 2 + 20, center.y - size.y / 2 + 740);
+
+  patientText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 10);
+  vaccineText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 60);
+  antigenText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 110);
+
+  policeText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 160);
+  virusText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 210);
+  deliveryText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 260);
+  breakerText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 310);
+
+  autoText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 360);
+  monorailText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 410);
+  busText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 460);
+  metroText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 510);
+
+  penaltyText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 560);
+  caughtText.setPosition(center.x - size.x / 2 + 110, center.y - size.y / 2 + 610);
+
+  std::vector<int> stat = Save::LoadStat();
+
+  std::ostringstream ssPatient;
+  ssPatient << "Patients saved: " << stat[0];
+  patientText.setString(ssPatient.str());
+
+  std::ostringstream ssVaccine;
+  ssVaccine << "Vaccine collected: " << stat[1];
+  vaccineText.setString(ssVaccine.str());
+
+  std::ostringstream ssAntigen;
+  ssAntigen << "Antigen collected: " << stat[2];
+  antigenText.setString(ssAntigen.str());
+
+  std::ostringstream ssPolice;
+  ssPolice << "Police cured: " << stat[3];
+  policeText.setString(ssPolice.str());
+
+  std::ostringstream ssVirus;
+  ssVirus << "Virus cured: " << stat[4];
+  virusText.setString(ssVirus.str());
+
+  std::ostringstream ssDelivery;
+  ssDelivery << "Delivery cured: " << stat[5];
+  deliveryText.setString(ssDelivery.str());
+
+  std::ostringstream ssBreaker;
+  ssBreaker << "Breaker cured: " << stat[6];
+  breakerText.setString(ssBreaker.str());
+
+  std::ostringstream ssAuto;
+  ssAuto << "Ambulance trips: " << stat[7];
+  autoText.setString(ssAuto.str());
+
+  std::ostringstream ssMonorail;
+  ssMonorail << "Monorail trips: " << stat[8];
+  monorailText.setString(ssMonorail.str());
+
+  std::ostringstream ssBus;
+  ssBus << "Bus trips: " << stat[9];
+  busText.setString(ssBus.str());
+
+  std::ostringstream ssMetro;
+  ssMetro << "Metro trips: " << stat[10];
+  metroText.setString(ssMetro.str());
+
+  std::ostringstream ssPenalty;
+  ssPenalty << "Penalty time: " << stat[11];
+  penaltyText.setString(ssPenalty.str());
+
+  std::ostringstream ssCaught;
+  ssCaught << "Caught time: " << stat[12];
+  caughtText.setString(ssCaught.str());
+
+  while (window.isOpen()) {
+    sf::Event event{};
+    while (window.pollEvent(event)) {
+      if (event.type == sf::Event::Closed) {
+        window.close();
+      }
+    }
+
+    backSprite.setColor(sf::Color::White);
+
+    int menuNum = 0;
+
+    window.clear(sf::Color(68, 101, 219));
+
+    if (sf::IntRect(20,
+                    740,
+                    backSprite.getTextureRect().width,
+                    backSprite.getTextureRect().height).
+        contains(sf::Mouse::getPosition(window))) {
+
+      backSprite.setColor(sf::Color::Red);
+      menuNum = 1;
+    }
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+      if (menuNum == 1) {
+        return true;
+      }
+    }
+
+    window.draw(backSprite);
+
+    window.draw(patientText);
+    window.draw(vaccineText);
+    window.draw(antigenText);
+
+    window.draw(policeText);
+    window.draw(virusText);
+    window.draw(deliveryText);
+    window.draw(breakerText);
+
+    window.draw(autoText);
+    window.draw(monorailText);
+    window.draw(busText);
+    window.draw(metroText);
+
+    window.draw(penaltyText);
+    window.draw(caughtText);
+
     window.display();
   }
 

@@ -18,7 +18,7 @@
 
 class GameManager {
  public:
-  explicit GameManager(Level &lvl, const std::vector<int> &arms, MusicManager &music, const std::vector<int>& stat);
+  explicit GameManager(Level &lvl, const std::vector<int> &arms, MusicManager &music, const std::vector<int> &stat);
   // Обновление всех классов
   void Update(float time);
   // Вывод всех классов на экран

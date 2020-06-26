@@ -21,8 +21,7 @@ class Save {
   static bool SaveExistsP();
   static bool SaveExistsA();
   static std::vector<int> LoadStat();
-  static void SaveStat(const std::vector<int>& stat);
-
+  static void SaveStat(const std::vector<int> &stat);
 
  private:
   int lvl;
