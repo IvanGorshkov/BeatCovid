@@ -2,7 +2,7 @@
 #include "SaveGame.h"
 
 int main() {
-  sf::RenderWindow window(sf::VideoMode(1280, 800), "Beat COVID-19", sf::Style::Titlebar);
+  sf::RenderWindow window(sf::VideoMode(1280, 800), "Beat COVID-19");
   window.setFramerateLimit(120);
   Save save;
   Interface::MainMenu(window, save);

@@ -11,7 +11,6 @@
 		AC0B220F249ED1F6000CE7AC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC0B220E249ED1F6000CE7AC /* main.cpp */; };
 		AC5A7D9F24A37B5D00F54A6E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC5A7D9E24A37B5D00F54A6E /* Images.xcassets */; };
 		AC6355DB24A6A27900611736 /* InterfaceSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC6355D924A6A27900611736 /* InterfaceSprite.cpp */; };
-		AC6355DC24A6A27900611736 /* InterfaceText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC6355DA24A6A27900611736 /* InterfaceText.cpp */; };
 		AC86CCC224A3D9C0007D9C2D /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCBF24A3D9C0007D9C2D /* tinyxmlerror.cpp */; };
 		AC86CCC324A3D9C0007D9C2D /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCC024A3D9C0007D9C2D /* tinyxml.cpp */; };
 		AC86CCC424A3D9C0007D9C2D /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCC124A3D9C0007D9C2D /* tinyxmlparser.cpp */; };
@@ -41,6 +40,8 @@
 		AC86CD0B24A3DC01007D9C2D /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CD0A24A3DC00007D9C2D /* tinystr.cpp */; };
 		AC86CD0E24A3DE48007D9C2D /* files in Resources */ = {isa = PBXBuildFile; fileRef = AC86CD0D24A3DE48007D9C2D /* files */; };
 		ACE7CF8924A3C5540016E5AD /* SFML in Resources */ = {isa = PBXBuildFile; fileRef = ACE7CF8824A3C5530016E5AD /* SFML */; };
+		ACECC47E24A77E2A0085EBD7 /* InterfaceLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ACECC47D24A77E2A0085EBD7 /* InterfaceLabel.cpp */; };
+		ACECC48124A77ECB0085EBD7 /* InterfaceButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ACECC48024A77ECB0085EBD7 /* InterfaceButton.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,9 +53,7 @@
 		AC0B221E249ED204000CE7AC /* BeatCovid.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeatCovid.entitlements; sourceTree = "<group>"; };
 		AC5A7D9E24A37B5D00F54A6E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AC6355D724A6A26500611736 /* InterfaceSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceSprite.h; sourceTree = "<group>"; };
-		AC6355D824A6A26500611736 /* InterfaceText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceText.h; sourceTree = "<group>"; };
 		AC6355D924A6A27900611736 /* InterfaceSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InterfaceSprite.cpp; sourceTree = "<group>"; };
-		AC6355DA24A6A27900611736 /* InterfaceText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InterfaceText.cpp; sourceTree = "<group>"; };
 		AC86CC9F24A3D92A007D9C2D /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interface.h; sourceTree = "<group>"; };
 		AC86CCA024A3D92A007D9C2D /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
 		AC86CCA124A3D92A007D9C2D /* Level_map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level_map.h; sourceTree = "<group>"; };
@@ -109,6 +108,10 @@
 		AC86CD0C24A3DC1A007D9C2D /* tinystr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinystr.h; sourceTree = "<group>"; };
 		AC86CD0D24A3DE48007D9C2D /* files */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = files; path = BeatCovid/files; sourceTree = SOURCE_ROOT; };
 		ACE7CF8824A3C5530016E5AD /* SFML */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SFML; path = BeatCovid/SFML; sourceTree = SOURCE_ROOT; };
+		ACECC47C24A77E220085EBD7 /* InterfaceLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceLabel.h; sourceTree = "<group>"; };
+		ACECC47D24A77E2A0085EBD7 /* InterfaceLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InterfaceLabel.cpp; sourceTree = "<group>"; };
+		ACECC47F24A77EB30085EBD7 /* InterfaceButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceButton.h; sourceTree = "<group>"; };
+		ACECC48024A77ECB0085EBD7 /* InterfaceButton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = InterfaceButton.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,7 +183,8 @@
 				AC86CCDC24A3DAB5007D9C2D /* GameLables.cpp */,
 				AC86CCDE24A3DAB6007D9C2D /* GameManager.cpp */,
 				AC86CCDD24A3DAB5007D9C2D /* Interface.cpp */,
-				AC6355DA24A6A27900611736 /* InterfaceText.cpp */,
+				ACECC47D24A77E2A0085EBD7 /* InterfaceLabel.cpp */,
+				ACECC48024A77ECB0085EBD7 /* InterfaceButton.cpp */,
 				AC6355D924A6A27900611736 /* InterfaceSprite.cpp */,
 				AC86CCDF24A3DAB6007D9C2D /* Level_map.cpp */,
 				AC86CCE024A3DAB6007D9C2D /* MusicManager.cpp */,
@@ -198,7 +202,8 @@
 				AC86CCA424A3D92A007D9C2D /* GameLables.h */,
 				AC86CCA024A3D92A007D9C2D /* GameManager.h */,
 				AC86CC9F24A3D92A007D9C2D /* Interface.h */,
-				AC6355D824A6A26500611736 /* InterfaceText.h */,
+				ACECC47C24A77E220085EBD7 /* InterfaceLabel.h */,
+				ACECC47F24A77EB30085EBD7 /* InterfaceButton.h */,
 				AC6355D724A6A26500611736 /* InterfaceSprite.h */,
 				AC86CCA124A3D92A007D9C2D /* Level_map.h */,
 				AC86CCA324A3D92A007D9C2D /* MusicManager.h */,
@@ -408,7 +413,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC86CD0824A3DAD9007D9C2D /* AnimationManager.cpp in Sources */,
-				AC6355DC24A6A27900611736 /* InterfaceText.cpp in Sources */,
 				AC86CCE324A3DAB6007D9C2D /* Interface.cpp in Sources */,
 				AC86CCF524A3DAC7007D9C2D /* Enemy.cpp in Sources */,
 				AC86CD0524A3DAD3007D9C2D /* Cap.cpp in Sources */,
@@ -425,9 +429,11 @@
 				AC86CCFD24A3DACD007D9C2D /* Transport.cpp in Sources */,
 				AC86CCF724A3DAC7007D9C2D /* OrdinaryEnemies.cpp in Sources */,
 				AC0B220F249ED1F6000CE7AC /* main.cpp in Sources */,
+				ACECC48124A77ECB0085EBD7 /* InterfaceButton.cpp in Sources */,
 				AC86CCED24A3DAC1007D9C2D /* Antibodies.cpp in Sources */,
 				AC6355DB24A6A27900611736 /* InterfaceSprite.cpp in Sources */,
 				AC86CCC424A3D9C0007D9C2D /* tinyxmlparser.cpp in Sources */,
+				ACECC47E24A77E2A0085EBD7 /* InterfaceLabel.cpp in Sources */,
 				AC86CCE724A3DAB6007D9C2D /* SaveGame.cpp in Sources */,
 				AC86CCEE24A3DAC1007D9C2D /* Player.cpp in Sources */,
 				AC86CD0424A3DAD3007D9C2D /* Armor.cpp in Sources */,
