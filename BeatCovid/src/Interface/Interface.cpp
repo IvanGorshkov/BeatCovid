@@ -296,23 +296,23 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
     std::ostringstream ssPoints;
     int money = Save::LoadPoints();
     ssPoints << "Points: " << money;
-    pointsText.SetText(ssPoints);
+      pointsText.SetText(ssPoints.str());
 
     std::ostringstream ssArm;
     ssArm << "ARM: " << arm_vector[0] + arm_vector[1] + arm_vector[2];
-    armText.SetText(ssArm);
+      armText.SetText(ssArm.str());
 
     std::ostringstream ssCap;
     ssCap << "LVL:" << arm_vector[0];
-    lvlCapText.SetText(ssCap);
+      lvlCapText.SetText(ssCap.str());
 
     std::ostringstream ssShoes;
     ssShoes << "LVL:" << arm_vector[1];
-    lvlShoesText.SetText(ssShoes);
+      lvlShoesText.SetText(ssShoes.str());
 
     std::ostringstream ssRobe;
     ssRobe << "LVL:" << arm_vector[2];
-    lvlRobeText.SetText(ssRobe);
+      lvlRobeText.SetText(ssRobe.str());
 
     std::ostringstream ssCapCost;
     if (arm_vector[0] * 100 + 100 >= 500) {
@@ -320,7 +320,7 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
     } else {
       ssCapCost << arm_vector[0] * 100 + 100;
     }
-    costCapText.SetText(ssCapCost);
+      costCapText.SetText(ssCapCost.str());
 
     std::ostringstream ssShoesCost;
     if (arm_vector[1] * 100 + 100 >= 500) {
@@ -328,7 +328,7 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
     } else {
       ssShoesCost << arm_vector[1] * 100 + 100;
     }
-    costShoesText.SetText(ssShoesCost);
+      costShoesText.SetText(ssShoesCost.str());
 
     std::ostringstream ssRobeCost;
     if (arm_vector[2] * 100 + 100 >= 500) {
@@ -336,7 +336,7 @@ bool Interface::Shop(sf::RenderWindow &window, Save &save) {
     } else {
       ssRobeCost << arm_vector[2] * 100 + 100;
     }
-    costRobeText.SetText(ssRobeCost);
+      costRobeText.SetText(ssRobeCost.str());
 
     armorCapSprite.SetTextureRect(sf::Rect<int>(204 * arm_vector[0], 41, 196, 85));
     armorShoesSprite.SetTextureRect(sf::Rect<int>(204 * arm_vector[1], 352, 196, 169));
@@ -491,14 +491,14 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game, MusicManag
 
   std::string fontPath = resourcePath() + "files/fonts/Inconsolata-Bold.ttf";
 
-  InterfaceLabel pointsText(fontPath, 40, xPosition + 1000, yPosition + 13, ssPoints);
-  InterfaceLabel hpText(fontPath, 40, xPosition + 10, yPosition + 13, ssHp);
-  InterfaceLabel armText(fontPath, 40, xPosition + 200, yPosition + 13, ssArm);
-  InterfaceLabel vaccineText(fontPath, 40, xPosition + 350, yPosition + 13, ssVaccine);
+    InterfaceLabel pointsText(fontPath, 40, xPosition + 1000, yPosition + 13, ssPoints.str());
+    InterfaceLabel hpText(fontPath, 40, xPosition + 10, yPosition + 13, ssHp.str());
+    InterfaceLabel armText(fontPath, 40, xPosition + 200, yPosition + 13, ssArm.str());
+    InterfaceLabel vaccineText(fontPath, 40, xPosition + 350, yPosition + 13, ssVaccine.str());
 
-  InterfaceLabel lvlCapText(fontPath, 40, xPosition + 560, yPosition + 260, ssCap);
-  InterfaceLabel lvlShoesText(fontPath, 40, xPosition + 1090, yPosition + 260, ssShoes);
-  InterfaceLabel lvlRobeText(fontPath, 40, xPosition + 820, yPosition + 680, ssRobe);
+    InterfaceLabel lvlCapText(fontPath, 40, xPosition + 560, yPosition + 260, ssCap.str());
+    InterfaceLabel lvlShoesText(fontPath, 40, xPosition + 1090, yPosition + 260, ssShoes.str());
+    InterfaceLabel lvlRobeText(fontPath, 40, xPosition + 820, yPosition + 680, ssRobe.str());
 
   while (window.isOpen()) {
 
@@ -572,7 +572,7 @@ bool Interface::GameMenu(sf::RenderWindow &window, GameManager &game, MusicManag
 
 // Старт новой игры
 void Interface::StartNewGame(sf::RenderWindow &window, Save &save, MusicManager &menuMusic) {
-  sf::View view(sf::FloatRect(0, 0, 1280, 800));
+    sf::View view(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
 
   menuMusic.StopBackgroundMenuMusic();
 
@@ -929,7 +929,7 @@ bool Interface::AboutMenu(sf::RenderWindow &window, MusicManager &menuMusic) {
     }
       
 
-    myButton.Update(window);
+//    myButton.Update(window);
       
       if (myButton.IsSelect(sf::Vector2i(sf::Mouse::getPosition(window)))) {
           return true;
@@ -978,7 +978,6 @@ bool Interface::StatisticMenu(sf::RenderWindow &window, MusicManager &menuMusic)
   std::string fontPath = resourcePath() + "files/fonts/Inconsolata-Bold.ttf";
 
   std::vector<int> stat = Save::LoadStat();
-
   std::ostringstream ssPatient;
   ssPatient << "Patients saved: " << stat[0];
   std::ostringstream ssDied;
@@ -1008,39 +1007,38 @@ bool Interface::StatisticMenu(sf::RenderWindow &window, MusicManager &menuMusic)
   std::ostringstream ssCaught;
   ssCaught << "Caught time: " << stat[13];
 
-  float left = 150;
-  float right = 700;
-  float y = 170;
-
-  InterfaceLabel patientText(fontPath, 40, left, y, ssPatient);
-  InterfaceLabel diedText(fontPath, 40, right, y, ssDied);
-  y += 60;
-
-  InterfaceLabel vaccineText(fontPath, 40, left, y, ssVaccine);
-  InterfaceLabel antigenText(fontPath, 40, right, y, ssAntigen);
-  y += 60;
-
-  InterfaceLabel policeText(fontPath, 40, left, y, ssPolice);
-  InterfaceLabel breakerText(fontPath, 40, right, y, ssBreaker);
-  y += 60;
-
-  InterfaceLabel deliveryText(fontPath, 40, left, y, ssDelivery);
-  InterfaceLabel virusText(fontPath, 40, right, y, ssVirus);
-  y += 60;
-
-  InterfaceLabel autoText(fontPath, 40, left, y, ssAuto);
-  InterfaceLabel monorailText(fontPath, 40, right, y, ssMonorail);
-  y += 60;
-
-  InterfaceLabel busText(fontPath, 40, left, y, ssBus);
-  InterfaceLabel metroText(fontPath, 40, right, y, ssMetro);
-  y += 60;
-
-  InterfaceLabel penaltyText(fontPath, 40, left, y, ssPenalty);
-  InterfaceLabel caughtText(fontPath, 40, right, y, ssCaught);
-  y += 60;
     
-  InterfaceButton backButton(fontPath, 50, 20, 730, "Back");
+  int height = window.getSize().x;
+  int width = window.getSize().y;
+    
+    int buttonSize = width / 25;
+    int textSize = width / 30;
+    int headSize = width / 20;
+    
+    InterfaceLabelManager statistic;
+    
+    statistic.SetLeft(InterfaceLabel(fontPath, textSize, ssPatient.str()));
+    statistic.SetLeft(InterfaceLabel(fontPath, textSize, ssVaccine.str()));
+    statistic.SetLeft(InterfaceLabel(fontPath, textSize, ssPolice.str()));
+    statistic.SetLeft(InterfaceLabel(fontPath, textSize, ssDelivery.str()));
+    statistic.SetLeft(InterfaceLabel(fontPath, textSize, ssAuto.str()));
+    statistic.SetLeft(InterfaceLabel(fontPath, textSize, ssBus.str()));
+    statistic.SetLeft(InterfaceLabel(fontPath, textSize, ssPenalty.str()));
+    
+    statistic.SetRight(InterfaceLabel(fontPath, textSize, ssDied.str()));
+    statistic.SetRight(InterfaceLabel(fontPath, textSize, ssAntigen.str()));
+    statistic.SetRight(InterfaceLabel(fontPath, textSize, ssBreaker.str()));
+    statistic.SetRight(InterfaceLabel(fontPath, textSize, ssVirus.str()));
+    statistic.SetRight(InterfaceLabel(fontPath, textSize, ssMonorail.str()));
+    statistic.SetRight(InterfaceLabel(fontPath, textSize, ssMetro.str()));
+    statistic.SetRight(InterfaceLabel(fontPath, textSize, ssCaught.str()));
+                      
+    statistic.CalculatePosition(height, width);
+    
+  InterfaceLabel staticText(fontPath, headSize, "Statistic menu");
+  staticText.SetPosition((height - staticText.GetTextRectSize().x) / 2, width / 20);
+    
+  InterfaceButton backButton(fontPath, buttonSize, 30, width - buttonSize - 30, "Back");
 
   while (window.isOpen()) {
     sf::Event event{};
@@ -1049,22 +1047,6 @@ bool Interface::StatisticMenu(sf::RenderWindow &window, MusicManager &menuMusic)
         window.close();
       }
     }
-      patientText.Update(window);
-      diedText.Update(window);
-      vaccineText.Update(window);
-      antigenText.Update(window);
-      policeText.Update(window);
-      breakerText.Update(window);
-      deliveryText.Update(window);
-      virusText.Update(window);
-      autoText.Update(window);
-      monorailText.Update(window);
-      busText.Update(window);
-      metroText.Update(window);
-      penaltyText.Update(window);
-      caughtText.Update(window);
-      
-      backButton.Update(window);
       
       window.clear(sf::Color(68, 101, 219));
 
@@ -1072,26 +1054,146 @@ bool Interface::StatisticMenu(sf::RenderWindow &window, MusicManager &menuMusic)
           return true;
       }
 
-    patientText.Draw(window);
-    diedText.Draw(window);
-    vaccineText.Draw(window);
-    antigenText.Draw(window);
-    policeText.Draw(window);
-    virusText.Draw(window);
-    deliveryText.Draw(window);
-    breakerText.Draw(window);
-    autoText.Draw(window);
-    monorailText.Draw(window);
-    busText.Draw(window);
-    metroText.Draw(window);
-    penaltyText.Draw(window);
-    caughtText.Draw(window);
-      
+    statistic.Draw(window);
+    staticText.Draw(window);
     backButton.Draw(window);
+    
 
     window.display();
   }
 }
+
+//bool Interface::StatisticMenu(sf::RenderWindow &window, MusicManager &menuMusic) {
+//  std::string fontPath = resourcePath() + "files/fonts/Inconsolata-Bold.ttf";
+//
+//  std::vector<int> stat = Save::LoadStat();
+//  std::ostringstream ssPatient;
+//  ssPatient << "Patients saved: " << stat[0];
+//  std::ostringstream ssDied;
+//  ssDied << "Hippocrates died: " << stat[1];
+//  std::ostringstream ssVaccine;
+//  ssVaccine << "Vaccine collected: " << stat[2];
+//  std::ostringstream ssAntigen;
+//  ssAntigen << "Antigen collected: " << stat[3];
+//  std::ostringstream ssPolice;
+//  ssPolice << "Police cured: " << stat[4];
+//  std::ostringstream ssBreaker;
+//  ssBreaker << "Breaker cured: " << stat[5];
+//  std::ostringstream ssDelivery;
+//  ssDelivery << "Delivery cured: " << stat[6];
+//  std::ostringstream ssVirus;
+//  ssVirus << "Virus cured: " << stat[7];
+//  std::ostringstream ssAuto;
+//  ssAuto << "Ambulance trips: " << stat[8];
+//  std::ostringstream ssMonorail;
+//  ssMonorail << "Monorail trips: " << stat[9];
+//  std::ostringstream ssBus;
+//  ssBus << "Bus trips: " << stat[10];
+//  std::ostringstream ssMetro;
+//  ssMetro << "Metro trips: " << stat[11];
+//  std::ostringstream ssPenalty;
+//  ssPenalty << "Penalty time: " << stat[12];
+//  std::ostringstream ssCaught;
+//  ssCaught << "Caught time: " << stat[13];
+//
+//  float left = 150;
+//  float right = 1500;
+//  float y = 170;
+//
+//  int height = window.getSize().x;
+//  int width = window.getSize().y;
+//
+//    std::cout << height << std::endl;
+//    std::cout << width << std::endl;
+//
+//    int sizeB = 100;
+//    int sizeT = 60;
+//
+//  InterfaceLabel staticText(fontPath, 100, "Statistic menu");
+//  staticText.SetPosition((height - staticText.GetTextRectSize().x) / 2, 70);
+//
+//    InterfaceLabel patientText(fontPath, sizeT, left, y, ssPatient.str());
+//    InterfaceLabel diedText(fontPath, sizeT, right, y, ssDied.str());
+//  y += 60;
+//
+//    InterfaceLabel vaccineText(fontPath, sizeT, left, y, ssVaccine.str());
+//    InterfaceLabel antigenText(fontPath, sizeT, right, y, ssAntigen.str());
+//  y += 60;
+//
+//    InterfaceLabel policeText(fontPath, sizeT, left, y, ssPolice.str());
+//    InterfaceLabel breakerText(fontPath, sizeT, right, y, ssBreaker.str());
+//  y += 60;
+//
+//    InterfaceLabel deliveryText(fontPath, sizeT, left, y, ssDelivery.str());
+//    InterfaceLabel virusText(fontPath, sizeT, right, y, ssVirus.str());
+//  y += 60;
+//
+//    InterfaceLabel autoText(fontPath, sizeT, left, y, ssAuto.str());
+//    InterfaceLabel monorailText(fontPath, sizeT, right, y, ssMonorail.str());
+//  y += 60;
+//
+//    InterfaceLabel busText(fontPath, sizeT, left, y, ssBus.str());
+//    InterfaceLabel metroText(fontPath, sizeT, right, y, ssMetro.str());
+//  y += 60;
+//
+//    InterfaceLabel penaltyText(fontPath, sizeT, left, y, ssPenalty.str());
+//    InterfaceLabel caughtText(fontPath, sizeT, right, y, ssCaught.str());
+//  y += 60;
+//
+//  InterfaceButton backButton(fontPath, sizeB, 30, width - sizeB - 30, "Back");
+//
+//  while (window.isOpen()) {
+//    sf::Event event{};
+//    while (window.pollEvent(event)) {
+//      if (event.type == sf::Event::Closed) {
+//        window.close();
+//      }
+//    }
+//      staticText.Update(window);
+//      patientText.Update(window);
+//      diedText.Update(window);
+//      vaccineText.Update(window);
+//      antigenText.Update(window);
+//      policeText.Update(window);
+//      breakerText.Update(window);
+//      deliveryText.Update(window);
+//      virusText.Update(window);
+//      autoText.Update(window);
+//      monorailText.Update(window);
+//      busText.Update(window);
+//      metroText.Update(window);
+//      penaltyText.Update(window);
+//      caughtText.Update(window);
+//
+//      backButton.Update(window);
+//
+//      window.clear(sf::Color(68, 101, 219));
+//
+//      if (backButton.IsSelect(sf::Vector2i(sf::Mouse::getPosition(window)))) {
+//          return true;
+//      }
+//
+//    staticText.Draw(window);
+//    patientText.Draw(window);
+//    diedText.Draw(window);
+//    vaccineText.Draw(window);
+//    antigenText.Draw(window);
+//    policeText.Draw(window);
+//    virusText.Draw(window);
+//    deliveryText.Draw(window);
+//    breakerText.Draw(window);
+//    autoText.Draw(window);
+//    monorailText.Draw(window);
+//    busText.Draw(window);
+//    metroText.Draw(window);
+//    penaltyText.Draw(window);
+//    caughtText.Draw(window);
+//
+//    backButton.Draw(window);
+//
+//    window.display();
+//  }
+//}
 
 bool Interface::ConfigMenu(sf::RenderWindow &window, MusicManager &menuMusic) {
   sf::Vector2f center = window.getView().getCenter();
@@ -1172,44 +1274,44 @@ bool Interface::ConfigMenu(sf::RenderWindow &window, MusicManager &menuMusic) {
   float right = 700;
   float y = 100;
 
-  InterfaceLabel currentLvlText(fontPath, 40, xPosition + left, yPosition + y, ssCurrentLvl);
-  InterfaceLabel playerHpText(fontPath, 40, xPosition + right, yPosition + y, ssPlayerHp);
+    InterfaceLabel currentLvlText(fontPath, 40, xPosition + left, yPosition + y, ssCurrentLvl.str());
+    InterfaceLabel playerHpText(fontPath, 40, xPosition + right, yPosition + y, ssPlayerHp.str());
   y += 60;
 
-  InterfaceLabel currentPointsText(fontPath, 40, xPosition + left, yPosition + y, ssCurrentPoints);
-  InterfaceLabel antigenPointsText(fontPath, 40, xPosition + right, yPosition + y, ssAntigenPoints);
+    InterfaceLabel currentPointsText(fontPath, 40, xPosition + left, yPosition + y, ssCurrentPoints.str());
+    InterfaceLabel antigenPointsText(fontPath, 40, xPosition + right, yPosition + y, ssAntigenPoints.str());
   y += 60;
 
-  InterfaceLabel capLvlText(fontPath, 40, xPosition + left, yPosition + y, ssCapLvl);
-  InterfaceLabel shoesLvlText(fontPath, 40, xPosition + right, yPosition + y, ssShoesLvl);
+    InterfaceLabel capLvlText(fontPath, 40, xPosition + left, yPosition + y, ssCapLvl.str());
+    InterfaceLabel shoesLvlText(fontPath, 40, xPosition + right, yPosition + y, ssShoesLvl.str());
   y += 60;
 
-  InterfaceLabel robeLvlText(fontPath, 40, xPosition + left, yPosition + y, ssRobeLvl);
-  InterfaceLabel policeHpText(fontPath, 40, xPosition + right, yPosition + y, ssPoliceHp);
+    InterfaceLabel robeLvlText(fontPath, 40, xPosition + left, yPosition + y, ssRobeLvl.str());
+    InterfaceLabel policeHpText(fontPath, 40, xPosition + right, yPosition + y, ssPoliceHp.str());
   y += 60;
 
-  InterfaceLabel policeDmgText(fontPath, 40, xPosition + left, yPosition + y, ssPoliceDmg);
-  InterfaceLabel policePenaltyText(fontPath, 40, xPosition + right, yPosition + y, ssPolicePenalty);
+    InterfaceLabel policeDmgText(fontPath, 40, xPosition + left, yPosition + y, ssPoliceDmg.str());
+    InterfaceLabel policePenaltyText(fontPath, 40, xPosition + right, yPosition + y, ssPolicePenalty.str());
   y += 60;
 
-  InterfaceLabel breakerHpText(fontPath, 40, xPosition + left, yPosition + y, ssBreakerHp);
-  InterfaceLabel breakerDmgText(fontPath, 40, xPosition + right, yPosition + y, ssBreakerDmg);
+    InterfaceLabel breakerHpText(fontPath, 40, xPosition + left, yPosition + y, ssBreakerHp.str());
+    InterfaceLabel breakerDmgText(fontPath, 40, xPosition + right, yPosition + y, ssBreakerDmg.str());
   y += 60;
 
-  InterfaceLabel deliveryHpText(fontPath, 40, xPosition + left, yPosition + y, ssDeliveryHp);
-  InterfaceLabel deliveryDmgText(fontPath, 40, xPosition + right, yPosition + y, ssDeliveryDmg);
+    InterfaceLabel deliveryHpText(fontPath, 40, xPosition + left, yPosition + y, ssDeliveryHp.str());
+    InterfaceLabel deliveryDmgText(fontPath, 40, xPosition + right, yPosition + y, ssDeliveryDmg.str());
   y += 60;
 
-  InterfaceLabel virusHpText(fontPath, 40, xPosition + left, yPosition + y, ssVirusHp);
-  InterfaceLabel virusDmgText(fontPath, 40, xPosition + right, yPosition + y, ssVirusDmg);
+    InterfaceLabel virusHpText(fontPath, 40, xPosition + left, yPosition + y, ssVirusHp.str());
+    InterfaceLabel virusDmgText(fontPath, 40, xPosition + right, yPosition + y, ssVirusDmg.str());
   y += 60;
 
-  InterfaceLabel autoFuelText(fontPath, 40, xPosition + left, yPosition + y, ssAutoFuel);
-  InterfaceLabel monorailFuelText(fontPath, 40, xPosition + right, yPosition + y, ssMonorailFuel);
+    InterfaceLabel autoFuelText(fontPath, 40, xPosition + left, yPosition + y, ssAutoFuel.str());
+    InterfaceLabel monorailFuelText(fontPath, 40, xPosition + right, yPosition + y, ssMonorailFuel.str());
   y += 60;
 
-  InterfaceLabel busDmgText(fontPath, 40, xPosition + left, yPosition + y, ssBusDmg);
-  InterfaceLabel metroDmgText(fontPath, 40, xPosition + right, yPosition + y, ssMetroDmg);
+    InterfaceLabel busDmgText(fontPath, 40, xPosition + left, yPosition + y, ssBusDmg.str());
+    InterfaceLabel metroDmgText(fontPath, 40, xPosition + right, yPosition + y, ssMetroDmg.str());
   y += 60;
 
   while (window.isOpen()) {

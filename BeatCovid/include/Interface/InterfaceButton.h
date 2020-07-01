@@ -7,9 +7,4 @@ class InterfaceButton: public InterfaceLabel {
 public:
     InterfaceButton(const std::string &fontPath, int getSize, float getX, float getY, const std::string &str);
     bool IsSelect(sf::Vector2i mouse);
-    void Update(sf::RenderWindow &window);
-    
-protected:
-    float width;
-    float height;
 };

@@ -8,6 +8,7 @@
 #include "InterfaceLabel.h"
 #include "InterfaceSprite.h"
 #include "InterfaceButton.h"
+#include "InterfaceLabelManager.h"
 
 class Interface {
  public:
