@@ -5,11 +5,12 @@ set(CMAKE_CXX_STANDARD 14)
 
 include_directories(project/include)
 include_directories(project/include/Animation)
+include_directories(project/include/Interface)
+include_directories(project/include/Tinyxml)
 include_directories(project/include/Entities)
 include_directories(project/include/Entities/Armors)
 include_directories(project/include/Entities/Enemies)
 include_directories(project/include/Entities/Transports)
-include_directories(project/include/Tinyxml)
 
 add_definitions(-DFILES_PATH="../")
 
@@ -18,7 +19,12 @@ add_executable(beatcovid
         project/src/Level_map.cpp
         project/src/GameManager.cpp
         project/src/GameLables.cpp
-        project/src/Interface.cpp
+        project/src/Interface/Interface.cpp
+        project/src/Interface/InterfaceButton.cpp
+        project/src/Interface/InterfaceLabel.cpp
+        project/src/Interface/InterfaceTable.cpp
+        project/src/Interface/InterfaceMultiLineLabel.cpp
+        project/src/Interface/InterfaceSprite.cpp
         project/src/SaveGame.cpp
         project/src/Animation/Animation.cpp
         project/src/Animation/AnimationManager.cpp
@@ -38,8 +44,6 @@ add_executable(beatcovid
         project/src/Entities/Transports/UnSafeTransport.cpp
         project/src/Entities/Sick.cpp
         project/src/MusicManager.cpp
-        project/src/InterfaceText.cpp
-        project/src/InterfaceSprite.cpp
         project/src/Tinyxml/tinyxml.cpp
         project/src/Tinyxml/tinystr.cpp
         project/src/Tinyxml/tinyxmlparser.cpp

@@ -1,5 +1,4 @@
 #include "OrdinaryEnemies.h"
-
 #include <utility>
 
 OrdinaryEnemies::OrdinaryEnemies(float x, float y, int height, int weight, const std::string &name, std::vector<float> config)
