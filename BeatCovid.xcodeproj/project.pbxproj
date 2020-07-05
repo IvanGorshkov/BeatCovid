@@ -40,9 +40,10 @@
 		AC9196D124AD39AD00C28412 /* InterfaceButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC9196CC24AD39AD00C28412 /* InterfaceButton.cpp */; };
 		AC9196D224AD39AD00C28412 /* InterfaceLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC9196CD24AD39AD00C28412 /* InterfaceLabel.cpp */; };
 		AC9196D324AD39AD00C28412 /* Interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC9196CE24AD39AD00C28412 /* Interface.cpp */; };
-		AC9196D424AD39AD00C28412 /* InterfaceLabelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC9196CF24AD39AD00C28412 /* InterfaceLabelManager.cpp */; };
+		AC9196D424AD39AD00C28412 /* InterfaceTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC9196CF24AD39AD00C28412 /* InterfaceTable.cpp */; };
 		AC9196D524AD39AD00C28412 /* InterfaceSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC9196D024AD39AD00C28412 /* InterfaceSprite.cpp */; };
 		ACE7CF8924A3C5540016E5AD /* SFML in Resources */ = {isa = PBXBuildFile; fileRef = ACE7CF8824A3C5530016E5AD /* SFML */; };
+		ACEA181724AF67FA001E973A /* InterfaceMultiLineLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ACEA181624AF67FA001E973A /* InterfaceMultiLineLabel.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		AC0B220E249ED1F6000CE7AC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		AC0B221E249ED204000CE7AC /* BeatCovid.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeatCovid.entitlements; sourceTree = "<group>"; };
 		AC5A7D9E24A37B5D00F54A6E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		AC5C415224AE857D0069B395 /* FPS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FPS.h; sourceTree = "<group>"; };
 		AC86CCA024A3D92A007D9C2D /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
 		AC86CCA124A3D92A007D9C2D /* Level_map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level_map.h; sourceTree = "<group>"; };
 		AC86CCA224A3D92A007D9C2D /* SaveGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveGame.h; sourceTree = "<group>"; };
@@ -107,14 +109,16 @@
 		AC9196CC24AD39AD00C28412 /* InterfaceButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InterfaceButton.cpp; sourceTree = "<group>"; };
 		AC9196CD24AD39AD00C28412 /* InterfaceLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InterfaceLabel.cpp; sourceTree = "<group>"; };
 		AC9196CE24AD39AD00C28412 /* Interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Interface.cpp; sourceTree = "<group>"; };
-		AC9196CF24AD39AD00C28412 /* InterfaceLabelManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InterfaceLabelManager.cpp; sourceTree = "<group>"; };
+		AC9196CF24AD39AD00C28412 /* InterfaceTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InterfaceTable.cpp; sourceTree = "<group>"; };
 		AC9196D024AD39AD00C28412 /* InterfaceSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InterfaceSprite.cpp; sourceTree = "<group>"; };
 		AC9196D724AD39D500C28412 /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interface.h; sourceTree = "<group>"; };
 		AC9196D824AD39D500C28412 /* InterfaceSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceSprite.h; sourceTree = "<group>"; };
 		AC9196D924AD39D500C28412 /* InterfaceButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceButton.h; sourceTree = "<group>"; };
-		AC9196DA24AD39D500C28412 /* InterfaceLabelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceLabelManager.h; sourceTree = "<group>"; };
+		AC9196DA24AD39D500C28412 /* InterfaceTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceTable.h; sourceTree = "<group>"; };
 		AC9196DB24AD39D500C28412 /* InterfaceLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceLabel.h; sourceTree = "<group>"; };
 		ACE7CF8824A3C5530016E5AD /* SFML */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SFML; path = BeatCovid/SFML; sourceTree = SOURCE_ROOT; };
+		ACEA181524AF6631001E973A /* InterfaceMultiLineLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceMultiLineLabel.h; sourceTree = "<group>"; };
+		ACEA181624AF67FA001E973A /* InterfaceMultiLineLabel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = InterfaceMultiLineLabel.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +209,7 @@
 				AC86CCA124A3D92A007D9C2D /* Level_map.h */,
 				AC86CCA324A3D92A007D9C2D /* MusicManager.h */,
 				AC86CCA224A3D92A007D9C2D /* SaveGame.h */,
+				AC5C415224AE857D0069B395 /* FPS.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -345,8 +350,9 @@
 				AC9196CE24AD39AD00C28412 /* Interface.cpp */,
 				AC9196CC24AD39AD00C28412 /* InterfaceButton.cpp */,
 				AC9196CD24AD39AD00C28412 /* InterfaceLabel.cpp */,
-				AC9196CF24AD39AD00C28412 /* InterfaceLabelManager.cpp */,
+				AC9196CF24AD39AD00C28412 /* InterfaceTable.cpp */,
 				AC9196D024AD39AD00C28412 /* InterfaceSprite.cpp */,
+				ACEA181624AF67FA001E973A /* InterfaceMultiLineLabel.cpp */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -357,8 +363,9 @@
 				AC9196D724AD39D500C28412 /* Interface.h */,
 				AC9196D924AD39D500C28412 /* InterfaceButton.h */,
 				AC9196DB24AD39D500C28412 /* InterfaceLabel.h */,
-				AC9196DA24AD39D500C28412 /* InterfaceLabelManager.h */,
+				AC9196DA24AD39D500C28412 /* InterfaceTable.h */,
 				AC9196D824AD39D500C28412 /* InterfaceSprite.h */,
+				ACEA181524AF6631001E973A /* InterfaceMultiLineLabel.h */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -455,12 +462,13 @@
 				AC86CCE724A3DAB6007D9C2D /* SaveGame.cpp in Sources */,
 				AC9196D124AD39AD00C28412 /* InterfaceButton.cpp in Sources */,
 				AC86CCEE24A3DAC1007D9C2D /* Player.cpp in Sources */,
-				AC9196D424AD39AD00C28412 /* InterfaceLabelManager.cpp in Sources */,
+				AC9196D424AD39AD00C28412 /* InterfaceTable.cpp in Sources */,
 				AC86CD0424A3DAD3007D9C2D /* Armor.cpp in Sources */,
 				AC9196D524AD39AD00C28412 /* InterfaceSprite.cpp in Sources */,
 				AC9196D224AD39AD00C28412 /* InterfaceLabel.cpp in Sources */,
 				AC86CCF024A3DAC1007D9C2D /* Bullet.cpp in Sources */,
 				AC86CCE524A3DAB6007D9C2D /* Level_map.cpp in Sources */,
+				ACEA181724AF67FA001E973A /* InterfaceMultiLineLabel.cpp in Sources */,
 				AC86CD0B24A3DC01007D9C2D /* tinystr.cpp in Sources */,
 				AC86CCFC24A3DACD007D9C2D /* UnSafeTransport.cpp in Sources */,
 				AC86CCE424A3DAB6007D9C2D /* GameManager.cpp in Sources */,
@@ -563,6 +571,7 @@
 		AC0B221C249ED1F6000CE7AC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BeatCovid/BeatCovid.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -582,6 +591,7 @@
 		AC0B221D249ED1F6000CE7AC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BeatCovid/BeatCovid.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";

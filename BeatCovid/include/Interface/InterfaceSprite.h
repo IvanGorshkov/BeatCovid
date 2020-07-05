@@ -10,7 +10,7 @@ class InterfaceSprite {
   sf::Rect<int> GetTextureRect();
   void Scale(float l, float r);
   void SetTextureRect(sf::Rect<int> rect);
-  void SetPosition(float x, float  y);
+  void SetPosition(float x, float y);
   void Draw(sf::RenderWindow &window);
 
  private:

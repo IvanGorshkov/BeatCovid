@@ -7,6 +7,7 @@ int main() {
   window.setFramerateLimit(120);
   window.setVerticalSyncEnabled(true);
   Save save;
-  Interface::MainMenu(window, save);
+  Interface interface(window);
+  interface.MainMenu(window, save);
   return 0;
 }
