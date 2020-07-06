@@ -2,12 +2,17 @@
 #include "cmath"
 #include "Interface.h"
 
-GameManager::GameManager(Level &lvl, const std::vector<int> &arms, MusicManager &music, std::vector<int> stat, const std::vector<float> &config)
+GameManager::GameManager(Level &lvl,
+                         MusicManager &music,
+                         const std::vector<int> &arms,
+                         int points,
+                         const std::vector<int> &stat,
+                         const std::vector<float> &config)
     : obj(lvl.GetAllObjects()),
       music(music),
       stat(std::move(stat)),
       antigenPoints(config[1]),
-      player(std::make_shared<Player>(lvl.GetObject("player"), arms, config[0])) {
+      player(std::make_shared<Player>(lvl.GetObject("player"), arms, config[0], points)) {
 
   for (auto &i : obj) {
     if (i.name == "breaker" || i.name == "delivery" || i.name == "virus") {
@@ -310,7 +315,6 @@ void GameManager::updateEnemy(float time) {
         stat[5]++;
       }
 
-
       if ((*enemiesIt)->GetName() == "delivery") {
         stat[6]++;
       }
@@ -330,11 +334,13 @@ void GameManager::drawEnemy(sf::RenderWindow &window) {
   for (enemiesIt = enemies.begin(); enemiesIt != enemies.end(); ++enemiesIt) {
     if (auto police = std::dynamic_pointer_cast<Police>(*enemiesIt)) {
       if (police->IsDrawPenaltyMenu()) {
-        Interface::PenaltyPolice(window);
+        Interface &interface = Interface::GetInstance(window);
+        interface.PenaltyPolice(window);
       }
 
       if (police->ISDrawDiedMenu()) {
-        Interface::DiedPolice(window);
+        Interface &interface = Interface::GetInstance(window);
+        interface.DiedPolice(window);
         player->GoToStart();
       }
     }

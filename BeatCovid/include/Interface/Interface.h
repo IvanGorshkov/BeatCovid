@@ -9,32 +9,35 @@
 #include "InterfaceSprite.h"
 #include "InterfaceButton.h"
 #include "InterfaceTable.h"
-#include "InterfaceMultiLineLabel.h"
 
 #define BACK_BUTTON_SHIFT 30
 
 class Interface {
  public:
-  explicit Interface(sf::RenderWindow &window);
-  void MainMenu(sf::RenderWindow &window, Save &save);
-
-  static bool PenaltyPolice(sf::RenderWindow &window);
-  static bool DiedPolice(sf::RenderWindow &window);
+  static Interface &GetInstance(sf::RenderWindow &window);
+  void MainMenu(sf::RenderWindow &window);
+  void PenaltyPolice(sf::RenderWindow &window);
+  void DiedPolice(sf::RenderWindow &window);
 
  private:
-  bool gameMenu(sf::RenderWindow &window, GameManager &game, MusicManager &menuMusic);
-  bool shopMenu(sf::RenderWindow &window, Save &save);
-  bool newGameWarningMenu(sf::RenderWindow &window, MusicManager &menuMusic, Save &save);
-  void buy(std::vector<int> arm_vector, int index);
-  void startNewGame(sf::RenderWindow &window, Save &save, MusicManager &menuMusic);
+  explicit Interface(sf::RenderWindow &window);
+  ~Interface() = default;
+  Interface(const Interface &);
+  Interface &operator=(const Interface &);
 
+  void newGameWarningMenu(sf::RenderWindow &window, MusicManager &menuMusic, Save &save);
+  bool startNewGame(sf::RenderWindow &window, Save &save, MusicManager &menuMusic);
   bool winMenu(sf::RenderWindow &window, Save &save, GameManager &game, MusicManager &menuMusic);
   bool nextLvlMenu(sf::RenderWindow &window, Save &save, GameManager &game, MusicManager &menuMusic);
-  bool aboutMenu(sf::RenderWindow &window, MusicManager &menuMusic);
+  bool diedMenu(sf::RenderWindow &window, GameManager &game);
 
-  void diedMenu(sf::RenderWindow &window, GameManager &game);
   void statisticMenu(sf::RenderWindow &window, MusicManager &menuMusic);
   void configMenu(sf::RenderWindow &window, MusicManager &menuMusic);
+
+  bool gameMenu(sf::RenderWindow &window, GameManager &game, MusicManager &menuMusic);
+  bool shopMenu(sf::RenderWindow &window, Save &save);
+  void buy(std::vector<int> arm_vector, int index);
+  bool aboutMenu(sf::RenderWindow &window, MusicManager &menuMusic);
 
   int height;
   int width;

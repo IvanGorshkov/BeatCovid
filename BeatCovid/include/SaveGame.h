@@ -18,32 +18,27 @@ class Save {
   void ChangeLvl();
   void GoToStart();
   int GetLvl() const;
-  
   std::string GetLvlName();
+  void SaveGame(GameManager &game) const;
 
   static bool IsExistLvlFile();
-  static bool IsExistPointsFile();
-  static bool IsExistArmorFile();
-  static bool IsExistStatFile();
-  static bool IsExistConfigFile();
-  static bool IsExistConfigDefaultFile();
-
   static void RemoveGameSaves();
   static void RemoveConfig();
-    
-  void LoadGame(GameManager &game);
-  void SaveGame(GameManager &game) const;
-    
+
   static int LoadLvl();
   static void SaveLvl(int lvl);
+
   static int LoadPoints();
   static void SavePoints(int points);
+
   static std::vector<int> LoadArmors();
-  static void SaveArmor(const std::vector<int>& vec);
+  static void SaveArmor(const std::vector<int> &arm);
+
   static std::vector<int> LoadStat();
   static void SaveStat(const std::vector<int> &stat);
+
   static std::vector<float> LoadConfig();
-  static void SaveConfig(const std::vector<float> &stat);
+  static void SaveConfig(const std::vector<float> &config);
 
  private:
   int lvl;
