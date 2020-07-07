@@ -8,7 +8,9 @@ class InterfaceSprite {
   explicit InterfaceSprite(const std::string &texturePath);
   void SetColor(sf::Color color);
   sf::Rect<int> GetTextureRect();
-  void Scale(float l, float r);
+    sf::Vector2f GetSpriteRect();
+  void Size(float w, float h);
+  sf::Vector2<int> GetSize();
   void SetTextureRect(sf::Rect<int> rect);
   void SetPosition(float x, float y);
   void Draw(sf::RenderWindow &window);
@@ -16,4 +18,6 @@ class InterfaceSprite {
  private:
   sf::Texture texture;
   sf::Sprite sprite;
+    int w;
+    int h;
 };

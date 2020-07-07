@@ -2,7 +2,6 @@
 
 #include "InterfaceLabel.h"
 #include "InterfaceButton.h"
-#include "InterfaceMultiLineLabel.h"
 #include <memory>
 
 class InterfaceTable {

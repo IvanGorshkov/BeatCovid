@@ -22,8 +22,22 @@ sf::Rect<int> InterfaceSprite::GetTextureRect() {
   return sprite.getTextureRect();
 }
 
-void InterfaceSprite::Scale(float l, float r) {
-  sprite.scale(l, r);
+sf::Vector2f InterfaceSprite::GetSpriteRect() {
+    return sprite.getPosition();
+}
+
+sf::Vector2<int> InterfaceSprite::GetSize() {
+    return sf::Vector2<int>(w,h);
+}
+
+void InterfaceSprite::Size(float w, float h) {
+  //sprite.setScale(l, r);
+  sf::Vector2f targetSize(w, h);
+    this->w = w;
+    this->h = h;
+  sprite.setScale(
+      targetSize.x / sprite.getLocalBounds().width,
+      targetSize.y / sprite.getLocalBounds().height);
 }
 
 void InterfaceSprite::SetTextureRect(sf::Rect<int> rect) {
