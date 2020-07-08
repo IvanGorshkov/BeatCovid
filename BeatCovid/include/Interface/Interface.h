@@ -10,7 +10,7 @@
 #include "InterfaceButton.h"
 #include "InterfaceTable.h"
 
-#define BACK_BUTTON_SHIFT 31
+#define BACK_BUTTON_SHIFT 30
 
 class Interface {
  public:
