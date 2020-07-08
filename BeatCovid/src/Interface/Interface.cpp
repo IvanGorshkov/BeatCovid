@@ -1,8 +1,59 @@
-#include <sstream>
-#include <SFML/Graphics.hpp>
 #include "Interface.h"
+#include <sstream>
+#include <memory>
 #include "Level_map.h"
 #include "ResourcePath.hpp"
+
+sf::Vector2i calculatePlayerPosition(unsigned int width,
+                                     unsigned int height,
+                                     int leftX,
+                                     int rightX,
+                                     int upY,
+                                     int downY,
+                                     int playerCurrentX,
+                                     int playerCurrentY) {
+  int playerX = 0;
+  int playerY = 0;
+
+  if (playerCurrentX - width / 2 > leftX && playerCurrentX + width / 2 < rightX) {
+    playerX = playerCurrentX;
+  } else {
+    playerX = leftX + width / 2;
+  }
+
+  if (playerCurrentY - height / 2 > upY && playerCurrentY + height / 2 < downY) {
+    playerY = playerCurrentY;
+  } else {
+    if (playerCurrentY - height / 2 < upY) {
+      playerY = upY + height / 2;
+    } else {
+      playerY = downY - height / 2;
+    }
+  }
+
+  return {playerX, playerY};
+}
+
+void setPrice(std::vector<int> arm_vctr, InterfaceLabel &lbl, int id) {
+  std::ostringstream str;
+  if (arm_vctr[id] * 100 + 100 >= 500) {
+    str << "max";
+  } else {
+    str << arm_vctr[id] * 100 + 100;
+  }
+  lbl.SetText(str.str());
+}
+
+void setArmLvl(std::vector<int> arm_vctr, InterfaceLabel &lbl, int id) {
+  std::ostringstream str;
+  str << "LVL:" << arm_vctr[id];
+  lbl.SetText(str.str());
+}
+
+void buy(std::vector<int> arm_vector, int index) {
+  ++arm_vector[index];
+  Save::SaveArmor(arm_vector);
+}
 
 Interface &Interface::GetInstance(sf::RenderWindow &window) {
   static Interface instance(window);
@@ -21,9 +72,6 @@ Interface::Interface(sf::RenderWindow &window)
 void Interface::MainMenu(sf::RenderWindow &window) {
   std::string fontPath = resourcePath() + "files/fonts/Inconsolata-Bold.ttf";
 
-  InterfaceSprite backImageSprite(resourcePath() + "files/menu/back_image.png");
-  backImageSprite.SetPosition(700, 0);
-
   float left = buttonSize * 2;
   float up = buttonSize * 0.6;
   float dy = buttonSize * 1.4;
@@ -39,8 +87,12 @@ void Interface::MainMenu(sf::RenderWindow &window) {
 
   InterfaceButton aboutButton(fontPath, buttonSize, left, height - left, "About");
 
-  MusicManager menuMusic;
-  menuMusic.PlayBackgroundMenuMusic();
+  InterfaceImage backImageSprite(resourcePath() + "files/menu/back_image.png");
+  backImageSprite.SetPosition(statisticButton.GetTextRectSize().x + left + 30, 0);
+  backImageSprite.Size(width - backImageSprite.GetTextureRect().left, height);
+
+  MusicManager music;
+  music.PlayBackgroundMenuMusic();
 
   Save save;
 
@@ -53,35 +105,39 @@ void Interface::MainMenu(sf::RenderWindow &window) {
     }
 
     //    if (event.type == sf::Event::TextEntered)
-//    {
-//      if (event.text.unicode >= 48 && event.text.unicode <= 57)
-//        std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << std::endl;
-//    }
+    //    {
+    //      if (event.text.unicode >= 48 && event.text.unicode <= 57)
+    //        std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << std::endl;
+    //    }
 
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
     if (newGameButton.IsSelect(mousePosition)) {
       if (!Save::IsExistLvlFile()) {
-        while (startNewGame(window, save, menuMusic)) {}
-        menuMusic.PlayBackgroundMenuMusic();
+        music.StopBackgroundMenuMusic();
+        startNewGame(window, music);
       } else {
-        newGameWarningMenu(window, menuMusic, save);
+        newGameWarningMenu(window, music);
       }
     }
 
     if (loadGameButton.IsSelect(mousePosition)) {
       if (Save::IsExistLvlFile()) {
-        while (startNewGame(window, save, menuMusic)) {}
-        menuMusic.PlayBackgroundMenuMusic();
+        if (Save::LoadLvl() != 0) {
+          music.StopBackgroundMenuMusic();
+          startNewGame(window, music);
+        } else {
+          winMenu(window, music, true);
+        }
       }
     }
 
     if (statisticButton.IsSelect(mousePosition)) {
-      statisticMenu(window, menuMusic);
+      statisticMenu(window);
     }
 
     if (shopButton.IsSelect(mousePosition)) {
-      shopMenu(window, save);
+      shopMenu(window);
     }
 
     if (exitButton.IsSelect(mousePosition)) {
@@ -89,13 +145,13 @@ void Interface::MainMenu(sf::RenderWindow &window) {
     }
 
     if (aboutButton.IsSelect(mousePosition)) {
-      aboutMenu(window, menuMusic);
+      aboutMenu(window);
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)
         && sf::Keyboard::isKeyPressed(sf::Keyboard::G)
         && sf::Keyboard::isKeyPressed(sf::Keyboard::K)) {
-      configMenu(window, menuMusic);
+      configMenu(window);
     }
 
     window.clear(sf::Color(68, 101, 219));
@@ -121,7 +177,7 @@ void Interface::PenaltyPolice(sf::RenderWindow &window) {
   std::string fontPath = resourcePath() + "files/fonts/Inconsolata-Bold.ttf";
 
   InterfaceTable penaltyTable;
-  penaltyTable.SetCenterLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, "You were caught and fined"));
+  penaltyTable.SetCenterLabel(std::make_shared<InterfaceLabel>(fontPath, headSize, "You were caught and fined"));
   penaltyTable.SetCenterButton(std::make_shared<InterfaceButton>(fontPath, buttonSize, "Continue"));
 
   penaltyTable.CalculateTablePosition();
@@ -154,7 +210,7 @@ void Interface::DiedPolice(sf::RenderWindow &window) {
   std::string fontPath = resourcePath() + "files/fonts/Inconsolata-Bold.ttf";
 
   InterfaceTable diedTable;
-  diedTable.SetCenterLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, "You were caught and brought back"));
+  diedTable.SetCenterLabel(std::make_shared<InterfaceLabel>(fontPath, headSize, "You were caught and brought back"));
   diedTable.SetCenterButton(std::make_shared<InterfaceButton>(fontPath, buttonSize, "Continue"));
 
   diedTable.CalculateTablePosition();
@@ -179,12 +235,16 @@ void Interface::DiedPolice(sf::RenderWindow &window) {
 }
 
 // Предупреждение о сбросе данных
-void Interface::newGameWarningMenu(sf::RenderWindow &window, MusicManager &menuMusic, Save &save) {
+void Interface::newGameWarningMenu(sf::RenderWindow &window, MusicManager &music) {
   std::string fontPath = resourcePath() + "files/fonts/Inconsolata-Bold.ttf";
 
   InterfaceTable newGameWarningTable;
-  newGameWarningTable.SetCenterLabel(std::make_shared<InterfaceButton>(fontPath, textSize, "Are you sure you want to start a new game?"));
-  newGameWarningTable.SetCenterLabel(std::make_shared<InterfaceButton>(fontPath, textSize, "All your saves will be lost"));
+  newGameWarningTable.SetCenterLabel(std::make_shared<InterfaceButton>(fontPath,
+                                                                       textSize,
+                                                                       "Are you sure you want to start a new game?"));
+  newGameWarningTable.SetCenterLabel(std::make_shared<InterfaceButton>(fontPath,
+                                                                       textSize,
+                                                                       "All your saves will be lost"));
   newGameWarningTable.SetLeftButton(std::make_shared<InterfaceButton>(fontPath, buttonSize, "Yes"));
   newGameWarningTable.SetRightButton(std::make_shared<InterfaceButton>(fontPath, buttonSize, "No"));
 
@@ -203,8 +263,8 @@ void Interface::newGameWarningMenu(sf::RenderWindow &window, MusicManager &menuM
 
     if (newGameWarningTable.GetLeftButtons()[0]->IsSelect(mousePosition)) {
       Save::RemoveGameSaves();
-      while (startNewGame(window, save, menuMusic)) {}
-      menuMusic.PlayBackgroundMenuMusic();
+      music.StopBackgroundMenuMusic();
+      startNewGame(window, music);
       break;
     }
 
@@ -219,113 +279,146 @@ void Interface::newGameWarningMenu(sf::RenderWindow &window, MusicManager &menuM
 }
 
 // Старт новой игры
-bool Interface::startNewGame(sf::RenderWindow &window, Save &save, MusicManager &menuMusic) {
-  sf::View view(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
+void Interface::startNewGame(sf::RenderWindow &window, MusicManager &music) {
+  bool repeat = true;
+  bool isActive = true;
 
-  menuMusic.StopBackgroundMenuMusic();
+  Save save;
 
-  Level lvl;
-  lvl.LoadFromFile(save.GetLvlName());
-  GameManager game(lvl, menuMusic, Save::LoadArmors(), Save::LoadPoints(), Save::LoadStat(), Save::LoadConfig());
-  sf::Clock clock;
+  while (repeat) {
+    sf::View view(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
 
-  while (window.isOpen()) {
-    float time = clock.getElapsedTime().asMicroseconds();
-    clock.restart();
+    music.PlayBackgroundGameMusic();
 
-    time = time / 400;
+    Level lvl;
+    lvl.LoadFromFile(save.GetLvlName());
+    GameManager game(lvl, textSize, music, Save::LoadArmors(), Save::LoadPoints(), Save::LoadStat(), Save::LoadConfig());
+    sf::Clock clock;
 
-    if (time > 70) {
-      time = 70;
-    }
-
-    sf::Event event{};
-    while (window.pollEvent(event)) {
-      if (event.type == sf::Event::Closed)
-        window.close();
-
-      if (event.type == sf::Event::KeyPressed) {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-          game.GetPlayer()->SetKey("SPACE", true);
-          game.Fire();
+    while (window.isOpen()) {
+      sf::Event event{};
+      while (window.pollEvent(event)) {
+        if (event.type == sf::Event::Closed) {
+          window.close();
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
-          game.TakeTransport();
+        if (event.type == sf::Event::LostFocus) {
+          isActive = false;
+        }
+
+        if (event.type == sf::Event::GainedFocus) {
+          isActive = true;
+        }
+
+        if (event.type == sf::Event::KeyPressed) {
+          if (event.key.code == sf::Keyboard::Space) {
+            game.GetPlayer()->SetKey("SPACE", true);
+            game.Fire();
+          }
+
+          if (event.key.code == sf::Keyboard::E) {
+            game.TakeTransport();
+          }
         }
       }
-    }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-      game.GetPlayer()->SetKey("L", true);
-    }
+      if (isActive) {
+        float time = clock.getElapsedTime().asMicroseconds();
+        clock.restart();
+        time = time / 400;
+        if (time > 70) {
+          time = 70;
+        }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-      game.GetPlayer()->SetKey("R", true);
-    }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+          game.GetPlayer()->SetKey("L", true);
+        }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-      game.GetPlayer()->SetKey("UP", true);
-    }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+          game.GetPlayer()->SetKey("R", true);
+        }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-      game.GetPlayer()->SetKey("DOWN", true);
-    }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+          game.GetPlayer()->SetKey("UP", true);
+        }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-      if (!gameMenu(window, game, menuMusic)) {
-        return false;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+          game.GetPlayer()->SetKey("DOWN", true);
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+          music.StopBackgroundGameMusic();
+
+          if (!gameMenu(window, music, game.GetPlayer()->GetMainData())) {
+            repeat = false;
+            break;
+          }
+
+          music.PlayBackgroundGameMusic();
+        }
+
+        if (game.GetPlayer()->GetHp() <= 0) {
+          music.StopBackgroundGameMusic();
+          music.PlayDiedPlayerSound();
+
+          repeat = diedMenu(window, music);
+          break;
+        }
+
+        if (game.GetPlayer()->GetFinish()) {
+          music.StopBackgroundGameMusic();
+
+          if (save.GetLvl() == MAX_LVL) {
+            save.SetEndGame();
+            repeat = winMenu(window, music, false);
+
+          } else {
+            save.ChangeLvl();
+            repeat = nextLvlMenu(window, music);
+          }
+
+          save.SaveGame(game.GetPlayer()->GetPoints());
+          break;
+        }
+
+        game.Update(time);
+
+        window.clear(sf::Color(0, 0, 0));
+        lvl.Draw(window);
+        game.Draw(window);
+        view.setCenter(game.GetPlayer()->GetRect().left, game.GetPlayer()->GetRect().top);
+        window.setView(view);
+        window.display();
       }
     }
 
-    if (game.GetPlayer()->GetAnim().GetCurrentFrame() == 3 && game.GetPlayer()->GetHp() <= 0) {
-      menuMusic.PlayDiedPlayerSound();
-      return diedMenu(window, game);
-    }
-
-    if (game.GetPlayer()->GetFinish()) {
-      if (save.GetLvl() == MAX_LVL) {
-        return winMenu(window, save, game, menuMusic);
-      } else {
-        return nextLvlMenu(window, save, game, menuMusic);
-      }
-    }
-
-    game.Update(time);
-
-    window.clear(sf::Color(0, 0, 0));
-    lvl.Draw(window);
-    game.Draw(window);
-
-    view.setCenter(game.GetPlayer()->GetRect().left, game.GetPlayer()->GetRect().top);
-    window.setView(view);
-    window.display();
+    Save::SaveStat(game.GetStat());
   }
-
-  return false;
 }
 
-bool Interface::winMenu(sf::RenderWindow &window, Save &save, GameManager &game, MusicManager &menuMusic) {
+bool Interface::winMenu(sf::RenderWindow &window, MusicManager &music, bool isLoadFromMenu) {
   sf::View view(sf::FloatRect(0, 0, width, height));
   view.setCenter(width / 2, height / 2);
   window.setView(view);
+
+  if (!isLoadFromMenu) {
+    music.PlayBackgroundMenuMusic();
+  }
 
   std::string fontPath = resourcePath() + "files/fonts/Inconsolata-Bold.ttf";
 
   InterfaceTable winTable;
   winTable.SetCenterLabel(std::make_shared<InterfaceLabel>(fontPath, headSize, "Congratulations!"));
-  winTable.SetCenterLabel(std::make_shared<InterfaceLabel>(fontPath, headSize, "You have collected all the vaccines and were able to"));
-  winTable.SetCenterLabel(std::make_shared<InterfaceLabel>(fontPath, headSize, "save the world from the fucking coronavirus"));
+  winTable.SetCenterLabel(std::make_shared<InterfaceLabel>(fontPath,
+                                                           textSize,
+                                                           "You have collected all the vaccines and were able to"));
+  winTable.SetCenterLabel(std::make_shared<InterfaceLabel>(fontPath,
+                                                           textSize,
+                                                           "save the world from the fucking coronavirus"));
   winTable.SetCenterButton(std::make_shared<InterfaceButton>(fontPath, buttonSize, "Menu"));
 
   winTable.CalculateTablePosition();
   winTable.SetPosition(height, width);
-
-  save.SaveGame(game);
-
-  std::vector<int> stat = game.GetStat();
-  stat[0]++;
-  Save::SaveStat(stat);
 
   while (window.isOpen()) {
     sf::Event event{};
@@ -336,6 +429,10 @@ bool Interface::winMenu(sf::RenderWindow &window, Save &save, GameManager &game,
     }
 
     if (winTable.GetCenterButtons()[0]->IsSelect(sf::Vector2i(sf::Mouse::getPosition(window)))) {
+      if (!isLoadFromMenu) {
+        music.StopBackgroundMenuMusic();
+      }
+
       return false;;
     }
 
@@ -347,26 +444,22 @@ bool Interface::winMenu(sf::RenderWindow &window, Save &save, GameManager &game,
   return false;
 }
 
-bool Interface::nextLvlMenu(sf::RenderWindow &window, Save &save, GameManager &game, MusicManager &menuMusic) {
+bool Interface::nextLvlMenu(sf::RenderWindow &window, MusicManager &music) {
   sf::View view(sf::FloatRect(0, 0, width, height));
   view.setCenter(width / 2, height / 2);
   window.setView(view);
 
+  music.PlayBackgroundMenuMusic();
+
   std::string fontPath = resourcePath() + "files/fonts/Inconsolata-Bold.ttf";
 
   InterfaceTable nextMissionTable;
+  nextMissionTable.SetCenterLabel(std::make_shared<InterfaceLabel>(fontPath, headSize, "Mission completed"));
   nextMissionTable.SetCenterButton(std::make_shared<InterfaceButton>(fontPath, buttonSize, "Next mission"));
   nextMissionTable.SetCenterButton(std::make_shared<InterfaceButton>(fontPath, buttonSize, "Menu"));
 
   nextMissionTable.CalculateTablePosition();
   nextMissionTable.SetPosition(height, width);
-
-  save.ChangeLvl();
-  save.SaveGame(game);
-
-  std::vector<int> stat = game.GetStat();
-  stat[0]++;
-  Save::SaveStat(stat);
 
   while (window.isOpen()) {
     sf::Event event{};
@@ -379,11 +472,11 @@ bool Interface::nextLvlMenu(sf::RenderWindow &window, Save &save, GameManager &g
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
     if (nextMissionTable.GetCenterButtons()[0]->IsSelect(mousePosition)) {
+      music.StopBackgroundMenuMusic();
       return true;
     }
 
     if (nextMissionTable.GetCenterButtons()[1]->IsSelect(mousePosition)) {
-      menuMusic.StopBackgroundGameMusic();
       return false;
     }
 
@@ -396,23 +489,22 @@ bool Interface::nextLvlMenu(sf::RenderWindow &window, Save &save, GameManager &g
 }
 
 // Экран смерти
-bool Interface::diedMenu(sf::RenderWindow &window, GameManager &game) {
+bool Interface::diedMenu(sf::RenderWindow &window, MusicManager &music) {
   sf::View view(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
   view.setCenter(width / 2, height / 2);
   window.setView(view);
 
+  music.PlayBackgroundMenuMusic();
+
   std::string fontPath = resourcePath() + "files/fonts/Inconsolata-Bold.ttf";
 
   InterfaceTable diedTable;
+  diedTable.SetCenterLabel(std::make_shared<InterfaceLabel>(fontPath, headSize, "Mission failed"));
   diedTable.SetCenterButton(std::make_shared<InterfaceButton>(fontPath, buttonSize, "Restart"));
   diedTable.SetCenterButton(std::make_shared<InterfaceButton>(fontPath, buttonSize, "Menu"));
 
   diedTable.CalculateTablePosition();
   diedTable.SetPosition(height, width);
-
-  std::vector<int> stat = game.GetStat();
-  stat[1]++;
-  Save::SaveStat(stat);
 
   while (window.isOpen()) {
     sf::Event event{};
@@ -425,6 +517,7 @@ bool Interface::diedMenu(sf::RenderWindow &window, GameManager &game) {
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
     if (diedTable.GetCenterButtons()[0]->IsSelect(mousePosition)) {
+      music.StopBackgroundMenuMusic();
       return true;
     }
 
@@ -440,7 +533,7 @@ bool Interface::diedMenu(sf::RenderWindow &window, GameManager &game) {
   return false;
 }
 
-void Interface::statisticMenu(sf::RenderWindow &window, MusicManager &menuMusic) {
+void Interface::statisticMenu(sf::RenderWindow &window) {
   std::string fontPath = resourcePath() + "files/fonts/Inconsolata-Bold.ttf";
 
   InterfaceLabel statisticHeadText(fontPath, headSize, "Statistic menu");
@@ -502,7 +595,7 @@ void Interface::statisticMenu(sf::RenderWindow &window, MusicManager &menuMusic)
   statisticTable.SetLeftLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssPenalty.str()));
 
   std::ostringstream ssCaught;
-  ssCaught << "Caught time: " << stat[13];
+  ssCaught << "Back time: " << stat[13];
   statisticTable.SetRightLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssCaught.str()));
 
   statisticTable.CalculateTablePosition();
@@ -530,7 +623,7 @@ void Interface::statisticMenu(sf::RenderWindow &window, MusicManager &menuMusic)
   }
 }
 
-void Interface::configMenu(sf::RenderWindow &window, MusicManager &menuMusic) {
+void Interface::configMenu(sf::RenderWindow &window) {
   std::string fontPath = resourcePath() + "files/fonts/Inconsolata-Bold.ttf";
 
   InterfaceLabel configurationHeadText(fontPath, headSize, "Configuration menu");
@@ -656,132 +749,104 @@ void Interface::configMenu(sf::RenderWindow &window, MusicManager &menuMusic) {
   }
 }
 
-bool Interface::shopMenu(sf::RenderWindow &window, Save &save) {
-  sf::Vector2f center = window.getView().getCenter();
-  sf::Vector2f size = window.getView().getSize();
-
-  float xPosition = center.x - size.x / 2;
-  float yPosition = center.y - size.y / 2;
-
-  InterfaceSprite armorListSprite(resourcePath() + "files/menu/armor_list.png", xPosition + 250, yPosition + 80);
-  InterfaceSprite armorShoesSprite(resourcePath() + "files/menu/armors.png", xPosition + 790, yPosition + 100);
-  InterfaceSprite armorCapSprite(resourcePath() + "files/menu/armors.png", xPosition + 260, yPosition + 140);
-  InterfaceSprite armorRobeSprite(resourcePath() + "files/menu/armors.png", xPosition + 530, yPosition + 540);
-  InterfaceSprite buyShoesSprite(resourcePath() + "files/menu/upgrade.png", xPosition + 1010, yPosition + 160);
-  InterfaceSprite buyCapSprite(resourcePath() + "files/menu/upgrade.png", xPosition + 110, yPosition + 160);
-  InterfaceSprite buyRobeSprite(resourcePath() + "files/menu/upgrade.png", xPosition + 370, yPosition + 580);
-  InterfaceSprite backSprite(resourcePath() + "files/menu/back.png", xPosition + 20, yPosition + 740);
-
+bool Interface::shopMenu(sf::RenderWindow &window) {
   std::string fontPath = resourcePath() + "files/fonts/Inconsolata-Bold.ttf";
 
-  InterfaceLabel pointsText(fontPath, 40, xPosition + 800, yPosition + 13);
-  InterfaceLabel armText(fontPath, 40, xPosition + 300, yPosition + 13);
-  InterfaceLabel lvlShoesText(fontPath, 40, xPosition + 840, yPosition + 240);
-  InterfaceLabel lvlCapText(fontPath, 40, xPosition + 300, yPosition + 240);
-  InterfaceLabel lvlRobeText(fontPath, 40, xPosition + 570, yPosition + 660);
-  InterfaceLabel costShoesText(fontPath, 40, xPosition + 1045, yPosition + 290);
-  InterfaceLabel costCapText(fontPath, 40, xPosition + 145, yPosition + 290);
-  InterfaceLabel costRobeText(fontPath, 40, xPosition + 400, yPosition + 710);
+  InterfaceButton backButton(fontPath, buttonSize, 30, height - buttonSize - 30, "Back");
+
+  InterfaceImage armorListSprite(resourcePath() + "files/menu/armor_list.png",
+                                 width / 2 - (width / 1.6) / 2, height / 2 - (width / 1.9) / 2,
+                                 width / 1.6, width / 1.9);
+
+  InterfaceImage armorShoesSprite(resourcePath() + "files/menu/armors.png",
+                                  width / 1.57, height / 14,
+                                  width / 1.0, width / 1.7);
+
+  InterfaceImage armorCapSprite(resourcePath() + "files/menu/armors.png",
+                                width / 4.9, height / 6,
+                                width / 1.3, width / 2);
+
+  InterfaceImage armorRobeSprite(resourcePath() + "files/menu/armors.png",
+                                 width / 2.32, height / 1.45,
+                                 width / 1.3, width / 2.2);
+
+  InterfaceImage buyShoesSprite(resourcePath() + "files/menu/upgrade.png",
+                                width / 1.215, height / 7,
+                                width / 15, width / 15);
+
+  InterfaceImage buyCapSprite(resourcePath() + "files/menu/upgrade.png",
+                              width / 10, height / 7,
+                              width / 15, width / 15);
+
+  InterfaceImage buyRobeSprite(resourcePath() + "files/menu/upgrade.png",
+                               width / 1.67, height / 1.4,
+                               width / 15, width / 15);
+
+  InterfaceLabel lvlShoesText(fontPath, textSize, width / 1.46, height / 3.5);
+  InterfaceLabel lvlCapText(fontPath, textSize, width / 4.2, height / 3.5);
+  InterfaceLabel lvlRobeText(fontPath, textSize, width / 2.15, height / 1.18);
+  InterfaceLabel costShoesText(fontPath, textSize, width / 1.2, height / 4);
+  InterfaceLabel costCapText(fontPath, textSize, width / 9, height / 4);
+  InterfaceLabel costRobeText(fontPath, textSize, width / 1.64, height / 1.22);
+
+  std::ostringstream ssPoints;
+  int money = Save::LoadPoints();
+  ssPoints << "Points: " << money;
+  InterfaceLabel pointsLabel(fontPath, textSize, ssPoints.str());
+  pointsLabel.SetPosition(width - pointsLabel.GetTextRectSize().x - 30, 13);
+
+  std::vector<int> arm_vector = Save::LoadArmors();
+  std::ostringstream ssArm;
+  ssArm << "ARM: " << arm_vector[0] + arm_vector[1] + arm_vector[2];
+  InterfaceLabel armText(fontPath, textSize, 30, 13, ssArm.str());
+
+  setArmLvl(arm_vector, lvlCapText, 0);
+  setArmLvl(arm_vector, lvlShoesText, 1);
+  setArmLvl(arm_vector, lvlRobeText, 2);
+
+  setPrice(arm_vector, costCapText, 0);
+  setPrice(arm_vector, costShoesText, 1);
+  setPrice(arm_vector, costRobeText, 2);
+
+  armorCapSprite.SetTextureRect(sf::Rect<int>(204 * arm_vector[0], 41, 196, 85));
+  armorShoesSprite.SetTextureRect(sf::Rect<int>(204 * arm_vector[1], 352, 196, 169));
+  armorRobeSprite.SetTextureRect(sf::Rect<int>(204 * arm_vector[2], 200, 195, 165));
 
   while (window.isOpen()) {
-    std::vector<int> arm_vector = Save::LoadArmors();
-
-    std::ostringstream ssPoints;
-    int money = Save::LoadPoints();
-    ssPoints << "Points: " << money;
-    pointsText.SetText(ssPoints.str());
-
-    std::ostringstream ssArm;
-    ssArm << "ARM: " << arm_vector[0] + arm_vector[1] + arm_vector[2];
-    armText.SetText(ssArm.str());
-
-    std::ostringstream ssCap;
-    ssCap << "LVL:" << arm_vector[0];
-    lvlCapText.SetText(ssCap.str());
-
-    std::ostringstream ssShoes;
-    ssShoes << "LVL:" << arm_vector[1];
-    lvlShoesText.SetText(ssShoes.str());
-
-    std::ostringstream ssRobe;
-    ssRobe << "LVL:" << arm_vector[2];
-    lvlRobeText.SetText(ssRobe.str());
-
-    std::ostringstream ssCapCost;
-    if (arm_vector[0] * 100 + 100 >= 500) {
-      ssCapCost << "max";
-    } else {
-      ssCapCost << arm_vector[0] * 100 + 100;
-    }
-    costCapText.SetText(ssCapCost.str());
-
-    std::ostringstream ssShoesCost;
-    if (arm_vector[1] * 100 + 100 >= 500) {
-      ssShoesCost << "max";
-    } else {
-      ssShoesCost << arm_vector[1] * 100 + 100;
-    }
-    costShoesText.SetText(ssShoesCost.str());
-
-    std::ostringstream ssRobeCost;
-    if (arm_vector[2] * 100 + 100 >= 500) {
-      ssRobeCost << "max";
-    } else {
-      ssRobeCost << arm_vector[2] * 100 + 100;
-    }
-    costRobeText.SetText(ssRobeCost.str());
-
-    armorCapSprite.SetTextureRect(sf::Rect<int>(204 * arm_vector[0], 41, 196, 85));
-    armorShoesSprite.SetTextureRect(sf::Rect<int>(204 * arm_vector[1], 352, 196, 169));
-    armorRobeSprite.SetTextureRect(sf::Rect<int>(204 * arm_vector[2], 200, 195, 165));
-
-    window.clear(sf::Color(68, 101, 219));
-
     buyShoesSprite.SetColor(sf::Color::White);
     buyCapSprite.SetColor(sf::Color::White);
     buyRobeSprite.SetColor(sf::Color::White);
-    backSprite.SetColor(sf::Color::White);
 
     int menuNum = -1;
 
-    if (sf::IntRect(110,
-                    160,
-                    buyCapSprite.GetTextureRect().width,
-                    buyCapSprite.GetTextureRect().height).
+    if (sf::IntRect(buyCapSprite.GetSpriteRect().x,
+                    buyCapSprite.GetSpriteRect().y,
+                    buyCapSprite.GetSize().x,
+                    buyCapSprite.GetSize().y).
         contains(sf::Mouse::getPosition(window))) {
-
       buyCapSprite.SetColor(sf::Color::Red);
       menuNum = 0;
     }
 
-    if (sf::IntRect(1010,
-                    160,
-                    buyShoesSprite.GetTextureRect().width,
-                    buyShoesSprite.GetTextureRect().height).
+    if (sf::IntRect(buyShoesSprite.GetSpriteRect().x,
+                    buyShoesSprite.GetSpriteRect().y,
+                    buyShoesSprite.GetSize().x,
+                    buyShoesSprite.GetSize().y).
         contains(sf::Mouse::getPosition(window))) {
-
       buyShoesSprite.SetColor(sf::Color::Red);
       menuNum = 1;
     }
-
-    if (sf::IntRect(370,
-                    580,
-                    buyRobeSprite.GetTextureRect().width,
-                    buyRobeSprite.GetTextureRect().height).
+    if (sf::IntRect(buyRobeSprite.GetSpriteRect().x,
+                    buyRobeSprite.GetSpriteRect().y,
+                    buyRobeSprite.GetSize().x,
+                    buyRobeSprite.GetSize().y).
         contains(sf::Mouse::getPosition(window))) {
-
       buyRobeSprite.SetColor(sf::Color::Red);
       menuNum = 2;
     }
 
-    if (sf::IntRect(20,
-                    740,
-                    backSprite.GetTextureRect().width,
-                    backSprite.GetTextureRect().height).
-        contains(sf::Mouse::getPosition(window))) {
-
-      backSprite.SetColor(sf::Color::Red);
-      menuNum = 3;
+    if (backButton.IsSelect(sf::Vector2i(sf::Mouse::getPosition(window)))) {
+      break;
     }
 
     sf::Event event{};
@@ -789,7 +854,6 @@ bool Interface::shopMenu(sf::RenderWindow &window, Save &save) {
       if (event.type == sf::Event::Closed) {
         window.close();
       }
-
       if (event.type == sf::Event::MouseButtonPressed) {
         if (event.mouseButton.button == sf::Mouse::Left) {
           if (menuNum == 0 || menuNum == 1 || menuNum == 2) {
@@ -798,16 +862,32 @@ bool Interface::shopMenu(sf::RenderWindow &window, Save &save) {
               if (cost <= money) {
                 buy(arm_vector, menuNum);
                 Save::SavePoints(money - cost);
+                ssPoints.str("");
+                money = Save::LoadPoints();
+                ssPoints << "Points: " << money;
+                pointsLabel.SetText(ssPoints.str());
+                arm_vector = Save::LoadArmors();
+                ssArm.str("");
+                ssArm << "ARM: " << arm_vector[0] + arm_vector[1] + arm_vector[2];
+                armText.SetText(ssArm.str());
+                armText.SetPosition(+30, +13);
+                setArmLvl(arm_vector, lvlCapText, 0);
+                setArmLvl(arm_vector, lvlShoesText, 1);
+                setArmLvl(arm_vector, lvlRobeText, 2);
+                setPrice(arm_vector, costCapText, 0);
+                setPrice(arm_vector, costShoesText, 1);
+                setPrice(arm_vector, costRobeText, 2);
+                armorCapSprite.SetTextureRect(sf::Rect<int>(204 * arm_vector[0], 41, 196, 85));
+                armorShoesSprite.SetTextureRect(sf::Rect<int>(204 * arm_vector[1], 352, 196, 169));
+                armorRobeSprite.SetTextureRect(sf::Rect<int>(204 * arm_vector[2], 200, 195, 165));
               }
             }
-          }
-
-          if (menuNum == 3) {
-            return true;
           }
         }
       }
     }
+
+    window.clear(sf::Color(68, 101, 219));
 
     armorListSprite.Draw(window);
     armorShoesSprite.Draw(window);
@@ -816,9 +896,10 @@ bool Interface::shopMenu(sf::RenderWindow &window, Save &save) {
     buyShoesSprite.Draw(window);
     buyCapSprite.Draw(window);
     buyRobeSprite.Draw(window);
-    backSprite.Draw(window);
 
-    pointsText.Draw(window);
+    backButton.Draw(window);
+
+    pointsLabel.Draw(window);
     armText.Draw(window);
     lvlShoesText.Draw(window);
     lvlCapText.Draw(window);
@@ -833,71 +914,61 @@ bool Interface::shopMenu(sf::RenderWindow &window, Save &save) {
   return true;
 }
 
-void Interface::buy(std::vector<int> arm_vector, int index) {
-  ++arm_vector[index];
-  Save::SaveArmor(arm_vector);
-}
-
-bool Interface::gameMenu(sf::RenderWindow &window, GameManager &game, MusicManager &menuMusic) {
+bool Interface::gameMenu(sf::RenderWindow &window, MusicManager &music, std::vector<int> data) {
   sf::View view(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
   view.setCenter(width / 2, height / 2);
   window.setView(view);
 
-  menuMusic.StopBackgroundMenuMusic();
-
-  sf::Vector2f center = window.getView().getCenter();
-  sf::Vector2f size = window.getView().getSize();
-
-  float xPosition = center.x - size.x / 2;
-  float yPosition = center.y - size.y / 2;
-
-  InterfaceSprite menuSprite(resourcePath() + "files/menu/menu.png", xPosition + 190, yPosition + 650);
-  InterfaceSprite continueSprite(resourcePath() + "files/menu/continue.png", xPosition + 140, yPosition + 580);
-  InterfaceSprite armorListSprite(resourcePath() + "files/menu/armor_list.png", xPosition + 500, yPosition + 100);
-  InterfaceSprite armorCapSprite(resourcePath() + "files/menu/armors.png", xPosition + 520, yPosition + 150);
-  InterfaceSprite armorShoesSprite(resourcePath() + "files/menu/armors.png", xPosition + 1050, yPosition + 120);
-  InterfaceSprite armorRobeSprite(resourcePath() + "files/menu/armors.png", xPosition + 780, yPosition + 560);
-
-  std::vector<int> data = game.GetPlayer()->GetMainData();
-
-  armorShoesSprite.SetTextureRect(sf::Rect<int>(204 * data[3], 352, 196, 169));
-  armorCapSprite.SetTextureRect(sf::Rect<int>(204 * data[4], 41, 196, 85));
-  armorRobeSprite.SetTextureRect(sf::Rect<int>(204 * data[5], 200, 195, 165));
-
-  std::ostringstream ssHp;
-  ssHp << "HP: " << data[0] << "%";
-
-  std::ostringstream ssArm;
-  ssArm << "ARM: " << data[2];
-
-  std::ostringstream ssVaccine;
-  ssVaccine << "Vaccine: " << data[6];
-
-  std::ostringstream ssPoints;
-  ssPoints << "Points: " << data[1];
-
-  std::ostringstream ssCap;
-  ssCap << "LVL:" << data[4];
-
-  std::ostringstream ssShoes;
-  ssShoes << "LVL:" << data[3];
-
-  std::ostringstream ssRobe;
-  ssRobe << "LVL:" << data[5];
+  music.PlayBackgroundMenuMusic();
 
   std::string fontPath = resourcePath() + "files/fonts/Inconsolata-Bold.ttf";
 
-  InterfaceLabel pointsText(fontPath, 40, xPosition + 1000, yPosition + 13, ssPoints.str());
-  InterfaceLabel hpText(fontPath, 40, xPosition + 10, yPosition + 13, ssHp.str());
-  InterfaceLabel armText(fontPath, 40, xPosition + 200, yPosition + 13, ssArm.str());
-  InterfaceLabel vaccineText(fontPath, 40, xPosition + 350, yPosition + 13, ssVaccine.str());
+  InterfaceButton continueButton(fontPath, buttonSize, 30, height - buttonSize - 30, "Continue");
+  InterfaceButton menuButton(fontPath, buttonSize, "Menu");
+  menuButton.SetPosition(width - menuButton.GetTextRectSize().x - 30, height - menuButton.GetTextRectSize().y - 30);
 
-  InterfaceLabel lvlCapText(fontPath, 40, xPosition + 560, yPosition + 260, ssCap.str());
-  InterfaceLabel lvlShoesText(fontPath, 40, xPosition + 1090, yPosition + 260, ssShoes.str());
-  InterfaceLabel lvlRobeText(fontPath, 40, xPosition + 820, yPosition + 680, ssRobe.str());
+  InterfaceImage armorListImage(resourcePath() + "files/menu/armor_list.png",
+                                width / 2 - (width / 1.6) / 2, height / 2 - (width / 1.9) / 2,
+                                width / 1.6, width / 1.9);
+
+  InterfaceImage armorCapImage(resourcePath() + "files/menu/armors.png",
+                               width / 4.9, height / 6,
+                               width / 1.3, width / 2);
+
+  InterfaceImage armorShoesImage(resourcePath() + "files/menu/armors.png",
+                                 width / 1.57, height / 14,
+                                 width / 1.0, width / 1.7);
+
+  InterfaceImage armorRobeImage(resourcePath() + "files/menu/armors.png",
+                                width / 2.32, height / 1.45,
+                                width / 1.3, width / 2.2);
+
+  armorShoesImage.SetTextureRect(sf::Rect<int>(204 * data[3], 352, 196, 169));
+  armorCapImage.SetTextureRect(sf::Rect<int>(204 * data[4], 41, 196, 85));
+  armorRobeImage.SetTextureRect(sf::Rect<int>(204 * data[5], 200, 195, 165));
+
+  std::ostringstream ssData;
+  ssData << "HP: " << data[0] << "%" << " ARM: " << data[2] << " Vaccine: " << data[6];
+  InterfaceLabel playerDataLabel(fontPath, textSize, 20, 20, ssData.str());
+
+  std::ostringstream ssPoints;
+  ssPoints << "Points: " << data[1];
+  InterfaceLabel pointsLabel(fontPath, textSize, ssPoints.str());
+  pointsLabel.SetPosition(width - pointsLabel.GetTextRectSize().x - 20, 20);
+
+  std::ostringstream ssShoes;
+  ssShoes << "LVL:" << data[3];
+  InterfaceLabel lvlShoesLabel(fontPath, textSize, width / 1.46, height / 3.5, ssShoes.str());
+
+  std::ostringstream ssCap;
+  ssCap << "LVL:" << data[4];
+  InterfaceLabel lvlCapLabel(fontPath, textSize, width / 4.2, height / 3.5, ssCap.str());
+
+  std::ostringstream ssRobe;
+  ssRobe << "LVL:" << data[5];
+  InterfaceLabel lvlRobeLabel(fontPath, textSize, width / 2.15, height / 1.18, ssRobe.str());
 
   while (window.isOpen()) {
-
     sf::Event event{};
     while (window.pollEvent(event)) {
       if (event.type == sf::Event::Closed) {
@@ -905,60 +976,32 @@ bool Interface::gameMenu(sf::RenderWindow &window, GameManager &game, MusicManag
       }
     }
 
-    continueSprite.SetColor(sf::Color::White);
-    menuSprite.SetColor(sf::Color::White);
+    sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    int menuNum = 0;
+    if (menuButton.IsSelect(mousePosition)) {
+      return false;
+    }
+
+    if (continueButton.IsSelect(mousePosition)) {
+      music.StopBackgroundMenuMusic();
+      return true;
+    }
 
     window.clear(sf::Color(68, 101, 219));
 
-    if (sf::IntRect(190,
-                    650,
-                    menuSprite.GetTextureRect().width,
-                    menuSprite.GetTextureRect().height).
-        contains(sf::Mouse::getPosition(window))) {
+    menuButton.Draw(window);
+    continueButton.Draw(window);
 
-      menuSprite.SetColor(sf::Color::Red);
-      menuNum = 1;
-    }
+    armorListImage.Draw(window);
+    armorShoesImage.Draw(window);
+    armorCapImage.Draw(window);
+    armorRobeImage.Draw(window);
 
-    if (sf::IntRect(140,
-                    580,
-                    continueSprite.GetTextureRect().width,
-                    continueSprite.GetTextureRect().height).
-        contains(sf::Mouse::getPosition(window))) {
-
-      continueSprite.SetColor(sf::Color::Red);
-      menuNum = 2;
-    }
-
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-      if (menuNum == 1) {
-        std::vector<int> stat = game.GetStat();
-        Save::SaveStat(stat);
-        return false;
-      }
-
-      if (menuNum == 2) {
-        return true;
-      }
-
-    }
-
-    menuSprite.Draw(window);
-    continueSprite.Draw(window);
-    armorListSprite.Draw(window);
-    armorShoesSprite.Draw(window);
-    armorCapSprite.Draw(window);
-    armorRobeSprite.Draw(window);
-
-    pointsText.Draw(window);
-    hpText.Draw(window);
-    armText.Draw(window);
-    vaccineText.Draw(window);
-    lvlCapText.Draw(window);
-    lvlShoesText.Draw(window);
-    lvlRobeText.Draw(window);
+    playerDataLabel.Draw(window);
+    pointsLabel.Draw(window);
+    lvlCapLabel.Draw(window);
+    lvlShoesLabel.Draw(window);
+    lvlRobeLabel.Draw(window);
 
     window.display();
   }
@@ -966,18 +1009,10 @@ bool Interface::gameMenu(sf::RenderWindow &window, GameManager &game, MusicManag
   return true;
 }
 
-bool Interface::aboutMenu(sf::RenderWindow &window, MusicManager &menuMusic) {
+void Interface::aboutMenu(sf::RenderWindow &window) {
   std::string fontPath = resourcePath() + "files/fonts/Inconsolata-Bold.ttf";
 
   InterfaceButton backButton(fontPath, buttonSize, 30, height - buttonSize - 30, "Back");
-
-  InterfaceTable table1;
-//  table1.SetCenterLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, "Congratulations"));
-  table1.SetCenterButton(std::make_shared<InterfaceButton>(fontPath, buttonSize, "TYK"));
-  table1.SetCenterButton(std::make_shared<InterfaceButton>(fontPath, buttonSize, "TYK"));
-
-  table1.CalculateTablePosition();
-  table1.SetPosition(height, width);
 
   while (window.isOpen()) {
     sf::Event event{};
@@ -987,21 +1022,12 @@ bool Interface::aboutMenu(sf::RenderWindow &window, MusicManager &menuMusic) {
       }
     }
 
-    if (table1.GetCenterButtons()[0]->IsSelect(sf::Vector2i(sf::Mouse::getPosition(window)))) {
-      return true;
-    }
-
     if (backButton.IsSelect(sf::Vector2i(sf::Mouse::getPosition(window)))) {
-      return true;
+      break;
     }
 
     window.clear(sf::Color(68, 101, 219));
-
     backButton.Draw(window);
-    table1.Draw(window);
-
     window.display();
   }
-
-  return false;
 }

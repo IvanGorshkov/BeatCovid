@@ -1,11 +1,9 @@
 #include "SafeTransport.h"
 #include "ResourcePath.hpp"
-#include <utility>
 
 SafeTransport::SafeTransport(float x, float y, int height, int weight, const std::string &name, std::vector<float> config)
     : Transport(x, y, height, weight, name),
     config(std::move(config)) {
-
   if (name == "auto") {
     setAuto();
   }

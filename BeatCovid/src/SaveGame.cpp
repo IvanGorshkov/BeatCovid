@@ -1,6 +1,6 @@
+#include "SaveGame.h"
 #include <fstream>
 #include <sstream>
-#include "SaveGame.h"
 
 Save::Save() {
   this->lvl = 1;
@@ -14,8 +14,8 @@ int Save::GetLvl() const {
   return this->lvl;
 }
 
-void Save::GoToStart() {
-  this->lvl = 1;
+void Save::SetEndGame() {
+  this->lvl = 0;
 }
 
 std::string Save::GetLvlName() {
@@ -36,9 +36,9 @@ std::string Save::GetLvlName() {
   return (lvlname += std::to_string(lvl) + ".tmx");
 }
 
-void Save::SaveGame(GameManager &game) const {
+void Save::SaveGame(int points) const {
   SaveLvl(lvl);
-  SavePoints(game.GetPlayer()->GetPoints());
+  SavePoints(points);
 }
 
 bool Save::IsExistLvlFile() {
@@ -82,7 +82,6 @@ void Save::RemoveConfig() {
   saveConfig.close();
 }
 
-
 int Save::LoadLvl() {
   std::ifstream save(LVL_FILE);
   if (!save.is_open()) {
@@ -102,7 +101,6 @@ void Save::SaveLvl(int lvl) {
   save_file.close();
 }
 
-
 int Save::LoadPoints() {
   std::ifstream save(POINTS_FILE);
   if (!save.is_open()) {
@@ -121,7 +119,6 @@ void Save::SavePoints(int points) {
   save_file << points;
   save_file.close();
 }
-
 
 std::vector<int> Save::LoadArmors() {
   std::ifstream saveArmorsFile(ARMOR_FILE);
@@ -153,7 +150,6 @@ void Save::SaveArmor(const std::vector<int> &arm) {
   saveArmorsFile.close();
 }
 
-
 std::vector<int> Save::LoadStat() {
   std::ifstream saveStatFile(STAT_FILE);
   std::vector<int> stat;
@@ -162,7 +158,6 @@ std::vector<int> Save::LoadStat() {
   if (!saveStatFile.is_open()) {
     return stat;
   } else {
-
     char buff[1000];
     for (int &i : stat) {
       saveStatFile.getline(buff, 1000);
@@ -184,7 +179,6 @@ void Save::SaveStat(const std::vector<int> &stat) {
 
   saveStatFile.close();
 }
-
 
 std::vector<float> Save::LoadConfig() {
   std::ifstream saveConfigFile;

@@ -1,6 +1,7 @@
 #pragma once
 
-#include "GameManager.h"
+#include <vector>
+#include <string>
 #include "ResourcePath.hpp"
 
 #define MAX_LVL 2
@@ -16,10 +17,10 @@ class Save {
  public:
   Save();
   void ChangeLvl();
-  void GoToStart();
+  void SetEndGame();
   int GetLvl() const;
   std::string GetLvlName();
-  void SaveGame(GameManager &game) const;
+  void SaveGame(int points) const;
 
   static bool IsExistLvlFile();
   static void RemoveGameSaves();

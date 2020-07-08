@@ -1,15 +1,17 @@
 #pragma once
 
+#include <list>
+#include <vector>
+#include <memory>
+#include <SFML/Graphics.hpp>
 #include "Level_map.h"
 #include "Player.h"
 #include "MusicManager.h"
-#include <list>
-#include <vector>
-#include <SFML/Graphics.hpp>
 #include "Bullet.h"
 #include "Enemy.h"
 #include "Antibodies.h"
-#include "GameLables.h"
+#include "GameLabelManager.h"
+#include "GameLabel.h"
 #include "Police.h"
 #include "OrdinaryEnemies.h"
 #include "SafeTransport.h"
@@ -18,7 +20,14 @@
 
 class GameManager {
  public:
-  explicit GameManager(Level &lvl, MusicManager &music, const std::vector<int> &arms, int points, const std::vector<int> &stat, const std::vector<float> &config);
+  explicit GameManager(Level &lvl,
+                       unsigned int textSize,
+                       MusicManager &music,
+                       const std::vector<int> &arms,
+                       int points,
+                       std::vector<int> stat,
+                       const std::vector<float> &config);
+
   // Обновление всех классов
   void Update(float time);
   // Вывод всех классов на экран
@@ -34,6 +43,7 @@ class GameManager {
 
  private:
   MusicManager &music;
+//  GameFPS fps;
 
   std::vector<int> stat;
   int antigenPoints;
@@ -41,7 +51,10 @@ class GameManager {
   std::vector<Object> obj;
   std::shared_ptr<Player> player;
   std::shared_ptr<Sick> sick;
-  GameLables lables;
+
+  GameLabelManager labelManager;
+  void drawPlayerData(sf::RenderWindow &window);
+//  void drawFPS(sf::RenderWindow &window);
 
   // Методы работы с классом Bullet
   std::list<Bullet> playerBullets;

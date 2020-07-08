@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+#include <string>
 #include "Entity.h"
 
 #define ENEMY_HIT_TIME 1000

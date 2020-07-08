@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+#include <string>
 #include "Transport.h"
 
 #define HP_TIME_LOSS 2000

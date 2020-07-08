@@ -1,11 +1,10 @@
 #include "InterfaceButton.h"
-#include <iostream>
 
-InterfaceButton::InterfaceButton(const std::string &fontPath, int getSize, const std::string &str)
+InterfaceButton::InterfaceButton(const std::string &fontPath, unsigned int getSize, const std::string &str)
     : InterfaceLabel(fontPath, getSize, str) {
 }
 
-InterfaceButton::InterfaceButton(const std::string &fontPath, int getSize, float getX, float getY, const std::string &str)
+InterfaceButton::InterfaceButton(const std::string &fontPath, unsigned int getSize, float getX, float getY, const std::string &str)
     : InterfaceLabel(fontPath, getSize, getX, getY, str) {
 }
 

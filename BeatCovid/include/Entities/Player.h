@@ -1,5 +1,8 @@
 #pragma once
 
+#include <vector>
+#include <string>
+#include <map>
 #include <SFML/Graphics.hpp>
 #include "AnimationManager.h"
 #include "Level_map.h"
@@ -8,17 +11,10 @@
 #include "Shoes.h"
 #include "Cap.h"
 
-enum PLAYER_STATE {
-  STAY,
-  RUN,
-  JUMP,
-  LAY,
-  WALKLAY,
-};
 
 class Player : public Entity {
  public:
-  explicit Player(const Object &position, std::vector<int> armors, float hp, int points);
+  explicit Player(const Object &position, std::vector<int> armors, float hp, int dmg, int points);
   bool GetDir() const;
   void KeyCheck();
   float GetHp() const;
@@ -50,11 +46,16 @@ class Player : public Entity {
   bool GetAlive() const;
   void SetFinish(bool getFinish = true);
   bool GetTreat() const;
-  PLAYER_STATE GetPLayerState();
   int PlayFinishMusic() const;
 
  private:
-  PLAYER_STATE STATE;
+  enum {
+    STAY,
+    RUN,
+    JUMP,
+    LAY,
+    WALKLAY,
+  } STATE;
 
   std::map<std::string, bool> key;
   Object startPlayerPosition;

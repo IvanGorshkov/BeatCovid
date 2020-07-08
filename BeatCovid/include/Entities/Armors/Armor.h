@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+#include <string>
 #include "Entity.h"
 
 class Armor : public Entity {
@@ -11,6 +13,7 @@ class Armor : public Entity {
   void FlipAnim(bool value);
   int GetArm() const;
   int Getlvl() const;
+
  protected:
   float arm;
   int lvl;
