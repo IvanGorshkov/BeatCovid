@@ -1,15 +1,15 @@
 #include "Player.h"
-#include <iostream>
 
-Player::Player(const Object &position, std::vector<int> armors, float hp)
+Player::Player(const Object &position, std::vector<int> armors, float hp, int dmg, int points)
     : Entity(position.rect.left, position.rect.top, 0.1, 0.1, 64, 64),
       hp(hp),
       max_jump(0),
+      arm(0),
       STATE(STAY),
       isGround(true),
-      points(0),
+      points(points),
       vaccine(false),
-      dmg(1),
+      dmg(dmg),
       fireC(0),
       isDrive(false),
       finish(false),
@@ -22,8 +22,9 @@ Player::Player(const Object &position, std::vector<int> armors, float hp)
       bathrobe(position.rect.left, position.rect.top, 64, 64, armors[2]),
       shoes(position.rect.left, position.rect.top, 64, 64, armors[1]),
       cap(position.rect.left, position.rect.top, 64, 64, armors[0]) {
+
   sf::Texture player_t;
-  player_t.loadFromFile(FILES_PATH"files/images/doctor.png");
+  player_t.loadFromFile(FILES_PATH "files/images/doctor.png");
   anim = AnimationManager(player_t);
   anim.Create("walk", 76, 76, 64, 64, 7, 0.005, 72);
   anim.Create("stay", 4, 4, 64, 64, 8, 0.0005, 72);
@@ -422,10 +423,6 @@ void Player::SetFinish(bool getFinish) {
 
 bool Player::GetTreat() const {
   return treat;
-}
-
-PLAYER_STATE Player::GetPLayerState() {
-  return STATE;
 }
 
 int Player::PlayFinishMusic() const {

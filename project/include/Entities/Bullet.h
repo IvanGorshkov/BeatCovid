@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include "Entity.h"
 
 #define BULLET_TIME_DIE 400

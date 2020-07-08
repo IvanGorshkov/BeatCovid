@@ -1,10 +1,5 @@
-#include <string>
-#include <vector>
-#include <map>
-#include <iostream>
-#include <SFML/Graphics.hpp>
-#include "tinyxml.h"
 #include "Level_map.h"
+#include <iostream>
 
 int Object::GetPropertyInt(const std::string &getName) {
   return atoi(properties[getName].c_str());

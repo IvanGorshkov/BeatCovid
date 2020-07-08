@@ -2,10 +2,11 @@
 
 #include "InterfaceLabel.h"
 #include <memory>
+#include <vector>
 
 class InterfaceMultiLineLabel {
  public:
-  explicit InterfaceMultiLineLabel() = default;
+  InterfaceMultiLineLabel() = default;
   void SetLine(const std::shared_ptr<InterfaceLabel>& label);
   void CalculateLabelPosition();
   void SetPosition(float getX, float getY);

@@ -9,7 +9,7 @@ void InterfaceMultiLineLabel::SetLine(const std::shared_ptr<InterfaceLabel>& lab
 void InterfaceMultiLineLabel::CalculateLabelPosition() {
   float y = 0;
 
-  for (auto &i: multiLineLabel) {
+  for (auto &i : multiLineLabel) {
     float x = (width - i->GetTextRectSize().x) / 2;
     multiLineLabelPosition.emplace_back(x, y);
     y += i->GetTextRectSize().y;
@@ -23,7 +23,7 @@ void InterfaceMultiLineLabel::SetPosition(float getX, float getY) {
 }
 
 void InterfaceMultiLineLabel::Draw(sf::RenderWindow &window) {
-  for (auto &i: multiLineLabel) {
+  for (auto &i : multiLineLabel) {
     i->Draw(window);
   }
 }

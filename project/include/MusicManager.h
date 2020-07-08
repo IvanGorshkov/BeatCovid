@@ -15,8 +15,6 @@ class MusicManager {
   void PlayDiedPlayerSound();
   void PlayMetroSound();
   void PlayCarSound();
-  void PlayWalkPlayerSound();
-  void PlayJumpPlayerSound();
   void PlayGetAntibodiesSound();
   void PlayGetVaccineSound();
   void PlayTreatPatientSound();
@@ -54,14 +52,6 @@ class MusicManager {
   sf::SoundBuffer carBuffer;
   sf::Sound carSound;
   bool isDriveCar;
-
-  // Движение игрока
-  sf::SoundBuffer walkPlayerBuffer;
-  sf::Sound walkPlayerSound;
-
-  // Прыжок игрока
-  sf::SoundBuffer jumpPlayerBuffer;
-  sf::Sound jumpPlayerSound;
 
   // Получение антител
   sf::SoundBuffer getAntibodiesBuffer;

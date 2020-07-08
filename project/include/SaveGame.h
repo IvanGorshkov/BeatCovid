@@ -1,6 +1,7 @@
 #pragma once
 
-#include "GameManager.h"
+#include <vector>
+#include <string>
 
 #define MAX_LVL 2
 #define LVL_FILE FILES_PATH"files/saves/save_lvl.txt"
@@ -15,34 +16,29 @@ class Save {
  public:
   Save();
   void ChangeLvl();
-  void GoToStart();
+  void SetEndGame();
   int GetLvl() const;
-
   std::string GetLvlName();
+  void SaveGame(int points) const;
 
   static bool IsExistLvlFile();
-  static bool IsExistPointsFile();
-  static bool IsExistArmorFile();
-  static bool IsExistStatFile();
-  static bool IsExistConfigFile();
-  static bool IsExistConfigDefaultFile();
-
   static void RemoveGameSaves();
   static void RemoveConfig();
 
-  void LoadGame(GameManager &game);
-  void SaveGame(GameManager &game) const;
-
   static int LoadLvl();
   static void SaveLvl(int lvl);
+
   static int LoadPoints();
   static void SavePoints(int points);
+
   static std::vector<int> LoadArmors();
-  static void SaveArmor(const std::vector<int> &vec);
+  static void SaveArmor(const std::vector<int> &arm);
+
   static std::vector<int> LoadStat();
   static void SaveStat(const std::vector<int> &stat);
+
   static std::vector<float> LoadConfig();
-  static void SaveConfig(const std::vector<float> &stat);
+  static void SaveConfig(const std::vector<float> &config);
 
  private:
   int lvl;

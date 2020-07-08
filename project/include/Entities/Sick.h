@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include "Entity.h"
 
 class Sick : public Entity {

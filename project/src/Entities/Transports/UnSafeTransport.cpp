@@ -1,10 +1,8 @@
 #include "UnSafeTransport.h"
-#include <utility>
 
 UnSafeTransport::UnSafeTransport(float x, float y, int height, int weight, const std::string &name, std::vector<float> config)
     : Transport(x, y, height, weight, name),
     config(std::move(config)) {
-
   if (name == "bus") {
     setBus();
   }
