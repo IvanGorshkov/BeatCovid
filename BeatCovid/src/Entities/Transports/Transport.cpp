@@ -1,7 +1,5 @@
 #include "Transport.h"
 
-#include <utility>
-
 Transport::Transport(float x, float y, int height, int weight, std::string name)
     : Entity(x, y, 0, 0, height, weight),
       name(std::move(name)),

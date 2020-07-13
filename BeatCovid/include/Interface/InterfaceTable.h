@@ -1,12 +1,13 @@
 #pragma once
 
+#include <memory>
+#include <vector>
 #include "InterfaceLabel.h"
 #include "InterfaceButton.h"
-#include <memory>
 
 class InterfaceTable {
  public:
-  explicit InterfaceTable() = default;
+  InterfaceTable() = default;
 
   void SetCenterLabel(const std::shared_ptr<InterfaceLabel> &label);
   void SetLeftLabel(const std::shared_ptr<InterfaceLabel> &label);
@@ -21,7 +22,7 @@ class InterfaceTable {
   std::vector<std::shared_ptr<InterfaceButton>> GetRightButtons();
 
   void CalculateTablePosition();
-  void SetPosition(int height, int width);
+  void SetPosition(unsigned int height, unsigned int width);
   void Draw(sf::RenderWindow &window);
 
  private:
@@ -32,29 +33,29 @@ class InterfaceTable {
 
   std::vector<std::shared_ptr<InterfaceLabel>> centerLabel;
   std::vector<sf::Vector2i> centerLabelPosition;
-  int centerLabelMaxWidth = 0;
-  int centerLabelHeight = 0;
+  float centerLabelMaxWidth = 0;
+  float centerLabelHeight = 0;
 
   std::vector<std::shared_ptr<InterfaceButton>> centerButton;
-  std::vector<sf::Vector2i> centerButtonPosition;
-  int centerButtonMaxWidth = 0;
-  int centerButtonHeight = 0;
+  std::vector<sf::Vector2f> centerButtonPosition;
+  float centerButtonMaxWidth = 0;
+  float centerButtonHeight = 0;
 
   std::vector<std::shared_ptr<InterfaceLabel>> leftLabel;
   std::vector<std::shared_ptr<InterfaceLabel>> rightLabel;
-  std::vector<sf::Vector2i> leftLabelPosition;
-  std::vector<sf::Vector2i> rightLabelPosition;
-  int leftLabelMaxWidth = 0;
-  int rightLabelMaxWidth = 0;
-  int leftLabelHeight = 0;
-  int rightLabelHeight = 0;
+  std::vector<sf::Vector2f> leftLabelPosition;
+  std::vector<sf::Vector2f> rightLabelPosition;
+  float leftLabelMaxWidth = 0;
+  float rightLabelMaxWidth = 0;
+  float leftLabelHeight = 0;
+  float rightLabelHeight = 0;
 
   std::vector<std::shared_ptr<InterfaceButton>> leftButton;
   std::vector<std::shared_ptr<InterfaceButton>> rightButton;
-  std::vector<sf::Vector2i> leftButtonPosition;
-  std::vector<sf::Vector2i> rightButtonPosition;
-  int leftButtonMaxWidth = 0;
-  int rightButtonMaxWidth = 0;
-  int leftButtonHeight = 0;
-  int rightButtonHeight = 0;
+  std::vector<sf::Vector2f> leftButtonPosition;
+  std::vector<sf::Vector2f> rightButtonPosition;
+  float leftButtonMaxWidth = 0;
+  float rightButtonMaxWidth = 0;
+  float leftButtonHeight = 0;
+  float rightButtonHeight = 0;
 };

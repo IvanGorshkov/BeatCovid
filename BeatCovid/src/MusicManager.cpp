@@ -25,12 +25,6 @@ MusicManager::MusicManager()
   carBuffer.loadFromFile(resourcePath() + "files/music/carSound.wav");
   carSound.setBuffer(carBuffer);
 
-//  walkPlayerBuffer.loadFromFile(resourcePath() + "files/music/1.wav");
-//  walkPlayerSound.setBuffer(walkPlayerBuffer);
-//
-//  jumpPlayerBuffer.loadFromFile(resourcePath() + "files/music/1.wav");
-//  jumpPlayerSound.setBuffer(jumpPlayerBuffer);
-
   getAntibodiesBuffer.loadFromFile(resourcePath() + "files/music/getAntibodies.wav");
   getAntibodiesSound.setBuffer(getAntibodiesBuffer);
 
@@ -42,8 +36,7 @@ MusicManager::MusicManager()
 }
 
 void MusicManager::PlayBackgroundGameMusic() {
-  backgroundMenuMusic.stop();
-  backgroundGameMusic.setVolume(4);
+  backgroundGameMusic.setVolume(10);
   backgroundGameMusic.setLoop(true);
   backgroundGameMusic.play();
 }
@@ -53,7 +46,6 @@ void MusicManager::StopBackgroundGameMusic() {
 }
 
 void MusicManager::PlayBackgroundMenuMusic() {
-  backgroundGameMusic.stop();
   backgroundMenuMusic.setVolume(10);
   backgroundMenuMusic.setLoop(true);
   backgroundMenuMusic.play();
@@ -106,16 +98,6 @@ void MusicManager::PlayCarSound() {
   } else {
     carSound.stop();
   }
-}
-
-void MusicManager::PlayWalkPlayerSound() {
-  walkPlayerSound.setVolume(10);
-  walkPlayerSound.play();
-}
-
-void MusicManager::PlayJumpPlayerSound() {
-  jumpPlayerSound.setVolume(10);
-  jumpPlayerSound.play();
 }
 
 void MusicManager::PlayGetAntibodiesSound() {

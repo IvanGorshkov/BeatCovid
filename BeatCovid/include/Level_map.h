@@ -1,10 +1,9 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <string>
-#include <vector>
 #include <map>
-#include <iostream>
+#include <vector>
+#include <string>
+#include <SFML/Graphics.hpp>
 #include "tinyxml.h"
 
 struct Object {

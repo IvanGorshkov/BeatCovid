@@ -1,7 +1,7 @@
 #pragma once
 
+#include <vector>
 #include <SFML/Graphics.hpp>
-#include <list>
 #include "AnimationManager.h"
 #include "Level_map.h"
 

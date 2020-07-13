@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+#include <string>
 #include "Transport.h"
 
 #define FUEL_LOSS 0.1

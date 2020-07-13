@@ -1,8 +1,7 @@
 #include "Player.h"
-#include <iostream>
 #include "ResourcePath.hpp"
 
-Player::Player(const Object &position, std::vector<int> armors, float hp, int points)
+Player::Player(const Object &position, std::vector<int> armors, float hp, int dmg, int points)
     : Entity(position.rect.left, position.rect.top, 0.1, 0.1, 64, 64),
       hp(hp),
       max_jump(0),
@@ -11,7 +10,7 @@ Player::Player(const Object &position, std::vector<int> armors, float hp, int po
       isGround(true),
       points(points),
       vaccine(false),
-      dmg(1),
+      dmg(dmg),
       fireC(0),
       isDrive(false),
       finish(false),
@@ -24,10 +23,6 @@ Player::Player(const Object &position, std::vector<int> armors, float hp, int po
       bathrobe(position.rect.left, position.rect.top, 64, 64, armors[2]),
       shoes(position.rect.left, position.rect.top, 64, 64, armors[1]),
       cap(position.rect.left, position.rect.top, 64, 64, armors[0]) {
-
-  for (int i : armors) {
-    arm += i;
-  }
 
   sf::Texture player_t;
   player_t.loadFromFile(resourcePath() +  "files/images/doctor.png");
@@ -51,7 +46,7 @@ void Player::KeyCheck() {
     dir = true;
     if (STATE == STAY) {
       STATE = RUN;
-      dx = -0.1;
+      dx = -0.13;
       treat = false;
     }
   }
@@ -60,7 +55,7 @@ void Player::KeyCheck() {
     dir = false;
     if (STATE == STAY) {
       STATE = RUN;
-      dx = 0.1;
+      dx = 0.13;
       treat = false;
     }
   }
@@ -192,8 +187,8 @@ void Player::Update(float time, std::vector<Object> &obj) {
   }
 
   if (STATE == JUMP) {
-    max_jump += 0.2;
-    if (max_jump > 10) {
+      max_jump += 0.2*time;
+    if (max_jump > 300) {
       dy = 0.2;
     }
   }
@@ -263,7 +258,7 @@ void Player::Collision(int num, std::vector<Object> &objs) {
         if (dy < 0 && num == 1) {
           rect.top = obj.rect.top + obj.rect.height;
           dy = 0;
-          max_jump = 200;
+          max_jump = 300;
         }
 
         if (dx > 0 && num == 0) {
@@ -429,10 +424,6 @@ void Player::SetFinish(bool getFinish) {
 
 bool Player::GetTreat() const {
   return treat;
-}
-
-PLAYER_STATE Player::GetPLayerState() {
-  return STATE;
 }
 
 int Player::PlayFinishMusic() const {

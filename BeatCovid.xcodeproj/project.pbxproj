@@ -13,7 +13,6 @@
 		AC86CCC224A3D9C0007D9C2D /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCBF24A3D9C0007D9C2D /* tinyxmlerror.cpp */; };
 		AC86CCC324A3D9C0007D9C2D /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCC024A3D9C0007D9C2D /* tinyxml.cpp */; };
 		AC86CCC424A3D9C0007D9C2D /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCC124A3D9C0007D9C2D /* tinyxmlparser.cpp */; };
-		AC86CCE224A3DAB6007D9C2D /* GameLables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCDC24A3DAB5007D9C2D /* GameLables.cpp */; };
 		AC86CCE424A3DAB6007D9C2D /* GameManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCDE24A3DAB6007D9C2D /* GameManager.cpp */; };
 		AC86CCE524A3DAB6007D9C2D /* Level_map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCDF24A3DAB6007D9C2D /* Level_map.cpp */; };
 		AC86CCE624A3DAB6007D9C2D /* MusicManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCE024A3DAB6007D9C2D /* MusicManager.cpp */; };
@@ -37,11 +36,13 @@
 		AC86CD0924A3DAD9007D9C2D /* Animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CD0724A3DAD9007D9C2D /* Animation.cpp */; };
 		AC86CD0B24A3DC01007D9C2D /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CD0A24A3DC00007D9C2D /* tinystr.cpp */; };
 		AC86CD0E24A3DE48007D9C2D /* files in Resources */ = {isa = PBXBuildFile; fileRef = AC86CD0D24A3DE48007D9C2D /* files */; };
+		AC8B853924B3A2330091BAF2 /* GameLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC8B853824B3A2330091BAF2 /* GameLabel.cpp */; };
+		AC8B853C24B3AC470091BAF2 /* GameLabelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC8B853B24B3AC470091BAF2 /* GameLabelManager.cpp */; };
 		AC9196D124AD39AD00C28412 /* InterfaceButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC9196CC24AD39AD00C28412 /* InterfaceButton.cpp */; };
 		AC9196D224AD39AD00C28412 /* InterfaceLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC9196CD24AD39AD00C28412 /* InterfaceLabel.cpp */; };
 		AC9196D324AD39AD00C28412 /* Interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC9196CE24AD39AD00C28412 /* Interface.cpp */; };
 		AC9196D424AD39AD00C28412 /* InterfaceTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC9196CF24AD39AD00C28412 /* InterfaceTable.cpp */; };
-		AC9196D524AD39AD00C28412 /* InterfaceSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC9196D024AD39AD00C28412 /* InterfaceSprite.cpp */; };
+		AC9196D524AD39AD00C28412 /* InterfaceImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC9196D024AD39AD00C28412 /* InterfaceImage.cpp */; };
 		ACE7CF8924A3C5540016E5AD /* SFML in Resources */ = {isa = PBXBuildFile; fileRef = ACE7CF8824A3C5530016E5AD /* SFML */; };
 /* End PBXBuildFile section */
 
@@ -53,12 +54,10 @@
 		AC0B220E249ED1F6000CE7AC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		AC0B221E249ED204000CE7AC /* BeatCovid.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeatCovid.entitlements; sourceTree = "<group>"; };
 		AC5A7D9E24A37B5D00F54A6E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		AC5C415224AE857D0069B395 /* FPS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FPS.h; sourceTree = "<group>"; };
 		AC86CCA024A3D92A007D9C2D /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
 		AC86CCA124A3D92A007D9C2D /* Level_map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level_map.h; sourceTree = "<group>"; };
 		AC86CCA224A3D92A007D9C2D /* SaveGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveGame.h; sourceTree = "<group>"; };
 		AC86CCA324A3D92A007D9C2D /* MusicManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicManager.h; sourceTree = "<group>"; };
-		AC86CCA424A3D92A007D9C2D /* GameLables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLables.h; sourceTree = "<group>"; };
 		AC86CCAD24A3D991007D9C2D /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
 		AC86CCAE24A3D996007D9C2D /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		AC86CCAF24A3D996007D9C2D /* AnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationManager.h; sourceTree = "<group>"; };
@@ -80,7 +79,6 @@
 		AC86CCBF24A3D9C0007D9C2D /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
 		AC86CCC024A3D9C0007D9C2D /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		AC86CCC124A3D9C0007D9C2D /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
-		AC86CCDC24A3DAB5007D9C2D /* GameLables.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameLables.cpp; sourceTree = "<group>"; };
 		AC86CCDE24A3DAB6007D9C2D /* GameManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameManager.cpp; sourceTree = "<group>"; };
 		AC86CCDF24A3DAB6007D9C2D /* Level_map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Level_map.cpp; sourceTree = "<group>"; };
 		AC86CCE024A3DAB6007D9C2D /* MusicManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MusicManager.cpp; sourceTree = "<group>"; };
@@ -105,13 +103,17 @@
 		AC86CD0A24A3DC00007D9C2D /* tinystr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinystr.cpp; sourceTree = "<group>"; };
 		AC86CD0C24A3DC1A007D9C2D /* tinystr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinystr.h; sourceTree = "<group>"; };
 		AC86CD0D24A3DE48007D9C2D /* files */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = files; path = BeatCovid/files; sourceTree = SOURCE_ROOT; };
+		AC8B853524B3A1140091BAF2 /* GameLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameLabel.h; sourceTree = "<group>"; };
+		AC8B853824B3A2330091BAF2 /* GameLabel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameLabel.cpp; sourceTree = "<group>"; };
+		AC8B853A24B3ABFA0091BAF2 /* GameLabelManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameLabelManager.h; sourceTree = "<group>"; };
+		AC8B853B24B3AC470091BAF2 /* GameLabelManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameLabelManager.cpp; sourceTree = "<group>"; };
 		AC9196CC24AD39AD00C28412 /* InterfaceButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InterfaceButton.cpp; sourceTree = "<group>"; };
 		AC9196CD24AD39AD00C28412 /* InterfaceLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InterfaceLabel.cpp; sourceTree = "<group>"; };
 		AC9196CE24AD39AD00C28412 /* Interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Interface.cpp; sourceTree = "<group>"; };
 		AC9196CF24AD39AD00C28412 /* InterfaceTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InterfaceTable.cpp; sourceTree = "<group>"; };
-		AC9196D024AD39AD00C28412 /* InterfaceSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InterfaceSprite.cpp; sourceTree = "<group>"; };
+		AC9196D024AD39AD00C28412 /* InterfaceImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InterfaceImage.cpp; sourceTree = "<group>"; };
 		AC9196D724AD39D500C28412 /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interface.h; sourceTree = "<group>"; };
-		AC9196D824AD39D500C28412 /* InterfaceSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceSprite.h; sourceTree = "<group>"; };
+		AC9196D824AD39D500C28412 /* InterfaceImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceImage.h; sourceTree = "<group>"; };
 		AC9196D924AD39D500C28412 /* InterfaceButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceButton.h; sourceTree = "<group>"; };
 		AC9196DA24AD39D500C28412 /* InterfaceTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceTable.h; sourceTree = "<group>"; };
 		AC9196DB24AD39D500C28412 /* InterfaceLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceLabel.h; sourceTree = "<group>"; };
@@ -181,12 +183,11 @@
 		AC86CC9124A3D7D8007D9C2D /* src */ = {
 			isa = PBXGroup;
 			children = (
+				AC8B853724B3A1DF0091BAF2 /* Game */,
 				AC9196CB24AD398900C28412 /* Interface */,
 				AC86CC9324A3D7E8007D9C2D /* Animation */,
 				AC86CC9424A3D7F0007D9C2D /* Entities */,
 				AC86CC9524A3D7FA007D9C2D /* Tinyxml */,
-				AC86CCDC24A3DAB5007D9C2D /* GameLables.cpp */,
-				AC86CCDE24A3DAB6007D9C2D /* GameManager.cpp */,
 				AC86CCDF24A3DAB6007D9C2D /* Level_map.cpp */,
 				AC86CCE024A3DAB6007D9C2D /* MusicManager.cpp */,
 				AC86CCE124A3DAB6007D9C2D /* SaveGame.cpp */,
@@ -197,16 +198,14 @@
 		AC86CC9224A3D7DD007D9C2D /* include */ = {
 			isa = PBXGroup;
 			children = (
+				AC8B853624B3A1C80091BAF2 /* Game */,
 				AC9196D624AD39BE00C28412 /* Interface */,
 				AC86CC9A24A3D841007D9C2D /* Animation */,
 				AC86CC9924A3D83A007D9C2D /* Entities */,
 				AC86CC9B24A3D849007D9C2D /* Tinyxml */,
-				AC86CCA424A3D92A007D9C2D /* GameLables.h */,
-				AC86CCA024A3D92A007D9C2D /* GameManager.h */,
 				AC86CCA124A3D92A007D9C2D /* Level_map.h */,
 				AC86CCA324A3D92A007D9C2D /* MusicManager.h */,
 				AC86CCA224A3D92A007D9C2D /* SaveGame.h */,
-				AC5C415224AE857D0069B395 /* FPS.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -341,6 +340,26 @@
 			path = Enemies;
 			sourceTree = "<group>";
 		};
+		AC8B853624B3A1C80091BAF2 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				AC86CCA024A3D92A007D9C2D /* GameManager.h */,
+				AC8B853524B3A1140091BAF2 /* GameLabel.h */,
+				AC8B853A24B3ABFA0091BAF2 /* GameLabelManager.h */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		AC8B853724B3A1DF0091BAF2 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				AC86CCDE24A3DAB6007D9C2D /* GameManager.cpp */,
+				AC8B853824B3A2330091BAF2 /* GameLabel.cpp */,
+				AC8B853B24B3AC470091BAF2 /* GameLabelManager.cpp */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
 		AC9196CB24AD398900C28412 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,7 +367,7 @@
 				AC9196CC24AD39AD00C28412 /* InterfaceButton.cpp */,
 				AC9196CD24AD39AD00C28412 /* InterfaceLabel.cpp */,
 				AC9196CF24AD39AD00C28412 /* InterfaceTable.cpp */,
-				AC9196D024AD39AD00C28412 /* InterfaceSprite.cpp */,
+				AC9196D024AD39AD00C28412 /* InterfaceImage.cpp */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -360,7 +379,7 @@
 				AC9196D924AD39D500C28412 /* InterfaceButton.h */,
 				AC9196DB24AD39D500C28412 /* InterfaceLabel.h */,
 				AC9196DA24AD39D500C28412 /* InterfaceTable.h */,
-				AC9196D824AD39D500C28412 /* InterfaceSprite.h */,
+				AC9196D824AD39D500C28412 /* InterfaceImage.h */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -446,6 +465,7 @@
 				AC86CCFB24A3DACD007D9C2D /* SafeTransport.cpp in Sources */,
 				AC86CCC224A3D9C0007D9C2D /* tinyxmlerror.cpp in Sources */,
 				AC86CD0924A3DAD9007D9C2D /* Animation.cpp in Sources */,
+				AC8B853C24B3AC470091BAF2 /* GameLabelManager.cpp in Sources */,
 				AC86CCC324A3D9C0007D9C2D /* tinyxml.cpp in Sources */,
 				AC86CD0324A3DAD3007D9C2D /* Robe.cpp in Sources */,
 				AC86CD0224A3DAD3007D9C2D /* Shoes.cpp in Sources */,
@@ -459,14 +479,14 @@
 				AC86CCEE24A3DAC1007D9C2D /* Player.cpp in Sources */,
 				AC9196D424AD39AD00C28412 /* InterfaceTable.cpp in Sources */,
 				AC86CD0424A3DAD3007D9C2D /* Armor.cpp in Sources */,
-				AC9196D524AD39AD00C28412 /* InterfaceSprite.cpp in Sources */,
+				AC9196D524AD39AD00C28412 /* InterfaceImage.cpp in Sources */,
 				AC9196D224AD39AD00C28412 /* InterfaceLabel.cpp in Sources */,
 				AC86CCF024A3DAC1007D9C2D /* Bullet.cpp in Sources */,
 				AC86CCE524A3DAB6007D9C2D /* Level_map.cpp in Sources */,
 				AC86CD0B24A3DC01007D9C2D /* tinystr.cpp in Sources */,
 				AC86CCFC24A3DACD007D9C2D /* UnSafeTransport.cpp in Sources */,
+				AC8B853924B3A2330091BAF2 /* GameLabel.cpp in Sources */,
 				AC86CCE424A3DAB6007D9C2D /* GameManager.cpp in Sources */,
-				AC86CCE224A3DAB6007D9C2D /* GameLables.cpp in Sources */,
 				AC0B220C249ED1F6000CE7AC /* ResourcePath.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

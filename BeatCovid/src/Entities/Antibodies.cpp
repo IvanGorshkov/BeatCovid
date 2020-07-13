@@ -1,7 +1,7 @@
 #include "Antibodies.h"
 #include "ResourcePath.hpp"
 
-Antibodies::Antibodies(float x, float y, float w, float h, const std::string &name)
+Antibodies::Antibodies(float x, float y, int w, int h, const std::string &name)
     : Entity(x, y, 0, 0, w, h),
       name(name) {
 
@@ -14,9 +14,9 @@ Antibodies::Antibodies(float x, float y, float w, float h, const std::string &na
   }
 }
 
-void Antibodies::Update(const std::shared_ptr<Player> &player) {
+void Antibodies::Update(sf::FloatRect playerRect) {
   anim.Tick(0.05);
-  if (rect.intersects(player->GetRect())) {
+  if (rect.intersects(playerRect)) {
     isLife = false;
   }
 }
