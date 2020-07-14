@@ -2,14 +2,13 @@
 #include "ResourcePath.hpp"
 
 SafeTransport::SafeTransport(float x, float y, int height, int weight, const std::string &name, std::vector<float> config)
-    : Transport(x, y, height, weight, name),
-    config(std::move(config)) {
+    : Transport(x, y, height, weight, name) {
   if (name == "auto") {
-    setAuto();
+    setAuto(config[11]);
   }
 
   if (name == "monorail") {
-    setMonorail();
+    setMonorail(config[12]);
   }
 }
 
@@ -38,9 +37,9 @@ void SafeTransport::Update(float time, std::vector<Object> &obj) {
   anim.Tick(time);
 }
 
-void SafeTransport::setAuto() {
+void SafeTransport::setAuto(float getFuel) {
   dx = AUTO_DX;
-  fuel = config[11];
+  fuel = getFuel;
 
   sf::Texture autoTexture;
   autoTexture.loadFromFile(resourcePath() + "files/images/safe.png");
@@ -49,9 +48,9 @@ void SafeTransport::setAuto() {
   anim.Set("move");
 }
 
-void SafeTransport::setMonorail() {
+void SafeTransport::setMonorail(float getFuel) {
   dx = MONORAIL_DX;
-  fuel = config[12];
+  fuel = getFuel;
 
   sf::Texture autoTexture;
   autoTexture.loadFromFile(resourcePath() + "files/images/mono.png");

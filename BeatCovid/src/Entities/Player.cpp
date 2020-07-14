@@ -46,7 +46,7 @@ void Player::KeyCheck() {
     dir = true;
     if (STATE == STAY) {
       STATE = RUN;
-      dx = -0.1;
+      dx = -0.13;
       treat = false;
     }
   }
@@ -55,7 +55,7 @@ void Player::KeyCheck() {
     dir = false;
     if (STATE == STAY) {
       STATE = RUN;
-      dx = 0.1;
+      dx = 0.13;
       treat = false;
     }
   }
@@ -187,8 +187,8 @@ void Player::Update(float time, std::vector<Object> &obj) {
   }
 
   if (STATE == JUMP) {
-    max_jump += 0.2;
-    if (max_jump > 10) {
+      max_jump += 0.2*time;
+    if (max_jump > 300) {
       dy = 0.2;
     }
   }
@@ -258,7 +258,7 @@ void Player::Collision(int num, std::vector<Object> &objs) {
         if (dy < 0 && num == 1) {
           rect.top = obj.rect.top + obj.rect.height;
           dy = 0;
-          max_jump = 200;
+          max_jump = 300;
         }
 
         if (dx > 0 && num == 0) {
@@ -358,17 +358,18 @@ void Player::GoToStart() {
   rect.top = startPlayerPosition.rect.top;
 }
 
-void Player::ChangeHP(float getHp) {
-  this->hp = getHp;
-}
+//void Player::ChangeHP(float getHp) {
+//  this->hp = getHp;
+//}
+//
+//void Player::ChangeARM(float getArm) {
+//  this->arm = getArm;
+//}
+//
+//AnimationManager Player::GetAnim() {
+//  return anim;
+//}
 
-void Player::ChangeARM(float getArm) {
-  this->arm = getArm;
-}
-
-AnimationManager Player::GetAnim() {
-  return anim;
-}
 void Player::SetPosition(float x, float y) {
   rect.left = x;
   rect.top = y;
@@ -387,17 +388,17 @@ std::vector<int> Player::GetMainData() {
   return data;
 }
 
-Robe Player::GetRobe() {
-  return bathrobe;
-}
-
-Cap Player::GetCap() {
-  return cap;
-}
-
-Shoes Player::GetShoes() {
-  return shoes;
-}
+//Robe Player::GetRobe() {
+//  return bathrobe;
+//}
+//
+//Cap Player::GetCap() {
+//  return cap;
+//}
+//
+//Shoes Player::GetShoes() {
+//  return shoes;
+//}
 
 void Player::SetDrive() {
   isDrive = !isDrive;
@@ -422,9 +423,9 @@ void Player::SetFinish(bool getFinish) {
   this->finish = getFinish;
 }
 
-bool Player::GetTreat() const {
-  return treat;
-}
+//bool Player::GetTreat() const {
+//  return treat;
+//}
 
 int Player::PlayFinishMusic() const {
   return playFinishMusic;

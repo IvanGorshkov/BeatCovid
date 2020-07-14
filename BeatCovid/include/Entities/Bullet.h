@@ -4,7 +4,7 @@
 #include "Entity.h"
 
 #define BULLET_TIME_DIE 400
-#define BULLET_DX 0.2
+#define BULLET_DX 0.3
 
 class Bullet : public Entity {
  public:

@@ -5,7 +5,6 @@
 #include <map>
 #include <SFML/Graphics.hpp>
 #include "AnimationManager.h"
-#include "Level_map.h"
 #include "Entity.h"
 #include "Robe.h"
 #include "Shoes.h"
@@ -30,22 +29,22 @@ class Player : public Entity {
   bool GetVaccine() const;
   void SetVaccine(bool value);
   void DrawObjs(sf::RenderWindow &window);
-  AnimationManager GetAnim();
+//  AnimationManager GetAnim();
   void GoToStart();
   bool GetFinish() const;
   void SetPosition(float x, float y);
-  void ChangeHP(float getHp);
-  void ChangeARM(float getArm);
+//  void ChangeHP(float getHp);
+//  void ChangeARM(float getArm);
   std::vector<int> GetMainData();
   void SetDrive();
   bool IsDrive() const;
-  Robe GetRobe();
-  Cap GetCap();
-  Shoes GetShoes();
+//  Robe GetRobe();
+//  Cap GetCap();
+//  Shoes GetShoes();
   bool IsFinishPosition() const;
   bool GetAlive() const;
   void SetFinish(bool getFinish = true);
-  bool GetTreat() const;
+//  bool GetTreat() const;
   int PlayFinishMusic() const;
 
  private:

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 #include <SFML/Graphics.hpp>
 #include "GameManager.h"
 #include "SaveGame.h"
@@ -39,6 +40,8 @@ class Interface {
 
   void aboutMenu(sf::RenderWindow &window);
 
+  std::string buttonFontPath;
+  std::string textFontPath;
   unsigned int height;
   unsigned int width;
   unsigned int buttonSize;

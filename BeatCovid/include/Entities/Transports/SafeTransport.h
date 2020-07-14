@@ -17,8 +17,7 @@ class SafeTransport : public Transport {
   float GetFuel() const;
 
  private:
-  std::vector<float> config;
   float fuel;
-  void setAuto();
-  void setMonorail();
+  void setAuto(float getFuel);
+  void setMonorail(float getFuel);
 };
