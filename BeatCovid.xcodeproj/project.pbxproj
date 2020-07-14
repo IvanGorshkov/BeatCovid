@@ -590,7 +590,7 @@
 				CODE_SIGN_ENTITLEMENTS = BeatCovid/BeatCovid.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VYDPJANCG8;
+				DEVELOPMENT_TEAM = 58T4L2QKV7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = "${SRCROOT}/BeatCovid/SFML/Frameworks";
 				HEADER_SEARCH_PATHS = "${SRCROOT}/BeatCovid/SFML/include";
@@ -610,7 +610,7 @@
 				CODE_SIGN_ENTITLEMENTS = BeatCovid/BeatCovid.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VYDPJANCG8;
+				DEVELOPMENT_TEAM = 58T4L2QKV7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = "${SRCROOT}/BeatCovid/SFML/Frameworks";
 				HEADER_SEARCH_PATHS = "${SRCROOT}/BeatCovid/SFML/include";

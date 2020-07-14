@@ -46,7 +46,7 @@ void Player::KeyCheck() {
     dir = true;
     if (STATE == STAY) {
       STATE = RUN;
-      dx = -0.1;
+      dx = -0.13;
       treat = false;
     }
   }
@@ -55,7 +55,7 @@ void Player::KeyCheck() {
     dir = false;
     if (STATE == STAY) {
       STATE = RUN;
-      dx = 0.1;
+      dx = 0.13;
       treat = false;
     }
   }
@@ -187,8 +187,8 @@ void Player::Update(float time, std::vector<Object> &obj) {
   }
 
   if (STATE == JUMP) {
-    max_jump += 0.2;
-    if (max_jump > 10) {
+      max_jump += 0.2*time;
+    if (max_jump > 300) {
       dy = 0.2;
     }
   }
@@ -258,7 +258,7 @@ void Player::Collision(int num, std::vector<Object> &objs) {
         if (dy < 0 && num == 1) {
           rect.top = obj.rect.top + obj.rect.height;
           dy = 0;
-          max_jump = 200;
+          max_jump = 300;
         }
 
         if (dx > 0 && num == 0) {
