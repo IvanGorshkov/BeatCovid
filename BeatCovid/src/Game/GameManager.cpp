@@ -8,7 +8,7 @@ GameManager::GameManager(Level &lvl,
                          MusicManager &music,
                          const std::vector<int> &arms,
                          int points,
-                         std::vector<int> stat,
+                         const std::vector<int> &stat,
                          const std::vector<float> &config)
     : obj(lvl.GetAllObjects()),
       music(music),
@@ -141,14 +141,14 @@ void GameManager::Fire() {
     if (player->GetDir()) {
       playerBullets.emplace_back(player->GetRect().left - 25,
                                  player->GetRect().top + 40,
-                                 -BULLET_DX,
+                                 -PLAYER_BULLET_DX,
                                  0,
                                  player->GetDmg(),
                                  true);
     } else {
       playerBullets.emplace_back(player->GetRect().left + player->GetRect().width + 10,
                                  player->GetRect().top + 40,
-                                 BULLET_DX,
+                                 PLAYER_BULLET_DX,
                                  0,
                                  player->GetDmg(),
                                  true);
@@ -290,9 +290,11 @@ void GameManager::bulletPlayer() {
     if ((*enemiesIt)->GetTimer() > ENEMY_HIT_TIME && (*enemiesIt)->IsLife()) {
       float X = (player->GetRect().left - (*enemiesIt)->GetRect().left) / 16;
       float Y = (player->GetRect().top - (*enemiesIt)->GetRect().top) / 16;
-      // Дальность полета пули
+        
       (*enemiesIt)->SetFire(true);
-      if (std::abs(X) > 30 || std::abs(Y) > 30) {
+
+      // Дальность полета пули
+      if (std::sqrt(X * X + Y * Y) > 35) {
         (*enemiesIt)->SetFire(false);
         (*enemiesIt)->ResetTimer();
         continue;
@@ -300,10 +302,10 @@ void GameManager::bulletPlayer() {
 
       float dx, dy;
       if (Y / X > 1 || Y / X < -1) {
-        dy = Y > 0 ? BULLET_DX : -BULLET_DX;
+        dy = Y > 0 ? ENEMY_BULLET_DX : -ENEMY_BULLET_DX;
         dx = dy * X / Y;
       } else {
-        dx = X > 0 ? BULLET_DX : -BULLET_DX;
+        dx = X > 0 ? ENEMY_BULLET_DX : -ENEMY_BULLET_DX;
         dy = dx * Y / X;
       }
 

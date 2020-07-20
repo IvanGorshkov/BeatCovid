@@ -25,7 +25,7 @@ class GameManager {
                        MusicManager &music,
                        const std::vector<int> &arms,
                        int points,
-                       std::vector<int> stat,
+                       const std::vector<int> &stat,
                        const std::vector<float> &config);
 
   // Обновление всех классов

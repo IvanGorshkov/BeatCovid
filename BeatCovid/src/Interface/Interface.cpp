@@ -68,6 +68,13 @@ Interface::Interface(sf::RenderWindow &window)
       headSize(window.getSize().y / 20),
       buttonFontPath(resourcePath() + "files/fonts/Inconsolata-Bold.ttf"),
       textFontPath(resourcePath() + "files/fonts/Inconsolata-Bold.ttf") {
+          if (width > 2500 && height > 1600) {
+              gameWidth = 2500;
+              gameHeight = 1600;
+          } else {
+              gameWidth = width;
+              gameHeight = height;
+          }
 }
 
 // Вывод главного меню
@@ -91,7 +98,6 @@ void Interface::MainMenu(sf::RenderWindow &window) {
   backImageSprite.SetPosition(statisticButton.GetTextRectSize().x + left + 30, 0);
   backImageSprite.Size(width - backImageSprite.GetTextureRect().left, height);
 
-  MusicManager music;
   music.PlayBackgroundMenuMusic();
 
   Save save;
@@ -109,42 +115,43 @@ void Interface::MainMenu(sf::RenderWindow &window) {
     //      if (event.text.unicode >= 48 && event.text.unicode <= 57)
     //        std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << std::endl;
     //    }
-
+      
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (newGameButton.IsSelect(mousePosition)) {
+    if (newGameButton.IsSelect(mousePosition, music)) {
       if (!Save::IsExistLvlFile()) {
         music.StopBackgroundMenuMusic();
-        startNewGame(window, music);
+        startNewGame(window);
       } else {
-        newGameWarningMenu(window, music);
+        newGameWarningMenu(window);
       }
     }
 
-    if (loadGameButton.IsSelect(mousePosition)) {
+    if (loadGameButton.IsSelect(mousePosition, music)) {
       if (Save::IsExistLvlFile()) {
         if (Save::LoadLvl() != 0) {
           music.StopBackgroundMenuMusic();
-          startNewGame(window, music);
+          startNewGame(window);
         } else {
-          winMenu(window, music, true);
+          winMenu(window, true);
         }
       }
     }
 
-    if (statisticButton.IsSelect(mousePosition)) {
+    if (statisticButton.IsSelect(mousePosition, music)) {
+        music.PlayOnButtonSound();
       statisticMenu(window);
     }
 
-    if (shopButton.IsSelect(mousePosition)) {
+    if (shopButton.IsSelect(mousePosition, music)) {
       shopMenu(window);
     }
 
-    if (exitButton.IsSelect(mousePosition)) {
+    if (exitButton.IsSelect(mousePosition, music)) {
       window.close();
     }
 
-    if (aboutButton.IsSelect(mousePosition)) {
+    if (aboutButton.IsSelect(mousePosition, music)) {
       aboutMenu(window);
     }
 
@@ -188,8 +195,10 @@ void Interface::PenaltyPolice(sf::RenderWindow &window) {
         window.close();
       }
     }
+      
+    auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (penaltyTable.GetCenterButtons()[0]->IsSelect(sf::Vector2i(sf::Mouse::getPosition(window)))) {
+    if (penaltyTable.GetCenterButtons()[0]->IsSelect(mousePosition, music)) {
       break;
     }
 
@@ -221,8 +230,10 @@ void Interface::DiedPolice(sf::RenderWindow &window) {
         window.close();
       }
     }
+      
+    auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (diedTable.GetCenterButtons()[0]->IsSelect(sf::Vector2i(sf::Mouse::getPosition(window)))) {
+    if (diedTable.GetCenterButtons()[0]->IsSelect(mousePosition, music)) {
       break;
     }
 
@@ -233,7 +244,7 @@ void Interface::DiedPolice(sf::RenderWindow &window) {
 }
 
 // Предупреждение о сбросе данных
-void Interface::newGameWarningMenu(sf::RenderWindow &window, MusicManager &music) {
+void Interface::newGameWarningMenu(sf::RenderWindow &window) {
   InterfaceTable newGameWarningTable;
   newGameWarningTable.SetCenterLabel(std::make_shared<InterfaceButton>(textFontPath,
                                                                        textSize,
@@ -257,14 +268,14 @@ void Interface::newGameWarningMenu(sf::RenderWindow &window, MusicManager &music
 
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (newGameWarningTable.GetLeftButtons()[0]->IsSelect(mousePosition)) {
+    if (newGameWarningTable.GetLeftButtons()[0]->IsSelect(mousePosition, music)) {
       Save::RemoveGameSaves();
       music.StopBackgroundMenuMusic();
-      startNewGame(window, music);
+      startNewGame(window);
       break;
     }
 
-    if (newGameWarningTable.GetRightButtons()[0]->IsSelect(mousePosition)) {
+    if (newGameWarningTable.GetRightButtons()[0]->IsSelect(mousePosition, music)) {
       break;
     }
 
@@ -275,20 +286,20 @@ void Interface::newGameWarningMenu(sf::RenderWindow &window, MusicManager &music
 }
 
 // Старт новой игры
-void Interface::startNewGame(sf::RenderWindow &window, MusicManager &music) {
+void Interface::startNewGame(sf::RenderWindow &window) {
   bool repeat = true;
 
   Save save;
 
   while (repeat) {
-    sf::View view(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
+    sf::View menuView(sf::FloatRect(0, 0, width, height));
+    sf::View gameView(sf::FloatRect(0, 0, gameWidth, gameHeight));
 
     music.PlayBackgroundGameMusic();
 
     Level lvl;
     lvl.LoadFromFile(save.GetLvlName());
-    GameManager
-        game(lvl, textSize, music, Save::LoadArmors(), Save::LoadPoints(), Save::LoadStat(), Save::LoadConfig());
+    GameManager game(lvl, textSize, music, Save::LoadArmors(), Save::LoadPoints(), Save::LoadStat(), Save::LoadConfig());
     sf::Clock clock;
 
     while (window.isOpen()) {
@@ -312,11 +323,10 @@ void Interface::startNewGame(sf::RenderWindow &window, MusicManager &music) {
 
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
         music.StopBackgroundGameMusic();
+          
+        window.setView(menuView);
 
-        view.setCenter(width / 2, height / 2);
-        window.setView(view);
-
-        if (!gameMenu(window, music, game.GetPlayer()->GetMainData())) {
+        if (!gameMenu(window, game.GetPlayer()->GetMainData())) {
           repeat = false;
           break;
         }
@@ -328,26 +338,24 @@ void Interface::startNewGame(sf::RenderWindow &window, MusicManager &music) {
         music.StopBackgroundGameMusic();
         music.PlayDiedPlayerSound();
 
-        view.setCenter(width / 2, height / 2);
-        window.setView(view);
+        window.setView(menuView);
 
-        repeat = diedMenu(window, music);
+        repeat = diedMenu(window);
         break;
       }
 
       if (game.GetPlayer()->GetFinish()) {
         music.StopBackgroundGameMusic();
 
-        view.setCenter(width / 2, height / 2);
-        window.setView(view);
+        window.setView(menuView);
 
         if (save.GetLvl() == MAX_LVL) {
           save.SetEndGame();
-          repeat = winMenu(window, music, false);
+          repeat = winMenu(window, false);
 
         } else {
           save.ChangeLvl();
-          repeat = nextLvlMenu(window, music);
+          repeat = nextLvlMenu(window);
         }
 
         save.SaveGame(game.GetPlayer()->GetPoints());
@@ -381,9 +389,9 @@ void Interface::startNewGame(sf::RenderWindow &window, MusicManager &music) {
 
       window.clear(sf::Color(0, 0, 0));
       lvl.Draw(window);
-      game.Draw(window, game.GetPlayer()->GetRect().left, game.GetPlayer()->GetRect().top, height, width);
-      view.setCenter(game.GetPlayer()->GetRect().left, game.GetPlayer()->GetRect().top);
-      window.setView(view);
+      game.Draw(window, game.GetPlayer()->GetRect().left, game.GetPlayer()->GetRect().top, gameHeight, gameWidth);
+      gameView.setCenter(game.GetPlayer()->GetRect().left, game.GetPlayer()->GetRect().top);
+      window.setView(gameView);
       window.display();
     }
 
@@ -391,7 +399,7 @@ void Interface::startNewGame(sf::RenderWindow &window, MusicManager &music) {
   }
 }
 
-bool Interface::winMenu(sf::RenderWindow &window, MusicManager &music, bool isLoadFromMenu) {
+bool Interface::winMenu(sf::RenderWindow &window, bool isLoadFromMenu) {
   if (!isLoadFromMenu) {
     music.PlayBackgroundMenuMusic();
   }
@@ -416,8 +424,10 @@ bool Interface::winMenu(sf::RenderWindow &window, MusicManager &music, bool isLo
         window.close();
       }
     }
+      
+    auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (winTable.GetCenterButtons()[0]->IsSelect(sf::Vector2i(sf::Mouse::getPosition(window)))) {
+    if (winTable.GetCenterButtons()[0]->IsSelect(mousePosition, music)) {
       if (!isLoadFromMenu) {
         music.StopBackgroundMenuMusic();
       }
@@ -433,7 +443,7 @@ bool Interface::winMenu(sf::RenderWindow &window, MusicManager &music, bool isLo
   return false;
 }
 
-bool Interface::nextLvlMenu(sf::RenderWindow &window, MusicManager &music) {
+bool Interface::nextLvlMenu(sf::RenderWindow &window) {
   music.PlayBackgroundMenuMusic();
 
   InterfaceTable nextMissionTable;
@@ -454,12 +464,12 @@ bool Interface::nextLvlMenu(sf::RenderWindow &window, MusicManager &music) {
 
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (nextMissionTable.GetCenterButtons()[0]->IsSelect(mousePosition)) {
+    if (nextMissionTable.GetCenterButtons()[0]->IsSelect(mousePosition, music)) {
       music.StopBackgroundMenuMusic();
       return true;
     }
 
-    if (nextMissionTable.GetCenterButtons()[1]->IsSelect(mousePosition)) {
+      if (nextMissionTable.GetCenterButtons()[1]->IsSelect(mousePosition, music)) {
       return false;
     }
 
@@ -472,7 +482,7 @@ bool Interface::nextLvlMenu(sf::RenderWindow &window, MusicManager &music) {
 }
 
 // Экран смерти
-bool Interface::diedMenu(sf::RenderWindow &window, MusicManager &music) {
+bool Interface::diedMenu(sf::RenderWindow &window) {
   music.PlayBackgroundMenuMusic();
 
   InterfaceTable diedTable;
@@ -493,12 +503,12 @@ bool Interface::diedMenu(sf::RenderWindow &window, MusicManager &music) {
 
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (diedTable.GetCenterButtons()[0]->IsSelect(mousePosition)) {
+    if (diedTable.GetCenterButtons()[0]->IsSelect(mousePosition, music)) {
       music.StopBackgroundMenuMusic();
       return true;
     }
 
-    if (diedTable.GetCenterButtons()[1]->IsSelect(mousePosition)) {
+    if (diedTable.GetCenterButtons()[1]->IsSelect(mousePosition, music)) {
       return false;
     }
 
@@ -585,8 +595,10 @@ void Interface::statisticMenu(sf::RenderWindow &window) {
         window.close();
       }
     }
+      
+    auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (backButton.IsSelect(sf::Vector2i(sf::Mouse::getPosition(window)))) {
+    if (backButton.IsSelect(mousePosition, music)) {
       break;
     }
 
@@ -705,11 +717,11 @@ void Interface::configMenu(sf::RenderWindow &window) {
 
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (backButton.IsSelect(mousePosition)) {
+    if (backButton.IsSelect(mousePosition, music)) {
       break;
     }
 
-    if (defaultButton.IsSelect(mousePosition)) {
+    if (defaultButton.IsSelect(mousePosition, music)) {
       Save::RemoveConfig();
     }
 
@@ -816,7 +828,9 @@ bool Interface::shopMenu(sf::RenderWindow &window) {
       menuNum = 2;
     }
 
-    if (backButton.IsSelect(sf::Vector2i(sf::Mouse::getPosition(window)))) {
+    auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
+      
+    if (backButton.IsSelect(mousePosition, music)) {
       break;
     }
 
@@ -885,7 +899,7 @@ bool Interface::shopMenu(sf::RenderWindow &window) {
   return true;
 }
 
-bool Interface::gameMenu(sf::RenderWindow &window, MusicManager &music, std::vector<int> data) {
+bool Interface::gameMenu(sf::RenderWindow &window, std::vector<int> data) {
   music.PlayBackgroundMenuMusic();
 
   InterfaceButton continueButton(buttonFontPath, buttonSize, 30, height - buttonSize - 30, "Continue");
@@ -943,11 +957,11 @@ bool Interface::gameMenu(sf::RenderWindow &window, MusicManager &music, std::vec
 
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (menuButton.IsSelect(mousePosition)) {
+    if (menuButton.IsSelect(mousePosition, music)) {
       return false;
     }
 
-    if (continueButton.IsSelect(mousePosition)) {
+    if (continueButton.IsSelect(mousePosition, music)) {
       music.StopBackgroundMenuMusic();
       return true;
     }
@@ -984,8 +998,10 @@ void Interface::aboutMenu(sf::RenderWindow &window) {
         window.close();
       }
     }
+      
+    auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (backButton.IsSelect(sf::Vector2i(sf::Mouse::getPosition(window)))) {
+    if (backButton.IsSelect(mousePosition, music)) {
       break;
     }
 

@@ -189,29 +189,29 @@ void InterfaceTable::SetPosition(unsigned int height, unsigned int width) {
     rightButtonXPosition = (width - leftButtonMaxWidth - rightButtonMaxWidth) / 3 * 2 + leftButtonMaxWidth;
   }
 
-  std::cout << "Height : " << height << std::endl;
-  std::cout << "Width : " << width << std::endl << std::endl << std::endl;
-
-  std::cout << "centerLabelMaxWidth : " << centerLabelMaxWidth << std::endl;
-  std::cout << "centerLabelHeight : " << centerLabelHeight << std::endl << std::endl;
-  std::cout << "centerButtonMaxWidth : " << centerButtonMaxWidth << std::endl;
-  std::cout << "centerButtonHeight : " << centerButtonHeight << std::endl << std::endl;
-  std::cout << "leftLabelMaxWidth : " << leftLabelMaxWidth << std::endl;
-  std::cout << "leftLabelHeight : " << leftLabelHeight << std::endl << std::endl;
-  std::cout << "rightLabelMaxWidth : " << rightLabelMaxWidth << std::endl;
-  std::cout << "rightLabelHeight : " << rightLabelHeight << std::endl << std::endl;
-  std::cout << "leftButtonMaxWidth : " << leftButtonMaxWidth << std::endl;
-  std::cout << "leftButtonHeight : " << leftButtonHeight << std::endl << std::endl;
-  std::cout << "rightButtonMaxWidth : " << rightButtonMaxWidth << std::endl;
-  std::cout << "rightButtonHeight : " << rightButtonHeight << std::endl << std::endl << std::endl;
-
-  std::cout << "upPosition : " << upPosition << std::endl << std::endl;
-  std::cout << "centerLabelXPosition : " << centerLabelXPosition << std::endl;
-  std::cout << "centerButtonXPosition : " << centerButtonXPosition << std::endl << std::endl;
-  std::cout << "leftLabelXPosition : " << leftLabelXPosition << std::endl;
-  std::cout << "rightLabelXPosition : " << rightLabelXPosition << std::endl << std::endl;
-  std::cout << "leftButtonXPosition : " << leftButtonXPosition << std::endl;
-  std::cout << "rightButtonXPosition : " << rightButtonXPosition << std::endl << std::endl;
+//  std::cout << "Height : " << height << std::endl;
+//  std::cout << "Width : " << width << std::endl << std::endl << std::endl;
+//
+//  std::cout << "centerLabelMaxWidth : " << centerLabelMaxWidth << std::endl;
+//  std::cout << "centerLabelHeight : " << centerLabelHeight << std::endl << std::endl;
+//  std::cout << "centerButtonMaxWidth : " << centerButtonMaxWidth << std::endl;
+//  std::cout << "centerButtonHeight : " << centerButtonHeight << std::endl << std::endl;
+//  std::cout << "leftLabelMaxWidth : " << leftLabelMaxWidth << std::endl;
+//  std::cout << "leftLabelHeight : " << leftLabelHeight << std::endl << std::endl;
+//  std::cout << "rightLabelMaxWidth : " << rightLabelMaxWidth << std::endl;
+//  std::cout << "rightLabelHeight : " << rightLabelHeight << std::endl << std::endl;
+//  std::cout << "leftButtonMaxWidth : " << leftButtonMaxWidth << std::endl;
+//  std::cout << "leftButtonHeight : " << leftButtonHeight << std::endl << std::endl;
+//  std::cout << "rightButtonMaxWidth : " << rightButtonMaxWidth << std::endl;
+//  std::cout << "rightButtonHeight : " << rightButtonHeight << std::endl << std::endl << std::endl;
+//
+//  std::cout << "upPosition : " << upPosition << std::endl << std::endl;
+//  std::cout << "centerLabelXPosition : " << centerLabelXPosition << std::endl;
+//  std::cout << "centerButtonXPosition : " << centerButtonXPosition << std::endl << std::endl;
+//  std::cout << "leftLabelXPosition : " << leftLabelXPosition << std::endl;
+//  std::cout << "rightLabelXPosition : " << rightLabelXPosition << std::endl << std::endl;
+//  std::cout << "leftButtonXPosition : " << leftButtonXPosition << std::endl;
+//  std::cout << "rightButtonXPosition : " << rightButtonXPosition << std::endl << std::endl;
 
   for (int i = 0; i < centerLabel.size(); i++) {
     centerLabel[i]->SetPosition(centerLabelPosition[i].x + centerLabelXPosition,
