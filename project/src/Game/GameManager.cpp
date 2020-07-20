@@ -8,7 +8,7 @@ GameManager::GameManager(Level &lvl,
                          MusicManager &music,
                          const std::vector<int> &arms,
                          int points,
-                         std::vector<int> stat,
+                         const std::vector<int> &stat,
                          const std::vector<float> &config)
     : obj(lvl.GetAllObjects()),
       music(music),
@@ -101,13 +101,19 @@ void GameManager::Update(float time) {
 }
 
 // Вывод всех классов на экран
-void GameManager::Draw(sf::RenderWindow &window) {
+void GameManager::Draw(sf::RenderWindow &window, float x, float y, int height, int width) {
 //  drawFPS(window);
+  float leftX = x - width / 2;
+  float rightX = x + width / 2;
+  float upY = y - height / 2;
+  float downY = y + height / 2;
+
   drawBullet(window);
-  drawEnemy(window);
-  drawAntibodies(window);
-  drawTransport(window);
+  drawEnemy(window, leftX, rightX, upY, downY);
+  drawAntibodies(window, leftX, rightX, upY, downY);
+  drawTransport(window, leftX, rightX, upY, downY);
   drawPlayerData(window);
+
   if (player->IsFinishPosition()) {
     labelManager.Draw("NoVaccine", window);
   }
@@ -116,7 +122,10 @@ void GameManager::Draw(sf::RenderWindow &window) {
     player->DrawObjs(window);
   }
 
-  sick->Draw(window);
+  auto rect = sick->GetRect();
+  if (rect.left + rect.width > leftX && rect.left < rightX && rect.top + rect.height> upY && rect.top < downY) {
+    sick->Draw(window);
+  }
 }
 
 std::shared_ptr<Player> GameManager::GetPlayer() {
@@ -132,14 +141,14 @@ void GameManager::Fire() {
     if (player->GetDir()) {
       playerBullets.emplace_back(player->GetRect().left - 25,
                                  player->GetRect().top + 40,
-                                 -BULLET_DX,
+                                 -PLAYER_BULLET_DX,
                                  0,
                                  player->GetDmg(),
                                  true);
     } else {
       playerBullets.emplace_back(player->GetRect().left + player->GetRect().width + 10,
                                  player->GetRect().top + 40,
-                                 BULLET_DX,
+                                 PLAYER_BULLET_DX,
                                  0,
                                  player->GetDmg(),
                                  true);
@@ -205,11 +214,7 @@ std::vector<int> GameManager::GetStat() {
 
 void GameManager::drawPlayerData(sf::RenderWindow &window) {
   std::ostringstream ssData;
-  int hp = player->GetHp();
-  if (hp < 0) {
-    hp = 0;
-  }
-  ssData << "HP: " << hp << "%" << " ARM: " << player->GetArm() << " Vaccine: " << player->GetVaccine();
+  ssData << "HP: " << player->GetHp() << "%" << " ARM: " << player->GetArm() << " Vaccine: " << player->GetVaccine();
   labelManager.SetText("PlayerData", ssData.str());
   labelManager.Draw("PlayerData", window);
 
@@ -285,9 +290,11 @@ void GameManager::bulletPlayer() {
     if ((*enemiesIt)->GetTimer() > ENEMY_HIT_TIME && (*enemiesIt)->IsLife()) {
       float X = (player->GetRect().left - (*enemiesIt)->GetRect().left) / 16;
       float Y = (player->GetRect().top - (*enemiesIt)->GetRect().top) / 16;
-      // Дальность полета пули
+        
       (*enemiesIt)->SetFire(true);
-      if (std::abs(X) > 30 || std::abs(Y) > 30) {
+
+      // Дальность полета пули
+      if (std::sqrt(X * X + Y * Y) > 35) {
         (*enemiesIt)->SetFire(false);
         (*enemiesIt)->ResetTimer();
         continue;
@@ -295,10 +302,10 @@ void GameManager::bulletPlayer() {
 
       float dx, dy;
       if (Y / X > 1 || Y / X < -1) {
-        dy = Y > 0 ? BULLET_DX : -BULLET_DX;
+        dy = Y > 0 ? ENEMY_BULLET_DX : -ENEMY_BULLET_DX;
         dx = dy * X / Y;
       } else {
-        dx = X > 0 ? BULLET_DX : -BULLET_DX;
+        dx = X > 0 ? ENEMY_BULLET_DX : -ENEMY_BULLET_DX;
         dy = dx * Y / X;
       }
 
@@ -371,7 +378,7 @@ void GameManager::updateEnemy(float time) {
 }
 
 // Вывод Enemy на экран
-void GameManager::drawEnemy(sf::RenderWindow &window) {
+void GameManager::drawEnemy(sf::RenderWindow &window, float leftX, float rightX, float upY, float downY) {
   for (enemiesIt = enemies.begin(); enemiesIt != enemies.end(); ++enemiesIt) {
     if (auto police = std::dynamic_pointer_cast<Police>(*enemiesIt)) {
       if (police->IsDrawPenaltyMenu()) {
@@ -386,7 +393,10 @@ void GameManager::drawEnemy(sf::RenderWindow &window) {
       }
     }
 
-    (*enemiesIt)->Draw(window);
+    auto rect =  (*enemiesIt)->GetRect();
+    if (rect.left + rect.width > leftX && rect.left < rightX && rect.top + rect.height> upY && rect.top < downY) {
+      (*enemiesIt)->Draw(window);
+    }
   }
 }
 
@@ -416,9 +426,12 @@ void GameManager::updateAntibodies() {
 }
 
 // Вывод Antibodies на экран
-void GameManager::drawAntibodies(sf::RenderWindow &window) {
+void GameManager::drawAntibodies(sf::RenderWindow &window, float leftX, float rightX, float upY, float downY) {
   for (antibodiesIt = antibodies.begin(); antibodiesIt != antibodies.end(); ++antibodiesIt) {
-    antibodiesIt->Draw(window);
+    auto rect = antibodiesIt->GetRect();
+    if (rect.left + rect.width > leftX && rect.left < rightX && rect.top + rect.height> upY && rect.top < downY) {
+      antibodiesIt->Draw(window);
+    }
   }
 }
 
@@ -462,14 +475,17 @@ void GameManager::updateUnSafeTransport(float time) {
 }
 
 // Вывод Transport на экран
-void GameManager::drawTransport(sf::RenderWindow &window) {
-  drawSafeTransport(window);
-  drawUnSafeTransport(window);
+void GameManager::drawTransport(sf::RenderWindow &window, float leftX, float rightX, float upY, float downY) {
+  drawSafeTransport(window, leftX, rightX, upY, downY);
+  drawUnSafeTransport(window, leftX, rightX, upY, downY);
 }
 
-void GameManager::drawSafeTransport(sf::RenderWindow &window) {
+void GameManager::drawSafeTransport(sf::RenderWindow &window, float leftX, float rightX, float upY, float downY) {
   for (safeTransportsIt = safeTransports.begin(); safeTransportsIt != safeTransports.end(); ++safeTransportsIt) {
-    safeTransportsIt->Draw(window);
+    auto rect = safeTransportsIt->GetRect();
+    if (rect.left + rect.width > leftX && rect.left < rightX && rect.top + rect.height> upY && rect.top < downY) {
+      safeTransportsIt->Draw(window);
+    }
 
     if (safeTransportsIt->GetRect().intersects(player->GetRect())) {
       labelManager.Draw("TransportHelp", window, player->GetRect().left, player->GetRect().top);
@@ -484,10 +500,13 @@ void GameManager::drawSafeTransport(sf::RenderWindow &window) {
   }
 }
 
-void GameManager::drawUnSafeTransport(sf::RenderWindow &window) {
+void GameManager::drawUnSafeTransport(sf::RenderWindow &window, float leftX, float rightX, float upY, float downY) {
   for (unSafeTransportsIt = unSafeTransports.begin(); unSafeTransportsIt != unSafeTransports.end();
        ++unSafeTransportsIt) {
-    unSafeTransportsIt->Draw(window);
+    auto rect = unSafeTransportsIt->GetRect();
+    if (rect.left + rect.width > leftX && rect.left < rightX && rect.top + rect.height> upY && rect.top < downY) {
+      unSafeTransportsIt->Draw(window);
+    }
 
     if (unSafeTransportsIt->GetRect().intersects(player->GetRect())) {
       labelManager.Draw("TransportHelp", window, player->GetRect().left, player->GetRect().top);

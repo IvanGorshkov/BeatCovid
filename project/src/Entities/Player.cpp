@@ -357,17 +357,18 @@ void Player::GoToStart() {
   rect.top = startPlayerPosition.rect.top;
 }
 
-void Player::ChangeHP(float getHp) {
-  this->hp = getHp;
-}
+//void Player::ChangeHP(float getHp) {
+//  this->hp = getHp;
+//}
 
-void Player::ChangeARM(float getArm) {
-  this->arm = getArm;
-}
+//void Player::ChangeARM(float getArm) {
+//  this->arm = getArm;
+//}
 
-AnimationManager Player::GetAnim() {
-  return anim;
-}
+//AnimationManager Player::GetAnim() {
+//  return anim;
+//}
+
 void Player::SetPosition(float x, float y) {
   rect.left = x;
   rect.top = y;
@@ -386,17 +387,17 @@ std::vector<int> Player::GetMainData() {
   return data;
 }
 
-Robe Player::GetRobe() {
-  return bathrobe;
-}
+//Robe Player::GetRobe() {
+//  return bathrobe;
+//}
 
-Cap Player::GetCap() {
-  return cap;
-}
+//Cap Player::GetCap() {
+//  return cap;
+//}
 
-Shoes Player::GetShoes() {
-  return shoes;
-}
+//Shoes Player::GetShoes() {
+//  return shoes;
+//}
 
 void Player::SetDrive() {
   isDrive = !isDrive;
@@ -421,9 +422,9 @@ void Player::SetFinish(bool getFinish) {
   this->finish = getFinish;
 }
 
-bool Player::GetTreat() const {
-  return treat;
-}
+//bool Player::GetTreat() const {
+//  return treat;
+//}
 
 int Player::PlayFinishMusic() const {
   return playFinishMusic;

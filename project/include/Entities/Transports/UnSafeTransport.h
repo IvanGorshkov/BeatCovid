@@ -18,9 +18,8 @@ class UnSafeTransport : public Transport {
   float PrintDmg() const;
 
  private:
-  std::vector<float> config;
   float dmg;
   float timerHit;
-  void setBus();
-  void setMetro();
+  void setBus(float getDmg);
+  void setMetro(float getDmg);
 };

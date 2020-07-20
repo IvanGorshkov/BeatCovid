@@ -64,33 +64,39 @@ Interface::Interface(sf::RenderWindow &window)
       width(window.getSize().x),
       buttonSize(window.getSize().y / 25),
       textSize(window.getSize().y / 30),
-      headSize(window.getSize().y / 20) {
+      headSize(window.getSize().y / 20),
+      buttonFontPath(FILES_PATH"files/fonts/Inconsolata-Bold.ttf"),
+      textFontPath(FILES_PATH"files/fonts/Inconsolata-Bold.ttf") {
+          if (width > 2500 && height > 1600) {
+              gameWidth = 2500;
+              gameHeight = 1600;
+          } else {
+              gameWidth = width;
+              gameHeight = height;
+          }
 }
 
 // Вывод главного меню
 void Interface::MainMenu(sf::RenderWindow &window) {
-  std::string fontPath = FILES_PATH"files/fonts/Inconsolata-Bold.ttf";
-
   float left = buttonSize * 2;
   float up = buttonSize * 0.6;
   float dy = buttonSize * 1.4;
-  InterfaceButton newGameButton(fontPath, buttonSize, left, up, "New Game");
+  InterfaceButton newGameButton(buttonFontPath, buttonSize, left, up, "New Game");
   up += dy;
-  InterfaceButton loadGameButton(fontPath, buttonSize, left, up, "Load Game");
+  InterfaceButton loadGameButton(buttonFontPath, buttonSize, left, up, "Load Game");
   up += dy;
-  InterfaceButton statisticButton(fontPath, buttonSize, left, up, "Statistic");
+  InterfaceButton statisticButton(buttonFontPath, buttonSize, left, up, "Statistic");
   up += dy;
-  InterfaceButton shopButton(fontPath, buttonSize, left, up, "Shop");
+  InterfaceButton shopButton(buttonFontPath, buttonSize, left, up, "Shop");
   up += dy;
-  InterfaceButton exitButton(fontPath, buttonSize, left, up, "Exit");
+  InterfaceButton exitButton(buttonFontPath, buttonSize, left, up, "Exit");
 
-  InterfaceButton aboutButton(fontPath, buttonSize, left, height - left, "About");
+  InterfaceButton aboutButton(buttonFontPath, buttonSize, left, height - left, "About");
 
   InterfaceImage backImageSprite(FILES_PATH"files/menu/back_image.png");
   backImageSprite.SetPosition(statisticButton.GetTextRectSize().x + left + 30, 0);
   backImageSprite.Size(width - backImageSprite.GetTextureRect().left, height);
 
-  MusicManager music;
   music.PlayBackgroundMenuMusic();
 
   Save save;
@@ -108,42 +114,43 @@ void Interface::MainMenu(sf::RenderWindow &window) {
     //      if (event.text.unicode >= 48 && event.text.unicode <= 57)
     //        std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << std::endl;
     //    }
-
+      
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (newGameButton.IsSelect(mousePosition)) {
+    if (newGameButton.IsSelect(mousePosition, music)) {
       if (!Save::IsExistLvlFile()) {
         music.StopBackgroundMenuMusic();
-        startNewGame(window, music);
+        startNewGame(window);
       } else {
-        newGameWarningMenu(window, music);
+        newGameWarningMenu(window);
       }
     }
 
-    if (loadGameButton.IsSelect(mousePosition)) {
+    if (loadGameButton.IsSelect(mousePosition, music)) {
       if (Save::IsExistLvlFile()) {
         if (Save::LoadLvl() != 0) {
           music.StopBackgroundMenuMusic();
-          startNewGame(window, music);
+          startNewGame(window);
         } else {
-          winMenu(window, music, true);
+          winMenu(window, true);
         }
       }
     }
 
-    if (statisticButton.IsSelect(mousePosition)) {
+    if (statisticButton.IsSelect(mousePosition, music)) {
+        music.PlayOnButtonSound();
       statisticMenu(window);
     }
 
-    if (shopButton.IsSelect(mousePosition)) {
+    if (shopButton.IsSelect(mousePosition, music)) {
       shopMenu(window);
     }
 
-    if (exitButton.IsSelect(mousePosition)) {
+    if (exitButton.IsSelect(mousePosition, music)) {
       window.close();
     }
 
-    if (aboutButton.IsSelect(mousePosition)) {
+    if (aboutButton.IsSelect(mousePosition, music)) {
       aboutMenu(window);
     }
 
@@ -173,11 +180,9 @@ void Interface::PenaltyPolice(sf::RenderWindow &window) {
   view.setCenter(width / 2, height / 2);
   window.setView(view);
 
-  std::string fontPath = FILES_PATH"files/fonts/Inconsolata-Bold.ttf";
-
   InterfaceTable penaltyTable;
-  penaltyTable.SetCenterLabel(std::make_shared<InterfaceLabel>(fontPath, headSize, "You were caught and fined"));
-  penaltyTable.SetCenterButton(std::make_shared<InterfaceButton>(fontPath, buttonSize, "Continue"));
+  penaltyTable.SetCenterLabel(std::make_shared<InterfaceLabel>(textFontPath, headSize, "You were caught and fined"));
+  penaltyTable.SetCenterButton(std::make_shared<InterfaceButton>(buttonFontPath, buttonSize, "Continue"));
 
   penaltyTable.CalculateTablePosition();
   penaltyTable.SetPosition(height, width);
@@ -189,8 +194,10 @@ void Interface::PenaltyPolice(sf::RenderWindow &window) {
         window.close();
       }
     }
+      
+    auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (penaltyTable.GetCenterButtons()[0]->IsSelect(sf::Vector2i(sf::Mouse::getPosition(window)))) {
+    if (penaltyTable.GetCenterButtons()[0]->IsSelect(mousePosition, music)) {
       break;
     }
 
@@ -206,11 +213,11 @@ void Interface::DiedPolice(sf::RenderWindow &window) {
   view.setCenter(width / 2, height / 2);
   window.setView(view);
 
-  std::string fontPath = FILES_PATH"files/fonts/Inconsolata-Bold.ttf";
-
   InterfaceTable diedTable;
-  diedTable.SetCenterLabel(std::make_shared<InterfaceLabel>(fontPath, headSize, "You were caught and brought back"));
-  diedTable.SetCenterButton(std::make_shared<InterfaceButton>(fontPath, buttonSize, "Continue"));
+  diedTable.SetCenterLabel(std::make_shared<InterfaceLabel>(textFontPath,
+                                                            headSize,
+                                                            "You were caught and brought back"));
+  diedTable.SetCenterButton(std::make_shared<InterfaceButton>(buttonFontPath, buttonSize, "Continue"));
 
   diedTable.CalculateTablePosition();
   diedTable.SetPosition(height, width);
@@ -222,8 +229,10 @@ void Interface::DiedPolice(sf::RenderWindow &window) {
         window.close();
       }
     }
+      
+    auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (diedTable.GetCenterButtons()[0]->IsSelect(sf::Vector2i(sf::Mouse::getPosition(window)))) {
+    if (diedTable.GetCenterButtons()[0]->IsSelect(mousePosition, music)) {
       break;
     }
 
@@ -234,18 +243,16 @@ void Interface::DiedPolice(sf::RenderWindow &window) {
 }
 
 // Предупреждение о сбросе данных
-void Interface::newGameWarningMenu(sf::RenderWindow &window, MusicManager &music) {
-  std::string fontPath = FILES_PATH"files/fonts/Inconsolata-Bold.ttf";
-
+void Interface::newGameWarningMenu(sf::RenderWindow &window) {
   InterfaceTable newGameWarningTable;
-  newGameWarningTable.SetCenterLabel(std::make_shared<InterfaceButton>(fontPath,
+  newGameWarningTable.SetCenterLabel(std::make_shared<InterfaceButton>(textFontPath,
                                                                        textSize,
                                                                        "Are you sure you want to start a new game?"));
-  newGameWarningTable.SetCenterLabel(std::make_shared<InterfaceButton>(fontPath,
+  newGameWarningTable.SetCenterLabel(std::make_shared<InterfaceButton>(textFontPath,
                                                                        textSize,
                                                                        "All your saves will be lost"));
-  newGameWarningTable.SetLeftButton(std::make_shared<InterfaceButton>(fontPath, buttonSize, "Yes"));
-  newGameWarningTable.SetRightButton(std::make_shared<InterfaceButton>(fontPath, buttonSize, "No"));
+  newGameWarningTable.SetLeftButton(std::make_shared<InterfaceButton>(buttonFontPath, buttonSize, "Yes"));
+  newGameWarningTable.SetRightButton(std::make_shared<InterfaceButton>(buttonFontPath, buttonSize, "No"));
 
   newGameWarningTable.CalculateTablePosition();
   newGameWarningTable.SetPosition(height, width);
@@ -260,14 +267,14 @@ void Interface::newGameWarningMenu(sf::RenderWindow &window, MusicManager &music
 
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (newGameWarningTable.GetLeftButtons()[0]->IsSelect(mousePosition)) {
+    if (newGameWarningTable.GetLeftButtons()[0]->IsSelect(mousePosition, music)) {
       Save::RemoveGameSaves();
       music.StopBackgroundMenuMusic();
-      startNewGame(window, music);
+      startNewGame(window);
       break;
     }
 
-    if (newGameWarningTable.GetRightButtons()[0]->IsSelect(mousePosition)) {
+    if (newGameWarningTable.GetRightButtons()[0]->IsSelect(mousePosition, music)) {
       break;
     }
 
@@ -278,14 +285,14 @@ void Interface::newGameWarningMenu(sf::RenderWindow &window, MusicManager &music
 }
 
 // Старт новой игры
-void Interface::startNewGame(sf::RenderWindow &window, MusicManager &music) {
+void Interface::startNewGame(sf::RenderWindow &window) {
   bool repeat = true;
-  bool isActive = true;
 
   Save save;
 
   while (repeat) {
-    sf::View view(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
+    sf::View menuView(sf::FloatRect(0, 0, width, height));
+    sf::View gameView(sf::FloatRect(0, 0, gameWidth, gameHeight));
 
     music.PlayBackgroundGameMusic();
 
@@ -301,14 +308,6 @@ void Interface::startNewGame(sf::RenderWindow &window, MusicManager &music) {
           window.close();
         }
 
-        if (event.type == sf::Event::LostFocus) {
-          isActive = false;
-        }
-
-        if (event.type == sf::Event::GainedFocus) {
-          isActive = true;
-        }
-
         if (event.type == sf::Event::KeyPressed) {
           if (event.key.code == sf::Keyboard::Space) {
             game.GetPlayer()->SetKey("SPACE", true);
@@ -321,100 +320,98 @@ void Interface::startNewGame(sf::RenderWindow &window, MusicManager &music) {
         }
       }
 
-      if (isActive) {
-        float time = clock.getElapsedTime().asMicroseconds();
-        clock.restart();
-        time = time / 400;
-        if (time > 70) {
-          time = 70;
-        }
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+        music.StopBackgroundGameMusic();
+          
+        window.setView(menuView);
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-          game.GetPlayer()->SetKey("L", true);
-        }
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-          game.GetPlayer()->SetKey("R", true);
-        }
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-          game.GetPlayer()->SetKey("UP", true);
-        }
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-          game.GetPlayer()->SetKey("DOWN", true);
-        }
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-          music.StopBackgroundGameMusic();
-
-          if (!gameMenu(window, music, game.GetPlayer()->GetMainData())) {
-            repeat = false;
-            break;
-          }
-
-          music.PlayBackgroundGameMusic();
-        }
-
-        if (game.GetPlayer()->GetHp() <= 0) {
-          music.StopBackgroundGameMusic();
-          music.PlayDiedPlayerSound();
-
-          repeat = diedMenu(window, music);
+        if (!gameMenu(window, game.GetPlayer()->GetMainData())) {
+          repeat = false;
           break;
         }
 
-        if (game.GetPlayer()->GetFinish()) {
-          music.StopBackgroundGameMusic();
-
-          if (save.GetLvl() == MAX_LVL) {
-            save.SetEndGame();
-            repeat = winMenu(window, music, false);
-
-          } else {
-            save.ChangeLvl();
-            repeat = nextLvlMenu(window, music);
-          }
-
-          save.SaveGame(game.GetPlayer()->GetPoints());
-          break;
-        }
-
-        game.Update(time);
-
-        window.clear(sf::Color(0, 0, 0));
-        lvl.Draw(window);
-        game.Draw(window);
-        view.setCenter(game.GetPlayer()->GetRect().left, game.GetPlayer()->GetRect().top);
-        window.setView(view);
-        window.display();
+        music.PlayBackgroundGameMusic();
       }
+
+      if (game.GetPlayer()->GetHp() <= 0) {
+        music.StopBackgroundGameMusic();
+        music.PlayDiedPlayerSound();
+
+        window.setView(menuView);
+
+        repeat = diedMenu(window);
+        break;
+      }
+
+      if (game.GetPlayer()->GetFinish()) {
+        music.StopBackgroundGameMusic();
+
+        window.setView(menuView);
+
+        if (save.GetLvl() == MAX_LVL) {
+          save.SetEndGame();
+          repeat = winMenu(window, false);
+
+        } else {
+          save.ChangeLvl();
+          repeat = nextLvlMenu(window);
+        }
+
+        save.SaveGame(game.GetPlayer()->GetPoints());
+        break;
+      }
+
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+        game.GetPlayer()->SetKey("L", true);
+      }
+
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+        game.GetPlayer()->SetKey("R", true);
+      }
+
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+        game.GetPlayer()->SetKey("UP", true);
+      }
+
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+        game.GetPlayer()->SetKey("DOWN", true);
+      }
+        
+      float time = clock.getElapsedTime().asMicroseconds();
+      clock.restart();
+      time = time / 400;
+      if (time > 70) {
+        time = 70;
+      }
+
+      game.Update(time);
+
+      window.clear(sf::Color(0, 0, 0));
+      lvl.Draw(window);
+      game.Draw(window, game.GetPlayer()->GetRect().left, game.GetPlayer()->GetRect().top, gameHeight, gameWidth);
+      gameView.setCenter(game.GetPlayer()->GetRect().left, game.GetPlayer()->GetRect().top);
+      window.setView(gameView);
+      window.display();
     }
 
     Save::SaveStat(game.GetStat());
   }
 }
 
-bool Interface::winMenu(sf::RenderWindow &window, MusicManager &music, bool isLoadFromMenu) {
-  sf::View view(sf::FloatRect(0, 0, width, height));
-  view.setCenter(width / 2, height / 2);
-  window.setView(view);
-
+bool Interface::winMenu(sf::RenderWindow &window, bool isLoadFromMenu) {
   if (!isLoadFromMenu) {
     music.PlayBackgroundMenuMusic();
   }
 
-  std::string fontPath = FILES_PATH"files/fonts/Inconsolata-Bold.ttf";
-
   InterfaceTable winTable;
-  winTable.SetCenterLabel(std::make_shared<InterfaceLabel>(fontPath, headSize, "Congratulations!"));
-  winTable.SetCenterLabel(std::make_shared<InterfaceLabel>(fontPath,
+  winTable.SetCenterLabel(std::make_shared<InterfaceLabel>(textFontPath, headSize, "Congratulations!"));
+  winTable.SetCenterLabel(std::make_shared<InterfaceLabel>(textFontPath,
                                                            textSize,
                                                            "You have collected all the vaccines and were able to"));
-  winTable.SetCenterLabel(std::make_shared<InterfaceLabel>(fontPath,
+  winTable.SetCenterLabel(std::make_shared<InterfaceLabel>(textFontPath,
                                                            textSize,
                                                            "save the world from the fucking coronavirus"));
-  winTable.SetCenterButton(std::make_shared<InterfaceButton>(fontPath, buttonSize, "Menu"));
+  winTable.SetCenterButton(std::make_shared<InterfaceButton>(buttonFontPath, buttonSize, "Menu"));
 
   winTable.CalculateTablePosition();
   winTable.SetPosition(height, width);
@@ -426,8 +423,10 @@ bool Interface::winMenu(sf::RenderWindow &window, MusicManager &music, bool isLo
         window.close();
       }
     }
+      
+    auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (winTable.GetCenterButtons()[0]->IsSelect(sf::Vector2i(sf::Mouse::getPosition(window)))) {
+    if (winTable.GetCenterButtons()[0]->IsSelect(mousePosition, music)) {
       if (!isLoadFromMenu) {
         music.StopBackgroundMenuMusic();
       }
@@ -443,19 +442,13 @@ bool Interface::winMenu(sf::RenderWindow &window, MusicManager &music, bool isLo
   return false;
 }
 
-bool Interface::nextLvlMenu(sf::RenderWindow &window, MusicManager &music) {
-  sf::View view(sf::FloatRect(0, 0, width, height));
-  view.setCenter(width / 2, height / 2);
-  window.setView(view);
-
+bool Interface::nextLvlMenu(sf::RenderWindow &window) {
   music.PlayBackgroundMenuMusic();
 
-  std::string fontPath = FILES_PATH"files/fonts/Inconsolata-Bold.ttf";
-
   InterfaceTable nextMissionTable;
-  nextMissionTable.SetCenterLabel(std::make_shared<InterfaceLabel>(fontPath, headSize, "Mission completed"));
-  nextMissionTable.SetCenterButton(std::make_shared<InterfaceButton>(fontPath, buttonSize, "Next mission"));
-  nextMissionTable.SetCenterButton(std::make_shared<InterfaceButton>(fontPath, buttonSize, "Menu"));
+  nextMissionTable.SetCenterLabel(std::make_shared<InterfaceLabel>(textFontPath, headSize, "Mission completed"));
+  nextMissionTable.SetCenterButton(std::make_shared<InterfaceButton>(buttonFontPath, buttonSize, "Next mission"));
+  nextMissionTable.SetCenterButton(std::make_shared<InterfaceButton>(buttonFontPath, buttonSize, "Menu"));
 
   nextMissionTable.CalculateTablePosition();
   nextMissionTable.SetPosition(height, width);
@@ -470,12 +463,12 @@ bool Interface::nextLvlMenu(sf::RenderWindow &window, MusicManager &music) {
 
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (nextMissionTable.GetCenterButtons()[0]->IsSelect(mousePosition)) {
+    if (nextMissionTable.GetCenterButtons()[0]->IsSelect(mousePosition, music)) {
       music.StopBackgroundMenuMusic();
       return true;
     }
 
-    if (nextMissionTable.GetCenterButtons()[1]->IsSelect(mousePosition)) {
+      if (nextMissionTable.GetCenterButtons()[1]->IsSelect(mousePosition, music)) {
       return false;
     }
 
@@ -488,19 +481,13 @@ bool Interface::nextLvlMenu(sf::RenderWindow &window, MusicManager &music) {
 }
 
 // Экран смерти
-bool Interface::diedMenu(sf::RenderWindow &window, MusicManager &music) {
-  sf::View view(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
-  view.setCenter(width / 2, height / 2);
-  window.setView(view);
-
+bool Interface::diedMenu(sf::RenderWindow &window) {
   music.PlayBackgroundMenuMusic();
 
-  std::string fontPath = FILES_PATH"files/fonts/Inconsolata-Bold.ttf";
-
   InterfaceTable diedTable;
-  diedTable.SetCenterLabel(std::make_shared<InterfaceLabel>(fontPath, headSize, "Mission failed"));
-  diedTable.SetCenterButton(std::make_shared<InterfaceButton>(fontPath, buttonSize, "Restart"));
-  diedTable.SetCenterButton(std::make_shared<InterfaceButton>(fontPath, buttonSize, "Menu"));
+  diedTable.SetCenterLabel(std::make_shared<InterfaceLabel>(textFontPath, headSize, "Mission failed"));
+  diedTable.SetCenterButton(std::make_shared<InterfaceButton>(buttonFontPath, buttonSize, "Restart"));
+  diedTable.SetCenterButton(std::make_shared<InterfaceButton>(buttonFontPath, buttonSize, "Menu"));
 
   diedTable.CalculateTablePosition();
   diedTable.SetPosition(height, width);
@@ -515,12 +502,12 @@ bool Interface::diedMenu(sf::RenderWindow &window, MusicManager &music) {
 
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (diedTable.GetCenterButtons()[0]->IsSelect(mousePosition)) {
+    if (diedTable.GetCenterButtons()[0]->IsSelect(mousePosition, music)) {
       music.StopBackgroundMenuMusic();
       return true;
     }
 
-    if (diedTable.GetCenterButtons()[1]->IsSelect(mousePosition)) {
+    if (diedTable.GetCenterButtons()[1]->IsSelect(mousePosition, music)) {
       return false;
     }
 
@@ -533,9 +520,7 @@ bool Interface::diedMenu(sf::RenderWindow &window, MusicManager &music) {
 }
 
 void Interface::statisticMenu(sf::RenderWindow &window) {
-  std::string fontPath = FILES_PATH"files/fonts/Inconsolata-Bold.ttf";
-
-  InterfaceLabel statisticHeadText(fontPath, headSize, "Statistic menu");
+  InterfaceLabel statisticHeadText(textFontPath, headSize, "Statistic menu");
   statisticHeadText.SetPosition((width - statisticHeadText.GetTextRectSize().x) / 2, headSize);
 
   InterfaceTable statisticTable;
@@ -543,64 +528,64 @@ void Interface::statisticMenu(sf::RenderWindow &window) {
 
   std::ostringstream ssPatient;
   ssPatient << "Patients saved: " << stat[0];
-  statisticTable.SetLeftLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssPatient.str()));
+  statisticTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssPatient.str()));
 
   std::ostringstream ssDied;
   ssDied << "Hippocrates died: " << stat[1];
-  statisticTable.SetRightLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssDied.str()));
+  statisticTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssDied.str()));
 
   std::ostringstream ssVaccine;
   ssVaccine << "Vaccine collected: " << stat[2];
-  statisticTable.SetLeftLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssVaccine.str()));
+  statisticTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssVaccine.str()));
 
   std::ostringstream ssAntigen;
   ssAntigen << "Antigen collected: " << stat[3];
-  statisticTable.SetRightLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssAntigen.str()));
+  statisticTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssAntigen.str()));
 
   std::ostringstream ssPolice;
   ssPolice << "Police cured: " << stat[4];
-  statisticTable.SetLeftLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssPolice.str()));
+  statisticTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssPolice.str()));
 
   std::ostringstream ssBreaker;
   ssBreaker << "Breaker cured: " << stat[5];
-  statisticTable.SetRightLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssBreaker.str()));
+  statisticTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssBreaker.str()));
 
   std::ostringstream ssDelivery;
   ssDelivery << "Delivery cured: " << stat[6];
-  statisticTable.SetLeftLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssDelivery.str()));
+  statisticTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssDelivery.str()));
 
   std::ostringstream ssVirus;
   ssVirus << "Virus cured: " << stat[7];
-  statisticTable.SetRightLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssVirus.str()));
+  statisticTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssVirus.str()));
 
   std::ostringstream ssAuto;
   ssAuto << "Ambulance trips: " << stat[8];
-  statisticTable.SetLeftLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssAuto.str()));
+  statisticTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssAuto.str()));
 
   std::ostringstream ssMonorail;
   ssMonorail << "Monorail trips: " << stat[9];
-  statisticTable.SetRightLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssMonorail.str()));
+  statisticTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssMonorail.str()));
 
   std::ostringstream ssBus;
   ssBus << "Bus trips: " << stat[10];
-  statisticTable.SetLeftLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssBus.str()));
+  statisticTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssBus.str()));
 
   std::ostringstream ssMetro;
   ssMetro << "Metro trips: " << stat[11];
-  statisticTable.SetRightLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssMetro.str()));
+  statisticTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssMetro.str()));
 
   std::ostringstream ssPenalty;
   ssPenalty << "Penalty time: " << stat[12];
-  statisticTable.SetLeftLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssPenalty.str()));
+  statisticTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssPenalty.str()));
 
   std::ostringstream ssCaught;
   ssCaught << "Back time: " << stat[13];
-  statisticTable.SetRightLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssCaught.str()));
+  statisticTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssCaught.str()));
 
   statisticTable.CalculateTablePosition();
   statisticTable.SetPosition(height, width);
 
-  InterfaceButton backButton(fontPath, buttonSize, 30, height - buttonSize - 30, "Back");
+  InterfaceButton backButton(buttonFontPath, buttonSize, 30, height - buttonSize - 30, "Back");
 
   while (window.isOpen()) {
     sf::Event event{};
@@ -609,8 +594,10 @@ void Interface::statisticMenu(sf::RenderWindow &window) {
         window.close();
       }
     }
+      
+    auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (backButton.IsSelect(sf::Vector2i(sf::Mouse::getPosition(window)))) {
+    if (backButton.IsSelect(mousePosition, music)) {
       break;
     }
 
@@ -623,9 +610,7 @@ void Interface::statisticMenu(sf::RenderWindow &window) {
 }
 
 void Interface::configMenu(sf::RenderWindow &window) {
-  std::string fontPath = FILES_PATH"files/fonts/Inconsolata-Bold.ttf";
-
-  InterfaceLabel configurationHeadText(fontPath, headSize, "Configuration menu");
+  InterfaceLabel configurationHeadText(textFontPath, headSize, "Configuration menu");
   configurationHeadText.SetPosition((width - configurationHeadText.GetTextRectSize().x) / 2, headSize);
 
   InterfaceTable configurationTable;
@@ -636,89 +621,89 @@ void Interface::configMenu(sf::RenderWindow &window) {
 
   std::ostringstream ssCurrentLvl;
   ssCurrentLvl << "Current lvl: " << lvl;
-  configurationTable.SetLeftLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssCurrentLvl.str()));
+  configurationTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssCurrentLvl.str()));
 
   std::ostringstream ssPlayerHp;
   ssPlayerHp << "Player hp: " << config[0];
-  configurationTable.SetRightLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssPlayerHp.str()));
+  configurationTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssPlayerHp.str()));
 
   std::ostringstream ssCurrentPoints;
   ssCurrentPoints << "Current points: " << points;
-  configurationTable.SetLeftLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssCurrentPoints.str()));
+  configurationTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssCurrentPoints.str()));
 
   std::ostringstream ssAntigenPoints;
   ssAntigenPoints << "Antigen Points: " << config[1];
-  configurationTable.SetRightLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssAntigenPoints.str()));
+  configurationTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssAntigenPoints.str()));
 
   std::ostringstream ssCapLvl;
   ssCapLvl << "Cap lvl: " << armors[0];
-  configurationTable.SetLeftLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssCapLvl.str()));
+  configurationTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssCapLvl.str()));
 
   std::ostringstream ssShoesLvl;
   ssShoesLvl << "Shoes lvl: " << armors[1];
-  configurationTable.SetRightLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssShoesLvl.str()));
+  configurationTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssShoesLvl.str()));
 
   std::ostringstream ssRobeLvl;
   ssRobeLvl << "Robe lvl: " << armors[2];
-  configurationTable.SetLeftLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssRobeLvl.str()));
+  configurationTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssRobeLvl.str()));
 
   std::ostringstream ssPoliceHp;
   ssPoliceHp << "Police hp: " << config[2];
-  configurationTable.SetRightLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssPoliceHp.str()));
+  configurationTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssPoliceHp.str()));
 
   std::ostringstream ssPoliceDmg;
   ssPoliceDmg << "Police dmg: " << config[3];
-  configurationTable.SetLeftLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssPoliceDmg.str()));
+  configurationTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssPoliceDmg.str()));
 
   std::ostringstream ssPolicePenalty;
   ssPolicePenalty << "Police penalty: " << config[4];
-  configurationTable.SetRightLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssPolicePenalty.str()));
+  configurationTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssPolicePenalty.str()));
 
   std::ostringstream ssBreakerHp;
   ssBreakerHp << "Breaker hp: " << config[5];
-  configurationTable.SetLeftLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssBreakerHp.str()));
+  configurationTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssBreakerHp.str()));
 
   std::ostringstream ssBreakerDmg;
   ssBreakerDmg << "Breaker dmg: " << config[6];
-  configurationTable.SetRightLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssBreakerDmg.str()));
+  configurationTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssBreakerDmg.str()));
 
   std::ostringstream ssDeliveryHp;
   ssDeliveryHp << "Delivery hp: " << config[7];
-  configurationTable.SetLeftLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssDeliveryHp.str()));
+  configurationTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssDeliveryHp.str()));
 
   std::ostringstream ssDeliveryDmg;
   ssDeliveryDmg << "Delivery dmg: " << config[8];
-  configurationTable.SetRightLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssDeliveryDmg.str()));
+  configurationTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssDeliveryDmg.str()));
 
   std::ostringstream ssVirusHp;
   ssVirusHp << "Virus hp: " << config[9];
-  configurationTable.SetLeftLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssVirusHp.str()));
+  configurationTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssVirusHp.str()));
 
   std::ostringstream ssVirusDmg;
   ssVirusDmg << "Virus dmg: " << config[10];
-  configurationTable.SetRightLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssVirusDmg.str()));
+  configurationTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssVirusDmg.str()));
 
   std::ostringstream ssAutoFuel;
   ssAutoFuel << "Ambulance fuel: " << config[11];
-  configurationTable.SetLeftLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssAutoFuel.str()));
+  configurationTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssAutoFuel.str()));
 
   std::ostringstream ssMonorailFuel;
   ssMonorailFuel << "Monorail fuel: " << config[12];
-  configurationTable.SetRightLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssMonorailFuel.str()));
+  configurationTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssMonorailFuel.str()));
 
   std::ostringstream ssBusDmg;
   ssBusDmg << "Bus dmg: " << config[13];
-  configurationTable.SetLeftLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssBusDmg.str()));
+  configurationTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssBusDmg.str()));
 
   std::ostringstream ssMetroDmg;
   ssMetroDmg << "Metro dmg: " << config[14];
-  configurationTable.SetRightLabel(std::make_shared<InterfaceLabel>(fontPath, textSize, ssMetroDmg.str()));
+  configurationTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssMetroDmg.str()));
 
   configurationTable.CalculateTablePosition();
   configurationTable.SetPosition(height, width);
 
-  InterfaceButton backButton(fontPath, buttonSize, 30, height - buttonSize - 30, "Back");
-  InterfaceButton defaultButton(fontPath, buttonSize, "Default");
+  InterfaceButton backButton(buttonFontPath, buttonSize, 30, height - buttonSize - 30, "Back");
+  InterfaceButton defaultButton(buttonFontPath, buttonSize, "Default");
   defaultButton.SetPosition(width - defaultButton.GetTextRectSize().x - 30, height - buttonSize - 30);
 
   while (window.isOpen()) {
@@ -731,11 +716,11 @@ void Interface::configMenu(sf::RenderWindow &window) {
 
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (backButton.IsSelect(mousePosition)) {
+    if (backButton.IsSelect(mousePosition, music)) {
       break;
     }
 
-    if (defaultButton.IsSelect(mousePosition)) {
+    if (defaultButton.IsSelect(mousePosition, music)) {
       Save::RemoveConfig();
     }
 
@@ -749,9 +734,7 @@ void Interface::configMenu(sf::RenderWindow &window) {
 }
 
 bool Interface::shopMenu(sf::RenderWindow &window) {
-  std::string fontPath = FILES_PATH"files/fonts/Inconsolata-Bold.ttf";
-
-  InterfaceButton backButton(fontPath, buttonSize, 30, height - buttonSize - 30, "Back");
+  InterfaceButton backButton(buttonFontPath, buttonSize, 30, height - buttonSize - 30, "Back");
 
   InterfaceImage armorListSprite(FILES_PATH"files/menu/armor_list.png",
                                  width / 2 - (width / 1.6) / 2, height / 2 - (width / 1.9) / 2,
@@ -781,23 +764,23 @@ bool Interface::shopMenu(sf::RenderWindow &window) {
                                width / 1.67, height / 1.4,
                                width / 15, width / 15);
 
-  InterfaceLabel lvlShoesText(fontPath, textSize, width / 1.46, height / 3.5);
-  InterfaceLabel lvlCapText(fontPath, textSize, width / 4.2, height / 3.5);
-  InterfaceLabel lvlRobeText(fontPath, textSize, width / 2.15, height / 1.18);
-  InterfaceLabel costShoesText(fontPath, textSize, width / 1.2, height / 4);
-  InterfaceLabel costCapText(fontPath, textSize, width / 9, height / 4);
-  InterfaceLabel costRobeText(fontPath, textSize, width / 1.64, height / 1.22);
+  InterfaceLabel lvlShoesText(textFontPath, textSize, width / 1.46, height / 3.5);
+  InterfaceLabel lvlCapText(textFontPath, textSize, width / 4.2, height / 3.5);
+  InterfaceLabel lvlRobeText(textFontPath, textSize, width / 2.15, height / 1.18);
+  InterfaceLabel costShoesText(textFontPath, textSize, width / 1.2, height / 4);
+  InterfaceLabel costCapText(textFontPath, textSize, width / 9, height / 4);
+  InterfaceLabel costRobeText(textFontPath, textSize, width / 1.64, height / 1.22);
 
   std::ostringstream ssPoints;
   int money = Save::LoadPoints();
   ssPoints << "Points: " << money;
-  InterfaceLabel pointsLabel(fontPath, textSize, ssPoints.str());
+  InterfaceLabel pointsLabel(textFontPath, textSize, ssPoints.str());
   pointsLabel.SetPosition(width - pointsLabel.GetTextRectSize().x - 30, 13);
 
   std::vector<int> arm_vector = Save::LoadArmors();
   std::ostringstream ssArm;
   ssArm << "ARM: " << arm_vector[0] + arm_vector[1] + arm_vector[2];
-  InterfaceLabel armText(fontPath, textSize, 30, 13, ssArm.str());
+  InterfaceLabel armText(textFontPath, textSize, 30, 13, ssArm.str());
 
   setArmLvl(arm_vector, lvlCapText, 0);
   setArmLvl(arm_vector, lvlShoesText, 1);
@@ -844,7 +827,9 @@ bool Interface::shopMenu(sf::RenderWindow &window) {
       menuNum = 2;
     }
 
-    if (backButton.IsSelect(sf::Vector2i(sf::Mouse::getPosition(window)))) {
+    auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
+      
+    if (backButton.IsSelect(mousePosition, music)) {
       break;
     }
 
@@ -913,17 +898,11 @@ bool Interface::shopMenu(sf::RenderWindow &window) {
   return true;
 }
 
-bool Interface::gameMenu(sf::RenderWindow &window, MusicManager &music, std::vector<int> data) {
-  sf::View view(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
-  view.setCenter(width / 2, height / 2);
-  window.setView(view);
-
+bool Interface::gameMenu(sf::RenderWindow &window, std::vector<int> data) {
   music.PlayBackgroundMenuMusic();
 
-  std::string fontPath = FILES_PATH"files/fonts/Inconsolata-Bold.ttf";
-
-  InterfaceButton continueButton(fontPath, buttonSize, 30, height - buttonSize - 30, "Continue");
-  InterfaceButton menuButton(fontPath, buttonSize, "Menu");
+  InterfaceButton continueButton(buttonFontPath, buttonSize, 30, height - buttonSize - 30, "Continue");
+  InterfaceButton menuButton(buttonFontPath, buttonSize, "Menu");
   menuButton.SetPosition(width - menuButton.GetTextRectSize().x - 30, height - menuButton.GetTextRectSize().y - 30);
 
   InterfaceImage armorListImage(FILES_PATH"files/menu/armor_list.png",
@@ -948,24 +927,24 @@ bool Interface::gameMenu(sf::RenderWindow &window, MusicManager &music, std::vec
 
   std::ostringstream ssData;
   ssData << "HP: " << data[0] << "%" << " ARM: " << data[2] << " Vaccine: " << data[6];
-  InterfaceLabel playerDataLabel(fontPath, textSize, 20, 20, ssData.str());
+  InterfaceLabel playerDataLabel(textFontPath, textSize, 20, 20, ssData.str());
 
   std::ostringstream ssPoints;
   ssPoints << "Points: " << data[1];
-  InterfaceLabel pointsLabel(fontPath, textSize, ssPoints.str());
+  InterfaceLabel pointsLabel(textFontPath, textSize, ssPoints.str());
   pointsLabel.SetPosition(width - pointsLabel.GetTextRectSize().x - 20, 20);
 
   std::ostringstream ssShoes;
   ssShoes << "LVL:" << data[3];
-  InterfaceLabel lvlShoesLabel(fontPath, textSize, width / 1.46, height / 3.5, ssShoes.str());
+  InterfaceLabel lvlShoesLabel(textFontPath, textSize, width / 1.46, height / 3.5, ssShoes.str());
 
   std::ostringstream ssCap;
   ssCap << "LVL:" << data[4];
-  InterfaceLabel lvlCapLabel(fontPath, textSize, width / 4.2, height / 3.5, ssCap.str());
+  InterfaceLabel lvlCapLabel(textFontPath, textSize, width / 4.2, height / 3.5, ssCap.str());
 
   std::ostringstream ssRobe;
   ssRobe << "LVL:" << data[5];
-  InterfaceLabel lvlRobeLabel(fontPath, textSize, width / 2.15, height / 1.18, ssRobe.str());
+  InterfaceLabel lvlRobeLabel(textFontPath, textSize, width / 2.15, height / 1.18, ssRobe.str());
 
   while (window.isOpen()) {
     sf::Event event{};
@@ -977,11 +956,11 @@ bool Interface::gameMenu(sf::RenderWindow &window, MusicManager &music, std::vec
 
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (menuButton.IsSelect(mousePosition)) {
+    if (menuButton.IsSelect(mousePosition, music)) {
       return false;
     }
 
-    if (continueButton.IsSelect(mousePosition)) {
+    if (continueButton.IsSelect(mousePosition, music)) {
       music.StopBackgroundMenuMusic();
       return true;
     }
@@ -1009,9 +988,7 @@ bool Interface::gameMenu(sf::RenderWindow &window, MusicManager &music, std::vec
 }
 
 void Interface::aboutMenu(sf::RenderWindow &window) {
-  std::string fontPath = FILES_PATH"files/fonts/Inconsolata-Bold.ttf";
-
-  InterfaceButton backButton(fontPath, buttonSize, 30, height - buttonSize - 30, "Back");
+  InterfaceButton backButton(buttonFontPath, buttonSize, 30, height - buttonSize - 30, "Back");
 
   while (window.isOpen()) {
     sf::Event event{};
@@ -1020,8 +997,10 @@ void Interface::aboutMenu(sf::RenderWindow &window) {
         window.close();
       }
     }
+      
+    auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
-    if (backButton.IsSelect(sf::Vector2i(sf::Mouse::getPosition(window)))) {
+    if (backButton.IsSelect(mousePosition, music)) {
       break;
     }
 

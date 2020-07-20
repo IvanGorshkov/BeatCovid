@@ -8,13 +8,24 @@ InterfaceButton::InterfaceButton(const std::string &fontPath, unsigned int getSi
     : InterfaceLabel(fontPath, getSize, getX, getY, str) {
 }
 
-bool InterfaceButton::IsSelect(sf::Vector2i mouse) {
+bool InterfaceButton::IsSelect(sf::Vector2i mouse, MusicManager &music) {
   if (sf::IntRect(x, y, width, height).contains(mouse)) {
     text.setFillColor(sf::Color::Red);
-
-    return sf::Mouse::isButtonPressed(sf::Mouse::Left);
+      
+      if (!isOnButton) {
+          music.PlayOnButtonSound();
+          isOnButton = true;
+      }
+      
+      if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+          music.PlaySelectButtonSound();
+          return true;
+      }
+      
+      return false;
   } else {
     text.setFillColor(sf::Color::White);
+    isOnButton = false;
 
     return false;
   }
