@@ -27,7 +27,7 @@ class Interface {
   Interface &operator=(const Interface &);
 
   void newGameWarningMenu(sf::RenderWindow &window);
-  void startNewGame(sf::RenderWindow &window);
+  int startNewGame(sf::RenderWindow &window);
   bool winMenu(sf::RenderWindow &window, bool isLoadFromMenu);
   bool nextLvlMenu(sf::RenderWindow &window);
   bool diedMenu(sf::RenderWindow &window);

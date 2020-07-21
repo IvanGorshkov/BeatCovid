@@ -286,7 +286,7 @@ void Interface::newGameWarningMenu(sf::RenderWindow &window) {
 }
 
 // Старт новой игры
-void Interface::startNewGame(sf::RenderWindow &window) {
+int Interface::startNewGame(sf::RenderWindow &window) {
   bool repeat = true;
 
   Save save;
@@ -318,20 +318,20 @@ void Interface::startNewGame(sf::RenderWindow &window) {
           if (event.key.code == sf::Keyboard::E) {
             game.TakeTransport();
           }
+            
+            if (event.key.code == sf::Keyboard::Escape) {
+              music.StopBackgroundGameMusic();
+                
+              window.setView(menuView);
+
+              if (!gameMenu(window, game.GetPlayer()->GetMainData())) {
+                repeat = false;
+                return 0;
+              }
+
+              music.PlayBackgroundGameMusic();
+            }
         }
-      }
-
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-        music.StopBackgroundGameMusic();
-          
-        window.setView(menuView);
-
-        if (!gameMenu(window, game.GetPlayer()->GetMainData())) {
-          repeat = false;
-          break;
-        }
-
-        music.PlayBackgroundGameMusic();
       }
 
       if (game.GetPlayer()->GetHp() <= 0) {
@@ -953,6 +953,13 @@ bool Interface::gameMenu(sf::RenderWindow &window, std::vector<int> data) {
       if (event.type == sf::Event::Closed) {
         window.close();
       }
+        
+        if (event.type == sf::Event::KeyPressed) {
+            if (event.key.code == sf::Keyboard::Escape) {
+                music.StopBackgroundMenuMusic();
+                return true;
+            }
+        }
     }
 
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
