@@ -13,7 +13,7 @@ Enemy::Enemy(float x, float y, int height, int weight, float hp, float dmg, std:
 
 Enemy::Enemy(float x, float y, int height, int weight, std::string name)
     : Entity(x, y, 0, 0, height, weight),
-      timerHit(0),
+      timerHit(std::rand() % ENEMY_HIT_TIME),
       name(std::move(name)),
       dieSound(false),
       dir(false),
@@ -27,6 +27,7 @@ void Enemy::SetHpGmg(float getHp, float getDmg) {
 
 void Enemy::Update(float time, std::vector<Object> &obj) {
   timerHit += time;
+    
   if (fire) {
     anim.Set("fire");
   } else {

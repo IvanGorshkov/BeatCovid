@@ -18,6 +18,8 @@
 #include "UnSafeTransport.h"
 #include "Sick.h"
 
+#define FIRE_TIME 1000
+
 class GameManager {
  public:
   explicit GameManager(Level &lvl,
@@ -44,12 +46,13 @@ class GameManager {
  private:
   MusicManager &music;
 //  GameFPS fps;
-
+    
   std::vector<int> stat;
   int antigenPoints;
 
   std::vector<Object> obj;
   std::shared_ptr<Player> player;
+  int fireTimer;
   std::shared_ptr<Sick> sick;
 
   GameLabelManager labelManager;

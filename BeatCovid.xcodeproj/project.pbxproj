@@ -10,7 +10,6 @@
 		AC0B220C249ED1F6000CE7AC /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = AC0B220B249ED1F6000CE7AC /* ResourcePath.mm */; };
 		AC0B220F249ED1F6000CE7AC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC0B220E249ED1F6000CE7AC /* main.cpp */; };
 		AC5A7D9F24A37B5D00F54A6E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC5A7D9E24A37B5D00F54A6E /* Images.xcassets */; };
-		AC83F3F624C099D0004D543C /* GameVaccineMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC83F3F524C099D0004D543C /* GameVaccineMeter.cpp */; };
 		AC86CCC224A3D9C0007D9C2D /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCBF24A3D9C0007D9C2D /* tinyxmlerror.cpp */; };
 		AC86CCC324A3D9C0007D9C2D /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCC024A3D9C0007D9C2D /* tinyxml.cpp */; };
 		AC86CCC424A3D9C0007D9C2D /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCC124A3D9C0007D9C2D /* tinyxmlparser.cpp */; };
@@ -55,8 +54,6 @@
 		AC0B220E249ED1F6000CE7AC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		AC0B221E249ED204000CE7AC /* BeatCovid.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeatCovid.entitlements; sourceTree = "<group>"; };
 		AC5A7D9E24A37B5D00F54A6E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		AC83F3F424C09420004D543C /* GameVaccineMeter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameVaccineMeter.h; sourceTree = "<group>"; };
-		AC83F3F524C099D0004D543C /* GameVaccineMeter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameVaccineMeter.cpp; sourceTree = "<group>"; };
 		AC86CCA024A3D92A007D9C2D /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
 		AC86CCA124A3D92A007D9C2D /* Level_map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level_map.h; sourceTree = "<group>"; };
 		AC86CCA224A3D92A007D9C2D /* SaveGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveGame.h; sourceTree = "<group>"; };
@@ -349,7 +346,6 @@
 				AC86CCA024A3D92A007D9C2D /* GameManager.h */,
 				AC8B853524B3A1140091BAF2 /* GameLabel.h */,
 				AC8B853A24B3ABFA0091BAF2 /* GameLabelManager.h */,
-				AC83F3F424C09420004D543C /* GameVaccineMeter.h */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -360,7 +356,6 @@
 				AC86CCDE24A3DAB6007D9C2D /* GameManager.cpp */,
 				AC8B853824B3A2330091BAF2 /* GameLabel.cpp */,
 				AC8B853B24B3AC470091BAF2 /* GameLabelManager.cpp */,
-				AC83F3F524C099D0004D543C /* GameVaccineMeter.cpp */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -463,7 +458,6 @@
 				AC9196D324AD39AD00C28412 /* Interface.cpp in Sources */,
 				AC86CCF524A3DAC7007D9C2D /* Enemy.cpp in Sources */,
 				AC86CD0524A3DAD3007D9C2D /* Cap.cpp in Sources */,
-				AC83F3F624C099D0004D543C /* GameVaccineMeter.cpp in Sources */,
 				AC86CCE624A3DAB6007D9C2D /* MusicManager.cpp in Sources */,
 				AC86CCF624A3DAC7007D9C2D /* Police.cpp in Sources */,
 				AC86CCEF24A3DAC1007D9C2D /* Entity.cpp in Sources */,

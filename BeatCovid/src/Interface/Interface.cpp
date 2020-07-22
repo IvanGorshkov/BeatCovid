@@ -311,7 +311,6 @@ int Interface::startNewGame(sf::RenderWindow &window) {
 
         if (event.type == sf::Event::KeyPressed) {
           if (event.key.code == sf::Keyboard::Space) {
-            game.GetPlayer()->SetKey("SPACE", true);
             game.Fire();
           }
 
@@ -336,6 +335,7 @@ int Interface::startNewGame(sf::RenderWindow &window) {
 
       if (game.GetPlayer()->GetHp() <= 0) {
         music.StopBackgroundGameMusic();
+        music.StopAllMusic();
         music.PlayDiedPlayerSound();
 
         window.setView(menuView);
@@ -807,7 +807,7 @@ bool Interface::shopMenu(sf::RenderWindow &window) {
                     buyCapSprite.GetSize().x,
                     buyCapSprite.GetSize().y).
         contains(sf::Mouse::getPosition(window))) {
-      buyCapSprite.SetColor(sf::Color::Red);
+      buyCapSprite.SetColor(sf::Color::Black);
       menuNum = 0;
     }
 
@@ -816,7 +816,7 @@ bool Interface::shopMenu(sf::RenderWindow &window) {
                     buyShoesSprite.GetSize().x,
                     buyShoesSprite.GetSize().y).
         contains(sf::Mouse::getPosition(window))) {
-      buyShoesSprite.SetColor(sf::Color::Red);
+      buyShoesSprite.SetColor(sf::Color::Black);
       menuNum = 1;
     }
     if (sf::IntRect(buyRobeSprite.GetSpriteRect().x,
@@ -824,7 +824,7 @@ bool Interface::shopMenu(sf::RenderWindow &window) {
                     buyRobeSprite.GetSize().x,
                     buyRobeSprite.GetSize().y).
         contains(sf::Mouse::getPosition(window))) {
-      buyRobeSprite.SetColor(sf::Color::Red);
+      buyRobeSprite.SetColor(sf::Color::Black);
       menuNum = 2;
     }
 

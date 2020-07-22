@@ -12,6 +12,7 @@ GameManager::GameManager(Level &lvl,
                          const std::vector<float> &config)
     : obj(lvl.GetAllObjects()),
       music(music),
+      fireTimer(0),
       stat(std::move(stat)),
       antigenPoints(config[1]),
       player(std::make_shared<Player>(lvl.GetObject("player"), arms, config[0], 1, points)) {
@@ -65,6 +66,7 @@ GameManager::GameManager(Level &lvl,
 
 // Обновление всех классов
 void GameManager::Update(float time) {
+  fireTimer += time;
   //  fps.Update();
   player->Update(time, obj);
 
@@ -136,6 +138,7 @@ std::shared_ptr<Player> GameManager::GetPlayer() {
 void GameManager::Fire() {
   music.PlayHitPlayerSound();
 
+    if (fireTimer > FIRE_TIME) {
   if (player->GetPoints() > 0) {
     player->SetKey("SPACE", true);
     if (player->GetDir()) {
@@ -155,7 +158,9 @@ void GameManager::Fire() {
     }
 
     player->AddPoints(-1);
+    fireTimer = 0;
   }
+    }
 }
 
 // Садится в транспорт
@@ -288,13 +293,13 @@ void GameManager::checkHitPlayer() {
 void GameManager::bulletPlayer() {
   for (enemiesIt = enemies.begin(); enemiesIt != enemies.end(); ++enemiesIt) {
     if ((*enemiesIt)->GetTimer() > ENEMY_HIT_TIME && (*enemiesIt)->IsLife()) {
-      float X = (player->GetRect().left - (*enemiesIt)->GetRect().left) / 16;
-      float Y = (player->GetRect().top - (*enemiesIt)->GetRect().top) / 16;
+      float X = (player->GetRect().left - (*enemiesIt)->GetRect().left) / 32;
+      float Y = (player->GetRect().top - (*enemiesIt)->GetRect().top) / 32;
         
       (*enemiesIt)->SetFire(true);
 
       // Дальность полета пули
-      if (std::sqrt(X * X + Y * Y) > 35) {
+      if (std::sqrt(X * X + Y * Y) > 20) {
         (*enemiesIt)->SetFire(false);
         (*enemiesIt)->ResetTimer();
         continue;
@@ -308,6 +313,34 @@ void GameManager::bulletPlayer() {
         dx = X > 0 ? ENEMY_BULLET_DX : -ENEMY_BULLET_DX;
         dy = dx * Y / X;
       }
+        
+        bool fire = true;
+        for (auto &i : obj) {
+          if (i.name != "wall") {
+            continue;
+          }
+
+          auto currentRect = sf::FloatRect((*enemiesIt)->GetRect().left, (*enemiesIt)->GetRect().top, 16, 16);
+          while (!currentRect.intersects(player->GetRect())) {
+            if (currentRect.intersects(i.rect)) {
+              fire = false;
+            }
+
+            currentRect.left += dx * 16;
+            currentRect.top += dy * 16;
+          }
+
+          if (!fire) {
+            break;
+          }
+        }
+
+        if (!fire) {
+          (*enemiesIt)->SetFire(false);
+          (*enemiesIt)->ResetTimer();
+          continue;
+        }
+
 
       if (X > 0) {
         (*enemiesIt)->SetDir(false);
@@ -326,8 +359,8 @@ void GameManager::bulletPlayer() {
                                   (*enemiesIt)->GetDmg(),
                                   false);
       }
+        
       (*enemiesIt)->ResetTimer();
-
       music.PlayHitEnemySound();
     }
   }

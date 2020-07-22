@@ -5,7 +5,7 @@
 #define BACK_MENU 50
 #define ON_BUTTON 15
 #define SELECT_BUTTON 20
-#define BACK_GAME 50
+#define BACK_GAME 0
 #define HIT_PLAYER 70
 #define HIT_ENEMY 70
 #define DIED_ENEMY 70
@@ -36,6 +36,8 @@ class MusicManager {
   void PlayGetVaccineSound();
   void PlayTreatPatientSound();
   void StopTreatPatientSound();
+
+  void StopAllMusic();
 
  private:
   // Звук меню
