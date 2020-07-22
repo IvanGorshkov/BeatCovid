@@ -374,6 +374,14 @@ bool Player::IsFinishPosition() const {
   return isFinishPosition;
 }
 
+bool Player::DrawProgressBar() const {
+  if (treat || alive) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 bool Player::GetAlive() const {
   return alive;
 }

@@ -58,6 +58,7 @@ void SafeTransport::setMonorail(float getFuel) {
   anim.Create("move", 39, 2, 976, 140, 2, 0.002, 986);
   anim.Set("move");
 }
-float SafeTransport::GetFuel() const {
+
+int SafeTransport::GetFuel() const {
   return fuel;
 }
