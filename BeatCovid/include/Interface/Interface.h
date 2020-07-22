@@ -28,6 +28,7 @@ class Interface {
 
   void newGameWarningMenu(sf::RenderWindow &window);
   int startNewGame(sf::RenderWindow &window);
+  bool endGameWarningMenu(sf::RenderWindow &window);
   bool winMenu(sf::RenderWindow &window, bool isLoadFromMenu);
   bool nextLvlMenu(sf::RenderWindow &window);
   bool diedMenu(sf::RenderWindow &window);

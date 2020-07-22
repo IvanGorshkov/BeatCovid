@@ -136,30 +136,29 @@ std::shared_ptr<Player> GameManager::GetPlayer() {
 
 // Огонь игроком
 void GameManager::Fire() {
-  music.PlayHitPlayerSound();
-
     if (fireTimer > FIRE_TIME) {
-  if (player->GetPoints() > 0) {
-    player->SetKey("SPACE", true);
-    if (player->GetDir()) {
-      playerBullets.emplace_back(player->GetRect().left - 25,
-                                 player->GetRect().top + 40,
-                                 -PLAYER_BULLET_DX,
-                                 0,
-                                 player->GetDmg(),
-                                 true);
-    } else {
-      playerBullets.emplace_back(player->GetRect().left + player->GetRect().width + 10,
-                                 player->GetRect().top + 40,
-                                 PLAYER_BULLET_DX,
-                                 0,
-                                 player->GetDmg(),
-                                 true);
-    }
-
-    player->AddPoints(-1);
-    fireTimer = 0;
-  }
+        if (player->GetPoints() > 0) {
+            player->SetKey("SPACE", true);
+            if (player->GetDir()) {
+                playerBullets.emplace_back(player->GetRect().left - 25,
+                                           player->GetRect().top + 40,
+                                           -PLAYER_BULLET_DX,
+                                           0,
+                                           player->GetDmg(),
+                                           true);
+            } else {
+                playerBullets.emplace_back(player->GetRect().left + player->GetRect().width + 10,
+                                           player->GetRect().top + 40,
+                                           PLAYER_BULLET_DX,
+                                           0,
+                                           player->GetDmg(),
+                                           true);
+            }
+            
+            player->AddPoints(-1);
+            music.PlayHitPlayerSound();
+            fireTimer = 0;
+        }
     }
 }
 
@@ -316,29 +315,29 @@ void GameManager::bulletPlayer() {
         
         bool fire = true;
         for (auto &i : obj) {
-          if (i.name != "wall") {
-            continue;
-          }
-
-          auto currentRect = sf::FloatRect((*enemiesIt)->GetRect().left, (*enemiesIt)->GetRect().top, 16, 16);
-          while (!currentRect.intersects(player->GetRect())) {
-            if (currentRect.intersects(i.rect)) {
-              fire = false;
+            if (i.name != "wall") {
+                continue;
             }
-
-            currentRect.left += dx * 16;
-            currentRect.top += dy * 16;
-          }
-
-          if (!fire) {
-            break;
-          }
+            
+            auto currentRect = sf::FloatRect((*enemiesIt)->GetRect().left, (*enemiesIt)->GetRect().top, 16, 16);
+            while (!currentRect.intersects(player->GetRect())) {
+                if (currentRect.intersects(i.rect)) {
+                    fire = false;
+                }
+                
+                currentRect.left += dx * 16;
+                currentRect.top += dy * 16;
+            }
+            
+            if (!fire) {
+                break;
+            }
         }
-
+        
         if (!fire) {
-          (*enemiesIt)->SetFire(false);
-          (*enemiesIt)->ResetTimer();
-          continue;
+            (*enemiesIt)->SetFire(false);
+            (*enemiesIt)->ResetTimer();
+            continue;
         }
 
 

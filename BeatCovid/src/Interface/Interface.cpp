@@ -68,13 +68,13 @@ Interface::Interface(sf::RenderWindow &window)
       headSize(window.getSize().y / 20),
       buttonFontPath(resourcePath() + "files/fonts/Inconsolata-Bold.ttf"),
       textFontPath(resourcePath() + "files/fonts/Inconsolata-Bold.ttf") {
-          if (width > 2500 && height > 1600) {
-              gameWidth = 2500;
-              gameHeight = 1600;
-          } else {
+//          if (width > 2500 && height > 1600) {
+//              gameWidth = 2500;
+//              gameHeight = 1600;
+//          } else {
               gameWidth = width;
               gameHeight = height;
-          }
+//          }
 }
 
 // Вывод главного меню
@@ -306,6 +306,7 @@ int Interface::startNewGame(sf::RenderWindow &window) {
       sf::Event event{};
       while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) {
+          repeat = false;
           window.close();
         }
 
@@ -396,6 +397,41 @@ int Interface::startNewGame(sf::RenderWindow &window) {
     }
 
     Save::SaveStat(game.GetStat());
+  }
+}
+
+// Предупреждение о сбросе данных
+bool Interface::endGameWarningMenu(sf::RenderWindow &window) {
+  InterfaceTable endGameWarningTable;
+  endGameWarningTable.SetCenterLabel(std::make_shared<InterfaceButton>(textFontPath, textSize, "Are you sure you want to end game?"));
+  endGameWarningTable.SetCenterLabel(std::make_shared<InterfaceButton>(textFontPath, textSize, "All your progress will be lost"));
+  endGameWarningTable.SetLeftButton(std::make_shared<InterfaceButton>(buttonFontPath, buttonSize, "Yes"));
+  endGameWarningTable.SetRightButton(std::make_shared<InterfaceButton>(buttonFontPath, buttonSize, "No"));
+
+  endGameWarningTable.CalculateTablePosition();
+  endGameWarningTable.SetPosition(height, width);
+
+  while (window.isOpen()) {
+    sf::Event event{};
+    while (window.pollEvent(event)) {
+      if (event.type == sf::Event::Closed) {
+        window.close();
+      }
+    }
+
+    sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
+
+    if (endGameWarningTable.GetLeftButtons()[0]->IsSelect(mousePosition, music)) {
+      return false;
+    }
+
+    if (endGameWarningTable.GetRightButtons()[0]->IsSelect(mousePosition, music)) {
+      return true;
+    }
+
+    window.clear(sf::Color(68, 101, 219));
+    endGameWarningTable.Draw(window);
+    window.display();
   }
 }
 
@@ -965,7 +1001,7 @@ bool Interface::gameMenu(sf::RenderWindow &window, std::vector<int> data) {
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
     if (menuButton.IsSelect(mousePosition, music)) {
-      return false;
+      return endGameWarningMenu(window);
     }
 
     if (continueButton.IsSelect(mousePosition, music)) {
