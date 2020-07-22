@@ -135,3 +135,8 @@ void MusicManager::PlayTreatPatientSound() {
 void MusicManager::StopTreatPatientSound() {
   treatPatientSound.stop();
 }
+
+void MusicManager::StopAllMusic() {
+  metroSound.stop();
+  carSound.stop();
+}
