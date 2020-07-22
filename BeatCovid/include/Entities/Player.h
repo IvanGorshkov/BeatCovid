@@ -32,6 +32,7 @@ class Player : public Entity {
   void SetDrive();
   bool IsDrive() const;
   bool IsFinishPosition() const;
+  bool DrawProgressBar() const;
   bool GetAlive() const;
   void SetFinish(bool getFinish = true);
   int PlayFinishMusic() const;

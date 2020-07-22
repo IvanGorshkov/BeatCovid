@@ -119,6 +119,8 @@ void GameManager::Draw(sf::RenderWindow &window, float x, float y, int height, i
   if (player->IsFinishPosition()) {
     labelManager.Draw("NoVaccine", window);
   }
+    
+  progressBar.Draw(window, player->DrawProgressBar());
 
   if (!player->IsDrive()) {
     player->DrawObjs(window);

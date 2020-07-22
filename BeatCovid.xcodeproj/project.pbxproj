@@ -10,6 +10,7 @@
 		AC0B220C249ED1F6000CE7AC /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = AC0B220B249ED1F6000CE7AC /* ResourcePath.mm */; };
 		AC0B220F249ED1F6000CE7AC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC0B220E249ED1F6000CE7AC /* main.cpp */; };
 		AC5A7D9F24A37B5D00F54A6E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC5A7D9E24A37B5D00F54A6E /* Images.xcassets */; };
+		AC639CBF24C8DD2E00436853 /* GameTreatPatientProgressBar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC639CBE24C8DD2E00436853 /* GameTreatPatientProgressBar.cpp */; };
 		AC86CCC224A3D9C0007D9C2D /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCBF24A3D9C0007D9C2D /* tinyxmlerror.cpp */; };
 		AC86CCC324A3D9C0007D9C2D /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCC024A3D9C0007D9C2D /* tinyxml.cpp */; };
 		AC86CCC424A3D9C0007D9C2D /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCC124A3D9C0007D9C2D /* tinyxmlparser.cpp */; };
@@ -54,6 +55,8 @@
 		AC0B220E249ED1F6000CE7AC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		AC0B221E249ED204000CE7AC /* BeatCovid.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeatCovid.entitlements; sourceTree = "<group>"; };
 		AC5A7D9E24A37B5D00F54A6E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		AC639CBE24C8DD2E00436853 /* GameTreatPatientProgressBar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameTreatPatientProgressBar.cpp; sourceTree = "<group>"; };
+		AC639CC024C8DD3700436853 /* GameTreatPatientProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTreatPatientProgressBar.h; sourceTree = "<group>"; };
 		AC86CCA024A3D92A007D9C2D /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
 		AC86CCA124A3D92A007D9C2D /* Level_map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level_map.h; sourceTree = "<group>"; };
 		AC86CCA224A3D92A007D9C2D /* SaveGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveGame.h; sourceTree = "<group>"; };
@@ -343,6 +346,7 @@
 		AC8B853624B3A1C80091BAF2 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				AC639CC024C8DD3700436853 /* GameTreatPatientProgressBar.h */,
 				AC86CCA024A3D92A007D9C2D /* GameManager.h */,
 				AC8B853524B3A1140091BAF2 /* GameLabel.h */,
 				AC8B853A24B3ABFA0091BAF2 /* GameLabelManager.h */,
@@ -353,6 +357,7 @@
 		AC8B853724B3A1DF0091BAF2 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				AC639CBE24C8DD2E00436853 /* GameTreatPatientProgressBar.cpp */,
 				AC86CCDE24A3DAB6007D9C2D /* GameManager.cpp */,
 				AC8B853824B3A2330091BAF2 /* GameLabel.cpp */,
 				AC8B853B24B3AC470091BAF2 /* GameLabelManager.cpp */,
@@ -476,6 +481,7 @@
 				AC86CCC424A3D9C0007D9C2D /* tinyxmlparser.cpp in Sources */,
 				AC86CCE724A3DAB6007D9C2D /* SaveGame.cpp in Sources */,
 				AC9196D124AD39AD00C28412 /* InterfaceButton.cpp in Sources */,
+				AC639CBF24C8DD2E00436853 /* GameTreatPatientProgressBar.cpp in Sources */,
 				AC86CCEE24A3DAC1007D9C2D /* Player.cpp in Sources */,
 				AC9196D424AD39AD00C28412 /* InterfaceTable.cpp in Sources */,
 				AC86CD0424A3DAD3007D9C2D /* Armor.cpp in Sources */,
