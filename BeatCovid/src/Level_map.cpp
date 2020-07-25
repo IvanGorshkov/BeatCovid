@@ -250,11 +250,15 @@ sf::Vector2i Level::GetTileSize() const {
   return {tileWidth, tileHeight};
 }
 
-void Level::Draw(sf::RenderWindow &window) {
-  // Рисуем все тайлы (объекты НЕ рисуем!)
-  for (auto &layer : layers) {
-    for (const auto &tile : layer.tiles) {
-      window.draw(tile);
+void Level::Draw(sf::RenderWindow &window, unsigned int height, unsigned int width, sf::Rect<float> center) {
+    auto currentRect = sf::FloatRect(center.left - width / 2 - 64, center.top - height / 2 - 64, width + 128, height + 128);
+
+    // Рисуем все тайлы (объекты НЕ рисуем!)
+    for (auto &layer : layers) {
+      for (const auto &tile : layer.tiles) {
+        if (currentRect.contains(tile.getPosition().x, tile.getPosition().y)) {
+          window.draw(tile);
+        }
+      }
     }
-  }
 }
