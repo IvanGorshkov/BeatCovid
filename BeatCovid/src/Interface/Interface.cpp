@@ -387,11 +387,12 @@ int Interface::startNewGame(sf::RenderWindow &window) {
       }
 
       game.Update(time);
-
+      sf::Rect<float> playerPosition = game.GetPlayer()->GetRect();
+      
       window.clear(sf::Color(0, 0, 0));
-      lvl.Draw(window);
-      game.Draw(window, game.GetPlayer()->GetRect().left, game.GetPlayer()->GetRect().top, gameHeight, gameWidth);
-      gameView.setCenter(game.GetPlayer()->GetRect().left, game.GetPlayer()->GetRect().top);
+        lvl.Draw(window, gameHeight, gameWidth, playerPosition);
+        game.Draw(window, playerPosition.left, playerPosition.top, gameHeight, gameWidth);
+        gameView.setCenter(playerPosition.left, playerPosition.top);
       window.setView(gameView);
       window.display();
     }
