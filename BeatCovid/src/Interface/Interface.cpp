@@ -18,7 +18,11 @@ sf::Vector2i calculatePlayerPosition(unsigned int width,
   if (playerCurrentX - width / 2 > leftX && playerCurrentX + width / 2 < rightX) {
     playerX = playerCurrentX;
   } else {
-    playerX = leftX + width / 2;
+    if (playerCurrentX - width / 2 < leftX) {
+      playerX = leftX + width / 2;
+    } else {
+      playerX = rightX - width / 2;
+    }
   }
 
   if (playerCurrentY - height / 2 > upY && playerCurrentY + height / 2 < downY) {
@@ -299,6 +303,12 @@ int Interface::startNewGame(sf::RenderWindow &window) {
 
     Level lvl;
     lvl.LoadFromFile(save.GetLvlName());
+      
+    int leftX = lvl.GetObject("left").rect.left;
+    int rightX = lvl.GetObject("right").rect.left + lvl.GetObject("right").rect.width;
+    int upY = lvl.GetObject("top").rect.top;
+    int downY = lvl.GetObject("bottom").rect.top + lvl.GetObject("bottom").rect.height;
+      
     GameManager game(lvl, textSize, music, Save::LoadArmors(), Save::LoadPoints(), Save::LoadStat(), Save::LoadConfig());
     sf::Clock clock;
 
@@ -385,14 +395,16 @@ int Interface::startNewGame(sf::RenderWindow &window) {
       if (time > 70) {
         time = 70;
       }
-
+        
       game.Update(time);
-      sf::Rect<float> playerPosition = game.GetPlayer()->GetRect();
+      auto playerPosition = calculatePlayerPosition(gameWidth, gameHeight,
+                                                    leftX, rightX, upY, downY,
+                                                    game.GetPlayer()->GetRect().left, game.GetPlayer()->GetRect().top);
       
       window.clear(sf::Color(0, 0, 0));
-        lvl.Draw(window, gameHeight, gameWidth, playerPosition);
-        game.Draw(window, playerPosition.left, playerPosition.top, gameHeight, gameWidth);
-        gameView.setCenter(playerPosition.left, playerPosition.top);
+      lvl.Draw(window, gameHeight, gameWidth, playerPosition.x, playerPosition.y);
+      game.Draw(window, playerPosition.x, playerPosition.y, gameHeight, gameWidth);
+      gameView.setCenter(playerPosition.x, playerPosition.y);
       window.setView(gameView);
       window.display();
     }

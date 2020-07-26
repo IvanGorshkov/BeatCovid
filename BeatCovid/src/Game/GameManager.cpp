@@ -300,7 +300,7 @@ void GameManager::bulletPlayer() {
       (*enemiesIt)->SetFire(true);
 
       // Дальность полета пули
-      if (std::sqrt(X * X + Y * Y) > 20) {
+      if (std::sqrt(X * X + Y * Y) > 30) {
         (*enemiesIt)->SetFire(false);
         (*enemiesIt)->ResetTimer();
         continue;
