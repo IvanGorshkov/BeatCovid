@@ -12,6 +12,7 @@ GameManager::GameManager(Level &lvl,
                          const std::vector<float> &config)
     : obj(lvl.GetAllObjects()),
       music(music),
+      fireTimer(0),
       stat(std::move(stat)),
       antigenPoints(config[1]),
       player(std::make_shared<Player>(lvl.GetObject("player"), arms, config[0], 1, points)) {
@@ -65,6 +66,7 @@ GameManager::GameManager(Level &lvl,
 
 // Обновление всех классов
 void GameManager::Update(float time) {
+  fireTimer += time;
   //  fps.Update();
   player->Update(time, obj);
 
@@ -118,12 +120,14 @@ void GameManager::Draw(sf::RenderWindow &window, float x, float y, int height, i
     labelManager.Draw("NoVaccine", window);
   }
 
+  progressBar.Draw(window, player->DrawProgressBar());
+
   if (!player->IsDrive()) {
     player->DrawObjs(window);
   }
 
   auto rect = sick->GetRect();
-  if (rect.left + rect.width > leftX && rect.left < rightX && rect.top + rect.height> upY && rect.top < downY) {
+  if (rect.left + rect.width > leftX && rect.left < rightX && rect.top + rect.height > upY && rect.top < downY) {
     sick->Draw(window);
   }
 }
@@ -134,27 +138,29 @@ std::shared_ptr<Player> GameManager::GetPlayer() {
 
 // Огонь игроком
 void GameManager::Fire() {
-  music.PlayHitPlayerSound();
+  if (fireTimer > FIRE_TIME) {
+    if (player->GetPoints() > 0) {
+      player->SetKey("SPACE", true);
+      if (player->GetDir()) {
+        playerBullets.emplace_back(player->GetRect().left - 25,
+                                   player->GetRect().top + 40,
+                                   -PLAYER_BULLET_DX,
+                                   0,
+                                   player->GetDmg(),
+                                   true);
+      } else {
+        playerBullets.emplace_back(player->GetRect().left + player->GetRect().width + 10,
+                                   player->GetRect().top + 40,
+                                   PLAYER_BULLET_DX,
+                                   0,
+                                   player->GetDmg(),
+                                   true);
+      }
 
-  if (player->GetPoints() > 0) {
-    player->SetKey("SPACE", true);
-    if (player->GetDir()) {
-      playerBullets.emplace_back(player->GetRect().left - 25,
-                                 player->GetRect().top + 40,
-                                 -PLAYER_BULLET_DX,
-                                 0,
-                                 player->GetDmg(),
-                                 true);
-    } else {
-      playerBullets.emplace_back(player->GetRect().left + player->GetRect().width + 10,
-                                 player->GetRect().top + 40,
-                                 PLAYER_BULLET_DX,
-                                 0,
-                                 player->GetDmg(),
-                                 true);
+      player->AddPoints(-1);
+      music.PlayHitPlayerSound();
+      fireTimer = 0;
     }
-
-    player->AddPoints(-1);
   }
 }
 
@@ -288,13 +294,13 @@ void GameManager::checkHitPlayer() {
 void GameManager::bulletPlayer() {
   for (enemiesIt = enemies.begin(); enemiesIt != enemies.end(); ++enemiesIt) {
     if ((*enemiesIt)->GetTimer() > ENEMY_HIT_TIME && (*enemiesIt)->IsLife()) {
-      float X = (player->GetRect().left - (*enemiesIt)->GetRect().left) / 16;
-      float Y = (player->GetRect().top - (*enemiesIt)->GetRect().top) / 16;
-        
+      float X = (player->GetRect().left - (*enemiesIt)->GetRect().left) / 32;
+      float Y = (player->GetRect().top - (*enemiesIt)->GetRect().top) / 32;
+
       (*enemiesIt)->SetFire(true);
 
       // Дальность полета пули
-      if (std::sqrt(X * X + Y * Y) > 35) {
+      if (std::sqrt(X * X + Y * Y) > 30) {
         (*enemiesIt)->SetFire(false);
         (*enemiesIt)->ResetTimer();
         continue;
@@ -307,6 +313,33 @@ void GameManager::bulletPlayer() {
       } else {
         dx = X > 0 ? ENEMY_BULLET_DX : -ENEMY_BULLET_DX;
         dy = dx * Y / X;
+      }
+
+      bool fire = true;
+      for (auto &i : obj) {
+        if (i.name != "wall") {
+          continue;
+        }
+
+        auto currentRect = sf::FloatRect((*enemiesIt)->GetRect().left, (*enemiesIt)->GetRect().top, 16, 16);
+        while (!currentRect.intersects(player->GetRect())) {
+          if (currentRect.intersects(i.rect)) {
+            fire = false;
+          }
+
+          currentRect.left += dx * 16;
+          currentRect.top += dy * 16;
+        }
+
+        if (!fire) {
+          break;
+        }
+      }
+
+      if (!fire) {
+        (*enemiesIt)->SetFire(false);
+        (*enemiesIt)->ResetTimer();
+        continue;
       }
 
       if (X > 0) {
@@ -326,8 +359,8 @@ void GameManager::bulletPlayer() {
                                   (*enemiesIt)->GetDmg(),
                                   false);
       }
-      (*enemiesIt)->ResetTimer();
 
+      (*enemiesIt)->ResetTimer();
       music.PlayHitEnemySound();
     }
   }
@@ -393,8 +426,8 @@ void GameManager::drawEnemy(sf::RenderWindow &window, float leftX, float rightX,
       }
     }
 
-    auto rect =  (*enemiesIt)->GetRect();
-    if (rect.left + rect.width > leftX && rect.left < rightX && rect.top + rect.height> upY && rect.top < downY) {
+    auto rect = (*enemiesIt)->GetRect();
+    if (rect.left + rect.width > leftX && rect.left < rightX && rect.top + rect.height > upY && rect.top < downY) {
       (*enemiesIt)->Draw(window);
     }
   }
@@ -429,7 +462,7 @@ void GameManager::updateAntibodies() {
 void GameManager::drawAntibodies(sf::RenderWindow &window, float leftX, float rightX, float upY, float downY) {
   for (antibodiesIt = antibodies.begin(); antibodiesIt != antibodies.end(); ++antibodiesIt) {
     auto rect = antibodiesIt->GetRect();
-    if (rect.left + rect.width > leftX && rect.left < rightX && rect.top + rect.height> upY && rect.top < downY) {
+    if (rect.left + rect.width > leftX && rect.left < rightX && rect.top + rect.height > upY && rect.top < downY) {
       antibodiesIt->Draw(window);
     }
   }
@@ -483,7 +516,7 @@ void GameManager::drawTransport(sf::RenderWindow &window, float leftX, float rig
 void GameManager::drawSafeTransport(sf::RenderWindow &window, float leftX, float rightX, float upY, float downY) {
   for (safeTransportsIt = safeTransports.begin(); safeTransportsIt != safeTransports.end(); ++safeTransportsIt) {
     auto rect = safeTransportsIt->GetRect();
-    if (rect.left + rect.width > leftX && rect.left < rightX && rect.top + rect.height> upY && rect.top < downY) {
+    if (rect.left + rect.width > leftX && rect.left < rightX && rect.top + rect.height > upY && rect.top < downY) {
       safeTransportsIt->Draw(window);
     }
 
@@ -504,7 +537,7 @@ void GameManager::drawUnSafeTransport(sf::RenderWindow &window, float leftX, flo
   for (unSafeTransportsIt = unSafeTransports.begin(); unSafeTransportsIt != unSafeTransports.end();
        ++unSafeTransportsIt) {
     auto rect = unSafeTransportsIt->GetRect();
-    if (rect.left + rect.width > leftX && rect.left < rightX && rect.top + rect.height> upY && rect.top < downY) {
+    if (rect.left + rect.width > leftX && rect.left < rightX && rect.top + rect.height > upY && rect.top < downY) {
       unSafeTransportsIt->Draw(window);
     }
 

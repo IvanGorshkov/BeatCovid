@@ -40,7 +40,8 @@ bool Level::LoadFromFile(const std::string &filename) {
   // source - путь до картинки в контейнере image
   TiXmlElement *image;
   image = tilesetElement->FirstChildElement("image");
-  std::string imagepath = image->Attribute("source");
+  std::string imagepath = FILES_PATH;
+  imagepath += image->Attribute("source");
 
   // Пытаемся загрузить тайлсет
   sf::Image img;
@@ -249,11 +250,15 @@ sf::Vector2i Level::GetTileSize() const {
   return {tileWidth, tileHeight};
 }
 
-void Level::Draw(sf::RenderWindow &window) {
+void Level::Draw(sf::RenderWindow &window, unsigned int height, unsigned int width, float x, float y) {
+  auto currentRect = sf::FloatRect(x - width / 2 - 64, y - height / 2 - 64, width + 128, height + 128);
+
   // Рисуем все тайлы (объекты НЕ рисуем!)
   for (auto &layer : layers) {
     for (const auto &tile : layer.tiles) {
-      window.draw(tile);
+      if (currentRect.contains(tile.getPosition().x, tile.getPosition().y)) {
+        window.draw(tile);
+      }
     }
   }
 }

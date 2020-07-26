@@ -40,6 +40,7 @@ add_executable(beatcovid
         project/src/Game/GameLabel.cpp
         project/src/Game/GameLabelManager.cpp
         project/src/Game/GameManager.cpp
+        project/src/Game/GameTreatPatientProgressBar.cpp
         project/src/Interface/Interface.cpp
         project/src/Interface/InterfaceButton.cpp
         project/src/Interface/InterfaceImage.cpp

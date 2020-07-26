@@ -1,7 +1,8 @@
 #include "UnSafeTransport.h"
 
 UnSafeTransport::UnSafeTransport(float x, float y, int height, int weight, const std::string &name, std::vector<float> config)
-    : Transport(x, y, height, weight, name) {
+    : Transport(x, y, height, weight, name),
+      timerHit(0) {
   if (name == "bus") {
     setBus(config[13]);
   }

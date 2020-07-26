@@ -2,6 +2,7 @@
 #include <sstream>
 #include <memory>
 #include "Level_map.h"
+#include "iostream"
 
 sf::Vector2i calculatePlayerPosition(unsigned int width,
                                      unsigned int height,
@@ -11,13 +12,21 @@ sf::Vector2i calculatePlayerPosition(unsigned int width,
                                      int downY,
                                      int playerCurrentX,
                                      int playerCurrentY) {
+
+  std::cout << "X: " << playerCurrentX << std::endl;
+  std::cout << "Y: " << playerCurrentY << std::endl;
+
   int playerX = 0;
   int playerY = 0;
 
   if (playerCurrentX - width / 2 > leftX && playerCurrentX + width / 2 < rightX) {
     playerX = playerCurrentX;
   } else {
-    playerX = leftX + width / 2;
+    if (playerCurrentX - width / 2 < leftX) {
+      playerX = leftX + width / 2;
+    } else {
+      playerX = rightX - width / 2;
+    }
   }
 
   if (playerCurrentY - height / 2 > upY && playerCurrentY + height / 2 < downY) {
@@ -67,13 +76,13 @@ Interface::Interface(sf::RenderWindow &window)
       headSize(window.getSize().y / 20),
       buttonFontPath(FILES_PATH"files/fonts/Inconsolata-Bold.ttf"),
       textFontPath(FILES_PATH"files/fonts/Inconsolata-Bold.ttf") {
-          if (width > 2500 && height > 1600) {
-              gameWidth = 2500;
-              gameHeight = 1600;
-          } else {
-              gameWidth = width;
-              gameHeight = height;
-          }
+//          if (width > 2500 && height > 1600) {
+//              gameWidth = 2500;
+//              gameHeight = 1600;
+//          } else {
+  gameWidth = width;
+  gameHeight = height;
+//          }
 }
 
 // Вывод главного меню
@@ -114,7 +123,7 @@ void Interface::MainMenu(sf::RenderWindow &window) {
     //      if (event.text.unicode >= 48 && event.text.unicode <= 57)
     //        std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << std::endl;
     //    }
-      
+
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
     if (newGameButton.IsSelect(mousePosition, music)) {
@@ -138,7 +147,7 @@ void Interface::MainMenu(sf::RenderWindow &window) {
     }
 
     if (statisticButton.IsSelect(mousePosition, music)) {
-        music.PlayOnButtonSound();
+      music.PlayOnButtonSound();
       statisticMenu(window);
     }
 
@@ -194,7 +203,7 @@ void Interface::PenaltyPolice(sf::RenderWindow &window) {
         window.close();
       }
     }
-      
+
     auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
     if (penaltyTable.GetCenterButtons()[0]->IsSelect(mousePosition, music)) {
@@ -229,7 +238,7 @@ void Interface::DiedPolice(sf::RenderWindow &window) {
         window.close();
       }
     }
-      
+
     auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
     if (diedTable.GetCenterButtons()[0]->IsSelect(mousePosition, music)) {
@@ -285,7 +294,7 @@ void Interface::newGameWarningMenu(sf::RenderWindow &window) {
 }
 
 // Старт новой игры
-void Interface::startNewGame(sf::RenderWindow &window) {
+int Interface::startNewGame(sf::RenderWindow &window) {
   bool repeat = true;
 
   Save save;
@@ -298,43 +307,56 @@ void Interface::startNewGame(sf::RenderWindow &window) {
 
     Level lvl;
     lvl.LoadFromFile(save.GetLvlName());
-    GameManager game(lvl, textSize, music, Save::LoadArmors(), Save::LoadPoints(), Save::LoadStat(), Save::LoadConfig());
+
+    int leftX = lvl.GetObject("left").rect.left;
+    int rightX = lvl.GetObject("right").rect.left + lvl.GetObject("right").rect.width;
+    int upY = lvl.GetObject("top").rect.top;
+    int downY = lvl.GetObject("bottom").rect.top + lvl.GetObject("bottom").rect.height;
+
+    std::cout << "Left: " << leftX << std::endl;
+    std::cout << "Right: " << rightX << std::endl;
+    std::cout << "Top: " << upY << std::endl;
+    std::cout << "Bottom: " << downY << std::endl;
+
+    GameManager
+        game(lvl, textSize, music, Save::LoadArmors(), Save::LoadPoints(), Save::LoadStat(), Save::LoadConfig());
     sf::Clock clock;
 
     while (window.isOpen()) {
       sf::Event event{};
       while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) {
+          repeat = false;
           window.close();
         }
 
         if (event.type == sf::Event::KeyPressed) {
           if (event.key.code == sf::Keyboard::Space) {
-            game.GetPlayer()->SetKey("SPACE", true);
             game.Fire();
           }
 
           if (event.key.code == sf::Keyboard::E) {
             game.TakeTransport();
           }
+
+          if (event.key.code == sf::Keyboard::Escape) {
+            music.StopBackgroundGameMusic();
+
+            window.setView(menuView);
+
+            if (!gameMenu(window, game.GetPlayer()->GetMainData())) {
+              repeat = false;
+              return 0;
+            }
+
+            music.PlayBackgroundGameMusic();
+          }
         }
-      }
-
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-        music.StopBackgroundGameMusic();
-          
-        window.setView(menuView);
-
-        if (!gameMenu(window, game.GetPlayer()->GetMainData())) {
-          repeat = false;
-          break;
-        }
-
-        music.PlayBackgroundGameMusic();
       }
 
       if (game.GetPlayer()->GetHp() <= 0) {
         music.StopBackgroundGameMusic();
+        music.StopAllMusic();
         music.PlayDiedPlayerSound();
 
         window.setView(menuView);
@@ -376,7 +398,7 @@ void Interface::startNewGame(sf::RenderWindow &window) {
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
         game.GetPlayer()->SetKey("DOWN", true);
       }
-        
+
       float time = clock.getElapsedTime().asMicroseconds();
       clock.restart();
       time = time / 400;
@@ -385,16 +407,58 @@ void Interface::startNewGame(sf::RenderWindow &window) {
       }
 
       game.Update(time);
+      auto playerPosition = calculatePlayerPosition(gameWidth, gameHeight,
+                                                    leftX, rightX, upY, downY,
+                                                    game.GetPlayer()->GetRect().left, game.GetPlayer()->GetRect().top);
 
       window.clear(sf::Color(0, 0, 0));
-      lvl.Draw(window);
-      game.Draw(window, game.GetPlayer()->GetRect().left, game.GetPlayer()->GetRect().top, gameHeight, gameWidth);
-      gameView.setCenter(game.GetPlayer()->GetRect().left, game.GetPlayer()->GetRect().top);
+      lvl.Draw(window, gameHeight, gameWidth, playerPosition.x, playerPosition.y);
+      game.Draw(window, playerPosition.x, playerPosition.y, gameHeight, gameWidth);
+      gameView.setCenter(playerPosition.x, playerPosition.y);
       window.setView(gameView);
       window.display();
     }
 
     Save::SaveStat(game.GetStat());
+  }
+}
+
+// Предупреждение о сбросе данных
+bool Interface::endGameWarningMenu(sf::RenderWindow &window) {
+  InterfaceTable endGameWarningTable;
+  endGameWarningTable.SetCenterLabel(std::make_shared<InterfaceButton>(textFontPath,
+                                                                       textSize,
+                                                                       "Are you sure you want to end game?"));
+  endGameWarningTable.SetCenterLabel(std::make_shared<InterfaceButton>(textFontPath,
+                                                                       textSize,
+                                                                       "All your progress will be lost"));
+  endGameWarningTable.SetLeftButton(std::make_shared<InterfaceButton>(buttonFontPath, buttonSize, "Yes"));
+  endGameWarningTable.SetRightButton(std::make_shared<InterfaceButton>(buttonFontPath, buttonSize, "No"));
+
+  endGameWarningTable.CalculateTablePosition();
+  endGameWarningTable.SetPosition(height, width);
+
+  while (window.isOpen()) {
+    sf::Event event{};
+    while (window.pollEvent(event)) {
+      if (event.type == sf::Event::Closed) {
+        window.close();
+      }
+    }
+
+    sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
+
+    if (endGameWarningTable.GetLeftButtons()[0]->IsSelect(mousePosition, music)) {
+      return false;
+    }
+
+    if (endGameWarningTable.GetRightButtons()[0]->IsSelect(mousePosition, music)) {
+      return true;
+    }
+
+    window.clear(sf::Color(68, 101, 219));
+    endGameWarningTable.Draw(window);
+    window.display();
   }
 }
 
@@ -423,7 +487,7 @@ bool Interface::winMenu(sf::RenderWindow &window, bool isLoadFromMenu) {
         window.close();
       }
     }
-      
+
     auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
     if (winTable.GetCenterButtons()[0]->IsSelect(mousePosition, music)) {
@@ -468,7 +532,7 @@ bool Interface::nextLvlMenu(sf::RenderWindow &window) {
       return true;
     }
 
-      if (nextMissionTable.GetCenterButtons()[1]->IsSelect(mousePosition, music)) {
+    if (nextMissionTable.GetCenterButtons()[1]->IsSelect(mousePosition, music)) {
       return false;
     }
 
@@ -594,7 +658,7 @@ void Interface::statisticMenu(sf::RenderWindow &window) {
         window.close();
       }
     }
-      
+
     auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
     if (backButton.IsSelect(mousePosition, music)) {
@@ -806,7 +870,7 @@ bool Interface::shopMenu(sf::RenderWindow &window) {
                     buyCapSprite.GetSize().x,
                     buyCapSprite.GetSize().y).
         contains(sf::Mouse::getPosition(window))) {
-      buyCapSprite.SetColor(sf::Color::Red);
+      buyCapSprite.SetColor(sf::Color::Black);
       menuNum = 0;
     }
 
@@ -815,7 +879,7 @@ bool Interface::shopMenu(sf::RenderWindow &window) {
                     buyShoesSprite.GetSize().x,
                     buyShoesSprite.GetSize().y).
         contains(sf::Mouse::getPosition(window))) {
-      buyShoesSprite.SetColor(sf::Color::Red);
+      buyShoesSprite.SetColor(sf::Color::Black);
       menuNum = 1;
     }
     if (sf::IntRect(buyRobeSprite.GetSpriteRect().x,
@@ -823,12 +887,12 @@ bool Interface::shopMenu(sf::RenderWindow &window) {
                     buyRobeSprite.GetSize().x,
                     buyRobeSprite.GetSize().y).
         contains(sf::Mouse::getPosition(window))) {
-      buyRobeSprite.SetColor(sf::Color::Red);
+      buyRobeSprite.SetColor(sf::Color::Black);
       menuNum = 2;
     }
 
     auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
-      
+
     if (backButton.IsSelect(mousePosition, music)) {
       break;
     }
@@ -952,12 +1016,19 @@ bool Interface::gameMenu(sf::RenderWindow &window, std::vector<int> data) {
       if (event.type == sf::Event::Closed) {
         window.close();
       }
+
+      if (event.type == sf::Event::KeyPressed) {
+        if (event.key.code == sf::Keyboard::Escape) {
+          music.StopBackgroundMenuMusic();
+          return true;
+        }
+      }
     }
 
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
     if (menuButton.IsSelect(mousePosition, music)) {
-      return false;
+      return endGameWarningMenu(window);
     }
 
     if (continueButton.IsSelect(mousePosition, music)) {
@@ -997,7 +1068,7 @@ void Interface::aboutMenu(sf::RenderWindow &window) {
         window.close();
       }
     }
-      
+
     auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
     if (backButton.IsSelect(mousePosition, music)) {

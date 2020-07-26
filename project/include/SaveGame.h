@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 
-#define MAX_LVL 2
+#define MAX_LVL 3
 #define LVL_FILE FILES_PATH"files/saves/save_lvl.txt"
 #define MAPS_PATH FILES_PATH"files/maps/"
 #define POINTS_FILE FILES_PATH"files/saves/save_points.txt"

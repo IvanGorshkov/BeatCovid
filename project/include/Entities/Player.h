@@ -4,50 +4,45 @@
 #include <string>
 #include <map>
 #include <SFML/Graphics.hpp>
-#include "AnimationManager.h"
 #include "Entity.h"
 #include "Robe.h"
 #include "Shoes.h"
 #include "Cap.h"
 
-
 class Player : public Entity {
  public:
   explicit Player(const Object &position, std::vector<int> armors, float hp, int dmg, int points);
+  void Update(float time, std::vector<Object> &obj) override;
+  void SetKey(const std::string &name, bool value);
   bool GetDir() const;
-  void KeyCheck();
   float GetHp() const;
   float GetArm() const;
   float TakeDamge(float dmg);
   int GetDmg() const;
-  void Update(float time, std::vector<Object> &obj) override;
-  void Collision(int num, std::vector<Object> &objs);
-  void SetKey(const std::string &name, bool value);
   void AddPoints(int getPoints);
   int GetPoints() const;
   void PenaltyPoints(int penaltyPoints);
   bool GetVaccine() const;
   void SetVaccine(bool value);
   void DrawObjs(sf::RenderWindow &window);
-//  AnimationManager GetAnim();
   void GoToStart();
   bool GetFinish() const;
   void SetPosition(float x, float y);
-//  void ChangeHP(float getHp);
-//  void ChangeARM(float getArm);
   std::vector<int> GetMainData();
   void SetDrive();
   bool IsDrive() const;
-//  Robe GetRobe();
-//  Cap GetCap();
-//  Shoes GetShoes();
   bool IsFinishPosition() const;
+  bool DrawProgressBar() const;
   bool GetAlive() const;
   void SetFinish(bool getFinish = true);
-//  bool GetTreat() const;
   int PlayFinishMusic() const;
 
  private:
+  void keyCheck();
+  void collision(int num, std::vector<Object> &objs);
+  void setAnim(const std::string &str);
+  void setDir(bool dir);
+
   enum {
     STAY,
     RUN,

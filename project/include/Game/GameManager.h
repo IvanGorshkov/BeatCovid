@@ -17,6 +17,9 @@
 #include "SafeTransport.h"
 #include "UnSafeTransport.h"
 #include "Sick.h"
+#include "GameTreatPatientProgressBar.h"
+
+#define FIRE_TIME 1000
 
 class GameManager {
  public:
@@ -50,9 +53,11 @@ class GameManager {
 
   std::vector<Object> obj;
   std::shared_ptr<Player> player;
+  int fireTimer;
   std::shared_ptr<Sick> sick;
 
   GameLabelManager labelManager;
+  GameTreatPatientProgressBar progressBar;
   void drawPlayerData(sf::RenderWindow &window);
 //  void drawFPS(sf::RenderWindow &window);
 
