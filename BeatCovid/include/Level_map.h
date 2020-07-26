@@ -28,7 +28,7 @@ class Level {
   Object GetObject(const std::string &name);
   std::vector<Object> GetObjects(const std::string &name);
   std::vector<Object> GetAllObjects();
-  void Draw(sf::RenderWindow &window, unsigned int height, unsigned int width, sf::Rect<float> center);
+  void Draw(sf::RenderWindow &window, unsigned int height, unsigned int width, float x, float y);
   sf::Vector2i GetTileSize() const;
 
  private:
