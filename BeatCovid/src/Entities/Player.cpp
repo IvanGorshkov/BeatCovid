@@ -3,30 +3,35 @@
 
 Player::Player(const Object &position, std::vector<int> armors, float hp, int dmg, int points)
     : Entity(position.rect.left, position.rect.top, 0.1, 0.1, 64, 64),
+      startPlayerPosition(position),
       hp(hp),
+      dmg(dmg),
+      points(points),
+      dir(false),
+      finish(false),
+      isFinishPosition(false),
+      vaccine(false),
       max_jump(0),
       arm(0),
-      STATE(STAY),
       isGround(true),
-      points(points),
-      vaccine(false),
-      dmg(dmg),
+      STATE(STAY),
+      treat(false),
+      treatC(0),
+      alive(false),
+      tookDmg(false),
+      dmgC(0),
+      fire(false),
       fireC(0),
       isDrive(false),
-      finish(false),
-      tookDmg(false),
-      fire(false),
-      treat(false),
-      alive(false),
       playFinishMusic(0),
-      startPlayerPosition(position),
       bathrobe(position.rect.left, position.rect.top, 64, 64, armors[2]),
       shoes(position.rect.left, position.rect.top, 64, 64, armors[1]),
       cap(position.rect.left, position.rect.top, 64, 64, armors[0]) {
 
   sf::Texture player_t;
-  player_t.loadFromFile(resourcePath() +  "files/images/doctor.png");
+  player_t.loadFromFile(resourcePath() + "files/images/doctor.png");
   anim = AnimationManager(player_t);
+
   anim.Create("walk", 76, 76, 64, 64, 7, 0.005, 72);
   anim.Create("stay", 4, 4, 64, 64, 8, 0.0005, 72);
   anim.Create("jump", 4, 295, 64, 64, 7, 0.007, 72);
@@ -41,10 +46,10 @@ Player::Player(const Object &position, std::vector<int> armors, float hp, int dm
   arm = bathrobe.GetArm() + shoes.GetArm() + cap.GetArm();
 }
 
-void Player::KeyCheck() {
+void Player::keyCheck() {
   if (key["L"]) {
     dir = true;
-    if (STATE == STAY) {
+    if (STATE == STAY || STATE == JUMP) {
       STATE = RUN;
       dx = -0.13;
       treat = false;
@@ -53,20 +58,18 @@ void Player::KeyCheck() {
 
   if (key["R"]) {
     dir = false;
-    if (STATE == STAY) {
+    if (STATE == STAY || STATE == JUMP) {
       STATE = RUN;
       dx = 0.13;
       treat = false;
     }
   }
 
-  if (hp > 0) {
-    if (key["UP"]) {
-      if (STATE == STAY || STATE == RUN) {
-        dy = -0.2;
-        STATE = JUMP;
-        treat = false;
-      }
+  if (key["UP"]) {
+    if (STATE == STAY || STATE == RUN) {
+      dy = -0.2;
+      STATE = JUMP;
+      treat = false;
     }
   }
 
@@ -107,40 +110,26 @@ int Player::GetDmg() const {
 }
 
 void Player::Update(float time, std::vector<Object> &obj) {
-  KeyCheck();
+  keyCheck();
+
   if (STATE == STAY) {
-    anim.Set("stay");
-    bathrobe.SetAnim("stay");
-    shoes.SetAnim("stay");
-    cap.SetAnim("stay");
+    setAnim("stay");
   }
 
   if (STATE == RUN) {
-    anim.Set("walk");
-    bathrobe.SetAnim("walk");
-    shoes.SetAnim("walk");
-    cap.SetAnim("walk");
+    setAnim("walk");
   }
 
   if (STATE == JUMP) {
-    anim.Set("jump");
-    bathrobe.SetAnim("jump");
-    shoes.SetAnim("jump");
-    cap.SetAnim("jump");
+    setAnim("jump");
   }
 
   if (STATE == LAY) {
-    anim.Set("lay");
-    bathrobe.SetAnim("lay");
-    shoes.SetAnim("lay");
-    cap.SetAnim("lay");
+    setAnim("lay");
   }
 
   if (STATE == WALKLAY) {
-    anim.Set("walklay");
-    bathrobe.SetAnim("walklay");
-    shoes.SetAnim("walklay");
-    cap.SetAnim("walklay");
+    setAnim("walklay");
   }
 
   if (hp > 0) {
@@ -148,10 +137,7 @@ void Player::Update(float time, std::vector<Object> &obj) {
   }
 
   if (tookDmg) {
-    anim.Set("dmg");
-    bathrobe.SetAnim("dmg");
-    shoes.SetAnim("dmg");
-    cap.SetAnim("dmg");
+    setAnim("dmg");
     --dmgC;
 
     if (dmgC == 0) {
@@ -159,35 +145,28 @@ void Player::Update(float time, std::vector<Object> &obj) {
     }
   }
 
-  Collision(0, obj);
+  collision(0, obj);
 
   if (fire) {
-    anim.Set("fire");
-    bathrobe.SetAnim("fire");
-    shoes.SetAnim("fire");
-    cap.SetAnim("fire");
+    setAnim("fire");
     --fireC;
     if (fireC == 0) {
       fire = false;
     }
   }
-  anim.Flip(dir);
-  bathrobe.FlipAnim(dir);
-  shoes.FlipAnim(dir);
-  cap.FlipAnim(dir);
+
+  setDir(dir);
 
   if (STATE != JUMP) {
     if ((STATE == STAY || STATE == RUN || STATE == LAY) && !isGround) {
-      anim.Set("jump");
-      bathrobe.SetAnim("jump");
-      shoes.SetAnim("jump");
-      cap.SetAnim("jump");
+      setAnim("jump");
     }
+
     dy = 0.2;
   }
 
   if (STATE == JUMP) {
-      max_jump += 0.2*time;
+    max_jump += 0.2 * time;
     if (max_jump > 300) {
       dy = 0.2;
     }
@@ -195,19 +174,10 @@ void Player::Update(float time, std::vector<Object> &obj) {
 
   rect.top += dy * time;
   isGround = false;
-  Collision(1, obj);
+  collision(1, obj);
 
   if (hp <= 0) {
-    anim.Set("die");
-    bathrobe.SetAnim("die");
-    shoes.SetAnim("die");
-    cap.SetAnim("die");
-    if (anim.GetCurrentFrame() == 3) {
-      anim.Pause();
-      bathrobe.StatusAnim();
-      shoes.StatusAnim();
-      cap.StatusAnim();
-    }
+    setAnim("die");
   }
 
   if (treat && !alive) {
@@ -219,10 +189,7 @@ void Player::Update(float time, std::vector<Object> &obj) {
       playFinishMusic = 2;
     }
 
-    anim.Set("treat");
-    bathrobe.SetAnim("treat");
-    shoes.SetAnim("treat");
-    cap.SetAnim("treat");
+    setAnim("treat");
     --treatC;
     if (treatC <= 0) {
       alive = true;
@@ -237,11 +204,25 @@ void Player::Update(float time, std::vector<Object> &obj) {
   cap.Update(time, obj);
 }
 
+void Player::setAnim(const std::string &str) {
+  anim.Set(str);
+  bathrobe.SetAnim(str);
+  shoes.SetAnim(str);
+  cap.SetAnim(str);
+}
+
+void Player::setDir(bool dir) {
+  anim.Flip(dir);
+  bathrobe.FlipAnim(dir);
+  shoes.FlipAnim(dir);
+  cap.FlipAnim(dir);
+}
+
 bool Player::GetFinish() const {
   return finish;
 }
 
-void Player::Collision(int num, std::vector<Object> &objs) {
+void Player::collision(int num, std::vector<Object> &objs) {
   for (auto &obj : objs) {
     if (rect.intersects(obj.rect)) {
       if (obj.name == "wall") {
@@ -314,6 +295,7 @@ float Player::TakeDamge(float getDmg) {
     dmgC = 30;
     tookDmg = true;
   }
+
   return hp;
 }
 
@@ -322,7 +304,7 @@ float Player::GetHp() const {
 }
 
 float Player::GetArm() const {
-  return bathrobe.GetArm() + shoes.GetArm() + cap.GetArm();
+  return arm;
 }
 
 bool Player::GetDir() const {
@@ -334,7 +316,7 @@ void Player::SetKey(const std::string &name, bool value) {
 }
 
 void Player::AddPoints(int getPoints) {
-  this->points += getPoints;
+  points += getPoints;
 }
 
 int Player::GetPoints() const {
@@ -358,17 +340,6 @@ void Player::GoToStart() {
   rect.top = startPlayerPosition.rect.top;
 }
 
-void Player::ChangeHP(float getHp) {
-  this->hp = getHp;
-}
-
-void Player::ChangeARM(float getArm) {
-  this->arm = getArm;
-}
-
-AnimationManager Player::GetAnim() {
-  return anim;
-}
 void Player::SetPosition(float x, float y) {
   rect.left = x;
   rect.top = y;
@@ -387,18 +358,6 @@ std::vector<int> Player::GetMainData() {
   return data;
 }
 
-Robe Player::GetRobe() {
-  return bathrobe;
-}
-
-Cap Player::GetCap() {
-  return cap;
-}
-
-Shoes Player::GetShoes() {
-  return shoes;
-}
-
 void Player::SetDrive() {
   isDrive = !isDrive;
 }
@@ -415,15 +374,20 @@ bool Player::IsFinishPosition() const {
   return isFinishPosition;
 }
 
+bool Player::DrawProgressBar() const {
+  if (treat || alive) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 bool Player::GetAlive() const {
   return alive;
 }
+
 void Player::SetFinish(bool getFinish) {
   this->finish = getFinish;
-}
-
-bool Player::GetTreat() const {
-  return treat;
 }
 
 int Player::PlayFinishMusic() const {

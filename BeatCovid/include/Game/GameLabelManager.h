@@ -13,7 +13,8 @@ enum PositionSettings {
   RIGHT_UP,
   LEFT_DOWN,
   RIGHT_DOWN,
-  PLAYER_POSITION
+  PLAYER_POSITION,
+  CUSTOM_POSITION
 };
 
 class GameLabelManager {

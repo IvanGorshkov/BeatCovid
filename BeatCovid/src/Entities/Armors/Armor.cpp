@@ -14,10 +14,6 @@ void Armor::SetAnim(const std::string &name) {
   anim.Set(name);
 }
 
-void Armor::StatusAnim() {
-  anim.Pause();
-}
-
 void Armor::FlipAnim(bool value) {
   anim.Flip(value);
 }
