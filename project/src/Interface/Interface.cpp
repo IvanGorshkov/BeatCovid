@@ -2,7 +2,6 @@
 #include <sstream>
 #include <memory>
 #include "Level_map.h"
-#include "iostream"
 
 sf::Vector2i calculatePlayerPosition(unsigned int width,
                                      unsigned int height,
@@ -12,30 +11,26 @@ sf::Vector2i calculatePlayerPosition(unsigned int width,
                                      int downY,
                                      int playerCurrentX,
                                      int playerCurrentY) {
-
-  std::cout << "X: " << playerCurrentX << std::endl;
-  std::cout << "Y: " << playerCurrentY << std::endl;
-
   int playerX = 0;
   int playerY = 0;
 
-  if (playerCurrentX - width / 2 > leftX && playerCurrentX + width / 2 < rightX) {
+  if (playerCurrentX - width / 2.0 > leftX && playerCurrentX + width / 2.0 < rightX) {
     playerX = playerCurrentX;
   } else {
-    if (playerCurrentX - width / 2 < leftX) {
-      playerX = leftX + width / 2;
+    if (playerCurrentX - width / 2.0 < leftX) {
+      playerX = leftX + width / 2.0;
     } else {
-      playerX = rightX - width / 2;
+      playerX = rightX - width / 2.0;
     }
   }
 
-  if (playerCurrentY - height / 2 > upY && playerCurrentY + height / 2 < downY) {
+  if (playerCurrentY - height / 2.0 > upY && playerCurrentY + height / 2.0 < downY) {
     playerY = playerCurrentY;
   } else {
-    if (playerCurrentY - height / 2 < upY) {
-      playerY = upY + height / 2;
+    if (playerCurrentY - height / 2.0 < upY) {
+      playerY = upY + height / 2.0;
     } else {
-      playerY = downY - height / 2;
+      playerY = downY - height / 2.0;
     }
   }
 
@@ -76,13 +71,13 @@ Interface::Interface(sf::RenderWindow &window)
       headSize(window.getSize().y / 20),
       buttonFontPath(FILES_PATH"files/fonts/Inconsolata-Bold.ttf"),
       textFontPath(FILES_PATH"files/fonts/Inconsolata-Bold.ttf") {
-//          if (width > 2500 && height > 1600) {
-//              gameWidth = 2500;
-//              gameHeight = 1600;
-//          } else {
-  gameWidth = width;
-  gameHeight = height;
-//          }
+  if (width > 2500 && height > 1600) {
+    gameWidth = 2500;
+    gameHeight = 1600;
+  } else {
+    gameWidth = width;
+    gameHeight = height;
+  }
 }
 
 // Вывод главного меню
@@ -312,11 +307,6 @@ int Interface::startNewGame(sf::RenderWindow &window) {
     int rightX = lvl.GetObject("right").rect.left + lvl.GetObject("right").rect.width;
     int upY = lvl.GetObject("top").rect.top;
     int downY = lvl.GetObject("bottom").rect.top + lvl.GetObject("bottom").rect.height;
-
-    std::cout << "Left: " << leftX << std::endl;
-    std::cout << "Right: " << rightX << std::endl;
-    std::cout << "Top: " << upY << std::endl;
-    std::cout << "Bottom: " << downY << std::endl;
 
     GameManager
         game(lvl, textSize, music, Save::LoadArmors(), Save::LoadPoints(), Save::LoadStat(), Save::LoadConfig());

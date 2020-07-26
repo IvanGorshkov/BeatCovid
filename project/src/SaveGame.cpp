@@ -23,14 +23,14 @@ std::string Save::GetLvlName() {
 
   std::ifstream save_stat(STAT_FILE);
 
-//  if (save_stat.is_open()) {
-//    char buff[50];
-//    save_stat.getline(buff, 50);
-//
-//    if (atoi(buff) != 0 && lvl == 1) {
-//      ChangeLvl();
-//    }
-//  }
+  if (save_stat.is_open()) {
+    char buff[50];
+    save_stat.getline(buff, 50);
+
+    if (atoi(buff) != 0 && lvl == 1) {
+      ChangeLvl();
+    }
+  }
 
   std::string lvlname = MAPS_PATH;
   return (lvlname += std::to_string(lvl) + ".tmx");
