@@ -17,7 +17,7 @@ sf::Vector2i calculatePlayerPosition(unsigned int width,
   if (playerCurrentX - width / 2.0 > leftX && playerCurrentX + width / 2.0 < rightX) {
     playerX = playerCurrentX;
   } else {
-    if (playerCurrentX - width / 2.0 < leftX) {
+    if (playerCurrentX - width / 2.0 <= leftX) {
       playerX = leftX + width / 2.0;
     } else {
       playerX = rightX - width / 2.0;
@@ -27,7 +27,7 @@ sf::Vector2i calculatePlayerPosition(unsigned int width,
   if (playerCurrentY - height / 2.0 > upY && playerCurrentY + height / 2.0 < downY) {
     playerY = playerCurrentY;
   } else {
-    if (playerCurrentY - height / 2.0 < upY) {
+    if (playerCurrentY - height / 2.0 <= upY) {
       playerY = upY + height / 2.0;
     } else {
       playerY = downY - height / 2.0;
