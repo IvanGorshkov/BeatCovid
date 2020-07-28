@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="220" height="100" tilewidth="32" tileheight="32" nextobjectid="457">
- <tileset firstgid="1" name="city_tiles" tilewidth="32" tileheight="32" tilecount="152" columns="8">
+ <tileset firstgid="1" name="city_tiles" tilewidth="32" tileheight="32" tilecount="0" columns="8">
   <image source="files/maps/map_tiles.png" width="256" height="616"/>
  </tileset>
  <layer name="sky" width="220" height="100">
@@ -66131,7 +66131,7 @@
   <object id="396" name="wall" x="4159.7" y="128.162" width="2720.87" height="32.0106"/>
   <object id="397" name="wall" x="6498.57" y="352.988" width="318.714" height="61.5351"/>
   <object id="398" name="wall" x="4417.89" y="34.5167" width="32" height="92.738"/>
-  <object id="399" name="bus" x="1151.91" y="1214.98" width="32" height="32"/>
+  <object id="399" name="auto" x="1151.91" y="1214.98" width="32" height="32"/>
   <object id="400" name="wall" x="3876.6" y="2176.98" width="315.793" height="30.7817"/>
   <object id="401" name="wall" x="3775.6" y="2208.65" width="416.806" height="30.7817"/>
   <object id="402" name="wall" x="3908.23" y="2113.64" width="283.561" height="62.4543"/>
