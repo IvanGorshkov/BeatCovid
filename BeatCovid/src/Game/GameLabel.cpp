@@ -27,6 +27,11 @@ GameLabel::GameLabel(unsigned int getSize, const std::string &getStr)
   getLocalSize();
 }
 
+GameLabel::GameLabel(unsigned int getSize, const std::string &getStr, sf::Color color)
+    : GameLabel(getSize, getStr) {
+   text.setFillColor(color);
+}
+
 void GameLabel::SetText(const std::string &getStr) {
   str = getStr;
   text.setString(str);

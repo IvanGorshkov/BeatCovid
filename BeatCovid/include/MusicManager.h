@@ -2,30 +2,58 @@
 
 #include "SFML/Audio.hpp"
 
+#define BACK_MENU 50
+#define ON_BUTTON 15
+#define SELECT_BUTTON 20
+#define BACK_GAME 0
+#define HIT_PLAYER 70
+#define HIT_ENEMY 70
+#define DIED_ENEMY 70
+#define DIED_PLAYER 70
+#define METRO 70
+#define CAR 70
+#define ANTIBODIES 70
+#define VACCINE 70
+#define TREAT_PATIENT 70
+
 class MusicManager {
  public:
   MusicManager();
-  void PlayBackgroundGameMusic();
-  void StopBackgroundGameMusic();
   void PlayBackgroundMenuMusic();
   void StopBackgroundMenuMusic();
+  void PlayOnButtonSound();
+  void PlaySelectButtonSound();
+    
+  void PlayBackgroundGameMusic();
+  void StopBackgroundGameMusic();
   void PlayHitPlayerSound();
   void PlayHitEnemySound();
   void PlayDiedEnemySound();
   void PlayDiedPlayerSound();
   void PlayMetroSound();
   void PlayCarSound();
+  void StopCarSound();
   void PlayGetAntibodiesSound();
   void PlayGetVaccineSound();
   void PlayTreatPatientSound();
   void StopTreatPatientSound();
 
- private:
-  // Звук игры
-  sf::Music backgroundGameMusic;
+  void StopAllMusic();
 
+ private:
   // Звук меню
   sf::Music backgroundMenuMusic;
+    
+  // Наведение на кнопку
+  sf::SoundBuffer onButtonBuffer;
+  sf::Sound onButtonSound;
+    
+  // Выбор кнопки
+  sf::SoundBuffer selectButtonBuffer;
+  sf::Sound selectButtonSound;
+    
+  // Звук игры
+  sf::Music backgroundGameMusic;
 
   // Стрельба игроком
   sf::SoundBuffer hitPlayerBuffer;

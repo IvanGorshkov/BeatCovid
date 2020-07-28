@@ -4,7 +4,7 @@
 #include <string>
 #include "Entity.h"
 
-#define ENEMY_HIT_TIME 1000
+#define ENEMY_HIT_TIME 1500
 
 class Enemy : public Entity {
  public:

@@ -17,6 +17,9 @@
 #include "SafeTransport.h"
 #include "UnSafeTransport.h"
 #include "Sick.h"
+#include "GameTreatPatientProgressBar.h"
+
+#define FIRE_TIME 1000
 
 class GameManager {
  public:
@@ -25,13 +28,13 @@ class GameManager {
                        MusicManager &music,
                        const std::vector<int> &arms,
                        int points,
-                       std::vector<int> stat,
+                       const std::vector<int> &stat,
                        const std::vector<float> &config);
 
   // Обновление всех классов
   void Update(float time);
   // Вывод всех классов на экран
-  void Draw(sf::RenderWindow &window);
+  void Draw(sf::RenderWindow &window, float x, float y, int height, int width);
   // Получение игрока
   std::shared_ptr<Player> GetPlayer();
   // Огонь игроком
@@ -44,15 +47,17 @@ class GameManager {
  private:
   MusicManager &music;
 //  GameFPS fps;
-
+    
   std::vector<int> stat;
   int antigenPoints;
 
   std::vector<Object> obj;
   std::shared_ptr<Player> player;
+  int fireTimer;
   std::shared_ptr<Sick> sick;
 
   GameLabelManager labelManager;
+  GameTreatPatientProgressBar progressBar;
   void drawPlayerData(sf::RenderWindow &window);
 //  void drawFPS(sf::RenderWindow &window);
 
@@ -71,12 +76,12 @@ class GameManager {
   std::list<std::shared_ptr<Enemy>> enemies;
   std::list<std::shared_ptr<Enemy>>::iterator enemiesIt;
   void updateEnemy(float time);
-  void drawEnemy(sf::RenderWindow &window);
+  void drawEnemy(sf::RenderWindow &window, float leftX, float rightX, float upY, float downY);
 
   // Методы работы с классом Antibodies
   std::list<Antibodies> antibodies;
   std::list<Antibodies>::iterator antibodiesIt;
-  void drawAntibodies(sf::RenderWindow &window);
+  void drawAntibodies(sf::RenderWindow &window, float leftX, float rightX, float upY, float downY);
   void updateAntibodies();
 
   // Методы работы с классом Transport
@@ -87,7 +92,7 @@ class GameManager {
   void updateTransport(float time);
   void updateSafeTransport(float time);
   void updateUnSafeTransport(float time);
-  void drawTransport(sf::RenderWindow &window);
-  void drawSafeTransport(sf::RenderWindow &window);
-  void drawUnSafeTransport(sf::RenderWindow &window);
+  void drawTransport(sf::RenderWindow &window, float leftX, float rightX, float upY, float downY);
+  void drawSafeTransport(sf::RenderWindow &window, float leftX, float rightX, float upY, float downY);
+  void drawUnSafeTransport(sf::RenderWindow &window, float leftX, float rightX, float upY, float downY);
 };
