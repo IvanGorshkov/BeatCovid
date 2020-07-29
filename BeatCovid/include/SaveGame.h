@@ -4,7 +4,7 @@
 #include <string>
 #include "ResourcePath.hpp"
 
-#define MAX_LVL 6
+#define MAX_LVL 7
 #define LVL_FILE resourcePath() + "files/saves/save_lvl.txt"
 #define MAPS_PATH resourcePath() + "files/maps/"
 #define POINTS_FILE resourcePath() + "files/saves/save_points.txt"
