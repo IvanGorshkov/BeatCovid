@@ -40,10 +40,10 @@ sf::Vector2i calculatePlayerPosition(unsigned int width,
 
 void setPrice(std::vector<int> arm_vctr, InterfaceLabel &lbl, int id) {
   std::ostringstream str;
-  if (arm_vctr[id] * 100 + 100 >= 500) {
+  if (arm_vctr[id] * 200 + 200 >= 1000) {
     str << "max";
   } else {
-    str << arm_vctr[id] * 100 + 100;
+      str << arm_vctr[id] * 200 + 200;
   }
   lbl.SetText(str.str());
 }
@@ -815,12 +815,12 @@ bool Interface::shopMenu(sf::RenderWindow &window) {
                                width / 1.67, height / 1.4,
                                width / 15, width / 15);
 
-  InterfaceLabel lvlShoesText(textFontPath, textSize, width / 1.46, height / 3.5);
-  InterfaceLabel lvlCapText(textFontPath, textSize, width / 4.2, height / 3.5);
-  InterfaceLabel lvlRobeText(textFontPath, textSize, width / 2.15, height / 1.18);
-  InterfaceLabel costShoesText(textFontPath, textSize, width / 1.2, height / 4);
-  InterfaceLabel costCapText(textFontPath, textSize, width / 9, height / 4);
-  InterfaceLabel costRobeText(textFontPath, textSize, width / 1.64, height / 1.22);
+  InterfaceLabel lvlShoesText(textFontPath, textSize, width / 1.42, height / 3.5);
+  InterfaceLabel lvlCapText(textFontPath, textSize, width / 4.0, height / 3.5);
+  InterfaceLabel lvlRobeText(textFontPath, textSize, width / 2.10, height / 1.18);
+  InterfaceLabel costShoesText(textFontPath, textSize, width / 1.19, height / 4);
+    InterfaceLabel costCapText(textFontPath, textSize, width / 8.6, height / 4);
+  InterfaceLabel costRobeText(textFontPath, textSize, width / 1.62, height / 1.22);
 
   std::ostringstream ssPoints;
   int money = Save::LoadPoints();
@@ -893,7 +893,7 @@ bool Interface::shopMenu(sf::RenderWindow &window) {
         if (event.mouseButton.button == sf::Mouse::Left) {
           if (menuNum == 0 || menuNum == 1 || menuNum == 2) {
             if (arm_vector[menuNum] < 4) {
-              int cost = arm_vector[menuNum] * 100 + 100;
+              int cost = arm_vector[menuNum] * 200 + 200;
               if (cost <= money) {
                 buy(arm_vector, menuNum);
                 Save::SavePoints(money - cost);
