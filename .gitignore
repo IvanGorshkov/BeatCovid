@@ -1,6 +1,7 @@
 .DS_Store
 .idea/
 .vscode/
+.vs/
 build/
 linters/
 cmake-build-debug/
@@ -17,3 +18,4 @@ BeatCovid/x64
 *.ipdb
 *.obj
 *.iobj
+*.exe
