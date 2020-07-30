@@ -1,2 +1,0 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(1016,5): warning MSB8027: два или более файлов с именем main.cpp выводят результаты в одно и то же расположение. Это может стать причиной неверного результата сборки.  Включенные файлы — main.cpp, src\main.cpp.
-  BeatCovid.vcxproj -> C:\Win_Version\x64\Release\BeatCovid.exe
