@@ -23,7 +23,7 @@ class MusicManager {
   void StopBackgroundMenuMusic();
   void PlayOnButtonSound();
   void PlaySelectButtonSound();
-    
+
   void PlayBackgroundGameMusic();
   void StopBackgroundGameMusic();
   void PlayHitPlayerSound();
@@ -43,15 +43,15 @@ class MusicManager {
  private:
   // Звук меню
   sf::Music backgroundMenuMusic;
-    
+
   // Наведение на кнопку
   sf::SoundBuffer onButtonBuffer;
   sf::Sound onButtonSound;
-    
+
   // Выбор кнопки
   sf::SoundBuffer selectButtonBuffer;
   sf::Sound selectButtonSound;
-    
+
   // Звук игры
   sf::Music backgroundGameMusic;
 

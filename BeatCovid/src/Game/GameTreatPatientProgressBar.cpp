@@ -26,10 +26,12 @@ void GameTreatPatientProgressBar::Draw(sf::RenderWindow &window, bool isDraw) {
       }
     }
 
-    progress.setPosition(xPosition + (window.getView().getSize().x - progressWidth) / 2, yPosition + 20 + window.getView().getSize().y / 70);
-    bar.setPosition(xPosition + (window.getView().getSize().x - progressWidth) / 2, yPosition + 20 + window.getView().getSize().y / 70);
+    progress.setPosition(xPosition + (window.getView().getSize().x - progressWidth) / 2,
+                         yPosition + 20 + window.getView().getSize().y / 70);
+    bar.setPosition(xPosition + (window.getView().getSize().x - progressWidth) / 2,
+                    yPosition + 20 + window.getView().getSize().y / 70);
     progress.setSize(sf::Vector2f(status, progressHeight));
-    bar.setSize(sf::Vector2f( progressWidth, progressHeight));
+    bar.setSize(sf::Vector2f(progressWidth, progressHeight));
 
     window.draw(progress);
     window.draw(bar);

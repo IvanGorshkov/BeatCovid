@@ -1,8 +1,8 @@
 #include "Robe.h"
 #include "ResourcePath.hpp"
 
-Robe::Robe(float x, float y, float w, float h, int lvl)
-    : Armor(x, y, w, h, lvl) {
+Robe::Robe(float x, float y, int width, int height, int lvl)
+    : Armor(x, y, width, height, lvl) {
   sf::Texture player_t;
   switch (lvl) {
     case 0: {
@@ -32,6 +32,12 @@ Robe::Robe(float x, float y, float w, float h, int lvl)
     case 4: {
       player_t.loadFromFile(resourcePath() + "files/images/halat_4.png");
       arm = 4;
+      break;
+    }
+
+    default: {
+      player_t.loadFromFile(resourcePath() + "files/images/free.png");
+      arm = 0;
       break;
     }
   }

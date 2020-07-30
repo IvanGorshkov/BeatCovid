@@ -1,8 +1,8 @@
 #include "Player.h"
 #include "ResourcePath.hpp"
 
-Player::Player(const sf::FloatRect &position, std::vector<int> armors, float hp, int dmg, int points)
-    : Entity(position.left, position.top, 0.1, 0.1, 64, 64),
+Player::Player(const sf::FloatRect &position, int hp, int dmg, int points, std::vector<int> armors)
+    : Entity(position.left, position.top, 64, 64),
       startPlayerPosition(position),
       hp(hp),
       dmg(dmg),
@@ -27,7 +27,6 @@ Player::Player(const sf::FloatRect &position, std::vector<int> armors, float hp,
       bathrobe(position.left, position.top, 64, 64, armors[2]),
       shoes(position.left, position.top, 64, 64, armors[1]),
       cap(position.left, position.top, 64, 64, armors[0]) {
-
   anim = AnimationManager(resourcePath() + "files/images/doctor.png");
 
   anim.Create("walk", 76, 76, 64, 64, 7, 0.005, 72);
@@ -51,7 +50,7 @@ void Player::keyCheck() {
         STATE = STAY;
       }
     }
-    
+
   if (key["L"]) {
     dir = true;
     if (STATE == STAY) {
@@ -59,7 +58,7 @@ void Player::keyCheck() {
       dx = -PLAYER_DX;
       treat = false;
     }
-      
+
       if (STATE == JUMP) {
           STATE = JUMP;
           dx = -PLAYER_DX;
@@ -74,7 +73,7 @@ void Player::keyCheck() {
       dx = PLAYER_DX;
       treat = false;
     }
-      
+
       if (STATE == JUMP) {
           STATE = JUMP;
           dx = PLAYER_DX;
@@ -165,7 +164,7 @@ void Player::Update(float time, std::vector<Object> &obj) {
     }
   }
 
-  setDir(dir);
+  setDir();
 
   if (STATE != JUMP) {
     if ((STATE == STAY || STATE == RUN || STATE == LAY) && !isGround) {
@@ -221,7 +220,7 @@ void Player::setAnim(const std::string &str) {
   cap.SetAnim(str);
 }
 
-void Player::setDir(bool dir) {
+void Player::setDir() {
   anim.Flip(dir);
   bathrobe.FlipAnim(dir);
   shoes.FlipAnim(dir);
@@ -291,29 +290,23 @@ void Player::DrawObjs(sf::RenderWindow &window) {
   cap.Draw(window);
 }
 
-float Player::TakeDamge(float getDmg) {
-  if (getDmg == 0) {
-    return hp;
-  }
-
+void Player::TakeDamage(int getDmg) {
   if (hp > 0) {
     if (GetArm() >= getDmg) {
       --hp;
     } else {
-      hp += GetArm() - getDmg;
+      hp += arm - getDmg;
     }
     dmgC = PLAYER_DAMAGED_ANIM_TIME;
     tookDmg = true;
   }
+}
 
+int Player::GetHp() const {
   return hp;
 }
 
-float Player::GetHp() const {
-  return hp;
-}
-
-float Player::GetArm() const {
+int Player::GetArm() const {
   return arm;
 }
 
@@ -321,8 +314,8 @@ bool Player::GetDir() const {
   return dir;
 }
 
-void Player::SetKey(const std::string &name, bool value) {
-  key[name] = value;
+void Player::SetKey(const std::string &name) {
+  key[name] = true;
 }
 
 void Player::ChangePoints(int getPoints) {

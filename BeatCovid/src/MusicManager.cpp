@@ -7,7 +7,7 @@ MusicManager::MusicManager()
   backgroundMenuMusic.openFromFile(resourcePath() + "files/music/menuBack.wav");
   backgroundMenuMusic.setLoop(true);
   backgroundMenuMusic.setVolume(BACK_MENU);
-  
+
   onButtonBuffer.loadFromFile(resourcePath() + "files/music/onButton.wav");
   onButtonSound.setBuffer(onButtonBuffer);
   onButtonSound.setVolume(ON_BUTTON);
@@ -15,7 +15,7 @@ MusicManager::MusicManager()
   selectButtonBuffer.loadFromFile(resourcePath() + "files/music/selectButton.wav");
   selectButtonSound.setBuffer(selectButtonBuffer);
   selectButtonSound.setVolume(SELECT_BUTTON);
-          
+
   backgroundGameMusic.openFromFile(resourcePath() + "files/music/gameBack.wav");
   backgroundGameMusic.setLoop(true);
   backgroundGameMusic.setVolume(BACK_GAME);
@@ -68,13 +68,12 @@ void MusicManager::StopBackgroundMenuMusic() {
 }
 
 void MusicManager::PlayOnButtonSound() {
-    onButtonSound.play();
+  onButtonSound.play();
 }
 
 void MusicManager::PlaySelectButtonSound() {
-    selectButtonSound.play();
+  selectButtonSound.play();
 }
-
 
 void MusicManager::PlayBackgroundGameMusic() {
   backgroundGameMusic.play();
@@ -121,7 +120,7 @@ void MusicManager::PlayCarSound() {
 }
 
 void MusicManager::StopCarSound() {
-    carSound.stop();
+  carSound.stop();
 }
 
 void MusicManager::PlayGetAntibodiesSound() {

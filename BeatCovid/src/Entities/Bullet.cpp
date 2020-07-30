@@ -1,10 +1,11 @@
 #include "Bullet.h"
 #include "ResourcePath.hpp"
 
-Bullet::Bullet(float x, float y, float dx, float dy, float dmg, bool player)
-    : Entity(x, y, dx, dy, 16, 16), dmg(dmg),
-      timerDie(0),
-      isDie(false) {
+Bullet::Bullet(float x, float y, float dx, float dy, int dmg, bool player)
+    : Entity(x, y, dx, dy, 16, 16),
+      dmg(dmg),
+      isDie(false),
+      timerDie(0) {
   anim = AnimationManager(resourcePath() + "files/images/bullets.png");
 
   if (player) {
@@ -39,7 +40,7 @@ void Bullet::Update(float time, std::vector<Object> &obj) {
   anim.Tick(time);
 }
 
-float Bullet::GetDmg() const {
+int Bullet::GetDmg() const {
   return dmg;
 }
 

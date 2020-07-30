@@ -15,13 +15,14 @@
 class Save {
  public:
   Save();
-  void ChangeLvl();
+  void NextLvl();
+  void LastLvl();
   void SetEndGame();
   int GetLvl() const;
   std::string GetLvlName();
   void SaveGame(int points) const;
-    
-  bool CheckEndGame();
+
+  bool CheckEndGame() const;
 
   static bool IsExistLvlFile();
   static void RemoveGameSaves();
@@ -39,8 +40,8 @@ class Save {
   static std::vector<int> LoadStat();
   static void SaveStat(const std::vector<int> &stat);
 
-  static std::vector<float> LoadConfig();
-  static void SaveConfig(const std::vector<float> &config);
+  static std::vector<int> LoadConfig();
+  static void SaveConfig(const std::vector<int> &config);
 
  private:
   int lvl;

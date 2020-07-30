@@ -251,14 +251,14 @@ sf::Vector2i Level::GetTileSize() const {
 }
 
 void Level::Draw(sf::RenderWindow &window, unsigned int height, unsigned int width, float x, float y) {
-    auto currentRect = sf::FloatRect(x - width / 2 - 64, y - height / 2 - 64, width + 128, height + 128);
+  auto currentRect = sf::FloatRect(x - width / 2 - 64, y - height / 2 - 64, width + 128, height + 128);
 
-    // Рисуем все тайлы (объекты НЕ рисуем!)
-    for (auto &layer : layers) {
-      for (const auto &tile : layer.tiles) {
-        if (currentRect.contains(tile.getPosition().x, tile.getPosition().y)) {
-          window.draw(tile);
-        }
+  // Рисуем все тайлы (объекты НЕ рисуем!)
+  for (auto &layer : layers) {
+    for (const auto &tile : layer.tiles) {
+      if (currentRect.contains(tile.getPosition().x, tile.getPosition().y)) {
+        window.draw(tile);
       }
     }
+  }
 }

@@ -29,7 +29,7 @@ GameLabel::GameLabel(unsigned int getSize, const std::string &getStr)
 
 GameLabel::GameLabel(unsigned int getSize, const std::string &getStr, sf::Color color)
     : GameLabel(getSize, getStr) {
-   text.setFillColor(color);
+  text.setFillColor(color);
 }
 
 void GameLabel::SetText(const std::string &getStr) {

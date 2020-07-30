@@ -12,8 +12,10 @@
 #include "Antibodies.h"
 #include "GameLabelManager.h"
 #include "GameLabel.h"
+#include "Breaker.h"
+#include "Delivery.h"
 #include "Police.h"
-#include "OrdinaryEnemies.h"
+#include "Virus.h"
 #include "SafeTransport.h"
 #include "UnSafeTransport.h"
 #include "Sick.h"
@@ -24,19 +26,19 @@
 class GameManager {
  public:
   explicit GameManager(Level &lvl,
-                       unsigned int textSize,
+                       int textSize,
                        MusicManager &music,
                        const std::vector<int> &arms,
                        int points,
-                       const std::vector<int> &stat,
-                       const std::vector<float> &config);
+                       std::vector<int> stat,
+                       const std::vector<int> &config);
 
   // Обновление всех классов
   void Update(float time);
   // Вывод всех классов на экран
   void Draw(sf::RenderWindow &window, float x, float y, int height, int width);
   // Получение игрока
-  Player& GetPlayer();
+  Player &GetPlayer();
   // Огонь игроком
   void Fire();
   // Садится в транспорт
@@ -47,13 +49,13 @@ class GameManager {
  private:
   MusicManager &music;
 //  GameFPS fps;
-    
+
   std::vector<int> stat;
   int antigenPoints;
 
   std::vector<Object> obj;
   Player player;
-  int fireTimer;
+  float fireTimer;
   std::shared_ptr<Sick> sick;
 
   GameLabelManager labelManager;

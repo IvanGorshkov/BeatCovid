@@ -1,14 +1,11 @@
 #pragma once
 
+#include <string>
 #include "Enemy.h"
-
-#define POLICE_HP 3
-#define POLICE_DMG 6
-#define POLICE_PENALTY 50
 
 class Police : public Enemy {
  public:
-  explicit Police(float x, float y, int height, int weight, int hp, int dmg, int penalty);
+  explicit Police(float x, float y, int width, int height, int hp, int dmg, int penalty, const std::string &name);
   int Penatly();
   bool IsDrawPenaltyMenu();
   bool ISDrawDiedMenu();
@@ -20,4 +17,3 @@ class Police : public Enemy {
   bool drawDiedMenu;
   bool isMetUser;
 };
-

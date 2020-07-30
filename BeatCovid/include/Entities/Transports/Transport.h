@@ -5,7 +5,7 @@
 
 class Transport : public Entity {
  public:
-  explicit Transport(float x, float y, int height, int weight, std::string name);
+  explicit Transport(float x, float y, int width, int height, std::string name);
   void SetDrive();
   bool IsDrive() const;
   bool GetDir() const;

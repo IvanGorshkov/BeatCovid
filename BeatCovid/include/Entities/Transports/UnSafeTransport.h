@@ -5,21 +5,18 @@
 #include "Transport.h"
 
 #define HP_TIME_LOSS 2000
-#define BUS_DMG 4
 #define BUS_DX 0.3
-#define METRO_DMG 5
 #define METRO_DX 0.4
 
 class UnSafeTransport : public Transport {
  public:
-  explicit UnSafeTransport(float x, float y, int height, int weight, const std::string &name, std::vector<float> config);
+  explicit UnSafeTransport(float x, float y, int width, int height, const std::string &name, std::vector<int> config);
   void Update(float time, std::vector<Object> &obj) override;
-  float GetDmg();
-  float PrintDmg() const;
+  int GetDmg();
 
  private:
-  float dmg;
+  int dmg{};
   float timerHit;
-  void setBus(float getDmg);
-  void setMetro(float getDmg);
+  void setBus(int getDmg);
+  void setMetro(int getDmg);
 };

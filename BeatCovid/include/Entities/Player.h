@@ -19,13 +19,13 @@
 
 class Player : public Entity {
  public:
-  explicit Player(const sf::FloatRect &position, std::vector<int> armors, float hp, int dmg, int points);
+  explicit Player(const sf::FloatRect &position, int hp, int dmg, int points, std::vector<int> armors);
   void Update(float time, std::vector<Object> &obj) override;
-  void SetKey(const std::string &name, bool value);
+  void SetKey(const std::string &name);
   bool GetDir() const;
-  float GetHp() const;
-  float GetArm() const;
-  float TakeDamge(float dmg);
+  int GetHp() const;
+  int GetArm() const;
+  void TakeDamage(int getDmg);
   int GetDmg() const;
   void ChangePoints(int getPoints);
   int GetPoints() const;
@@ -48,7 +48,7 @@ class Player : public Entity {
   void keyCheck();
   void collision(int num, std::vector<Object> &objs);
   void setAnim(const std::string &str);
-  void setDir(bool dir);
+  void setDir();
 
   enum {
     STAY,
@@ -69,8 +69,8 @@ class Player : public Entity {
   bool dir;
   bool fire;
   int dmg;
-  float hp;
-  float arm;
+  int hp;
+  int arm;
   float max_jump;
   int points;
   bool isGround;

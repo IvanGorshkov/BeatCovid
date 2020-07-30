@@ -9,13 +9,13 @@
 
 class Bullet : public Entity {
  public:
-  explicit Bullet(float x, float y, float dx, float dy, float dmg, bool player);
+  explicit Bullet(float x, float y, float dx, float dy, int dmg, bool player);
   void Update(float time, std::vector<Object> &obj) override;
-  float GetDmg() const;
+  int GetDmg() const;
   bool IsDie();
 
  private:
-  float dmg;
+  int dmg;
   bool isDie;
   float timerDie;
 };

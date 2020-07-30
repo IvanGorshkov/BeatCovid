@@ -1,7 +1,7 @@
 #include "Transport.h"
 
-Transport::Transport(float x, float y, int height, int weight, std::string name)
-    : Entity(x, y, 0, 0, height, weight),
+Transport::Transport(float x, float y, int wight, int height, std::string name)
+    : Entity(x, y, wight, height),
       name(std::move(name)),
       isDrive(false),
       isHitWall(false),

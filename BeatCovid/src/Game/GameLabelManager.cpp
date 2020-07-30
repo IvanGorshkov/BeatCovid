@@ -14,7 +14,7 @@ void GameLabelManager::SetText(const std::string &mapStr, const std::string &get
 void GameLabelManager::Draw(const std::string &mapStr, sf::RenderWindow &window) {
   int height = window.getView().getSize().y;
   int width = window.getView().getSize().x;
-    
+
   sf::Vector2f center = window.getView().getCenter();
   sf::Vector2f size = window.getView().getSize();
 
@@ -56,13 +56,8 @@ void GameLabelManager::Draw(const std::string &mapStr, sf::RenderWindow &window)
       break;
     }
 
-    case PLAYER_POSITION: {
-      break;
-    }
-          
-    case CUSTOM_POSITION: {
-      break;
-    }
+    case PLAYER_POSITION:break;
+    case CUSTOM_POSITION:break;
   }
 
   gameLabel[mapStr]->SetPosition(xPosition + x, yPosition + y);
@@ -74,7 +69,7 @@ void GameLabelManager::Draw(const std::string &mapStr, sf::RenderWindow &window,
     gameLabel[mapStr]->SetPosition(x + SHIFT * 3, y - SHIFT * 3);
     gameLabel[mapStr]->Draw(window);
   }
-    
+
   if (labelPositionSettings[mapStr] == CUSTOM_POSITION) {
     gameLabel[mapStr]->SetPosition(x, y);
     gameLabel[mapStr]->Draw(window);

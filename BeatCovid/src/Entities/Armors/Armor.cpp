@@ -1,7 +1,8 @@
 #include "Armor.h"
 
-Armor::Armor(float x, float y, float w, float h, int lvl)
-    : Entity(x, y, 0, 0, w, h),
+Armor::Armor(float x, float y, int width, int height, int lvl)
+    : Entity(x, y, width, height),
+      arm(0),
       lvl(lvl) {
 }
 

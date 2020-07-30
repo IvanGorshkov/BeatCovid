@@ -25,7 +25,6 @@
 		AC86CCF124A3DAC1007D9C2D /* Sick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCEC24A3DAC1007D9C2D /* Sick.cpp */; };
 		AC86CCF524A3DAC7007D9C2D /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCF224A3DAC7007D9C2D /* Enemy.cpp */; };
 		AC86CCF624A3DAC7007D9C2D /* Police.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCF324A3DAC7007D9C2D /* Police.cpp */; };
-		AC86CCF724A3DAC7007D9C2D /* OrdinaryEnemies.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCF424A3DAC7007D9C2D /* OrdinaryEnemies.cpp */; };
 		AC86CCFB24A3DACD007D9C2D /* SafeTransport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCF824A3DACC007D9C2D /* SafeTransport.cpp */; };
 		AC86CCFC24A3DACD007D9C2D /* UnSafeTransport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCF924A3DACC007D9C2D /* UnSafeTransport.cpp */; };
 		AC86CCFD24A3DACD007D9C2D /* Transport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC86CCFA24A3DACC007D9C2D /* Transport.cpp */; };
@@ -44,6 +43,9 @@
 		AC9196D324AD39AD00C28412 /* Interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC9196CE24AD39AD00C28412 /* Interface.cpp */; };
 		AC9196D424AD39AD00C28412 /* InterfaceTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC9196CF24AD39AD00C28412 /* InterfaceTable.cpp */; };
 		AC9196D524AD39AD00C28412 /* InterfaceImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC9196D024AD39AD00C28412 /* InterfaceImage.cpp */; };
+		ACB0D85524D367CF0005A1F0 /* Breaker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ACB0D85224D367CF0005A1F0 /* Breaker.cpp */; };
+		ACB0D85624D367CF0005A1F0 /* Virus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ACB0D85324D367CF0005A1F0 /* Virus.cpp */; };
+		ACB0D85724D367CF0005A1F0 /* Delivery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ACB0D85424D367CF0005A1F0 /* Delivery.cpp */; };
 		ACE7CF8924A3C5540016E5AD /* SFML in Resources */ = {isa = PBXBuildFile; fileRef = ACE7CF8824A3C5530016E5AD /* SFML */; };
 /* End PBXBuildFile section */
 
@@ -70,7 +72,6 @@
 		AC86CCB324A3D9A1007D9C2D /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		AC86CCB424A3D9A1007D9C2D /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
 		AC86CCB524A3D9A7007D9C2D /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
-		AC86CCB624A3D9A7007D9C2D /* OrdinaryEnemies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdinaryEnemies.h; sourceTree = "<group>"; };
 		AC86CCB724A3D9A7007D9C2D /* Police.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Police.h; sourceTree = "<group>"; };
 		AC86CCB824A3D9AC007D9C2D /* SafeTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SafeTransport.h; sourceTree = "<group>"; };
 		AC86CCB924A3D9AC007D9C2D /* UnSafeTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnSafeTransport.h; sourceTree = "<group>"; };
@@ -93,7 +94,6 @@
 		AC86CCEC24A3DAC1007D9C2D /* Sick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sick.cpp; sourceTree = "<group>"; };
 		AC86CCF224A3DAC7007D9C2D /* Enemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Enemy.cpp; sourceTree = "<group>"; };
 		AC86CCF324A3DAC7007D9C2D /* Police.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Police.cpp; sourceTree = "<group>"; };
-		AC86CCF424A3DAC7007D9C2D /* OrdinaryEnemies.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OrdinaryEnemies.cpp; sourceTree = "<group>"; };
 		AC86CCF824A3DACC007D9C2D /* SafeTransport.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SafeTransport.cpp; sourceTree = "<group>"; };
 		AC86CCF924A3DACC007D9C2D /* UnSafeTransport.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnSafeTransport.cpp; sourceTree = "<group>"; };
 		AC86CCFA24A3DACC007D9C2D /* Transport.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transport.cpp; sourceTree = "<group>"; };
@@ -120,6 +120,12 @@
 		AC9196D924AD39D500C28412 /* InterfaceButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceButton.h; sourceTree = "<group>"; };
 		AC9196DA24AD39D500C28412 /* InterfaceTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceTable.h; sourceTree = "<group>"; };
 		AC9196DB24AD39D500C28412 /* InterfaceLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceLabel.h; sourceTree = "<group>"; };
+		ACB0D84F24D367A70005A1F0 /* Breaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Breaker.h; sourceTree = "<group>"; };
+		ACB0D85024D367A70005A1F0 /* Delivery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Delivery.h; sourceTree = "<group>"; };
+		ACB0D85124D367A70005A1F0 /* Virus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Virus.h; sourceTree = "<group>"; };
+		ACB0D85224D367CF0005A1F0 /* Breaker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Breaker.cpp; sourceTree = "<group>"; };
+		ACB0D85324D367CF0005A1F0 /* Virus.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Virus.cpp; sourceTree = "<group>"; };
+		ACB0D85424D367CF0005A1F0 /* Delivery.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Delivery.cpp; sourceTree = "<group>"; };
 		ACE7CF8824A3C5530016E5AD /* SFML */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SFML; path = BeatCovid/SFML; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -272,8 +278,10 @@
 		AC86CC9824A3D82F007D9C2D /* Enemies */ = {
 			isa = PBXGroup;
 			children = (
+				ACB0D85224D367CF0005A1F0 /* Breaker.cpp */,
+				ACB0D85424D367CF0005A1F0 /* Delivery.cpp */,
+				ACB0D85324D367CF0005A1F0 /* Virus.cpp */,
 				AC86CCF224A3DAC7007D9C2D /* Enemy.cpp */,
-				AC86CCF424A3DAC7007D9C2D /* OrdinaryEnemies.cpp */,
 				AC86CCF324A3DAC7007D9C2D /* Police.cpp */,
 			);
 			path = Enemies;
@@ -336,8 +344,10 @@
 		AC86CC9E24A3D865007D9C2D /* Enemies */ = {
 			isa = PBXGroup;
 			children = (
+				ACB0D84F24D367A70005A1F0 /* Breaker.h */,
+				ACB0D85024D367A70005A1F0 /* Delivery.h */,
+				ACB0D85124D367A70005A1F0 /* Virus.h */,
 				AC86CCB524A3D9A7007D9C2D /* Enemy.h */,
-				AC86CCB624A3D9A7007D9C2D /* OrdinaryEnemies.h */,
 				AC86CCB724A3D9A7007D9C2D /* Police.h */,
 			);
 			path = Enemies;
@@ -470,12 +480,13 @@
 				AC86CCFB24A3DACD007D9C2D /* SafeTransport.cpp in Sources */,
 				AC86CCC224A3D9C0007D9C2D /* tinyxmlerror.cpp in Sources */,
 				AC86CD0924A3DAD9007D9C2D /* Animation.cpp in Sources */,
+				ACB0D85624D367CF0005A1F0 /* Virus.cpp in Sources */,
 				AC8B853C24B3AC470091BAF2 /* GameLabelManager.cpp in Sources */,
 				AC86CCC324A3D9C0007D9C2D /* tinyxml.cpp in Sources */,
 				AC86CD0324A3DAD3007D9C2D /* Robe.cpp in Sources */,
+				ACB0D85524D367CF0005A1F0 /* Breaker.cpp in Sources */,
 				AC86CD0224A3DAD3007D9C2D /* Shoes.cpp in Sources */,
 				AC86CCFD24A3DACD007D9C2D /* Transport.cpp in Sources */,
-				AC86CCF724A3DAC7007D9C2D /* OrdinaryEnemies.cpp in Sources */,
 				AC0B220F249ED1F6000CE7AC /* main.cpp in Sources */,
 				AC86CCED24A3DAC1007D9C2D /* Antibodies.cpp in Sources */,
 				AC86CCC424A3D9C0007D9C2D /* tinyxmlparser.cpp in Sources */,
@@ -484,6 +495,7 @@
 				AC639CBF24C8DD2E00436853 /* GameTreatPatientProgressBar.cpp in Sources */,
 				AC86CCEE24A3DAC1007D9C2D /* Player.cpp in Sources */,
 				AC9196D424AD39AD00C28412 /* InterfaceTable.cpp in Sources */,
+				ACB0D85724D367CF0005A1F0 /* Delivery.cpp in Sources */,
 				AC86CD0424A3DAD3007D9C2D /* Armor.cpp in Sources */,
 				AC9196D524AD39AD00C28412 /* InterfaceImage.cpp in Sources */,
 				AC9196D224AD39AD00C28412 /* InterfaceLabel.cpp in Sources */,

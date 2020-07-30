@@ -4,5 +4,5 @@
 
 class Cap : public Armor {
  public:
-  Cap(float x, float y, float w, float h, int lvl);
+  Cap(float x, float y, int width, int height, int lvl);
 };

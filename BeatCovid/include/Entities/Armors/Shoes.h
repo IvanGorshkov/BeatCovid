@@ -4,5 +4,5 @@
 
 class Shoes : public Armor {
  public:
-  Shoes(float x, float y, float w, float h, int lvl);
+  Shoes(float x, float y, int width, int height, int lvl);
 };

@@ -1,8 +1,8 @@
 #include "Antibodies.h"
 #include "ResourcePath.hpp"
 
-Antibodies::Antibodies(float x, float y, int w, int h, const std::string &name)
-    : Entity(x, y, 0, 0, w, h),
+Antibodies::Antibodies(float x, float y, int width, int height, const std::string &name)
+    : Entity(x, y, width, height),
       name(name) {
   if (name == "antigen") {
     setAntigen();

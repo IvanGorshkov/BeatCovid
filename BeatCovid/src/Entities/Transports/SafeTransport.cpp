@@ -1,8 +1,8 @@
 #include "SafeTransport.h"
 #include "ResourcePath.hpp"
 
-SafeTransport::SafeTransport(float x, float y, int height, int weight, const std::string &name, std::vector<float> config)
-    : Transport(x, y, height, weight, name) {
+SafeTransport::SafeTransport(float x, float y, int width, int height, const std::string &name, std::vector<int> config)
+    : Transport(x, y, width, height, name) {
   if (name == "auto") {
     setAuto(config[11]);
   }
@@ -37,7 +37,7 @@ void SafeTransport::Update(float time, std::vector<Object> &obj) {
   anim.Tick(time);
 }
 
-void SafeTransport::setAuto(float getFuel) {
+void SafeTransport::setAuto(int getFuel) {
   dx = AUTO_DX;
   fuel = getFuel;
 
@@ -46,7 +46,7 @@ void SafeTransport::setAuto(float getFuel) {
   anim.Set("move");
 }
 
-void SafeTransport::setMonorail(float getFuel) {
+void SafeTransport::setMonorail(int getFuel) {
   dx = MONORAIL_DX;
   fuel = getFuel;
 
