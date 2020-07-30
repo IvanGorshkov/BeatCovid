@@ -9,3 +9,11 @@ save_armor.txt
 save_lvl.txt
 save_points.txt
 save_stat.txt
+Beatcovid/Debug
+BeatCovid/Release
+BeatCovid/x64
+*.ilk
+*.pdb
+*.ipdb
+*.obj
+*.iobj
