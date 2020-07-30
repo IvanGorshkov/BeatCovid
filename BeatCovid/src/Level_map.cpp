@@ -260,4 +260,5 @@ void Level::Draw(sf::RenderWindow &window, unsigned int height, unsigned int wid
         window.draw(tile);
       }
     }
+  }
 }
