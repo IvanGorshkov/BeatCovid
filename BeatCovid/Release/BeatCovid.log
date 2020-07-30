@@ -1,0 +1,711 @@
+﻿  main.cpp
+  ResourcePath.cpp
+  Animation.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Animation.cpp(6,23): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Animation.cpp(26,9): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+  AnimationManager.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\AnimationManager.cpp(13,46): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\AnimationManager.cpp(13,43): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\AnimationManager.cpp(34,47): warning C4244: return: преобразование "float" в "int", возможна потеря данных
+  Antibodies.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Antibodies.cpp(18,17): warning C4305: аргумент: усечение из "double" в "float"
+  Armor.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Armor.cpp(4,29): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Armor.cpp(4,26): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Armor.cpp(22,10): warning C4244: return: преобразование "const float" в "int", возможна потеря данных
+  Bullet.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Bullet.cpp(14,55): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Bullet.cpp(17,54): warning C4305: аргумент: усечение из "double" в "float"
+  Cap.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Cap.cpp(40,51): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Cap.cpp(41,50): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Cap.cpp(42,51): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Cap.cpp(44,54): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Cap.cpp(45,50): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Cap.cpp(46,51): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Cap.cpp(47,50): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Cap.cpp(48,52): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Cap.cpp(49,51): warning C4305: аргумент: усечение из "double" в "float"
+  Enemy.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Enemy.cpp(16,15): warning C4244: инициализация: преобразование "int" в "float", возможна потеря данных
+  Entity.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Entity.cpp(7,37): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Entity.cpp(7,30): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Entity.cpp(15,41): warning C4244: аргумент: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Entity.cpp(15,25): warning C4244: аргумент: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+  GameLabel.cpp
+  GameLabelManager.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\GameLabelManager.cpp(15,14): warning C4244: инициализация: преобразование "const T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\GameLabelManager.cpp(16,13): warning C4244: инициализация: преобразование "const T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+  GameManager.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\GameManager.cpp(17,20): warning C4244: инициализация: преобразование "const _Ty" в "int", возможна потеря данных
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\GameManager.cpp(69,20): warning C4244: +=: преобразование "float" в "int", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\GameManager.cpp(311,16): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\GameManager.cpp(314,16): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\xmemory(204,33): warning C4244: аргумент: преобразование "const _Ty" в "int", возможна потеря данных
+          with
+          [
+              _Ty=float
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\memory(1489): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::_Construct_in_place<_Ty,T&,T&,int,int,const float&,const float&,const float&>(_Ty &,T &,T &,int &&,int &&,const float &,const float &,const float &) noexcept(false)"
+          with
+          [
+              _Ty=Police,
+              T=float
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\memory(1587): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<T&,T&,int,int,const float&,const float&,const float&>(T &,T &,int &&,int &&,const float &,const float &,const float &)"
+          with
+          [
+              _Ty=Police,
+              T=float
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\memory(1588): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<T&,T&,int,int,const float&,const float&,const float&>(T &,T &,int &&,int &&,const float &,const float &,const float &)"
+          with
+          [
+              _Ty=Police,
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\GameManager.cpp(28): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::shared_ptr<Police> std::make_shared<Police,T&,T&,int,int,const _Ty&,const _Ty&,const _Ty&>(T &,T &,int &&,int &&,const _Ty &,const _Ty &,const _Ty &)"
+          with
+          [
+              T=float,
+              _Ty=float
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\xmemory(204,33): warning C4244: аргумент: преобразование "_Ty" в "float", возможна потеря данных
+          with
+          [
+              _Ty=int
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\memory(1489): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::_Construct_in_place<_Ty,float,float,int,int,int,int>(_Ty &,float &&,float &&,int &&,int &&,int &&,int &&) noexcept(false)"
+          with
+          [
+              _Ty=Sick
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\memory(1587): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<float,float,int,int,int,int>(float &&,float &&,int &&,int &&,int &&,int &&)"
+          with
+          [
+              _Ty=Sick
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\memory(1588): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<float,float,int,int,int,int>(float &&,float &&,int &&,int &&,int &&,int &&)"
+          with
+          [
+              _Ty=Sick
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\GameManager.cpp(54): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::shared_ptr<Sick> std::make_shared<Sick,T,T,int,int,int,int>(T &&,T &&,int &&,int &&,int &&,int &&)"
+          with
+          [
+              T=float
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\xmemory(671,103): warning C4244: аргумент: преобразование "_Ty" в "float", возможна потеря данных
+          with
+          [
+              _Ty=int
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\list(585): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::_Default_allocator_traits<_Alloc>::construct<_Ty,float,float,double,int,int,bool>(_Alloc &,_Objty *const ,float &&,float &&,double &&,int &&,int &&,bool &&)"
+          with
+          [
+              _Alloc=std::allocator<std::_List_node<Bullet,std::_Default_allocator_traits<std::allocator<Bullet>>::void_pointer>>,
+              _Ty=Bullet,
+              _Objty=Bullet
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\list(587): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::_Default_allocator_traits<_Alloc>::construct<_Ty,float,float,double,int,int,bool>(_Alloc &,_Objty *const ,float &&,float &&,double &&,int &&,int &&,bool &&)"
+          with
+          [
+              _Alloc=std::allocator<std::_List_node<Bullet,std::_Default_allocator_traits<std::allocator<Bullet>>::void_pointer>>,
+              _Ty=Bullet,
+              _Objty=Bullet
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\list(1013): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::_List_node_emplace_op2<std::allocator<std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer>>>::_List_node_emplace_op2<float,float,double,int,int,bool>(_Alnode &,float &&,float &&,double &&,int &&,int &&,bool &&)"
+          with
+          [
+              _Ty=Bullet,
+              _Alloc=std::allocator<Bullet>,
+              _Alnode=std::allocator<std::_List_node<Bullet,std::_Default_allocator_traits<std::allocator<Bullet>>::void_pointer>>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\list(1019): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::_List_node_emplace_op2<std::allocator<std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer>>>::_List_node_emplace_op2<float,float,double,int,int,bool>(_Alnode &,float &&,float &&,double &&,int &&,int &&,bool &&)"
+          with
+          [
+              _Ty=Bullet,
+              _Alloc=std::allocator<Bullet>,
+              _Alnode=std::allocator<std::_List_node<Bullet,std::_Default_allocator_traits<std::allocator<Bullet>>::void_pointer>>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\list(993): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer> *std::list<_Ty,_Alloc>::_Emplace<float,float,double,int,int,bool>(std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer> *const ,float &&,float &&,double &&,int &&,int &&,bool &&)"
+          with
+          [
+              _Ty=Bullet,
+              _Alloc=std::allocator<Bullet>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\list(994): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer> *std::list<_Ty,_Alloc>::_Emplace<float,float,double,int,int,bool>(std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer> *const ,float &&,float &&,double &&,int &&,int &&,bool &&)"
+          with
+          [
+              _Ty=Bullet,
+              _Alloc=std::allocator<Bullet>
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\GameManager.cpp(150): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::list<Bullet,std::allocator<Bullet>>::emplace_back<T,T,double,int,int,bool>(T &&,T &&,double &&,int &&,int &&,bool &&)"
+          with
+          [
+              T=float
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\xmemory(671,103): warning C4244: аргумент: преобразование "_Ty" в "float", возможна потеря данных
+          with
+          [
+              _Ty=double
+          ]
+  GameTreatPatientProgressBar.cpp
+  Interface.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(22,23): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(24,24): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(32,21): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(34,23): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(86,14): warning C4244: инициализация: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(87,12): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(88,12): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(103,71): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(103,30): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(184,73): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(184,53): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(185,36): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(185,24): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(217,73): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(217,53): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(218,36): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(218,24): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(299,50): warning C4244: аргумент: преобразование "unsigned int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(299,43): warning C4244: аргумент: преобразование "unsigned int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(300,54): warning C4244: аргумент: преобразование "unsigned int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(300,43): warning C4244: аргумент: преобразование "unsigned int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(307,15): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(308,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(309,13): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(310,15): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(393,18): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(403,114): warning C4244: аргумент: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(403,80): warning C4244: аргумент: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(406,79): warning C4244: аргумент: преобразование "T" в "float", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(406,61): warning C4244: аргумент: преобразование "T" в "float", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(407,57): warning C4244: аргумент: преобразование "T" в "float", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(407,39): warning C4244: аргумент: преобразование "T" в "float", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(408,58): warning C4244: аргумент: преобразование "T" в "float", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(408,40): warning C4244: аргумент: преобразование "T" в "float", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(579,86): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(643,82): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(669,94): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(760,82): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(762,97): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(792,82): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(796,53): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(796,40): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(795,76): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(795,44): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(800,54): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(800,41): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(799,56): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(799,41): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(804,52): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(804,39): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(803,53): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(803,39): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(808,53): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(808,40): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(807,55): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(807,40): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(812,51): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(812,39): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(811,55): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(811,39): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(816,49): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(816,37): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(815,50): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(815,37): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(820,50): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(820,38): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(819,53): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(819,38): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(822,76): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(822,61): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(823,73): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(823,59): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(824,75): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(824,60): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(825,76): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(825,62): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(826,72): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(826,60): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(827,76): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(827,61): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(862,43): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=double
+          ]
+          and
+          [
+              T=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(861,43): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=double
+          ]
+          and
+          [
+              T=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(860,49): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(859,49): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(871,45): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=double
+          ]
+          and
+          [
+              T=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(870,45): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=double
+          ]
+          and
+          [
+              T=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(869,51): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(868,51): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(879,44): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=double
+          ]
+          and
+          [
+              T=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(878,44): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=double
+          ]
+          and
+          [
+              T=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(877,50): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(876,50): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(959,86): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(965,52): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(965,39): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(964,75): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(964,43): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(969,51): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(969,38): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(968,52): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(968,38): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(973,53): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(973,40): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(972,55): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(972,40): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(977,52): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(977,39): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(976,54): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(976,39): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(994,77): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(994,62): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(998,74): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(998,60): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(1002,76): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(1002,61): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(1053,82): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+  InterfaceButton.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\InterfaceButton.cpp(12,32): warning C4244: аргумент: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\InterfaceButton.cpp(12,25): warning C4244: аргумент: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\InterfaceButton.cpp(12,22): warning C4244: аргумент: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\InterfaceButton.cpp(12,19): warning C4244: аргумент: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+  InterfaceImage.cpp
+  InterfaceLabel.cpp
+  InterfaceTable.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\InterfaceTable.cpp(74,86): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\InterfaceTable.cpp(88,18): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\InterfaceTable.cpp(93,89): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\InterfaceTable.cpp(216,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\InterfaceTable.cpp(222,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\InterfaceTable.cpp(228,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\InterfaceTable.cpp(233,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\InterfaceTable.cpp(239,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\InterfaceTable.cpp(244,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\xmemory(671,103): warning C4244: аргумент: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\vector(682): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::_Default_allocator_traits<_Alloc>::construct<_Ty,float&,float&>(_Alloc &,_Objty *const ,float &,float &)"
+          with
+          [
+              _Alloc=std::allocator<sf::Vector2i>,
+              _Ty=sf::Vector2<int>,
+              _Objty=sf::Vector2<int>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\vector(687): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::_Default_allocator_traits<_Alloc>::construct<_Ty,float&,float&>(_Alloc &,_Objty *const ,float &,float &)"
+          with
+          [
+              _Alloc=std::allocator<sf::Vector2i>,
+              _Ty=sf::Vector2<int>,
+              _Objty=sf::Vector2<int>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\vector(700): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::vector<sf::Vector2i,std::allocator<sf::Vector2i>>::_Emplace_back_with_unused_capacity<float&,float&>(float &,float &)"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\InterfaceTable.cpp(68): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::vector<sf::Vector2i,std::allocator<sf::Vector2i>>::emplace_back<float&,float&>(float &,float &)"
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\xmemory(671,103): warning C4244: аргумент: преобразование "_Ty" в "T", возможна потеря данных
+          with
+          [
+              _Ty=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\vector(682): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::_Default_allocator_traits<_Alloc>::construct<_Ty,int,float&>(_Alloc &,_Objty *const ,int &&,float &)"
+          with
+          [
+              _Alloc=std::allocator<sf::Vector2f>,
+              _Ty=sf::Vector2<float>,
+              _Objty=sf::Vector2<float>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\vector(687): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::_Default_allocator_traits<_Alloc>::construct<_Ty,int,float&>(_Alloc &,_Objty *const ,int &&,float &)"
+          with
+          [
+              _Alloc=std::allocator<sf::Vector2f>,
+              _Ty=sf::Vector2<float>,
+              _Objty=sf::Vector2<float>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\vector(700): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::vector<sf::Vector2f,std::allocator<sf::Vector2f>>::_Emplace_back_with_unused_capacity<_Ty,float&>(_Ty &&,float &)"
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\InterfaceTable.cpp(105): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::vector<sf::Vector2f,std::allocator<sf::Vector2f>>::emplace_back<int,float&>(int &&,float &)"
+  Level_map.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Level_map.cpp(10,16): warning C4244: return: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Level_map.cpp(83,21): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Level_map.cpp(84,27): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Level_map.cpp(117,45): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Level_map.cpp(117,30): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Level_map.cpp(169,31): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Level_map.cpp(169,28): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Level_map.cpp(187,26): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Level_map.cpp(188,27): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Level_map.cpp(189,29): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Level_map.cpp(190,28): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Level_map.cpp(255,97): warning C4244: аргумент: преобразование "unsigned int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Level_map.cpp(255,83): warning C4244: аргумент: преобразование "unsigned int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+  Компиляция...
+  MusicManager.cpp
+  OrdinaryEnemies.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\OrdinaryEnemies.cpp(25,49): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\OrdinaryEnemies.cpp(26,51): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\OrdinaryEnemies.cpp(27,51): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\OrdinaryEnemies.cpp(36,49): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\OrdinaryEnemies.cpp(37,50): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\OrdinaryEnemies.cpp(38,51): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\OrdinaryEnemies.cpp(47,49): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\OrdinaryEnemies.cpp(48,50): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\OrdinaryEnemies.cpp(49,51): warning C4305: аргумент: усечение из "double" в "float"
+  Player.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Player.cpp(29,69): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Player.cpp(35,51): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Player.cpp(36,50): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Player.cpp(37,51): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Player.cpp(39,54): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Player.cpp(40,50): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Player.cpp(41,51): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Player.cpp(42,50): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Player.cpp(43,51): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Player.cpp(44,52): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Player.cpp(46,44): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Player.cpp(54,17): warning C4305: =: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Player.cpp(63,16): warning C4305: =: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Player.cpp(70,16): warning C4305: =: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Player.cpp(96,15): warning C4305: =: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Player.cpp(165,13): warning C4305: =: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Player.cpp(169,27): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Player.cpp(171,15): warning C4305: =: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Player.cpp(350,18): warning C4244: аргумент: преобразование "float" в "const _Ty", возможна потеря данных
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Player.cpp(352,18): warning C4244: аргумент: преобразование "float" в "const _Ty", возможна потеря данных
+          with
+          [
+              _Ty=int
+          ]
+  Police.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Police.cpp(2,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Police.cpp(5,39): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Police.cpp(5,35): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Police.cpp(14,49): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Police.cpp(15,51): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Police.cpp(16,51): warning C4305: аргумент: усечение из "double" в "float"
+  Robe.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Robe.cpp(40,51): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Robe.cpp(41,50): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Robe.cpp(42,51): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Robe.cpp(44,54): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Robe.cpp(45,50): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Robe.cpp(46,51): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Robe.cpp(47,50): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Robe.cpp(48,52): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Robe.cpp(49,51): warning C4305: аргумент: усечение из "double" в "float"
+  SafeTransport.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\SafeTransport.cpp(23,22): warning C4305: -=: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\SafeTransport.cpp(41,15): warning C4305: =: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\SafeTransport.cpp(47,52): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\SafeTransport.cpp(52,19): warning C4305: =: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\SafeTransport.cpp(58,53): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\SafeTransport.cpp(63,10): warning C4244: return: преобразование "const float" в "int", возможна потеря данных
+  SaveGame.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\SaveGame.cpp(199,13): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+  Shoes.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Shoes.cpp(40,51): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Shoes.cpp(41,50): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Shoes.cpp(42,51): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Shoes.cpp(44,54): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Shoes.cpp(45,50): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Shoes.cpp(46,51): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Shoes.cpp(47,50): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Shoes.cpp(48,52): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Shoes.cpp(49,51): warning C4305: аргумент: усечение из "double" в "float"
+  Sick.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Sick.cpp(13,48): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Sick.cpp(14,51): warning C4305: аргумент: усечение из "double" в "float"
+  tinystr.cpp
+  tinyxml.cpp
+  tinyxmlerror.cpp
+  tinyxmlparser.cpp
+  Transport.cpp
+  UnSafeTransport.cpp
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\UnSafeTransport.cpp(55,14): warning C4305: =: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\UnSafeTransport.cpp(61,52): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\UnSafeTransport.cpp(66,16): warning C4305: =: усечение из "double" в "float"
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\UnSafeTransport.cpp(72,53): warning C4305: аргумент: усечение из "double" в "float"
+  Создание кода
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(454): warning C4715: Interface::endGameWarningMenu: значение возвращается не при всех путях выполнения
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Level_map.cpp(233): warning C4715: Level::GetObject: значение возвращается не при всех путях выполнения
+C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\src\Interface.cpp(415): warning C4715: Interface::startNewGame: значение возвращается не при всех путях выполнения
+  1550 of 2630 functions (58.9%) were compiled, the rest were copied from previous compilation.
+    322 functions were new in current compilation
+    67 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  BeatCovid.vcxproj -> C:\Users\alekh\source\repos\Win_BeatCovid\Release\BeatCovid.exe

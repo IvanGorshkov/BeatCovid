@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Исходные файлы\Animation">
+      <UniqueIdentifier>{e39c3f94-8419-4494-9c09-0ef6f3db0dea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Entities">
+      <UniqueIdentifier>{0d7656e5-1daf-42f4-a7c9-7b708268184a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Game">
+      <UniqueIdentifier>{effa5351-71df-459b-ad8d-95aa12ae4cc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Interface">
+      <UniqueIdentifier>{d321a42b-e174-4454-862c-4c7826ca6468}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Tinyxml">
+      <UniqueIdentifier>{b4bf61f8-0086-44ff-9aaa-2e36b6b4852b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Entities\Armors">
+      <UniqueIdentifier>{ece43d61-7c7f-4185-958b-83ef09939a86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Entities\Enemies">
+      <UniqueIdentifier>{bf319b5f-4cbd-4adb-bc41-94f8b214a921}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Entities\Transports">
+      <UniqueIdentifier>{8af3ddda-7e29-4164-9f3c-83c674757fc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Animation">
+      <UniqueIdentifier>{a3c789d5-114e-43f1-b4bf-e770647bef3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Entities">
+      <UniqueIdentifier>{2bb9b567-0821-4a3b-bf05-d9dfe47d7e1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Entities\Armors">
+      <UniqueIdentifier>{b7a15c42-1409-4384-922a-6b7caba6bccc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Entities\Enemies">
+      <UniqueIdentifier>{e43b8e2a-3101-41af-90c7-3c303c898d98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Entities\Transports">
+      <UniqueIdentifier>{56d26790-e070-48ac-ab0a-c7cfd23bbb41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Game">
+      <UniqueIdentifier>{c7cf032b-87a4-4989-a9e0-a84d35a7291c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Interface">
+      <UniqueIdentifier>{b90583e0-e3e2-42f0-96e3-6d4d6c7ce1cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Tinyxml">
+      <UniqueIdentifier>{c436bf81-3074-4523-bd71-11efc2afc3c7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ResourcePath.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Level_map.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MusicManager.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SaveGame.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tinyxml\tinystr.cpp">
+      <Filter>Исходные файлы\Tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tinyxml\tinyxml.cpp">
+      <Filter>Исходные файлы\Tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tinyxml\tinyxmlerror.cpp">
+      <Filter>Исходные файлы\Tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tinyxml\tinyxmlparser.cpp">
+      <Filter>Исходные файлы\Tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Interface\Interface.cpp">
+      <Filter>Исходные файлы\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Interface\InterfaceButton.cpp">
+      <Filter>Исходные файлы\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Interface\InterfaceImage.cpp">
+      <Filter>Исходные файлы\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Interface\InterfaceLabel.cpp">
+      <Filter>Исходные файлы\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Interface\InterfaceTable.cpp">
+      <Filter>Исходные файлы\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\GameLabel.cpp">
+      <Filter>Исходные файлы\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\GameLabelManager.cpp">
+      <Filter>Исходные файлы\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\GameManager.cpp">
+      <Filter>Исходные файлы\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\GameTreatPatientProgressBar.cpp">
+      <Filter>Исходные файлы\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Transports\SafeTransport.cpp">
+      <Filter>Исходные файлы\Entities\Transports</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Transports\Transport.cpp">
+      <Filter>Исходные файлы\Entities\Transports</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Transports\UnSafeTransport.cpp">
+      <Filter>Исходные файлы\Entities\Transports</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Enemies\Breaker.cpp">
+      <Filter>Исходные файлы\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Enemies\Delivery.cpp">
+      <Filter>Исходные файлы\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Enemies\Enemy.cpp">
+      <Filter>Исходные файлы\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Enemies\Police.cpp">
+      <Filter>Исходные файлы\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Enemies\Virus.cpp">
+      <Filter>Исходные файлы\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Armors\Armor.cpp">
+      <Filter>Исходные файлы\Entities\Armors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Armors\Cap.cpp">
+      <Filter>Исходные файлы\Entities\Armors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Armors\Robe.cpp">
+      <Filter>Исходные файлы\Entities\Armors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Armors\Shoes.cpp">
+      <Filter>Исходные файлы\Entities\Armors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Antibodies.cpp">
+      <Filter>Исходные файлы\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Bullet.cpp">
+      <Filter>Исходные файлы\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Entity.cpp">
+      <Filter>Исходные файлы\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Player.cpp">
+      <Filter>Исходные файлы\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Sick.cpp">
+      <Filter>Исходные файлы\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Animation\Animation.cpp">
+      <Filter>Исходные файлы\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Animation\AnimationManager.cpp">
+      <Filter>Исходные файлы\Animation</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\ResourcePath.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Animation\Animation.h">
+      <Filter>Файлы заголовков\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Animation\AnimationManager.h">
+      <Filter>Файлы заголовков\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Game\GameLabel.h">
+      <Filter>Файлы заголовков\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Game\GameLabelManager.h">
+      <Filter>Файлы заголовков\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Game\GameManager.h">
+      <Filter>Файлы заголовков\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Game\GameTreatPatientProgressBar.h">
+      <Filter>Файлы заголовков\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Interface\Interface.h">
+      <Filter>Файлы заголовков\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Interface\InterfaceButton.h">
+      <Filter>Файлы заголовков\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Interface\InterfaceImage.h">
+      <Filter>Файлы заголовков\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Interface\InterfaceLabel.h">
+      <Filter>Файлы заголовков\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Interface\InterfaceTable.h">
+      <Filter>Файлы заголовков\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tinyxml\tinystr.h">
+      <Filter>Файлы заголовков\Tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tinyxml\tinyxml.h">
+      <Filter>Файлы заголовков\Tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Level_map.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MusicManager.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SaveGame.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entities\Antibodies.h">
+      <Filter>Файлы заголовков\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entities\Bullet.h">
+      <Filter>Файлы заголовков\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entities\Entity.h">
+      <Filter>Файлы заголовков\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entities\Player.h">
+      <Filter>Файлы заголовков\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entities\Sick.h">
+      <Filter>Файлы заголовков\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entities\Armors\Armor.h">
+      <Filter>Файлы заголовков\Entities\Armors</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entities\Armors\Cap.h">
+      <Filter>Файлы заголовков\Entities\Armors</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entities\Armors\Robe.h">
+      <Filter>Файлы заголовков\Entities\Armors</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entities\Armors\Shoes.h">
+      <Filter>Файлы заголовков\Entities\Armors</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entities\Enemies\Breaker.h">
+      <Filter>Файлы заголовков\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entities\Enemies\Delivery.h">
+      <Filter>Файлы заголовков\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entities\Enemies\Enemy.h">
+      <Filter>Файлы заголовков\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entities\Enemies\Police.h">
+      <Filter>Файлы заголовков\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entities\Enemies\Virus.h">
+      <Filter>Файлы заголовков\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entities\Transports\SafeTransport.h">
+      <Filter>Файлы заголовков\Entities\Transports</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entities\Transports\Transport.h">
+      <Filter>Файлы заголовков\Entities\Transports</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entities\Transports\UnSafeTransport.h">
+      <Filter>Файлы заголовков\Entities\Transports</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

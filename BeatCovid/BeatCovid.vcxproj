@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{cd2fa1ea-58c7-4bb3-a232-1b39ed9d0ed3}</ProjectGuid>
+    <RootNamespace>BeatCovid</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\lib_x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Win_Version\BeatCovid\include\Tinyxml;C:\Win_Version\BeatCovid\include\Interface;C:\Win_Version\BeatCovid\include\Game;C:\Win_Version\BeatCovid\include\Entities\Transports;C:\Win_Version\BeatCovid\include\Entities\Enemies;C:\Win_Version\BeatCovid\include\Entities\Armors;C:\Win_Version\BeatCovid\include\Entities;C:\Win_Version\BeatCovid\include\Animation;C:\Win_Version\BeatCovid\include;C:\Win_Version\BeatCovid\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Win_Version\BeatCovid\SFML\lib_x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\alekh\source\repos\Win_BeatCovid\BeatCovid\lib_x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Win_Version\BeatCovid\include\Tinyxml;C:\Win_Version\BeatCovid\include\Interface;C:\Win_Version\BeatCovid\include\Game;C:\Win_Version\BeatCovid\include\Entities\Transports;C:\Win_Version\BeatCovid\include\Entities\Enemies;C:\Win_Version\BeatCovid\include\Entities\Armors;C:\Win_Version\BeatCovid\include\Entities;C:\Win_Version\BeatCovid\include\Animation;C:\Win_Version\BeatCovid\include;C:\Win_Version\BeatCovid\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Win_Version\BeatCovid\SFML\lib_x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\Animation\Animation.cpp" />
+    <ClCompile Include="src\Animation\AnimationManager.cpp" />
+    <ClCompile Include="src\Entities\Antibodies.cpp" />
+    <ClCompile Include="src\Entities\Armors\Armor.cpp" />
+    <ClCompile Include="src\Entities\Armors\Cap.cpp" />
+    <ClCompile Include="src\Entities\Armors\Robe.cpp" />
+    <ClCompile Include="src\Entities\Armors\Shoes.cpp" />
+    <ClCompile Include="src\Entities\Bullet.cpp" />
+    <ClCompile Include="src\Entities\Enemies\Breaker.cpp" />
+    <ClCompile Include="src\Entities\Enemies\Delivery.cpp" />
+    <ClCompile Include="src\Entities\Enemies\Enemy.cpp" />
+    <ClCompile Include="src\Entities\Enemies\Police.cpp" />
+    <ClCompile Include="src\Entities\Enemies\Virus.cpp" />
+    <ClCompile Include="src\Entities\Entity.cpp" />
+    <ClCompile Include="src\Entities\Player.cpp" />
+    <ClCompile Include="src\Entities\Sick.cpp" />
+    <ClCompile Include="src\Entities\Transports\SafeTransport.cpp" />
+    <ClCompile Include="src\Entities\Transports\Transport.cpp" />
+    <ClCompile Include="src\Entities\Transports\UnSafeTransport.cpp" />
+    <ClCompile Include="src\Game\GameLabel.cpp" />
+    <ClCompile Include="src\Game\GameLabelManager.cpp" />
+    <ClCompile Include="src\Game\GameManager.cpp" />
+    <ClCompile Include="src\Game\GameTreatPatientProgressBar.cpp" />
+    <ClCompile Include="src\Interface\Interface.cpp" />
+    <ClCompile Include="src\Interface\InterfaceButton.cpp" />
+    <ClCompile Include="src\Interface\InterfaceImage.cpp" />
+    <ClCompile Include="src\Interface\InterfaceLabel.cpp" />
+    <ClCompile Include="src\Interface\InterfaceTable.cpp" />
+    <ClCompile Include="src\Level_map.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MusicManager.cpp" />
+    <ClCompile Include="src\ResourcePath.cpp" />
+    <ClCompile Include="src\SaveGame.cpp" />
+    <ClCompile Include="src\Tinyxml\tinystr.cpp" />
+    <ClCompile Include="src\Tinyxml\tinyxml.cpp" />
+    <ClCompile Include="src\Tinyxml\tinyxmlerror.cpp" />
+    <ClCompile Include="src\Tinyxml\tinyxmlparser.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Animation\Animation.h" />
+    <ClInclude Include="include\Animation\AnimationManager.h" />
+    <ClInclude Include="include\Entities\Antibodies.h" />
+    <ClInclude Include="include\Entities\Armors\Armor.h" />
+    <ClInclude Include="include\Entities\Armors\Cap.h" />
+    <ClInclude Include="include\Entities\Armors\Robe.h" />
+    <ClInclude Include="include\Entities\Armors\Shoes.h" />
+    <ClInclude Include="include\Entities\Bullet.h" />
+    <ClInclude Include="include\Entities\Enemies\Breaker.h" />
+    <ClInclude Include="include\Entities\Enemies\Delivery.h" />
+    <ClInclude Include="include\Entities\Enemies\Enemy.h" />
+    <ClInclude Include="include\Entities\Enemies\Police.h" />
+    <ClInclude Include="include\Entities\Enemies\Virus.h" />
+    <ClInclude Include="include\Entities\Entity.h" />
+    <ClInclude Include="include\Entities\Player.h" />
+    <ClInclude Include="include\Entities\Sick.h" />
+    <ClInclude Include="include\Entities\Transports\SafeTransport.h" />
+    <ClInclude Include="include\Entities\Transports\Transport.h" />
+    <ClInclude Include="include\Entities\Transports\UnSafeTransport.h" />
+    <ClInclude Include="include\Game\GameLabel.h" />
+    <ClInclude Include="include\Game\GameLabelManager.h" />
+    <ClInclude Include="include\Game\GameManager.h" />
+    <ClInclude Include="include\Game\GameTreatPatientProgressBar.h" />
+    <ClInclude Include="include\Interface\Interface.h" />
+    <ClInclude Include="include\Interface\InterfaceButton.h" />
+    <ClInclude Include="include\Interface\InterfaceImage.h" />
+    <ClInclude Include="include\Interface\InterfaceLabel.h" />
+    <ClInclude Include="include\Interface\InterfaceTable.h" />
+    <ClInclude Include="include\Level_map.h" />
+    <ClInclude Include="include\MusicManager.h" />
+    <ClInclude Include="include\ResourcePath.hpp" />
+    <ClInclude Include="include\SaveGame.h" />
+    <ClInclude Include="include\Tinyxml\tinystr.h" />
+    <ClInclude Include="include\Tinyxml\tinyxml.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
