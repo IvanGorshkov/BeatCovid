@@ -1,6 +1,0 @@
-.DS_Store
-.idea/
-.vscode/
-build/
-linters/
-cmake-build-debug/
