@@ -66,13 +66,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\ResourcePath.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="src\Level_map.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="src\main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\MusicManager.cpp">
@@ -177,11 +171,11 @@
     <ClCompile Include="src\Animation\AnimationManager.cpp">
       <Filter>Исходные файлы\Animation</Filter>
     </ClCompile>
+    <ClCompile Include="ResourcePath.mm">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\ResourcePath.hpp">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="include\Animation\Animation.h">
       <Filter>Файлы заголовков\Animation</Filter>
     </ClInclude>
@@ -280,6 +274,9 @@
     </ClInclude>
     <ClInclude Include="include\Entities\Transports\UnSafeTransport.h">
       <Filter>Файлы заголовков\Entities\Transports</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourcePath.hpp">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

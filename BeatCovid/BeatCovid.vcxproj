@@ -88,7 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\Tinyxml;$(ProjectDir)include\Interface;$(ProjectDir)include\Game;$(ProjectDir)include\Entities\Transports;$(ProjectDir)include\Entities\Enemies;$(ProjectDir)include\Entities\Armors;$(ProjectDir)include\Entities;$(ProjectDir)include\Animation;$(ProjectDir)include;$(ProjectDir)SFML\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\Tinyxml;$(ProjectDir)include\Interface;$(ProjectDir)include\Game;$(ProjectDir)include\Entities\Transports;$(ProjectDir)include\Entities\Enemies;$(ProjectDir)include\Entities\Armors;$(ProjectDir)include\Entities;$(ProjectDir)include\Animation;$(ProjectDir)include;$(ProjectDir)SFML\include;$(ProjectDir)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -106,7 +106,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\Tinyxml;$(ProjectDir)include\Interface;$(ProjectDir)include\Game;$(ProjectDir)include\Entities\Transports;$(ProjectDir)include\Entities\Enemies;$(ProjectDir)include\Entities\Armors;$(ProjectDir)include\Entities;$(ProjectDir)include\Animation;$(ProjectDir)include;$(ProjectDir)SFML\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\Tinyxml;$(ProjectDir)include\Interface;$(ProjectDir)include\Game;$(ProjectDir)include\Entities\Transports;$(ProjectDir)include\Entities\Enemies;$(ProjectDir)include\Entities\Armors;$(ProjectDir)include\Entities;$(ProjectDir)include\Animation;$(ProjectDir)include;$(ProjectDir)SFML\include;$(ProjectDir)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -124,7 +124,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\Tinyxml;$(ProjectDir)include\Interface;$(ProjectDir)include\Game;$(ProjectDir)include\Entities\Transports;$(ProjectDir)include\Entities\Enemies;$(ProjectDir)include\Entities\Armors;$(ProjectDir)include\Entities;$(ProjectDir)include\Animation;$(ProjectDir)include;$(ProjectDir)SFML\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\Tinyxml;$(ProjectDir)include\Interface;$(ProjectDir)include\Game;$(ProjectDir)include\Entities\Transports;$(ProjectDir)include\Entities\Enemies;$(ProjectDir)include\Entities\Armors;$(ProjectDir)include\Entities;$(ProjectDir)include\Animation;$(ProjectDir)include;$(ProjectDir)SFML\include;$(ProjectDir)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -142,7 +142,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\Tinyxml;$(ProjectDir)include\Interface;$(ProjectDir)include\Game;$(ProjectDir)include\Entities\Transports;$(ProjectDir)include\Entities\Enemies;$(ProjectDir)include\Entities\Armors;$(ProjectDir)include\Entities;$(ProjectDir)include\Animation;$(ProjectDir)include;$(ProjectDir)SFML\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\Tinyxml;$(ProjectDir)include\Interface;$(ProjectDir)include\Game;$(ProjectDir)include\Entities\Transports;$(ProjectDir)include\Entities\Enemies;$(ProjectDir)include\Entities\Armors;$(ProjectDir)include\Entities;$(ProjectDir)include\Animation;$(ProjectDir)include;$(ProjectDir)SFML\include;$(ProjectDir)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -156,6 +156,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ResourcePath.mm" />
     <ClCompile Include="src\Animation\Animation.cpp" />
     <ClCompile Include="src\Animation\AnimationManager.cpp" />
     <ClCompile Include="src\Entities\Antibodies.cpp" />
@@ -185,9 +186,7 @@
     <ClCompile Include="src\Interface\InterfaceLabel.cpp" />
     <ClCompile Include="src\Interface\InterfaceTable.cpp" />
     <ClCompile Include="src\Level_map.cpp" />
-    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MusicManager.cpp" />
-    <ClCompile Include="src\ResourcePath.cpp" />
     <ClCompile Include="src\SaveGame.cpp" />
     <ClCompile Include="src\Tinyxml\tinystr.cpp" />
     <ClCompile Include="src\Tinyxml\tinyxml.cpp" />
@@ -225,10 +224,10 @@
     <ClInclude Include="include\Interface\InterfaceTable.h" />
     <ClInclude Include="include\Level_map.h" />
     <ClInclude Include="include\MusicManager.h" />
-    <ClInclude Include="include\ResourcePath.hpp" />
     <ClInclude Include="include\SaveGame.h" />
     <ClInclude Include="include\Tinyxml\tinystr.h" />
     <ClInclude Include="include\Tinyxml\tinyxml.h" />
+    <ClInclude Include="ResourcePath.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

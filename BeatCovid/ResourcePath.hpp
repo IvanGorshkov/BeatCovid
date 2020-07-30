@@ -2,4 +2,4 @@
 
 #include <string>
 
-std::string resourcePath(void);
+std::string resourcePath();
