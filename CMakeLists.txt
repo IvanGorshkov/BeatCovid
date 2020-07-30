@@ -1,56 +1,58 @@
 cmake_minimum_required(VERSION 3.16)
-project(beatcovid)
+project(BeatCovid)
 
 set(CMAKE_CXX_STANDARD 14)
-
-include_directories(project/include)
-include_directories(project/include/Animation)
-include_directories(project/include/Entities)
-include_directories(project/include/Entities/Armors)
-include_directories(project/include/Entities/Enemies)
-include_directories(project/include/Entities/Transports)
-include_directories(project/include/Game)
-include_directories(project/include/Interface)
-include_directories(project/include/Tinyxml)
+include_directories(./)
+include_directories(include)
+include_directories(include/Animation)
+include_directories(include/Entities)
+include_directories(include/Entities/Armors)
+include_directories(include/Entities/Enemies)
+include_directories(include/Entities/Transports)
+include_directories(include/Game)
+include_directories(include/Interface)
+include_directories(include/Tinyxml)
 
 add_definitions(-DFILES_PATH="../")
 
-add_executable(beatcovid
+add_executable(${PROJECT_NAME}
         main.cpp
-        project/src/Level_map.cpp
-        project/src/SaveGame.cpp
-        project/src/MusicManager.cpp
-        project/src/Animation/Animation.cpp
-        project/src/Animation/AnimationManager.cpp
-        project/src/Entities/Antibodies.cpp
-        project/src/Entities/Bullet.cpp
-        project/src/Entities/Entity.cpp
-        project/src/Entities/Player.cpp
-        project/src/Entities/Sick.cpp
-        project/src/Entities/Armors/Armor.cpp
-        project/src/Entities/Armors/Cap.cpp
-        project/src/Entities/Armors/Shoes.cpp
-        project/src/Entities/Armors/Robe.cpp
-        project/src/Entities/Transports/SafeTransport.cpp
-        project/src/Entities/Transports/Transport.cpp
-        project/src/Entities/Transports/UnSafeTransport.cpp
-        project/src/Entities/Enemies/Enemy.cpp
-        project/src/Entities/Enemies/OrdinaryEnemies.cpp
-        project/src/Entities/Enemies/Police.cpp
-        project/src/Game/GameLabel.cpp
-        project/src/Game/GameLabelManager.cpp
-        project/src/Game/GameManager.cpp
-        project/src/Game/GameTreatPatientProgressBar.cpp
-        project/src/Interface/Interface.cpp
-        project/src/Interface/InterfaceButton.cpp
-        project/src/Interface/InterfaceImage.cpp
-        project/src/Interface/InterfaceLabel.cpp
-        project/src/Interface/InterfaceTable.cpp
-        project/src/Tinyxml/tinystr.cpp
-        project/src/Tinyxml/tinyxml.cpp
-        project/src/Tinyxml/tinyxmlerror.cpp
-        project/src/Tinyxml/tinyxmlparser.cpp
-        )
+        ResourcePath.mm
+        src/Level_map.cpp
+        src/MusicManager.cpp
+        src/SaveGame.cpp
+        src/Animation/Animation.cpp
+        src/Animation/AnimationManager.cpp
+        src/Entities/Antibodies.cpp
+        src/Entities/Bullet.cpp
+        src/Entities/Entity.cpp
+        src/Entities/Player.cpp
+        src/Entities/Sick.cpp
+        src/Entities/Armors/Armor.cpp
+        src/Entities/Armors/Cap.cpp
+        src/Entities/Armors/Robe.cpp
+        src/Entities/Armors/Shoes.cpp
+        src/Entities/Enemies/Enemy.cpp
+        src/Entities/Enemies/Breaker.cpp
+        src/Entities/Enemies/Delivery.cpp
+        src/Entities/Enemies/Police.cpp
+        src/Entities/Enemies/Virus.cpp
+        src/Entities/Transports/SafeTransport.cpp
+        src/Entities/Transports/Transport.cpp
+        src/Entities/Transports/UnSafeTransport.cpp
+        src/Game/GameLabel.cpp
+        src/Game/GameLabelManager.cpp
+        src/Game/GameManager.cpp
+        src/Game/GameTreatPatientProgressBar.cpp
+        src/Interface/Interface.cpp
+        src/Interface/InterfaceButton.cpp
+        src/Interface/InterfaceImage.cpp
+        src/Interface/InterfaceLabel.cpp
+        src/Interface/InterfaceTable.cpp
+        src/Tinyxml/tinystr.cpp
+        src/Tinyxml/tinyxml.cpp
+        src/Tinyxml/tinyxmlerror.cpp
+        src/Tinyxml/tinyxmlparser.cpp)
 
 find_package(SFML REQUIRED system window graphics network audio)
-target_link_libraries(beatcovid sfml-graphics sfml-audio)
+target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-audio)
