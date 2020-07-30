@@ -3,8 +3,8 @@
 Entity::Entity(float x, float y, float dx, float dy, int width, int height)
     : dx(dx),
       dy(dy),
-      isLife(true) {
-  rect = sf::FloatRect(x, y, width, height);
+      isLife(true),
+      rect(x, y, width, height) {
 }
 
 sf::FloatRect Entity::GetRect() {

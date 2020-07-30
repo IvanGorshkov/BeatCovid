@@ -3,7 +3,7 @@
 
 Sick::Sick(float x, float y, float dx, float dy, int weight, int height)
     : Entity(x, y, 0, 0, weight, height),
-      aliveC(100),
+      aliveAnimTimer(100),
       alive(false),
       end(false) {
 
@@ -17,8 +17,8 @@ Sick::Sick(float x, float y, float dx, float dy, int weight, int height)
 void Sick::Update(float time, std::vector<Object> &obj) {
   anim.Tick(time);
   if (alive) {
-    --aliveC;
-    if (aliveC == 0) {
+    --aliveAnimTimer;
+    if (aliveAnimTimer == 0) {
       end = true;
     }
   }

@@ -23,14 +23,14 @@ std::string Save::GetLvlName() {
 
   std::ifstream save_stat(STAT_FILE);
 
-//  if (save_stat.is_open()) {
-//    char buff[50];
-//    save_stat.getline(buff, 50);
-//
-//    if (atoi(buff) != 0 && lvl == 1) {
-//      ChangeLvl();
-//    }
-//  }
+  if (save_stat.is_open()) {
+    char buff[50];
+    save_stat.getline(buff, 50);
+
+    if (atoi(buff) != 0 && lvl == 1) {
+      ChangeLvl();
+    }
+  }
 
   std::string lvlname = MAPS_PATH;
   return (lvlname += std::to_string(lvl) + ".tmx");
@@ -39,6 +39,11 @@ std::string Save::GetLvlName() {
 void Save::SaveGame(int points) const {
   SaveLvl(lvl);
   SavePoints(points);
+}
+
+bool Save::CheckEndGame() {
+  std::ifstream lvlMap(MAPS_PATH + std::to_string(lvl + 1) + ".tmx");
+  return !lvlMap.is_open();
 }
 
 bool Save::IsExistLvlFile() {

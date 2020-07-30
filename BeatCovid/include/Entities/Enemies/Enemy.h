@@ -4,13 +4,12 @@
 #include <string>
 #include "Entity.h"
 
-#define ENEMY_HIT_TIME 1000
+#define ENEMY_HIT_TIME 1500
 
 class Enemy : public Entity {
  public:
   explicit Enemy(float x, float y, int height, int weight, float hp, float dmg, std::string name);
   explicit Enemy(float x, float y, int height, int weight, std::string name);
-  void SetHpGmg(float getHp, float getDmg);
   void Update(float time, std::vector<Object> &obj) override;
   float GetDmg() const;
   void TakeDmg(float getDmg);

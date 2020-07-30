@@ -4,7 +4,6 @@
 #include <string>
 #include "ResourcePath.hpp"
 
-#define MAX_LVL 2
 #define LVL_FILE resourcePath() + "files/saves/save_lvl.txt"
 #define MAPS_PATH resourcePath() + "files/maps/"
 #define POINTS_FILE resourcePath() + "files/saves/save_points.txt"
@@ -21,6 +20,8 @@ class Save {
   int GetLvl() const;
   std::string GetLvlName();
   void SaveGame(int points) const;
+    
+  bool CheckEndGame();
 
   static bool IsExistLvlFile();
   static void RemoveGameSaves();

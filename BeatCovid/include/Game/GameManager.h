@@ -36,7 +36,7 @@ class GameManager {
   // Вывод всех классов на экран
   void Draw(sf::RenderWindow &window, float x, float y, int height, int width);
   // Получение игрока
-  std::shared_ptr<Player> GetPlayer();
+  Player& GetPlayer();
   // Огонь игроком
   void Fire();
   // Садится в транспорт
@@ -52,7 +52,7 @@ class GameManager {
   int antigenPoints;
 
   std::vector<Object> obj;
-  std::shared_ptr<Player> player;
+  Player player;
   int fireTimer;
   std::shared_ptr<Sick> sick;
 
@@ -76,12 +76,12 @@ class GameManager {
   std::list<std::shared_ptr<Enemy>> enemies;
   std::list<std::shared_ptr<Enemy>>::iterator enemiesIt;
   void updateEnemy(float time);
-  void drawEnemy(sf::RenderWindow &window, float leftX, float rightX, float upY, float downY);
+  void drawEnemy(sf::RenderWindow &window, sf::FloatRect screenRect);
 
   // Методы работы с классом Antibodies
   std::list<Antibodies> antibodies;
   std::list<Antibodies>::iterator antibodiesIt;
-  void drawAntibodies(sf::RenderWindow &window, float leftX, float rightX, float upY, float downY);
+  void drawAntibodies(sf::RenderWindow &window, sf::FloatRect screenRect);
   void updateAntibodies();
 
   // Методы работы с классом Transport
@@ -92,7 +92,7 @@ class GameManager {
   void updateTransport(float time);
   void updateSafeTransport(float time);
   void updateUnSafeTransport(float time);
-  void drawTransport(sf::RenderWindow &window, float leftX, float rightX, float upY, float downY);
-  void drawSafeTransport(sf::RenderWindow &window, float leftX, float rightX, float upY, float downY);
-  void drawUnSafeTransport(sf::RenderWindow &window, float leftX, float rightX, float upY, float downY);
+  void drawTransport(sf::RenderWindow &window, sf::FloatRect screenRect);
+  void drawSafeTransport(sf::RenderWindow &window, sf::FloatRect screenRect);
+  void drawUnSafeTransport(sf::RenderWindow &window, sf::FloatRect screenRect);
 };

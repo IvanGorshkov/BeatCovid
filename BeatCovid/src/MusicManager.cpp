@@ -120,6 +120,10 @@ void MusicManager::PlayCarSound() {
   }
 }
 
+void MusicManager::StopCarSound() {
+    carSound.stop();
+}
+
 void MusicManager::PlayGetAntibodiesSound() {
   getAntibodiesSound.play();
 }

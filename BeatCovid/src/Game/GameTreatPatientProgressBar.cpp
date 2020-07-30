@@ -9,7 +9,7 @@ GameTreatPatientProgressBar::GameTreatPatientProgressBar()
 }
 
 void GameTreatPatientProgressBar::Draw(sf::RenderWindow &window, bool isDraw) {
-  if (isDraw || status != 0) {
+  if (isDraw) {
     float progressHeight = window.getView().getSize().y / 50;
     float progressWidth = window.getView().getSize().x / 5;
 
@@ -24,11 +24,6 @@ void GameTreatPatientProgressBar::Draw(sf::RenderWindow &window, bool isDraw) {
       if (status >= progressWidth) {
         status = progressWidth;
       }
-    } else {
-      status -= progressWidth / TREAT_TIME;
-      if (status < 0) {
-        status = 0;
-      }
     }
 
     progress.setPosition(xPosition + (window.getView().getSize().x - progressWidth) / 2, yPosition + 20 + window.getView().getSize().y / 70);
@@ -38,5 +33,7 @@ void GameTreatPatientProgressBar::Draw(sf::RenderWindow &window, bool isDraw) {
 
     window.draw(progress);
     window.draw(bar);
+  } else {
+    status = 0;
   }
 }

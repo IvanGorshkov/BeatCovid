@@ -55,9 +55,7 @@ void UnSafeTransport::setBus(float getDmg) {
   dx = BUS_DX;
   dmg = getDmg;
 
-  sf::Texture autoTexture;
-  autoTexture.loadFromFile(resourcePath() + "files/images/bus.png");
-  anim = AnimationManager(autoTexture);
+  anim = AnimationManager(resourcePath() + "files/images/bus.png");
   anim.Create("move", 4, 4, 393, 100, 2, 0.005, 397);
   anim.Set("move");
 }
@@ -66,9 +64,7 @@ void UnSafeTransport::setMetro(float getDmg) {
   dx = METRO_DX;
   dmg = getDmg;
 
-  sf::Texture autoTexture;
-  autoTexture.loadFromFile(resourcePath() + "files/images/metro.png");
-  anim = AnimationManager(autoTexture);
+  anim = AnimationManager(resourcePath() + "files/images/metro.png");
   anim.Create("move", 64, 2, 924, 140, 2, 0.002, 994);
   anim.Set("move");
 }

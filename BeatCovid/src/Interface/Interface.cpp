@@ -15,19 +15,23 @@ sf::Vector2i calculatePlayerPosition(unsigned int width,
   int playerX = 0;
   int playerY = 0;
 
-  if (playerCurrentX - width / 2 > leftX && playerCurrentX + width / 2 < rightX) {
+  if (playerCurrentX - width / 2.0 > leftX && playerCurrentX + width / 2.0 < rightX) {
     playerX = playerCurrentX;
   } else {
-    playerX = leftX + width / 2;
+    if (playerCurrentX - width / 2.0 <= leftX) {
+      playerX = leftX + width / 2.0;
+    } else {
+      playerX = rightX - width / 2.0;
+    }
   }
 
-  if (playerCurrentY - height / 2 > upY && playerCurrentY + height / 2 < downY) {
+  if (playerCurrentY - height / 2.0 > upY && playerCurrentY + height / 2.0 < downY) {
     playerY = playerCurrentY;
   } else {
-    if (playerCurrentY - height / 2 < upY) {
-      playerY = upY + height / 2;
+    if (playerCurrentY - height / 2.0 <= upY) {
+      playerY = upY + height / 2.0;
     } else {
-      playerY = downY - height / 2;
+      playerY = downY - height / 2.0;
     }
   }
 
@@ -36,10 +40,10 @@ sf::Vector2i calculatePlayerPosition(unsigned int width,
 
 void setPrice(std::vector<int> arm_vctr, InterfaceLabel &lbl, int id) {
   std::ostringstream str;
-  if (arm_vctr[id] * 100 + 100 >= 500) {
+  if (arm_vctr[id] * 200 + 200 >= 1000) {
     str << "max";
   } else {
-    str << arm_vctr[id] * 100 + 100;
+    str << arm_vctr[id] * 200 + 200;
   }
   lbl.SetText(str.str());
 }
@@ -66,15 +70,11 @@ Interface::Interface(sf::RenderWindow &window)
       buttonSize(window.getSize().y / 25),
       textSize(window.getSize().y / 30),
       headSize(window.getSize().y / 20),
+      gameHeight(1600),
+      gameWidth(2500),
+      gameText(1600 / 30),
       buttonFontPath(resourcePath() + "files/fonts/Inconsolata-Bold.ttf"),
       textFontPath(resourcePath() + "files/fonts/Inconsolata-Bold.ttf") {
-//          if (width > 2500 && height > 1600) {
-//              gameWidth = 2500;
-//              gameHeight = 1600;
-//          } else {
-              gameWidth = width;
-              gameHeight = height;
-//          }
 }
 
 // Вывод главного меню
@@ -115,7 +115,7 @@ void Interface::MainMenu(sf::RenderWindow &window) {
     //      if (event.text.unicode >= 48 && event.text.unicode <= 57)
     //        std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << std::endl;
     //    }
-      
+
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
     if (newGameButton.IsSelect(mousePosition, music)) {
@@ -139,7 +139,7 @@ void Interface::MainMenu(sf::RenderWindow &window) {
     }
 
     if (statisticButton.IsSelect(mousePosition, music)) {
-        music.PlayOnButtonSound();
+      music.PlayOnButtonSound();
       statisticMenu(window);
     }
 
@@ -195,7 +195,7 @@ void Interface::PenaltyPolice(sf::RenderWindow &window) {
         window.close();
       }
     }
-      
+
     auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
     if (penaltyTable.GetCenterButtons()[0]->IsSelect(mousePosition, music)) {
@@ -230,7 +230,7 @@ void Interface::DiedPolice(sf::RenderWindow &window) {
         window.close();
       }
     }
-      
+
     auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
     if (diedTable.GetCenterButtons()[0]->IsSelect(mousePosition, music)) {
@@ -299,7 +299,14 @@ int Interface::startNewGame(sf::RenderWindow &window) {
 
     Level lvl;
     lvl.LoadFromFile(save.GetLvlName());
-    GameManager game(lvl, textSize, music, Save::LoadArmors(), Save::LoadPoints(), Save::LoadStat(), Save::LoadConfig());
+
+    int leftX = lvl.GetObject("left").rect.left;
+    int rightX = lvl.GetObject("right").rect.left + lvl.GetObject("right").rect.width;
+    int upY = lvl.GetObject("top").rect.top;
+    int downY = lvl.GetObject("bottom").rect.top + lvl.GetObject("bottom").rect.height;
+
+    GameManager
+        game(lvl, gameText, music, Save::LoadArmors(), Save::LoadPoints(), Save::LoadStat(), Save::LoadConfig());
     sf::Clock clock;
 
     while (window.isOpen()) {
@@ -318,23 +325,23 @@ int Interface::startNewGame(sf::RenderWindow &window) {
           if (event.key.code == sf::Keyboard::E) {
             game.TakeTransport();
           }
-            
-            if (event.key.code == sf::Keyboard::Escape) {
-              music.StopBackgroundGameMusic();
-                
-              window.setView(menuView);
 
-              if (!gameMenu(window, game.GetPlayer()->GetMainData())) {
-                repeat = false;
-                return 0;
-              }
+          if (event.key.code == sf::Keyboard::Escape) {
+            music.StopBackgroundGameMusic();
 
-              music.PlayBackgroundGameMusic();
+            window.setView(menuView);
+
+              if (!gameMenu(window, game.GetPlayer().GetMainData())) {
+              repeat = false;
+              return 0;
             }
+
+            music.PlayBackgroundGameMusic();
+          }
         }
       }
 
-      if (game.GetPlayer()->GetHp() <= 0) {
+      if (game.GetPlayer().GetHp() <= 0) {
         music.StopBackgroundGameMusic();
         music.StopAllMusic();
         music.PlayDiedPlayerSound();
@@ -345,12 +352,12 @@ int Interface::startNewGame(sf::RenderWindow &window) {
         break;
       }
 
-      if (game.GetPlayer()->GetFinish()) {
+      if (game.GetPlayer().GetFinish()) {
         music.StopBackgroundGameMusic();
 
         window.setView(menuView);
 
-        if (save.GetLvl() == MAX_LVL) {
+        if (save.CheckEndGame()) {
           save.SetEndGame();
           repeat = winMenu(window, false);
 
@@ -359,26 +366,41 @@ int Interface::startNewGame(sf::RenderWindow &window) {
           repeat = nextLvlMenu(window);
         }
 
-        save.SaveGame(game.GetPlayer()->GetPoints());
+        save.SaveGame(game.GetPlayer().GetPoints());
         break;
       }
+        
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::N)
+            && sf::Keyboard::isKeyPressed(sf::Keyboard::E)
+            && sf::Keyboard::isKeyPressed(sf::Keyboard::X)
+            && sf::Keyboard::isKeyPressed(sf::Keyboard::T)) {
+            
+            if (save.CheckEndGame()) {
+                save.SetEndGame();
+            } else {
+                save.ChangeLvl();
+            }
+            
+            save.SaveGame(game.GetPlayer().GetPoints());
+            break;
+        }
 
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        game.GetPlayer()->SetKey("L", true);
+        game.GetPlayer().SetKey("L", true);
       }
 
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        game.GetPlayer()->SetKey("R", true);
+        game.GetPlayer().SetKey("R", true);
       }
 
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        game.GetPlayer()->SetKey("UP", true);
+        game.GetPlayer().SetKey("UP", true);
       }
 
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        game.GetPlayer()->SetKey("DOWN", true);
+        game.GetPlayer().SetKey("DOWN", true);
       }
-        
+
       float time = clock.getElapsedTime().asMicroseconds();
       clock.restart();
       time = time / 400;
@@ -387,11 +409,14 @@ int Interface::startNewGame(sf::RenderWindow &window) {
       }
 
       game.Update(time);
+      auto playerPosition = calculatePlayerPosition(gameWidth, gameHeight,
+                                                    leftX, rightX, upY, downY,
+                                                    game.GetPlayer().GetRect().left, game.GetPlayer().GetRect().top);
 
       window.clear(sf::Color(0, 0, 0));
-      lvl.Draw(window);
-      game.Draw(window, game.GetPlayer()->GetRect().left, game.GetPlayer()->GetRect().top, gameHeight, gameWidth);
-      gameView.setCenter(game.GetPlayer()->GetRect().left, game.GetPlayer()->GetRect().top);
+      lvl.Draw(window, gameHeight, gameWidth, playerPosition.x, playerPosition.y);
+      game.Draw(window, playerPosition.x, playerPosition.y, gameHeight, gameWidth);
+      gameView.setCenter(playerPosition.x, playerPosition.y);
       window.setView(gameView);
       window.display();
     }
@@ -403,8 +428,12 @@ int Interface::startNewGame(sf::RenderWindow &window) {
 // Предупреждение о сбросе данных
 bool Interface::endGameWarningMenu(sf::RenderWindow &window) {
   InterfaceTable endGameWarningTable;
-  endGameWarningTable.SetCenterLabel(std::make_shared<InterfaceButton>(textFontPath, textSize, "Are you sure you want to end game?"));
-  endGameWarningTable.SetCenterLabel(std::make_shared<InterfaceButton>(textFontPath, textSize, "All your progress will be lost"));
+  endGameWarningTable.SetCenterLabel(std::make_shared<InterfaceButton>(textFontPath,
+                                                                       textSize,
+                                                                       "Are you sure you want to end game?"));
+  endGameWarningTable.SetCenterLabel(std::make_shared<InterfaceButton>(textFontPath,
+                                                                       textSize,
+                                                                       "All your progress will be lost"));
   endGameWarningTable.SetLeftButton(std::make_shared<InterfaceButton>(buttonFontPath, buttonSize, "Yes"));
   endGameWarningTable.SetRightButton(std::make_shared<InterfaceButton>(buttonFontPath, buttonSize, "No"));
 
@@ -460,7 +489,7 @@ bool Interface::winMenu(sf::RenderWindow &window, bool isLoadFromMenu) {
         window.close();
       }
     }
-      
+
     auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
     if (winTable.GetCenterButtons()[0]->IsSelect(mousePosition, music)) {
@@ -505,7 +534,7 @@ bool Interface::nextLvlMenu(sf::RenderWindow &window) {
       return true;
     }
 
-      if (nextMissionTable.GetCenterButtons()[1]->IsSelect(mousePosition, music)) {
+    if (nextMissionTable.GetCenterButtons()[1]->IsSelect(mousePosition, music)) {
       return false;
     }
 
@@ -631,7 +660,7 @@ void Interface::statisticMenu(sf::RenderWindow &window) {
         window.close();
       }
     }
-      
+
     auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
     if (backButton.IsSelect(mousePosition, music)) {
@@ -801,12 +830,12 @@ bool Interface::shopMenu(sf::RenderWindow &window) {
                                width / 1.67, height / 1.4,
                                width / 15, width / 15);
 
-  InterfaceLabel lvlShoesText(textFontPath, textSize, width / 1.46, height / 3.5);
-  InterfaceLabel lvlCapText(textFontPath, textSize, width / 4.2, height / 3.5);
-  InterfaceLabel lvlRobeText(textFontPath, textSize, width / 2.15, height / 1.18);
-  InterfaceLabel costShoesText(textFontPath, textSize, width / 1.2, height / 4);
-  InterfaceLabel costCapText(textFontPath, textSize, width / 9, height / 4);
-  InterfaceLabel costRobeText(textFontPath, textSize, width / 1.64, height / 1.22);
+  InterfaceLabel lvlShoesText(textFontPath, textSize, width / 1.42, height / 3.5);
+  InterfaceLabel lvlCapText(textFontPath, textSize, width / 4.0, height / 3.5);
+  InterfaceLabel lvlRobeText(textFontPath, textSize, width / 2.10, height / 1.18);
+  InterfaceLabel costShoesText(textFontPath, textSize, width / 1.19, height / 4);
+  InterfaceLabel costCapText(textFontPath, textSize, width / 8.6, height / 4);
+  InterfaceLabel costRobeText(textFontPath, textSize, width / 1.62, height / 1.22);
 
   std::ostringstream ssPoints;
   int money = Save::LoadPoints();
@@ -865,7 +894,7 @@ bool Interface::shopMenu(sf::RenderWindow &window) {
     }
 
     auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
-      
+
     if (backButton.IsSelect(mousePosition, music)) {
       break;
     }
@@ -879,7 +908,7 @@ bool Interface::shopMenu(sf::RenderWindow &window) {
         if (event.mouseButton.button == sf::Mouse::Left) {
           if (menuNum == 0 || menuNum == 1 || menuNum == 2) {
             if (arm_vector[menuNum] < 4) {
-              int cost = arm_vector[menuNum] * 100 + 100;
+              int cost = arm_vector[menuNum] * 200 + 200;
               if (cost <= money) {
                 buy(arm_vector, menuNum);
                 Save::SavePoints(money - cost);
@@ -989,13 +1018,13 @@ bool Interface::gameMenu(sf::RenderWindow &window, std::vector<int> data) {
       if (event.type == sf::Event::Closed) {
         window.close();
       }
-        
-        if (event.type == sf::Event::KeyPressed) {
-            if (event.key.code == sf::Keyboard::Escape) {
-                music.StopBackgroundMenuMusic();
-                return true;
-            }
+
+      if (event.type == sf::Event::KeyPressed) {
+        if (event.key.code == sf::Keyboard::Escape) {
+          music.StopBackgroundMenuMusic();
+          return true;
         }
+      }
     }
 
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
@@ -1041,7 +1070,7 @@ void Interface::aboutMenu(sf::RenderWindow &window) {
         window.close();
       }
     }
-      
+
     auto mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
     if (backButton.IsSelect(mousePosition, music)) {

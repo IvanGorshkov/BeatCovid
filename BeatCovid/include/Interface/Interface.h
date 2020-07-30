@@ -48,6 +48,7 @@ class Interface {
   unsigned int width;
   unsigned int gameHeight;
   unsigned int gameWidth;
+  unsigned int gameText;
   unsigned int buttonSize;
   unsigned int textSize;
   unsigned int headSize;

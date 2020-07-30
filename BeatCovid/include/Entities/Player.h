@@ -9,9 +9,17 @@
 #include "Shoes.h"
 #include "Cap.h"
 
+#define PLAYER_DX 0.13
+#define PLAYER_DY 0.2
+#define PLAYER_MAX_JUMP_TIME 300
+#define PLAYER_FIRE_ANIM_TIME 20
+#define PLAYER_TREAT_ANIM_TIME 200
+#define PLAYER_WIN_ANIM_TIME 100
+#define PLAYER_DAMAGED_ANIM_TIME 30
+
 class Player : public Entity {
  public:
-  explicit Player(const Object &position, std::vector<int> armors, float hp, int dmg, int points);
+  explicit Player(const sf::FloatRect &position, std::vector<int> armors, float hp, int dmg, int points);
   void Update(float time, std::vector<Object> &obj) override;
   void SetKey(const std::string &name, bool value);
   bool GetDir() const;
@@ -19,9 +27,8 @@ class Player : public Entity {
   float GetArm() const;
   float TakeDamge(float dmg);
   int GetDmg() const;
-  void AddPoints(int getPoints);
+  void ChangePoints(int getPoints);
   int GetPoints() const;
-  void PenaltyPoints(int penaltyPoints);
   bool GetVaccine() const;
   void SetVaccine(bool value);
   void DrawObjs(sf::RenderWindow &window);
@@ -52,7 +59,7 @@ class Player : public Entity {
   } STATE;
 
   std::map<std::string, bool> key;
-  Object startPlayerPosition;
+  sf::FloatRect startPlayerPosition;
   int dmgC;
   int fireC;
   int treatC;
