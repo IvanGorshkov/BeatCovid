@@ -6,7 +6,7 @@
 
 class Armor : public Entity {
  public:
-  Armor(float x, float y, float w, float h, int lvl);
+  Armor(float x, float y, int width, int height, int lvl);
   void Update(float time, std::vector<Object> &obj) override;
   void SetAnim(const std::string &name);
   void FlipAnim(bool value);
@@ -14,7 +14,7 @@ class Armor : public Entity {
   int Getlvl() const;
 
  protected:
-  float arm;
+  int arm;
   int lvl;
 };
 

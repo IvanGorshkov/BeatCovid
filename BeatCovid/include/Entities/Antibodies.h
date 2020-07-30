@@ -4,11 +4,9 @@
 #include <string>
 #include "Entity.h"
 
-#define ANTIGEN_POINTS 100
-
 class Antibodies : public Entity {
  public:
-  Antibodies(float x, float y, int w, int h, const std::string &name);
+  Antibodies(float x, float y, int width, int height, const std::string &name);
   void Update(sf::FloatRect playerRect);
   void Update(float time, std::vector<Object> &obj) override;
   std::string GetName();

@@ -6,16 +6,20 @@ Save::Save() {
   this->lvl = 1;
 }
 
-void Save::ChangeLvl() {
+void Save::NextLvl() {
   this->lvl += 1;
 }
 
-int Save::GetLvl() const {
-  return this->lvl;
+void Save::LastLvl() {
+  this->lvl -= 1;
 }
 
 void Save::SetEndGame() {
   this->lvl = 0;
+}
+
+int Save::GetLvl() const {
+  return this->lvl;
 }
 
 std::string Save::GetLvlName() {
@@ -28,17 +32,22 @@ std::string Save::GetLvlName() {
     save_stat.getline(buff, 50);
 
     if (atoi(buff) != 0 && lvl == 1) {
-      ChangeLvl();
+      NextLvl();
     }
   }
 
-  std::string lvlname = MAPS_PATH;
-  return (lvlname += std::to_string(lvl) + ".tmx");
+  std::string lvlName = MAPS_PATH;
+  return (lvlName += std::to_string(lvl) + ".tmx");
 }
 
 void Save::SaveGame(int points) const {
   SaveLvl(lvl);
   SavePoints(points);
+}
+
+bool Save::CheckEndGame() const {
+  std::ifstream lvlMap(MAPS_PATH + std::to_string(lvl + 1) + ".tmx");
+  return !lvlMap.is_open();
 }
 
 bool Save::IsExistLvlFile() {
@@ -180,9 +189,9 @@ void Save::SaveStat(const std::vector<int> &stat) {
   saveStatFile.close();
 }
 
-std::vector<float> Save::LoadConfig() {
+std::vector<int> Save::LoadConfig() {
   std::ifstream saveConfigFile;
-  std::vector<float> config;
+  std::vector<int> config;
   config.resize(20, 0);
 
   std::fstream saveConfig(CONFIG_FILE);
@@ -194,7 +203,7 @@ std::vector<float> Save::LoadConfig() {
   saveConfig.close();
 
   char buff[100];
-  for (float &i : config) {
+  for (int &i : config) {
     saveConfigFile.getline(buff, 100);
     i = atoi(buff);
   }
@@ -203,10 +212,10 @@ std::vector<float> Save::LoadConfig() {
   return config;
 }
 
-void Save::SaveConfig(const std::vector<float> &config) {
+void Save::SaveConfig(const std::vector<int> &config) {
   std::ofstream saveConfigFile(CONFIG_FILE);
 
-  for (float i : config) {
+  for (int i : config) {
     saveConfigFile << i;
     saveConfigFile << std::endl;
   }

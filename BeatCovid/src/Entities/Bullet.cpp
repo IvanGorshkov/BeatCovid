@@ -1,14 +1,13 @@
 #include "Bullet.h"
 #include "ResourcePath.hpp"
 
-Bullet::Bullet(float x, float y, float dx, float dy, float dmg, bool player)
-    : Entity(x, y, dx, dy, 16, 16), dmg(dmg),
-      timerDie(0),
-      isDie(false) {
+Bullet::Bullet(float x, float y, float dx, float dy, int dmg, bool player)
+    : Entity(x, y, dx, dy, 16, 16),
+      dmg(dmg),
+      isDie(false),
+      timerDie(0) {
+  anim = AnimationManager(resourcePath() + "files/images/bullets.png");
 
-  sf::Texture bulletTexture;
-  bulletTexture.loadFromFile(resourcePath() + "files/images/bullets.png");
-  anim = AnimationManager(bulletTexture);
   if (player) {
     anim.Create("move", 8, 50, 30, 30, 1, 0);
     anim.Create("explode", 38, 50, 30, 30, 3, 0.01, 34);
@@ -41,7 +40,7 @@ void Bullet::Update(float time, std::vector<Object> &obj) {
   anim.Tick(time);
 }
 
-float Bullet::GetDmg() const {
+int Bullet::GetDmg() const {
   return dmg;
 }
 

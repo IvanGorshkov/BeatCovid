@@ -1,8 +1,8 @@
 #include "Player.h"
 #include "ResourcePath.hpp"
 
-Player::Player(const Object &position, std::vector<int> armors, float hp, int dmg, int points)
-    : Entity(position.rect.left, position.rect.top, 0.1, 0.1, 64, 64),
+Player::Player(const sf::FloatRect &position, int hp, int dmg, int points, std::vector<int> armors)
+    : Entity(position.left, position.top, 64, 64),
       startPlayerPosition(position),
       hp(hp),
       dmg(dmg),
@@ -24,13 +24,10 @@ Player::Player(const Object &position, std::vector<int> armors, float hp, int dm
       fireC(0),
       isDrive(false),
       playFinishMusic(0),
-      bathrobe(position.rect.left, position.rect.top, 64, 64, armors[2]),
-      shoes(position.rect.left, position.rect.top, 64, 64, armors[1]),
-      cap(position.rect.left, position.rect.top, 64, 64, armors[0]) {
-
-  sf::Texture player_t;
-  player_t.loadFromFile(resourcePath() + "files/images/doctor.png");
-  anim = AnimationManager(player_t);
+      bathrobe(position.left, position.top, 64, 64, armors[2]),
+      shoes(position.left, position.top, 64, 64, armors[1]),
+      cap(position.left, position.top, 64, 64, armors[0]) {
+  anim = AnimationManager(resourcePath() + "files/images/doctor.png");
 
   anim.Create("walk", 76, 76, 64, 64, 7, 0.005, 72);
   anim.Create("stay", 4, 4, 64, 64, 8, 0.0005, 72);
@@ -47,27 +44,46 @@ Player::Player(const Object &position, std::vector<int> armors, float hp, int dm
 }
 
 void Player::keyCheck() {
+    if (!(key["L"] || key["R"])) {
+      dx = 0;
+      if (STATE == RUN) {
+        STATE = STAY;
+      }
+    }
+
   if (key["L"]) {
     dir = true;
-    if (STATE == STAY || STATE == JUMP) {
+    if (STATE == STAY) {
       STATE = RUN;
-      dx = -0.13;
+      dx = -PLAYER_DX;
       treat = false;
     }
+
+      if (STATE == JUMP) {
+          STATE = JUMP;
+          dx = -PLAYER_DX;
+          treat = false;
+      }
   }
 
   if (key["R"]) {
     dir = false;
-    if (STATE == STAY || STATE == JUMP) {
+    if (STATE == STAY) {
       STATE = RUN;
-      dx = 0.13;
+      dx = PLAYER_DX;
       treat = false;
     }
+
+      if (STATE == JUMP) {
+          STATE = JUMP;
+          dx = PLAYER_DX;
+          treat = false;
+      }
   }
 
   if (key["UP"]) {
     if (STATE == STAY || STATE == RUN) {
-      dy = -0.2;
+      dy = -PLAYER_DY;
       STATE = JUMP;
       treat = false;
     }
@@ -84,21 +100,14 @@ void Player::keyCheck() {
     }
   }
 
-  if (!(key["L"] || key["R"])) {
-    dx = 0;
-    if (STATE == RUN) {
-      STATE = STAY;
-    }
-  }
-
   if (!key["UP"]) {
     if (STATE == JUMP) {
-      dy = 0.2;
+      dy = PLAYER_DY;
     }
   }
 
   if (key["SPACE"]) {
-    fireC = 20;
+    fireC = PLAYER_FIRE_ANIM_TIME;
     fire = true;
   }
 
@@ -155,20 +164,20 @@ void Player::Update(float time, std::vector<Object> &obj) {
     }
   }
 
-  setDir(dir);
+  setDir();
 
   if (STATE != JUMP) {
     if ((STATE == STAY || STATE == RUN || STATE == LAY) && !isGround) {
       setAnim("jump");
     }
 
-    dy = 0.2;
+    dy = PLAYER_DY;
   }
 
   if (STATE == JUMP) {
-    max_jump += 0.2 * time;
-    if (max_jump > 300) {
-      dy = 0.2;
+    max_jump += PLAYER_DY * time;
+    if (max_jump > PLAYER_MAX_JUMP_TIME) {
+      dy = PLAYER_DY;
     }
   }
 
@@ -211,7 +220,7 @@ void Player::setAnim(const std::string &str) {
   cap.SetAnim(str);
 }
 
-void Player::setDir(bool dir) {
+void Player::setDir() {
   anim.Flip(dir);
   bathrobe.FlipAnim(dir);
   shoes.FlipAnim(dir);
@@ -230,6 +239,7 @@ void Player::collision(int num, std::vector<Object> &objs) {
           rect.top = obj.rect.top - rect.height;
           dy = 0;
           isGround = true;
+          max_jump = PLAYER_MAX_JUMP_TIME;
           if (STATE == JUMP) {
             max_jump = 0;
           }
@@ -239,7 +249,7 @@ void Player::collision(int num, std::vector<Object> &objs) {
         if (dy < 0 && num == 1) {
           rect.top = obj.rect.top + obj.rect.height;
           dy = 0;
-          max_jump = 300;
+          max_jump = PLAYER_MAX_JUMP_TIME;
         }
 
         if (dx > 0 && num == 0) {
@@ -252,8 +262,7 @@ void Player::collision(int num, std::vector<Object> &objs) {
       }
 
       if (obj.name == "death" && obj.rect.intersects(rect)) {
-        rect.left = startPlayerPosition.rect.left;
-        rect.top = startPlayerPosition.rect.top;
+          GoToStart();
       }
 
       finish = false;
@@ -263,7 +272,7 @@ void Player::collision(int num, std::vector<Object> &objs) {
         if (vaccine && !treat) {
           playFinishMusic = 1;
           treat = true;
-          treatC = 200;
+          treatC = PLAYER_TREAT_ANIM_TIME;
         }
       }
     }
@@ -281,29 +290,23 @@ void Player::DrawObjs(sf::RenderWindow &window) {
   cap.Draw(window);
 }
 
-float Player::TakeDamge(float getDmg) {
-  if (getDmg == 0) {
-    return hp;
-  }
-
+void Player::TakeDamage(int getDmg) {
   if (hp > 0) {
     if (GetArm() >= getDmg) {
       --hp;
     } else {
-      hp += GetArm() - getDmg;
+      hp += arm - getDmg;
     }
-    dmgC = 30;
+    dmgC = PLAYER_DAMAGED_ANIM_TIME;
     tookDmg = true;
   }
+}
 
+int Player::GetHp() const {
   return hp;
 }
 
-float Player::GetHp() const {
-  return hp;
-}
-
-float Player::GetArm() const {
+int Player::GetArm() const {
   return arm;
 }
 
@@ -311,20 +314,16 @@ bool Player::GetDir() const {
   return dir;
 }
 
-void Player::SetKey(const std::string &name, bool value) {
-  key[name] = value;
+void Player::SetKey(const std::string &name) {
+  key[name] = true;
 }
 
-void Player::AddPoints(int getPoints) {
+void Player::ChangePoints(int getPoints) {
   points += getPoints;
 }
 
 int Player::GetPoints() const {
   return points;
-}
-
-void Player::PenaltyPoints(int penaltyPoints) {
-  points -= penaltyPoints;
 }
 
 bool Player::GetVaccine() const {
@@ -336,8 +335,7 @@ void Player::SetVaccine(bool value) {
 }
 
 void Player::GoToStart() {
-  rect.left = startPlayerPosition.rect.left;
-  rect.top = startPlayerPosition.rect.top;
+    rect = startPlayerPosition;
 }
 
 void Player::SetPosition(float x, float y) {

@@ -1,16 +1,14 @@
 #include "Police.h"
 #include "ResourcePath.hpp"
 
-Police::Police(float x, float y, int height, int weight, int hp, int dmg, int penalty)
-    : Enemy(x, y, height, weight, hp, dmg, "police"),
+Police::Police(float x, float y, int width, int height, int hp, int dmg, int penalty, const std::string &name)
+    : Enemy(x, y, width, height, hp, dmg, name),
       penalty(penalty),
       isMetUser(false),
       drawPenaltyMenu(false),
       drawDiedMenu(false) {
 
-  sf::Texture policeTexture;
-  policeTexture.loadFromFile(resourcePath() + "files/images/policemen.png");
-  anim = AnimationManager(policeTexture);
+  anim = AnimationManager(resourcePath() + "files/images/policemen.png");
   anim.Create("move", 4, 4, 64, 64, 3, 0.002, 72);
   anim.Create("fire", 4, 147, 64, 64, 3, 0.004, 72);
   anim.Create("dead", 4, 363, 64, 64, 3, 0.002, 72);

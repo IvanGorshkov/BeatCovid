@@ -4,16 +4,14 @@
 #include <string>
 #include "Entity.h"
 
-#define ENEMY_HIT_TIME 1000
+#define ENEMY_HIT_TIME 1500
 
 class Enemy : public Entity {
  public:
-  explicit Enemy(float x, float y, int height, int weight, float hp, float dmg, std::string name);
-  explicit Enemy(float x, float y, int height, int weight, std::string name);
-  void SetHpGmg(float getHp, float getDmg);
+  explicit Enemy(float x, float y, int width, int height, int hp, int dmg, std::string name);
   void Update(float time, std::vector<Object> &obj) override;
-  float GetDmg() const;
-  void TakeDmg(float getDmg);
+  int GetDmg() const;
+  void TakeDmg(int getDmg);
   float GetTimer() const;
   void ResetTimer();
   void SetFire(bool getFire);
@@ -24,10 +22,10 @@ class Enemy : public Entity {
 
  protected:
   std::string name;
-  bool dieSound;
-  bool fire;
+  int hp;
+  int dmg;
   bool dir;
-  float dmg;
-  float hp;
+  bool fire;
   float timerHit;
+  bool dieSound;
 };

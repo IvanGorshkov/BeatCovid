@@ -1,8 +1,8 @@
 #include "UnSafeTransport.h"
 #include "ResourcePath.hpp"
 
-UnSafeTransport::UnSafeTransport(float x, float y, int height, int weight, const std::string &name, std::vector<float> config)
-    : Transport(x, y, height, weight, name),
+UnSafeTransport::UnSafeTransport(float x, float y, int width, int height, const std::string &name, std::vector<int> config)
+    : Transport(x, y, width, height, name),
       timerHit(0) {
   if (name == "bus") {
     setBus(config[13]);
@@ -38,7 +38,7 @@ void UnSafeTransport::Update(float time, std::vector<Object> &obj) {
   anim.Tick(time);
 }
 
-float UnSafeTransport::GetDmg() {
+int UnSafeTransport::GetDmg() {
   if (timerHit > HP_TIME_LOSS) {
     timerHit = 0;
     return dmg;
@@ -47,28 +47,20 @@ float UnSafeTransport::GetDmg() {
   return 0;
 }
 
-float UnSafeTransport::PrintDmg() const {
-  return dmg;
-}
-
-void UnSafeTransport::setBus(float getDmg) {
+void UnSafeTransport::setBus(int getDmg) {
   dx = BUS_DX;
   dmg = getDmg;
 
-  sf::Texture autoTexture;
-  autoTexture.loadFromFile(resourcePath() + "files/images/bus.png");
-  anim = AnimationManager(autoTexture);
+  anim = AnimationManager(resourcePath() + "files/images/bus.png");
   anim.Create("move", 4, 4, 393, 100, 2, 0.005, 397);
   anim.Set("move");
 }
 
-void UnSafeTransport::setMetro(float getDmg) {
+void UnSafeTransport::setMetro(int getDmg) {
   dx = METRO_DX;
   dmg = getDmg;
 
-  sf::Texture autoTexture;
-  autoTexture.loadFromFile(resourcePath() + "files/images/metro.png");
-  anim = AnimationManager(autoTexture);
+  anim = AnimationManager(resourcePath() + "files/images/metro.png");
   anim.Create("move", 64, 2, 924, 140, 2, 0.002, 994);
   anim.Set("move");
 }

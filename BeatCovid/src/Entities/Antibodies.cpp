@@ -1,10 +1,9 @@
 #include "Antibodies.h"
 #include "ResourcePath.hpp"
 
-Antibodies::Antibodies(float x, float y, int w, int h, const std::string &name)
-    : Entity(x, y, 0, 0, w, h),
+Antibodies::Antibodies(float x, float y, int width, int height, const std::string &name)
+    : Entity(x, y, width, height),
       name(name) {
-
   if (name == "antigen") {
     setAntigen();
   }
@@ -29,17 +28,13 @@ std::string Antibodies::GetName() {
 }
 
 void Antibodies::setAntigen() {
-  sf::Texture antigenTexture;
-  antigenTexture.loadFromFile(resourcePath() + "files/images/antitel.png");
-  anim = AnimationManager(antigenTexture);
+  anim = AnimationManager(resourcePath() + "files/images/antitel.png");
   anim.Create("stay", 4, 4, 32, 32, 3, 1, 34);
   anim.Set("stay");
 }
 
 void Antibodies::setVaccine() {
-  sf::Texture vaccineTexture;
-  vaccineTexture.loadFromFile(resourcePath() + "files/images/vaccine.png");
-  anim = AnimationManager(vaccineTexture);
+  anim = AnimationManager(resourcePath() + "files/images/vaccine.png");
   anim.Create("stay", 4, 4, 32, 32, 3, 1, 34);
   anim.Set("stay");
 }

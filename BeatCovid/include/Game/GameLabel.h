@@ -8,6 +8,7 @@ class GameLabel {
   explicit GameLabel(unsigned int getSize);
   explicit GameLabel(unsigned int getSize, sf::Color color);
   explicit GameLabel(unsigned int getSize, const std::string &getStr);
+  explicit GameLabel(unsigned int getSize, const std::string &getStr, sf::Color color);
   void SetText(const std::string &getStr);
   void SetPosition(float getX, float getY);
   sf::Vector2f GetTextRectSize() const;

@@ -4,54 +4,54 @@
 #include "Level_map.h"
 #include "ResourcePath.hpp"
 
-sf::Vector2i calculatePlayerPosition(unsigned int width,
-                                     unsigned int height,
-                                     int leftX,
-                                     int rightX,
-                                     int upY,
-                                     int downY,
-                                     int playerCurrentX,
-                                     int playerCurrentY) {
-  int playerX = 0;
-  int playerY = 0;
+sf::Vector2f calculatePlayerPosition(int width,
+                                     int height,
+                                     int left,
+                                     int right,
+                                     int top,
+                                     int bottom,
+                                     float playerX,
+                                     float playerY) {
+  float x = 0;
+  float y = 0;
 
-  if (playerCurrentX - width / 2.0 > leftX && playerCurrentX + width / 2.0 < rightX) {
-    playerX = playerCurrentX;
+  if (playerX - width / 2.0 > left && playerX + width / 2.0 < right) {
+    x = playerX;
   } else {
-    if (playerCurrentX - width / 2.0 < leftX) {
-      playerX = leftX + width / 2.0;
+    if (playerX - width / 2.0 <= left) {
+      x = left + width / 2.0;
     } else {
-      playerX = rightX - width / 2.0;
+      x = right - width / 2.0;
     }
   }
 
-  if (playerCurrentY - height / 2.0 > upY && playerCurrentY + height / 2.0 < downY) {
-    playerY = playerCurrentY;
+  if (playerY - height / 2.0 > top && playerY + height / 2.0 < bottom) {
+    y = playerY;
   } else {
-    if (playerCurrentY - height / 2.0 < upY) {
-      playerY = upY + height / 2.0;
+    if (playerY - height / 2.0 <= top) {
+      y = top + height / 2.0;
     } else {
-      playerY = downY - height / 2.0;
+      y = bottom - height / 2.0;
     }
   }
 
-  return {playerX, playerY};
+  return {x, y};
 }
 
-void setPrice(std::vector<int> arm_vctr, InterfaceLabel &lbl, int id) {
+void setPrice(std::vector<int> armor, InterfaceLabel &label, int id) {
   std::ostringstream str;
-  if (arm_vctr[id] * 100 + 100 >= 500) {
+  if (armor[id] * 200 + 200 >= 1000) {
     str << "max";
   } else {
-    str << arm_vctr[id] * 100 + 100;
+    str << armor[id] * 200 + 200;
   }
-  lbl.SetText(str.str());
+  label.SetText(str.str());
 }
 
-void setArmLvl(std::vector<int> arm_vctr, InterfaceLabel &lbl, int id) {
+void setArmLvl(std::vector<int> armor, InterfaceLabel &label, int id) {
   std::ostringstream str;
-  str << "LVL:" << arm_vctr[id];
-  lbl.SetText(str.str());
+  str << "LVL:" << armor[id];
+  label.SetText(str.str());
 }
 
 void buy(std::vector<int> arm_vector, int index) {
@@ -70,6 +70,9 @@ Interface::Interface(sf::RenderWindow &window)
       buttonSize(window.getSize().y / 25),
       textSize(window.getSize().y / 30),
       headSize(window.getSize().y / 20),
+      gameHeight(1600),
+      gameWidth(2500),
+      gameText(1600 / 30),
       buttonFontPath(resourcePath() + "files/fonts/Inconsolata-Bold.ttf"),
       textFontPath(resourcePath() + "files/fonts/Inconsolata-Bold.ttf") {
   if (width > 2500 && height > 1600) {
@@ -155,9 +158,9 @@ void Interface::MainMenu(sf::RenderWindow &window) {
       window.close();
     }
 
-    if (aboutButton.IsSelect(mousePosition, music)) {
-      aboutMenu(window);
-    }
+//    if (aboutButton.IsSelect(mousePosition, music)) {
+//      aboutMenu(window);
+//    }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)
         && sf::Keyboard::isKeyPressed(sf::Keyboard::G)
@@ -304,13 +307,13 @@ int Interface::startNewGame(sf::RenderWindow &window) {
     Level lvl;
     lvl.LoadFromFile(save.GetLvlName());
 
-    int leftX = lvl.GetObject("left").rect.left;
-    int rightX = lvl.GetObject("right").rect.left + lvl.GetObject("right").rect.width;
-    int upY = lvl.GetObject("top").rect.top;
-    int downY = lvl.GetObject("bottom").rect.top + lvl.GetObject("bottom").rect.height;
+    int left = lvl.GetObject("left").rect.left;
+    int right = lvl.GetObject("right").rect.left + lvl.GetObject("right").rect.width;
+    int top = lvl.GetObject("top").rect.top;
+    int bottom = lvl.GetObject("bottom").rect.top + lvl.GetObject("bottom").rect.height;
 
     GameManager
-        game(lvl, textSize, music, Save::LoadArmors(), Save::LoadPoints(), Save::LoadStat(), Save::LoadConfig());
+        game(lvl, gameText, music, Save::LoadArmors(), Save::LoadPoints(), Save::LoadStat(), Save::LoadConfig());
     sf::Clock clock;
 
     while (window.isOpen()) {
@@ -335,7 +338,7 @@ int Interface::startNewGame(sf::RenderWindow &window) {
 
             window.setView(menuView);
 
-            if (!gameMenu(window, game.GetPlayer()->GetMainData())) {
+            if (!gameMenu(window, game.GetPlayer().GetMainData())) {
               repeat = false;
               return 0;
             }
@@ -345,7 +348,7 @@ int Interface::startNewGame(sf::RenderWindow &window) {
         }
       }
 
-      if (game.GetPlayer()->GetHp() <= 0) {
+      if (game.GetPlayer().GetHp() <= 0) {
         music.StopBackgroundGameMusic();
         music.StopAllMusic();
         music.PlayDiedPlayerSound();
@@ -356,38 +359,71 @@ int Interface::startNewGame(sf::RenderWindow &window) {
         break;
       }
 
-      if (game.GetPlayer()->GetFinish()) {
+      if (game.GetPlayer().GetFinish()) {
         music.StopBackgroundGameMusic();
 
         window.setView(menuView);
 
-        if (save.GetLvl() == MAX_LVL) {
+        if (save.CheckEndGame()) {
           save.SetEndGame();
           repeat = winMenu(window, false);
 
         } else {
-          save.ChangeLvl();
+          save.NextLvl();
           repeat = nextLvlMenu(window);
         }
 
-        save.SaveGame(game.GetPlayer()->GetPoints());
+        save.SaveGame(game.GetPlayer().GetPoints());
+        break;
+      }
+
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::N)
+          && sf::Keyboard::isKeyPressed(sf::Keyboard::E)
+          && sf::Keyboard::isKeyPressed(sf::Keyboard::X)
+          && sf::Keyboard::isKeyPressed(sf::Keyboard::T)) {
+
+        if (save.CheckEndGame()) {
+          save.SetEndGame();
+          repeat = false;
+          window.setView(menuView);
+        } else {
+          save.NextLvl();
+        }
+
+        save.SaveGame(game.GetPlayer().GetPoints());
+        break;
+      }
+        
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)
+          && sf::Keyboard::isKeyPressed(sf::Keyboard::A)
+          && sf::Keyboard::isKeyPressed(sf::Keyboard::S)
+          && sf::Keyboard::isKeyPressed(sf::Keyboard::T)) {
+
+        save.LastLvl();
+
+        if (save.GetLvl() == 0) {
+          repeat = false;
+          window.setView(menuView);
+        }
+
+        save.SaveGame(game.GetPlayer().GetPoints());
         break;
       }
 
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        game.GetPlayer()->SetKey("L", true);
+        game.GetPlayer().SetKey("L");
       }
 
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        game.GetPlayer()->SetKey("R", true);
+        game.GetPlayer().SetKey("R");
       }
 
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        game.GetPlayer()->SetKey("UP", true);
+        game.GetPlayer().SetKey("UP");
       }
 
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        game.GetPlayer()->SetKey("DOWN", true);
+        game.GetPlayer().SetKey("DOWN");
       }
 
       float time = clock.getElapsedTime().asMicroseconds();
@@ -399,12 +435,12 @@ int Interface::startNewGame(sf::RenderWindow &window) {
 
       game.Update(time);
       auto playerPosition = calculatePlayerPosition(gameWidth, gameHeight,
-                                                    leftX, rightX, upY, downY,
-                                                    game.GetPlayer()->GetRect().left, game.GetPlayer()->GetRect().top);
+                                                    left, right, top, bottom,
+                                                    game.GetPlayer().GetRect().left, game.GetPlayer().GetRect().top);
 
       window.clear(sf::Color(0, 0, 0));
       lvl.Draw(window, gameHeight, gameWidth, playerPosition.x, playerPosition.y);
-      game.Draw(window, playerPosition.x, playerPosition.y, gameHeight, gameWidth);
+      game.Draw(window, playerPosition.x, playerPosition.y, gameWidth, gameHeight);
       gameView.setCenter(playerPosition.x, playerPosition.y);
       window.setView(gameView);
       window.display();
@@ -412,6 +448,8 @@ int Interface::startNewGame(sf::RenderWindow &window) {
 
     Save::SaveStat(game.GetStat());
   }
+
+  return 0;
 }
 
 // Предупреждение о сбросе данных
@@ -451,6 +489,8 @@ bool Interface::endGameWarningMenu(sf::RenderWindow &window) {
     endGameWarningTable.Draw(window);
     window.display();
   }
+
+  return true;
 }
 
 bool Interface::winMenu(sf::RenderWindow &window, bool isLoadFromMenu) {
@@ -672,7 +712,7 @@ void Interface::configMenu(sf::RenderWindow &window) {
   int lvl = Save::LoadLvl();
   int points = Save::LoadPoints();
   std::vector<int> armors = Save::LoadArmors();
-  std::vector<float> config = Save::LoadConfig();
+  std::vector<int> config = Save::LoadConfig();
 
   std::ostringstream ssCurrentLvl;
   ssCurrentLvl << "Current lvl: " << lvl;
@@ -819,12 +859,12 @@ bool Interface::shopMenu(sf::RenderWindow &window) {
                                width / 1.67, height / 1.4,
                                width / 15, width / 15);
 
-  InterfaceLabel lvlShoesText(textFontPath, textSize, width / 1.46, height / 3.5);
-  InterfaceLabel lvlCapText(textFontPath, textSize, width / 4.2, height / 3.5);
-  InterfaceLabel lvlRobeText(textFontPath, textSize, width / 2.15, height / 1.18);
-  InterfaceLabel costShoesText(textFontPath, textSize, width / 1.2, height / 4);
-  InterfaceLabel costCapText(textFontPath, textSize, width / 9, height / 4);
-  InterfaceLabel costRobeText(textFontPath, textSize, width / 1.64, height / 1.22);
+  InterfaceLabel lvlShoesText(textFontPath, textSize, width / 1.42, height / 3.5);
+  InterfaceLabel lvlCapText(textFontPath, textSize, width / 4.0, height / 3.5);
+  InterfaceLabel lvlRobeText(textFontPath, textSize, width / 2.10, height / 1.18);
+  InterfaceLabel costShoesText(textFontPath, textSize, width / 1.19, height / 4);
+  InterfaceLabel costCapText(textFontPath, textSize, width / 8.6, height / 4);
+  InterfaceLabel costRobeText(textFontPath, textSize, width / 1.62, height / 1.22);
 
   std::ostringstream ssPoints;
   int money = Save::LoadPoints();
@@ -897,7 +937,7 @@ bool Interface::shopMenu(sf::RenderWindow &window) {
         if (event.mouseButton.button == sf::Mouse::Left) {
           if (menuNum == 0 || menuNum == 1 || menuNum == 2) {
             if (arm_vector[menuNum] < 4) {
-              int cost = arm_vector[menuNum] * 100 + 100;
+              int cost = arm_vector[menuNum] * 200 + 200;
               if (cost <= money) {
                 buy(arm_vector, menuNum);
                 Save::SavePoints(money - cost);

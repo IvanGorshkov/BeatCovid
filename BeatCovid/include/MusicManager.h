@@ -5,7 +5,7 @@
 #define BACK_MENU 50
 #define ON_BUTTON 15
 #define SELECT_BUTTON 20
-#define BACK_GAME 0
+#define BACK_GAME 10
 #define HIT_PLAYER 70
 #define HIT_ENEMY 70
 #define DIED_ENEMY 70
@@ -23,7 +23,7 @@ class MusicManager {
   void StopBackgroundMenuMusic();
   void PlayOnButtonSound();
   void PlaySelectButtonSound();
-    
+
   void PlayBackgroundGameMusic();
   void StopBackgroundGameMusic();
   void PlayHitPlayerSound();
@@ -32,6 +32,7 @@ class MusicManager {
   void PlayDiedPlayerSound();
   void PlayMetroSound();
   void PlayCarSound();
+  void StopCarSound();
   void PlayGetAntibodiesSound();
   void PlayGetVaccineSound();
   void PlayTreatPatientSound();
@@ -42,15 +43,15 @@ class MusicManager {
  private:
   // Звук меню
   sf::Music backgroundMenuMusic;
-    
+
   // Наведение на кнопку
   sf::SoundBuffer onButtonBuffer;
   sf::Sound onButtonSound;
-    
+
   // Выбор кнопки
   sf::SoundBuffer selectButtonBuffer;
   sf::Sound selectButtonSound;
-    
+
   // Звук игры
   sf::Music backgroundGameMusic;
 

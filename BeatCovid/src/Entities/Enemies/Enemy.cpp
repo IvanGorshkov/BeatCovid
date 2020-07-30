@@ -1,28 +1,14 @@
 #include "Enemy.h"
 
-Enemy::Enemy(float x, float y, int height, int weight, float hp, float dmg, std::string name)
-    : Entity(x, y, 0, 0, height, weight),
+Enemy::Enemy(float x, float y, int width, int height, int hp, int dmg, std::string name)
+    : Entity(x, y, width, height),
+      name(std::move(name)),
       hp(hp),
       dmg(dmg),
-      timerHit(0),
+      dir(false),
       fire(false),
-      dir(false),
-      dieSound(false),
-      name(std::move(name)) {
-}
-
-Enemy::Enemy(float x, float y, int height, int weight, std::string name)
-    : Entity(x, y, 0, 0, height, weight),
       timerHit(std::rand() % ENEMY_HIT_TIME),
-      name(std::move(name)),
-      dieSound(false),
-      dir(false),
-      fire(false) {
-}
-
-void Enemy::SetHpGmg(float getHp, float getDmg) {
-  hp = getHp;
-  dmg = getDmg;
+      dieSound(false) {
 }
 
 void Enemy::Update(float time, std::vector<Object> &obj) {
@@ -58,12 +44,12 @@ void Enemy::ResetTimer() {
   timerHit = 0;
 }
 
-float Enemy::GetDmg() const {
+int Enemy::GetDmg() const {
   return dmg;
 }
 
-void Enemy::TakeDmg(float getDmg) {
-  hp -= getDmg;
+void Enemy::TakeDmg(int takeDmg) {
+  hp -= takeDmg;
 }
 
 void Enemy::SetFire(bool getFire) {

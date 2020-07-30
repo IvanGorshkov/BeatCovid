@@ -9,7 +9,7 @@ class InterfaceButton : public InterfaceLabel {
   InterfaceButton(const std::string &fontPath, unsigned int getSize, const std::string &str);
   InterfaceButton(const std::string &fontPath, unsigned int getSize, float getX, float getY, const std::string &str);
   bool IsSelect(sf::Vector2i mouse, MusicManager &music);
-    
-private:
+
+ private:
   bool isOnButton;
 };
