@@ -335,7 +335,8 @@ void Player::SetVaccine(bool value) {
 }
 
 void Player::GoToStart() {
-    rect = startPlayerPosition;
+    rect.left = startPlayerPosition.left;
+    rect.top = startPlayerPosition.top;
 }
 
 void Player::SetPosition(float x, float y) {
