@@ -291,7 +291,7 @@ void Player::DrawObjs(sf::RenderWindow &window) {
 }
 
 void Player::TakeDamage(int getDmg) {
-  if (hp > 0) {
+  if (hp > 0 && getDmg != 0) {
     if (GetArm() >= getDmg) {
       --hp;
     } else {
