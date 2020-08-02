@@ -291,7 +291,7 @@ void Player::DrawObjs(sf::RenderWindow &window) {
 }
 
 void Player::TakeDamage(int getDmg) {
-  if (hp > 0) {
+  if (hp > 0 && getDmg != 0) {
     if (GetArm() >= getDmg) {
       --hp;
     } else {
@@ -335,7 +335,8 @@ void Player::SetVaccine(bool value) {
 }
 
 void Player::GoToStart() {
-    rect = startPlayerPosition;
+    rect.left = startPlayerPosition.left;
+    rect.top = startPlayerPosition.top;
 }
 
 void Player::SetPosition(float x, float y) {

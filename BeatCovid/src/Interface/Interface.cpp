@@ -333,6 +333,7 @@ int Interface::startNewGame(sf::RenderWindow &window) {
 
             if (!gameMenu(window, game.GetPlayer().GetMainData())) {
               repeat = false;
+              Save::SaveStat(game.GetStat());
               return 0;
             }
 
@@ -386,7 +387,7 @@ int Interface::startNewGame(sf::RenderWindow &window) {
         save.SaveGame(game.GetPlayer().GetPoints());
         break;
       }
-
+        
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)
           && sf::Keyboard::isKeyPressed(sf::Keyboard::A)
           && sf::Keyboard::isKeyPressed(sf::Keyboard::S)
