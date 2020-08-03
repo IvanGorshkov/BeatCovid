@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="220" height="100" tilewidth="32" tileheight="32" nextobjectid="635">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="220" height="100" tilewidth="32" tileheight="32" nextobjectid="640">
  <tileset firstgid="1" name="city_tiles" tilewidth="32" tileheight="32" tilecount="0" columns="8">
   <image source="files/maps/map_tiles.png" width="256" height="616"/>
  </tileset>
@@ -66149,17 +66149,14 @@
   <object id="583" name="antigen" x="1952.81" y="1624.05" width="32" height="32"/>
   <object id="584" name="finish" x="2879.47" y="1405.49" width="32" height="32"/>
   <object id="585" name="bus" x="2558.98" y="2175.81" width="32" height="32"/>
-  <object id="586" name="metro" x="2191.7" y="2530.86" width="32" height="32"/>
+  <object id="586" name="metro" x="2015.64" y="2530" width="32" height="32"/>
   <object id="587" name="monorail" x="2080.28" y="485.945" width="32" height="32"/>
   <object id="589" name="wall" x="1184.37" y="1600.84" width="63.322" height="62.927"/>
   <object id="594" name="antigen" x="5200.53" y="2420.23" width="32" height="32"/>
   <object id="595" name="antigen" x="5141.21" y="2422.2" width="32" height="32"/>
-  <object id="596" name="virus" x="2557.96" y="2525.42" width="32" height="32"/>
   <object id="597" name="virus" x="2978.08" y="2531.34" width="32" height="32"/>
   <object id="598" name="virus" x="3501.75" y="2522.46" width="32" height="32"/>
   <object id="599" name="virus" x="4043.17" y="2528.38" width="32" height="32"/>
-  <object id="600" name="virus" x="4623.05" y="2528.38" width="32" height="32"/>
-  <object id="601" name="virus" x="4969.21" y="2513.59" width="32" height="32"/>
   <object id="602" name="virus" x="3268.02" y="2105.3" width="32" height="32"/>
   <object id="603" name="virus" x="3628.97" y="2096.43" width="32" height="32"/>
   <object id="604" name="virus" x="4028.38" y="2102.34" width="32" height="32"/>
@@ -66190,6 +66187,11 @@
   <object id="630" name="delivery" x="4159.66" y="1537.4" width="32" height="32"/>
   <object id="631" name="delivery" x="3871.12" y="1600.01" width="32" height="32"/>
   <object id="632" name="delivery" x="3328.48" y="2398.39" width="32" height="32"/>
+  <object id="635" name="virus" x="3240.37" y="2520.73" width="32" height="32"/>
+  <object id="636" name="virus" x="3771.11" y="2520.73" width="32" height="32"/>
+  <object id="637" name="virus" x="4325.83" y="2523.73" width="32" height="32"/>
+  <object id="638" name="virus" x="3093.45" y="2115.93" width="32" height="32"/>
+  <object id="639" name="virus" x="4238.87" y="2100.94" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="obj"/>
  <objectgroup name="auto"/>
