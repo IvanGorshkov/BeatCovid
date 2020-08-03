@@ -55,39 +55,23 @@ bool Save::IsExistLvlFile() {
 }
 
 void Save::RemoveGameSaves() {
-  std::fstream saveLvl(LVL_FILE);
-  if (saveLvl.is_open()) {
     std::ostringstream ssLvl;
     ssLvl << LVL_FILE;
     remove(ssLvl.str().c_str());
-  }
-  saveLvl.close();
 
-  std::fstream saveArmor(ARMOR_FILE);
-  if (saveArmor.is_open()) {
     std::ostringstream ssArmor;
     ssArmor << ARMOR_FILE;
     remove(ssArmor.str().c_str());
-  }
-  saveArmor.close();
 
-  std::fstream savePoints(POINTS_FILE);
-  if (savePoints.is_open()) {
     std::ostringstream ssPoints;
     ssPoints << POINTS_FILE;
     remove(ssPoints.str().c_str());
-  }
-  savePoints.close();
 }
 
 void Save::RemoveConfig() {
-  std::fstream saveConfig(CONFIG_FILE);
-  if (saveConfig.is_open()) {
     std::ostringstream ssConfig;
     ssConfig << CONFIG_FILE;
     remove(ssConfig.str().c_str());
-  }
-  saveConfig.close();
 }
 
 int Save::LoadLvl() {
@@ -98,6 +82,8 @@ int Save::LoadLvl() {
 
   int lvl;
   saveLvlFile >> lvl;
+    
+  saveLvlFile.close();
   return lvl;
 }
 
@@ -115,6 +101,8 @@ int Save::LoadPoints() {
 
   int points;
   savePointsFile >> points;
+    
+  savePointsFile.close();
   return points;
 }
 
@@ -158,14 +146,14 @@ std::vector<int> Save::LoadStat() {
 
   if (!saveStatFile.is_open()) {
     return stat;
-  } else {
-    for (int &i : stat) {
-      saveStatFile >> i;
-    }
-
-    saveStatFile.close();
-    return stat;
   }
+    
+  for (int &i : stat) {
+    saveStatFile >> i;
+  }
+
+  saveStatFile.close();
+  return stat;
 }
 
 void Save::SaveStat(const std::vector<int> &stat) {
@@ -181,7 +169,7 @@ void Save::SaveStat(const std::vector<int> &stat) {
 std::vector<int> Save::LoadConfig() {
   std::ifstream saveConfigFile;
   std::vector<int> config;
-  config.resize(20, 0);
+  config.resize(15, 0);
 
   std::fstream saveConfig(CONFIG_FILE);
   if (saveConfig.is_open()) {
