@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="600" height="100" tilewidth="32" tileheight="32" nextobjectid="230">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="600" height="100" tilewidth="32" tileheight="32" nextobjectid="249">
  <tileset firstgid="1" name="city_tiles" tilewidth="32" tileheight="32" tilecount="0" columns="8">
   <image source="files/maps/map_tiles.png" width="256" height="616"/>
  </tileset>
@@ -145280,8 +145280,8 @@
    <tile gid="0"/>
    <tile gid="3"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="8"/>
+   <tile gid="8"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -145880,8 +145880,8 @@
    <tile gid="0"/>
    <tile gid="3"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="8"/>
+   <tile gid="8"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -180160,6 +180160,7 @@
   <object id="227" name="wall" x="9152.94" y="1248.72" width="30.5585" height="62.9981"/>
   <object id="228" name="wall" x="11585.6" y="2336.18" width="63.4069" height="62.8059"/>
   <object id="229" name="wall" x="7295.28" y="2336.41" width="63.4069" height="62.8059"/>
+  <object id="239" name="wall" x="2141.39" y="1342.59" width="66.477" height="67.5094"/>
  </objectgroup>
  <objectgroup name="obj">
   <object id="133" name="finish" x="17472" y="2686.75" width="32" height="33.2491"/>
@@ -180174,16 +180175,14 @@
   <object id="142" name="antigen" x="1408" y="2688" width="32" height="32"/>
   <object id="143" name="antigen" x="2560" y="1504" width="32" height="32"/>
   <object id="144" name="antigen" x="2624" y="1504" width="32" height="32"/>
-  <object id="145" name="antigen" x="2688" y="1504" width="32" height="32"/>
-  <object id="146" name="antigen" x="2752" y="1504" width="32" height="32"/>
-  <object id="147" name="vaccine" x="6432" y="1504" width="32" height="32"/>
+  <object id="147" name="vaccine" x="2012.29" y="1054.86" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="auto">
   <object id="148" name="metro" x="2688" y="2592" width="32" height="32"/>
   <object id="149" name="metro" x="7776" y="2592" width="32" height="32"/>
-  <object id="150" name="metro" x="12832" y="2560" width="32" height="32"/>
+  <object id="150" name="metro" x="12832" y="2587.67" width="32" height="32"/>
   <object id="151" name="auto" x="7483.83" y="2304" width="32" height="32"/>
-  <object id="152" name="bus" x="12832" y="2302.7" width="32" height="32"/>
+  <object id="152" name="bus" x="12832" y="2306.16" width="32" height="32"/>
   <object id="153" name="monorail" x="10241.6" y="1381.13" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="enemys">
@@ -180226,7 +180225,7 @@
   <object id="190" name="delivery" x="9216" y="2176" width="32" height="32"/>
   <object id="191" name="delivery" x="8992" y="2080" width="32" height="32"/>
   <object id="192" name="delivery" x="12448" y="2144" width="32" height="32"/>
-  <object id="193" name="delivery" x="16672" y="2336" width="32" height="32"/>
+  <object id="193" name="delivery" x="17079.5" y="2336.53" width="32" height="32"/>
   <object id="194" name="delivery" x="16736" y="2336" width="32" height="32"/>
   <object id="195" name="virus" x="4192" y="2496" width="32" height="32"/>
   <object id="196" name="virus" x="3936" y="2496" width="32" height="32"/>
@@ -180247,6 +180246,24 @@
   <object id="211" name="virus" x="14912" y="2272" width="32" height="32"/>
   <object id="212" name="virus" x="15264" y="2272" width="32" height="32"/>
   <object id="213" name="virus" x="15584" y="2272" width="32" height="32"/>
+  <object id="230" name="breaker" x="5281.07" y="1472.59" width="32" height="32"/>
+  <object id="231" name="breaker" x="6560.13" y="1247.71" width="32" height="32"/>
+  <object id="232" name="delivery" x="7392.46" y="1344.59" width="32" height="32"/>
+  <object id="233" name="delivery" x="3615.57" y="1469.97" width="32" height="32"/>
+  <object id="234" name="delivery" x="8256.06" y="671.769" width="32" height="32"/>
+  <object id="235" name="virus" x="5728.16" y="1410.31" width="32" height="32"/>
+  <object id="236" name="virus" x="4991.21" y="1408.86" width="32" height="32"/>
+  <object id="237" name="virus" x="4193.69" y="1413.19" width="32" height="32"/>
+  <object id="238" name="virus" x="2495.87" y="1440.1" width="32" height="32"/>
+  <object id="240" name="police" x="3615.93" y="2272.04" width="32" height="32"/>
+  <object id="241" name="police" x="3615.74" y="2015.12" width="32" height="32"/>
+  <object id="242" name="police" x="7104.12" y="2655.24" width="32" height="32"/>
+  <object id="243" name="virus" x="14201" y="2524.97" width="32" height="32"/>
+  <object id="244" name="virus" x="15700.2" y="2529.05" width="32" height="32"/>
+  <object id="245" name="virus" x="14934.5" y="2515.53" width="32" height="32"/>
+  <object id="246" name="virus" x="10191" y="2269.03" width="32" height="32"/>
+  <object id="247" name="virus" x="10504.2" y="2261.07" width="32" height="32"/>
+  <object id="248" name="virus" x="10740.4" y="2263.72" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="death">
   <object id="214" name="death" x="32" y="3168" width="17568" height="32"/>
