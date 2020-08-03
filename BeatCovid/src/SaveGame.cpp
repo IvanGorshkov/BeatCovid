@@ -2,42 +2,37 @@
 #include <fstream>
 #include <sstream>
 
-Save::Save() {
-  this->lvl = 1;
-}
-
 void Save::NextLvl() {
-  this->lvl += 1;
+  lvl += 1;
 }
 
 void Save::LastLvl() {
-  this->lvl -= 1;
+  lvl -= 1;
 }
 
 void Save::SetEndGame() {
-  this->lvl = 0;
+  lvl = 0;
 }
 
 int Save::GetLvl() const {
-  return this->lvl;
+  return lvl;
 }
 
 std::string Save::GetLvlName() {
   lvl = LoadLvl();
 
-  std::ifstream save_stat(STAT_FILE);
+  std::ifstream saveStatFile(STAT_FILE);
 
-  if (save_stat.is_open()) {
-    char buff[50];
-    save_stat.getline(buff, 50);
+  if (saveStatFile.is_open()) {
+    int statlvl;
+    saveStatFile >> statlvl;
 
-    if (atoi(buff) != 0 && lvl == 1) {
+    if (statlvl != 0 && lvl == 1) {
       NextLvl();
     }
   }
 
-  std::string lvlName = MAPS_PATH;
-  return (lvlName += std::to_string(lvl) + ".tmx");
+  return (MAPS_PATH + std::to_string(lvl) + ".tmx");
 }
 
 void Save::SaveGame(int points) const {
@@ -46,13 +41,17 @@ void Save::SaveGame(int points) const {
 }
 
 bool Save::CheckEndGame() const {
-  std::ifstream lvlMap(MAPS_PATH + std::to_string(lvl + 1) + ".tmx");
-  return !lvlMap.is_open();
+  std::ifstream nextMap(MAPS_PATH + std::to_string(lvl + 1) + ".tmx");
+  bool exist = nextMap.is_open();
+  nextMap.close();
+  return !exist;
 }
 
 bool Save::IsExistLvlFile() {
-  std::fstream save(LVL_FILE);
-  return save.is_open();
+  std::fstream saveLvlFile(LVL_FILE);
+  bool exist = saveLvlFile.is_open();
+  saveLvlFile.close();
+  return exist;
 }
 
 void Save::RemoveGameSaves() {
@@ -92,16 +91,14 @@ void Save::RemoveConfig() {
 }
 
 int Save::LoadLvl() {
-  std::ifstream save(LVL_FILE);
-  if (!save.is_open()) {
+  std::ifstream saveLvlFile(LVL_FILE);
+  if (!saveLvlFile.is_open()) {
     return 1;
   }
 
-  char buff[50];
-  int level;
-  save.getline(buff, 50);
-  level = atoi(buff);
-  return level;
+  int lvl;
+  saveLvlFile >> lvl;
+  return lvl;
 }
 
 void Save::SaveLvl(int lvl) {
@@ -111,15 +108,13 @@ void Save::SaveLvl(int lvl) {
 }
 
 int Save::LoadPoints() {
-  std::ifstream save(POINTS_FILE);
-  if (!save.is_open()) {
+  std::ifstream savePointsFile(POINTS_FILE);
+  if (!savePointsFile.is_open()) {
     return 0;
   }
 
-  char buff[50];
   int points;
-  save.getline(buff, 50);
-  points = atoi(buff);
+  savePointsFile >> points;
   return points;
 }
 
@@ -138,10 +133,8 @@ std::vector<int> Save::LoadArmors() {
     return armors;
   }
 
-  char buff[50];
-  for (int &armor : armors) {
-    saveArmorsFile.getline(buff, 50);
-    armor = atoi(buff);
+  for (int &i : armors) {
+    saveArmorsFile >> i;
   }
 
   saveArmorsFile.close();
@@ -152,8 +145,7 @@ void Save::SaveArmor(const std::vector<int> &arm) {
   std::ofstream saveArmorsFile(ARMOR_FILE);
 
   for (int armor : arm) {
-    saveArmorsFile << armor;
-    saveArmorsFile << std::endl;
+    saveArmorsFile << armor << std::endl;
   }
 
   saveArmorsFile.close();
@@ -167,10 +159,8 @@ std::vector<int> Save::LoadStat() {
   if (!saveStatFile.is_open()) {
     return stat;
   } else {
-    char buff[1000];
     for (int &i : stat) {
-      saveStatFile.getline(buff, 1000);
-      i = atoi(buff);
+      saveStatFile >> i;
     }
 
     saveStatFile.close();
@@ -182,8 +172,7 @@ void Save::SaveStat(const std::vector<int> &stat) {
   std::ofstream saveStatFile(STAT_FILE);
 
   for (int i : stat) {
-    saveStatFile << i;
-    saveStatFile << std::endl;
+    saveStatFile << i << std::endl;
   }
 
   saveStatFile.close();
@@ -202,10 +191,8 @@ std::vector<int> Save::LoadConfig() {
   }
   saveConfig.close();
 
-  char buff[100];
   for (int &i : config) {
-    saveConfigFile.getline(buff, 100);
-    i = atoi(buff);
+    saveConfigFile >> i;
   }
 
   saveConfigFile.close();
@@ -216,8 +203,7 @@ void Save::SaveConfig(const std::vector<int> &config) {
   std::ofstream saveConfigFile(CONFIG_FILE);
 
   for (int i : config) {
-    saveConfigFile << i;
-    saveConfigFile << std::endl;
+    saveConfigFile << i << std::endl;
   }
 
   saveConfigFile.close();

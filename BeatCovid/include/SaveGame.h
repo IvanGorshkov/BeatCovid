@@ -14,7 +14,6 @@
 
 class Save {
  public:
-  Save();
   void NextLvl();
   void LastLvl();
   void SetEndGame();
