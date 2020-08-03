@@ -75,13 +75,6 @@ Interface::Interface(sf::RenderWindow &window)
       gameText(1600 / 30),
       buttonFontPath(resourcePath() + "files/fonts/Inconsolata-Bold.ttf"),
       textFontPath(resourcePath() + "files/fonts/Inconsolata-Bold.ttf") {
-  if (width > 2500 && height > 1600) {
-    gameWidth = 2500;
-    gameHeight = 1600;
-  } else {
-    gameWidth = width;
-    gameHeight = height;
-  }
 }
 
 // Вывод главного меню
@@ -340,6 +333,7 @@ int Interface::startNewGame(sf::RenderWindow &window) {
 
             if (!gameMenu(window, game.GetPlayer().GetMainData())) {
               repeat = false;
+              Save::SaveStat(game.GetStat());
               return 0;
             }
 

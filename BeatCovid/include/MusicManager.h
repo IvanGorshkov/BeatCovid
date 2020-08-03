@@ -2,19 +2,19 @@
 
 #include "SFML/Audio.hpp"
 
-#define BACK_MENU 50
-#define ON_BUTTON 15
+#define BACK_MENU 10
+#define ON_BUTTON 10
 #define SELECT_BUTTON 20
-#define BACK_GAME 10
-#define HIT_PLAYER 70
-#define HIT_ENEMY 70
-#define DIED_ENEMY 70
-#define DIED_PLAYER 70
-#define METRO 70
-#define CAR 70
-#define ANTIBODIES 70
-#define VACCINE 70
-#define TREAT_PATIENT 70
+#define BACK_GAME 15
+#define HIT_PLAYER 20
+#define HIT_ENEMY 15
+#define DIED_ENEMY 25
+#define DIED_PLAYER 35
+#define METRO 35
+#define CAR 35
+#define ANTIBODIES 40
+#define VACCINE 40
+#define TREAT_PATIENT 25
 
 class MusicManager {
  public:
