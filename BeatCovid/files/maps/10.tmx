@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="220" height="100" tilewidth="32" tileheight="32" nextobjectid="640">
- <tileset firstgid="1" name="city_tiles" tilewidth="32" tileheight="32" tilecount="0" columns="8">
-  <image source="files/maps/map_tiles.png" width="256" height="616"/>
+ <tileset firstgid="1" name="city_tiles" tilewidth="32" tileheight="32" tilecount="176" columns="8">
+  <image source="files/maps/map_tiles.png" width="256" height="712"/>
  </tileset>
  <layer name="sky" width="220" height="100">
   <data>
@@ -59434,19 +59434,19 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="159"/>
+   <tile gid="162"/>
+   <tile gid="166"/>
+   <tile gid="157"/>
    <tile gid="0"/>
+   <tile gid="171"/>
+   <tile gid="161"/>
+   <tile gid="158"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="164"/>
+   <tile gid="154"/>
+   <tile gid="170"/>
+   <tile gid="171"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -59877,13 +59877,13 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="173"/>
+   <tile gid="154"/>
+   <tile gid="156"/>
+   <tile gid="156"/>
+   <tile gid="162"/>
+   <tile gid="166"/>
+   <tile gid="158"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -66169,7 +66169,7 @@
   <object id="612" name="virus" x="2504.71" y="401.16" width="32" height="32"/>
   <object id="613" name="virus" x="664.473" y="404.118" width="32" height="32"/>
   <object id="614" name="virus" x="1096.43" y="670.391" width="32" height="32"/>
-  <object id="615" name="virus" x="1438.66" y="1873.68" width="32" height="32"/>
+  <object id="615" name="virus" x="1549.16" y="1837.73" width="32" height="32"/>
   <object id="616" name="breaker" x="928.867" y="802.637" width="32" height="32"/>
   <object id="617" name="breaker" x="3230.71" y="899.166" width="32" height="32"/>
   <object id="618" name="breaker" x="3457.18" y="1313.13" width="32" height="32"/>
