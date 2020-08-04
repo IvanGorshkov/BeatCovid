@@ -380,6 +380,8 @@ int Interface::startNewGame(sf::RenderWindow &window) {
           save.SetEndGame();
           repeat = false;
           window.setView(menuView);
+          music.StopBackgroundGameMusic();
+          music.PlayBackgroundMenuMusic();
         } else {
           save.NextLvl();
         }
@@ -398,6 +400,8 @@ int Interface::startNewGame(sf::RenderWindow &window) {
         if (save.GetLvl() == 0) {
           repeat = false;
           window.setView(menuView);
+          music.StopBackgroundGameMusic();
+          music.PlayBackgroundMenuMusic();
         }
 
         save.SaveGame(game.GetPlayer().GetPoints());
@@ -616,11 +620,11 @@ void Interface::statisticMenu(sf::RenderWindow &window) {
   std::vector<int> stat = Save::LoadStat();
 
   std::ostringstream ssPatient;
-  ssPatient << "Patients saved: " << stat[0];
+  ssPatient << "Player win time: " << stat[0];
   statisticTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssPatient.str()));
 
   std::ostringstream ssDied;
-  ssDied << "Hippocrates died: " << stat[1];
+  ssDied << "Player lose time: " << stat[1];
   statisticTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssDied.str()));
 
   std::ostringstream ssVaccine;
@@ -664,11 +668,11 @@ void Interface::statisticMenu(sf::RenderWindow &window) {
   statisticTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssMetro.str()));
 
   std::ostringstream ssPenalty;
-  ssPenalty << "Penalty time: " << stat[12];
+  ssPenalty << "Police penalty time: " << stat[12];
   statisticTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssPenalty.str()));
 
   std::ostringstream ssCaught;
-  ssCaught << "Back time: " << stat[13];
+  ssCaught << "Police back time: " << stat[13];
   statisticTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, ssCaught.str()));
 
   statisticTable.CalculateTablePosition();

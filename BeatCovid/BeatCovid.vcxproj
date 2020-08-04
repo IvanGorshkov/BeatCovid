@@ -227,7 +227,15 @@
     <ClInclude Include="include\SaveGame.h" />
     <ClInclude Include="include\Tinyxml\tinystr.h" />
     <ClInclude Include="include\Tinyxml\tinyxml.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="resource1.h" />
     <ClInclude Include="ResourcePath.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BeatCovid.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

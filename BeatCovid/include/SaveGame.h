@@ -4,8 +4,8 @@
 #include <string>
 #include "ResourcePath.hpp"
 
-#define LVL_FILE resourcePath() + "files/saves/save_lvl.txt"
 #define MAPS_PATH resourcePath() + "files/maps/"
+#define LVL_FILE resourcePath() + "files/saves/save_lvl.txt"
 #define POINTS_FILE resourcePath() + "files/saves/save_points.txt"
 #define ARMOR_FILE resourcePath() + "files/saves/save_armor.txt"
 #define STAT_FILE resourcePath() + "files/saves/save_stat.txt"
@@ -14,15 +14,14 @@
 
 class Save {
  public:
-  Save();
   void NextLvl();
   void LastLvl();
   void SetEndGame();
   int GetLvl() const;
+    
   std::string GetLvlName();
-  void SaveGame(int points) const;
-
   bool CheckEndGame() const;
+  void SaveGame(int points) const;
 
   static bool IsExistLvlFile();
   static void RemoveGameSaves();

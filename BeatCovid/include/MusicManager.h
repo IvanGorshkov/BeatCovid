@@ -2,7 +2,7 @@
 
 #include "SFML/Audio.hpp"
 
-#define BACK_MENU 10
+#define BACK_MENU 15
 #define ON_BUTTON 10
 #define SELECT_BUTTON 20
 #define BACK_GAME 15
