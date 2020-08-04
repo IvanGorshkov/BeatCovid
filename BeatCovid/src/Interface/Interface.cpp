@@ -1082,7 +1082,6 @@ bool Interface::gameMenu(sf::RenderWindow &window, std::vector<int> data) {
 }
 
 void Interface::aboutMenu(sf::RenderWindow &window) {
-    
   InterfaceLabel aboutGameHead(textFontPath, headSize, "About game");
   aboutGameHead.SetPosition((width - aboutGameHead.GetTextRectSize().x) / 2, headSize);
     
