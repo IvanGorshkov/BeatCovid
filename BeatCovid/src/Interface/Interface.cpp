@@ -1082,18 +1082,17 @@ bool Interface::gameMenu(sf::RenderWindow &window, std::vector<int> data) {
 }
 
 void Interface::aboutMenu(sf::RenderWindow &window) {
-    
   InterfaceLabel aboutGameHead(textFontPath, headSize, "About game");
   aboutGameHead.SetPosition((width - aboutGameHead.GetTextRectSize().x) / 2, headSize);
     
   InterfaceTable aboutTable;
   aboutTable.SetCenterLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "This game was developed by"));
-  aboutTable.SetCenterLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Alekhin Sergey, Gorshkov Ivan, K Ilya"));
+  aboutTable.SetCenterLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Alekhin Sergey, Gorshkov Ivan, Kalinin Ilya"));
   aboutTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Sound expert:"));
   aboutTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Akhverdiev Valery"));
   aboutTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Designer:"));
-  aboutTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "..."));
-  aboutTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Asistance:"));
+  aboutTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Fedor Surovtsev"));
+  aboutTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Assistance:"));
   aboutTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Poznyak Anastasia"));
     
   aboutTable.CalculateTablePosition();
