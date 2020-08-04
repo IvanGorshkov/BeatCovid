@@ -109,13 +109,7 @@ void Interface::MainMenu(sf::RenderWindow &window) {
         window.close();
       }
     }
-
-    //    if (event.type == sf::Event::TextEntered)
-    //    {
-    //      if (event.text.unicode >= 48 && event.text.unicode <= 57)
-    //        std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << std::endl;
-    //    }
-
+      
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
     if (newGameButton.IsSelect(mousePosition, music)) {
@@ -151,9 +145,9 @@ void Interface::MainMenu(sf::RenderWindow &window) {
       window.close();
     }
 
-//    if (aboutButton.IsSelect(mousePosition, music)) {
-//      aboutMenu(window);
-//    }
+    if (aboutButton.IsSelect(mousePosition, music)) {
+      aboutMenu(window);
+    }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)
         && sf::Keyboard::isKeyPressed(sf::Keyboard::G)
@@ -1088,6 +1082,26 @@ bool Interface::gameMenu(sf::RenderWindow &window, std::vector<int> data) {
 }
 
 void Interface::aboutMenu(sf::RenderWindow &window) {
+    
+  InterfaceLabel aboutGameHead(textFontPath, headSize, "About game");
+  aboutGameHead.SetPosition((width - aboutGameHead.GetTextRectSize().x) / 2, headSize);
+    
+  InterfaceTable aboutTable;
+  aboutTable.SetCenterLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "This game was developed by"));
+  aboutTable.SetCenterLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Alekhin Sergey, Gorshkov Ivan, K Ilya"));
+  aboutTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Sound expert:"));
+  aboutTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Akhverdiev Valery"));
+  aboutTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Designer:"));
+  aboutTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "..."));
+  aboutTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Asistance:"));
+  aboutTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Poznyak Anastasia"));
+    
+  aboutTable.CalculateTablePosition();
+  aboutTable.SetPosition(height, width);
+    
+  InterfaceLabel gameData(textFontPath, textSize, "August 2020 version: 1.0");
+  gameData.SetPosition((width - gameData.GetTextRectSize().x) / 2, height - textSize - 30);
+    
   InterfaceButton backButton(buttonFontPath, buttonSize, 30, height - buttonSize - 30, "Back");
 
   while (window.isOpen()) {
@@ -1105,6 +1119,9 @@ void Interface::aboutMenu(sf::RenderWindow &window) {
     }
 
     window.clear(sf::Color(68, 101, 219));
+    aboutGameHead.Draw(window);
+    aboutTable.Draw(window);
+    gameData.Draw(window);
     backButton.Draw(window);
     window.display();
   }
