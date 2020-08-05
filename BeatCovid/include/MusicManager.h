@@ -5,7 +5,7 @@
 #define BACK_MENU 15
 #define ON_BUTTON 10
 #define SELECT_BUTTON 20
-#define BACK_GAME 15
+#define BACK_GAME 10
 #define HIT_PLAYER 20
 #define HIT_ENEMY 15
 #define DIED_ENEMY 25
