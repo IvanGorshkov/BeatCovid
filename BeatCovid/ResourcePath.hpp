@@ -41,5 +41,5 @@
 ///
 ////////////////////////////////////////////////////////////
 std::string resourcePath(void);
-
+std::string getUserName();
 #endif

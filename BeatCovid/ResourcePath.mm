@@ -47,6 +47,10 @@ std::string resourcePath(void)
     }
 
     [pool drain];
-
+    
     return rpath;
+}
+
+std::string getUserName(){
+    return std::string([NSUserName() UTF8String]);
 }
