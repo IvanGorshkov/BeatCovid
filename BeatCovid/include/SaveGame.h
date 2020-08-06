@@ -5,11 +5,11 @@
 #include "ResourcePath.hpp"
 
 #define MAPS_PATH resourcePath() + "files/maps/"
-#define LVL_FILE "/Users/" + getUserName() + "/Library/Containers/YSPN.BeatCovid.com/Data/Documents/save_lvl.txt"
-#define POINTS_FILE "/Users/" + getUserName() + "/Library/Containers/YSPN.BeatCovid.com/Data/Documents/save_points.txt"
-#define ARMOR_FILE "/Users/" + getUserName() + "/Library/Containers/YSPN.BeatCovid.com/Data/Documents/save_armor.txt"
-#define STAT_FILE "/Users/" + getUserName() + "/Library/Containers/YSPN.BeatCovid.com/Data/Documents/save_stat.txt"
-#define CONFIG_FILE "/Users/" + getUserName() + "/Library/Containers/YSPN.BeatCovid.com/Data/Documents/save_config.txt"
+#define LVL_FILE appContainerPath() + "/Documents/save_lvl.txt"
+#define POINTS_FILE appContainerPath() + "/Documents/save_points.txt"
+#define ARMOR_FILE appContainerPath() + "/Documents/save_armor.txt"
+#define STAT_FILE appContainerPath() + "/Documents/save_stat.txt"
+#define CONFIG_FILE appContainerPath() + "/Documents/save_config.txt"
 #define CONFIG_DEFAULT_FILE resourcePath() + "files/saves/save_config_default.txt"
 
 class Save {

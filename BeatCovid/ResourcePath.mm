@@ -30,8 +30,7 @@
 #import <Foundation/Foundation.h>
 
 ////////////////////////////////////////////////////////////
-std::string resourcePath(void)
-{
+std::string resourcePath() {
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 
     std::string rpath;
@@ -47,10 +46,11 @@ std::string resourcePath(void)
     }
 
     [pool drain];
-    
+
     return rpath;
 }
 
-std::string getUserName(){
-    return std::string([NSUserName() UTF8String]);
+std::string appContainerPath() {
+    return std::string([NSHomeDirectory() UTF8String]);
 }
+

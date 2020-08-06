@@ -23,8 +23,6 @@
 //
 ////////////////////////////////////////////////////////////
 
-
-
 #ifndef RESOURCE_PATH_HPP
 #define RESOURCE_PATH_HPP
 
@@ -40,6 +38,8 @@
 /// with the main bundle or an empty string is there is no bundle.
 ///
 ////////////////////////////////////////////////////////////
-std::string resourcePath(void);
-std::string getUserName();
+std::string resourcePath();
+
+std::string appContainerPath();
+
 #endif

@@ -381,6 +381,7 @@ int Interface::startNewGame(sf::RenderWindow &window) {
         }
 
         save.SaveGame(game.GetPlayer().GetPoints());
+        Save::SaveStat(game.GetStat());
         break;
       }
         
@@ -399,6 +400,7 @@ int Interface::startNewGame(sf::RenderWindow &window) {
         }
 
         save.SaveGame(game.GetPlayer().GetPoints());
+        Save::SaveStat(game.GetStat());
         break;
       }
 
