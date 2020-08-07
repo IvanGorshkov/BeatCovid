@@ -2,8 +2,7 @@
 #include "SaveGame.h"
 
 int main() {
-  sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Beat COVID-19", sf::Style::Fullscreen);
-//  sf::RenderWindow window(sf::VideoMode(1280, 800), "Beat COVID-19");
+  sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "VirusHunter", sf::Style::Fullscreen);
   window.setFramerateLimit(120);
   window.setVerticalSyncEnabled(true);
   Interface& interface = Interface::GetInstance(window);

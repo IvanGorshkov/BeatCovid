@@ -499,7 +499,7 @@ bool Interface::winMenu(sf::RenderWindow &window, bool isLoadFromMenu) {
                                                            "You have collected all the vaccines and were able to"));
   winTable.SetCenterLabel(std::make_shared<InterfaceLabel>(textFontPath,
                                                            textSize,
-                                                           "save the world from the fucking coronavirus"));
+                                                           "save the world from the annoying virus"));
   winTable.SetCenterButton(std::make_shared<InterfaceButton>(buttonFontPath, buttonSize, "Menu"));
 
   winTable.CalculateTablePosition();
