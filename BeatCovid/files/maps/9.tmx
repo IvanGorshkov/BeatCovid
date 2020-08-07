@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="500" height="140" tilewidth="32" tileheight="32" nextobjectid="387">
- <tileset firstgid="1" name="city_tiles" tilewidth="32" tileheight="32" tilecount="0" columns="8">
-  <image source="files/maps/map_tiles.png" width="256" height="616"/>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="500" height="140" tilewidth="32" tileheight="32" nextobjectid="393">
+ <tileset firstgid="1" name="city_tiles" tilewidth="32" tileheight="32" tilecount="176" columns="8">
+  <image source="files/maps/map_tiles.png" width="256" height="712"/>
  </tileset>
  <layer name="sky" width="500" height="140">
   <data>
@@ -210217,6 +210217,12 @@
   <object id="384" name="delivery" x="14592.1" y="1150.08" width="32" height="32"/>
   <object id="385" name="delivery" x="14080.4" y="1183.62" width="32" height="32"/>
   <object id="386" name="delivery" x="14112.5" y="448.622" width="32" height="32"/>
+  <object id="387" name="wall" x="8031.78" y="2973.07" width="993.124" height="35.3061"/>
+  <object id="388" name="wall" x="3898.94" y="2972.84" width="993.124" height="35.3061"/>
+  <object id="389" name="wall" x="5597.62" y="3264.29" width="354.902" height="30.5254"/>
+  <object id="390" name="wall" x="6014.73" y="3198.55" width="258.093" height="30.5254"/>
+  <object id="391" name="wall" x="6240.02" y="3071.87" width="192.359" height="30.5254"/>
+  <object id="392" name="wall" x="6621.88" y="3040.79" width="32.206" height="30.5254"/>
  </objectgroup>
  <objectgroup name="auto"/>
  <objectgroup name="enemys"/>

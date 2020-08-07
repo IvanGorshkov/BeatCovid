@@ -96,7 +96,7 @@ void Interface::MainMenu(sf::RenderWindow &window) {
 
   InterfaceImage backImageSprite(resourcePath() + "files/menu/back_image.png");
   backImageSprite.SetPosition(statisticButton.GetTextRectSize().x + left + 30, 0);
-  backImageSprite.Size(width - backImageSprite.GetTextureRect().left, height);
+  backImageSprite.Size(width - backImageSprite.GetTextureRect().left - width/6, height);
 
   music.PlayBackgroundMenuMusic();
 
@@ -499,7 +499,7 @@ bool Interface::winMenu(sf::RenderWindow &window, bool isLoadFromMenu) {
                                                            "You have collected all the vaccines and were able to"));
   winTable.SetCenterLabel(std::make_shared<InterfaceLabel>(textFontPath,
                                                            textSize,
-                                                           "save the world from the fucking coronavirus"));
+                                                           "save the world from the annoying virus"));
   winTable.SetCenterButton(std::make_shared<InterfaceButton>(buttonFontPath, buttonSize, "Menu"));
 
   winTable.CalculateTablePosition();
