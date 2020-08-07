@@ -96,7 +96,7 @@ void Interface::MainMenu(sf::RenderWindow &window) {
 
   InterfaceImage backImageSprite(resourcePath() + "files/menu/back_image.png");
   backImageSprite.SetPosition(statisticButton.GetTextRectSize().x + left + 30, 0);
-  backImageSprite.Size(width - backImageSprite.GetTextureRect().left, height);
+  backImageSprite.Size(width - backImageSprite.GetTextureRect().left - width/6, height);
 
   music.PlayBackgroundMenuMusic();
 
