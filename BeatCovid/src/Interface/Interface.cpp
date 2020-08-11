@@ -3,6 +3,7 @@
 #include <memory>
 #include "Level_map.h"
 #include "ResourcePath.hpp"
+#include "iostream"
 
 sf::Vector2f calculatePlayerPosition(int width,
                                      int height,
@@ -96,11 +97,11 @@ void Interface::MainMenu(sf::RenderWindow &window) {
 
   InterfaceImage backImageSprite(resourcePath() + "files/menu/back_image.png");
   backImageSprite.SetPosition(statisticButton.GetTextRectSize().x + left + 30, 0);
-  backImageSprite.Size(width - backImageSprite.GetTextureRect().left - width/6, height);
+  backImageSprite.Size(width - backImageSprite.GetTextureRect().left - width / 6, height);
 
   music.PlayBackgroundMenuMusic();
 
-  Save save;
+  ButtonsPressed buttons(3);
 
   while (window.isOpen()) {
     sf::Event event{};
@@ -108,8 +109,36 @@ void Interface::MainMenu(sf::RenderWindow &window) {
       if (event.type == sf::Event::Closed) {
         window.close();
       }
+
+      if (event.type == sf::Event::KeyPressed) {
+        if (event.key.code == sf::Keyboard::A) {
+          buttons.SetButton(0, true);
+        }
+
+        if (event.key.code == sf::Keyboard::G) {
+          buttons.SetButton(1, true);
+        }
+
+        if (event.key.code == sf::Keyboard::K) {
+          buttons.SetButton(2, true);
+        }
+      }
+
+      if (event.type == sf::Event::KeyReleased) {
+        if (event.key.code == sf::Keyboard::A) {
+          buttons.SetButton(0, false);
+        }
+
+        if (event.key.code == sf::Keyboard::G) {
+          buttons.SetButton(1, false);
+        }
+
+        if (event.key.code == sf::Keyboard::K) {
+          buttons.SetButton(2, false);
+        }
+      }
     }
-      
+
     sf::Vector2i mousePosition = sf::Vector2i(sf::Mouse::getPosition(window));
 
     if (newGameButton.IsSelect(mousePosition, music)) {
@@ -149,9 +178,7 @@ void Interface::MainMenu(sf::RenderWindow &window) {
       aboutMenu(window);
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)
-        && sf::Keyboard::isKeyPressed(sf::Keyboard::G)
-        && sf::Keyboard::isKeyPressed(sf::Keyboard::K)) {
+    if (buttons.isPressed()) {
       configMenu(window);
     }
 
@@ -280,38 +307,90 @@ void Interface::newGameWarningMenu(sf::RenderWindow &window) {
 }
 
 // Старт новой игры
-int Interface::startNewGame(sf::RenderWindow &window) {
-  bool repeat = true;
+void Interface::startNewGame(sf::RenderWindow &window) {
+  bool isRepeat = true;
 
   Save save;
 
-  while (repeat) {
+  while (isRepeat) {
+    music.PlayBackgroundGameMusic();
+
+    ButtonsPressed next(4);
+    ButtonsPressed last(4);
+
     sf::View menuView(sf::FloatRect(0, 0, width, height));
     sf::View gameView(sf::FloatRect(0, 0, gameWidth, gameHeight));
 
-    music.PlayBackgroundGameMusic();
-
     Level lvl;
     lvl.LoadFromFile(save.GetLvlName());
+    GameManager
+        game(lvl, gameText, music, Save::LoadArmors(), Save::LoadPoints(), Save::LoadStat(), Save::LoadConfig());
 
     int left = lvl.GetObject("left").rect.left;
     int right = lvl.GetObject("right").rect.left + lvl.GetObject("right").rect.width;
     int top = lvl.GetObject("top").rect.top;
     int bottom = lvl.GetObject("bottom").rect.top + lvl.GetObject("bottom").rect.height;
 
-    GameManager
-        game(lvl, gameText, music, Save::LoadArmors(), Save::LoadPoints(), Save::LoadStat(), Save::LoadConfig());
     sf::Clock clock;
-
     while (window.isOpen()) {
+
+      bool isBreak = false;
       sf::Event event{};
       while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) {
-          repeat = false;
+          isRepeat = false;
           window.close();
         }
 
         if (event.type == sf::Event::KeyPressed) {
+          if (event.key.code == sf::Keyboard::A || event.key.code == sf::Keyboard::Left) {
+            game.GetPlayer().SetKey("L", true);
+          }
+
+          if (event.key.code == sf::Keyboard::D || event.key.code == sf::Keyboard::Right) {
+            game.GetPlayer().SetKey("R", true);
+          }
+
+          if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up) {
+            game.GetPlayer().SetKey("UP", true);
+          }
+
+          if (event.key.code == sf::Keyboard::D || event.key.code == sf::Keyboard::Down) {
+            game.GetPlayer().SetKey("DOWN", true);
+          }
+
+          if (event.key.code == sf::Keyboard::N) {
+            next.SetButton(0, true);
+          }
+
+          if (event.key.code == sf::Keyboard::E) {
+            next.SetButton(1, true);
+          }
+
+          if (event.key.code == sf::Keyboard::X) {
+            next.SetButton(2, true);
+          }
+
+          if (event.key.code == sf::Keyboard::T) {
+            next.SetButton(3, true);
+          }
+
+          if (event.key.code == sf::Keyboard::L) {
+            last.SetButton(0, true);
+          }
+
+          if (event.key.code == sf::Keyboard::A) {
+            last.SetButton(1, true);
+          }
+
+          if (event.key.code == sf::Keyboard::S) {
+            last.SetButton(2, true);
+          }
+
+          if (event.key.code == sf::Keyboard::T) {
+            last.SetButton(3, true);
+          }
+
           if (event.key.code == sf::Keyboard::Space) {
             game.Fire();
           }
@@ -326,14 +405,68 @@ int Interface::startNewGame(sf::RenderWindow &window) {
             window.setView(menuView);
 
             if (!gameMenu(window, game.GetPlayer().GetMainData())) {
-              repeat = false;
-              Save::SaveStat(game.GetStat());
-              return 0;
+              isRepeat = false;
+              isBreak = true;
+              break;
             }
 
             music.PlayBackgroundGameMusic();
           }
         }
+
+        if (event.type == sf::Event::KeyReleased) {
+          if (event.key.code == sf::Keyboard::A || event.key.code == sf::Keyboard::Left) {
+            game.GetPlayer().SetKey("L", false);
+          }
+
+          if (event.key.code == sf::Keyboard::D || event.key.code == sf::Keyboard::Right) {
+            game.GetPlayer().SetKey("R", false);
+          }
+
+          if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up) {
+            game.GetPlayer().SetKey("UP", false);
+          }
+
+          if (event.key.code == sf::Keyboard::D || event.key.code == sf::Keyboard::Down) {
+            game.GetPlayer().SetKey("DOWN", false);
+          }
+
+          if (event.key.code == sf::Keyboard::N) {
+            next.SetButton(0, false);
+          }
+
+          if (event.key.code == sf::Keyboard::E) {
+            next.SetButton(1, false);
+          }
+
+          if (event.key.code == sf::Keyboard::X) {
+            next.SetButton(2, false);
+          }
+
+          if (event.key.code == sf::Keyboard::T) {
+            next.SetButton(3, false);
+          }
+
+          if (event.key.code == sf::Keyboard::L) {
+            last.SetButton(0, false);
+          }
+
+          if (event.key.code == sf::Keyboard::A) {
+            last.SetButton(1, false);
+          }
+
+          if (event.key.code == sf::Keyboard::S) {
+            last.SetButton(2, false);
+          }
+
+          if (event.key.code == sf::Keyboard::T) {
+            last.SetButton(3, false);
+          }
+        }
+      }
+
+      if (isBreak) {
+        break;
       }
 
       if (game.GetPlayer().GetHp() <= 0) {
@@ -343,7 +476,7 @@ int Interface::startNewGame(sf::RenderWindow &window) {
 
         window.setView(menuView);
 
-        repeat = diedMenu(window);
+        isRepeat = diedMenu(window);
         break;
       }
 
@@ -354,25 +487,21 @@ int Interface::startNewGame(sf::RenderWindow &window) {
 
         if (save.CheckEndGame()) {
           save.SetEndGame();
-          repeat = winMenu(window, false);
+          isRepeat = winMenu(window, false);
 
         } else {
           save.NextLvl();
-          repeat = nextLvlMenu(window);
+          isRepeat = nextLvlMenu(window);
         }
 
         save.SaveGame(game.GetPlayer().GetPoints());
         break;
       }
 
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::N)
-          && sf::Keyboard::isKeyPressed(sf::Keyboard::E)
-          && sf::Keyboard::isKeyPressed(sf::Keyboard::X)
-          && sf::Keyboard::isKeyPressed(sf::Keyboard::T)) {
-
+      if (next.isPressed()) {
         if (save.CheckEndGame()) {
           save.SetEndGame();
-          repeat = false;
+          isRepeat = false;
           window.setView(menuView);
           music.StopBackgroundGameMusic();
           music.PlayBackgroundMenuMusic();
@@ -381,43 +510,21 @@ int Interface::startNewGame(sf::RenderWindow &window) {
         }
 
         save.SaveGame(game.GetPlayer().GetPoints());
-        Save::SaveStat(game.GetStat());
         break;
       }
-        
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)
-          && sf::Keyboard::isKeyPressed(sf::Keyboard::A)
-          && sf::Keyboard::isKeyPressed(sf::Keyboard::S)
-          && sf::Keyboard::isKeyPressed(sf::Keyboard::T)) {
 
+      if (last.isPressed()) {
         save.LastLvl();
 
         if (save.GetLvl() == 0) {
-          repeat = false;
+          isRepeat = false;
           window.setView(menuView);
           music.StopBackgroundGameMusic();
           music.PlayBackgroundMenuMusic();
         }
 
         save.SaveGame(game.GetPlayer().GetPoints());
-        Save::SaveStat(game.GetStat());
         break;
-      }
-
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        game.GetPlayer().SetKey("L");
-      }
-
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        game.GetPlayer().SetKey("R");
-      }
-
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        game.GetPlayer().SetKey("UP");
-      }
-
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        game.GetPlayer().SetKey("DOWN");
       }
 
       float time = clock.getElapsedTime().asMicroseconds();
@@ -442,8 +549,6 @@ int Interface::startNewGame(sf::RenderWindow &window) {
 
     Save::SaveStat(game.GetStat());
   }
-
-  return 0;
 }
 
 // Предупреждение о сбросе данных
@@ -499,7 +604,7 @@ bool Interface::winMenu(sf::RenderWindow &window, bool isLoadFromMenu) {
                                                            "You have collected all the vaccines and were able to"));
   winTable.SetCenterLabel(std::make_shared<InterfaceLabel>(textFontPath,
                                                            textSize,
-                                                           "save the world from the annoying virus"));
+                                                           "save the world from the fucking coronavirus"));
   winTable.SetCenterButton(std::make_shared<InterfaceButton>(buttonFontPath, buttonSize, "Menu"));
 
   winTable.CalculateTablePosition();
@@ -1086,23 +1191,25 @@ bool Interface::gameMenu(sf::RenderWindow &window, std::vector<int> data) {
 void Interface::aboutMenu(sf::RenderWindow &window) {
   InterfaceLabel aboutGameHead(textFontPath, headSize, "About game");
   aboutGameHead.SetPosition((width - aboutGameHead.GetTextRectSize().x) / 2, headSize);
-    
+
   InterfaceTable aboutTable;
   aboutTable.SetCenterLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "This game was developed by"));
-  aboutTable.SetCenterLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Alekhin Sergey, Gorshkov Ivan, Kalinin Ilya"));
+  aboutTable.SetCenterLabel(std::make_shared<InterfaceLabel>(textFontPath,
+                                                             textSize,
+                                                             "Alekhin Sergey, Gorshkov Ivan, Kalinin Ilya"));
   aboutTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Sound expert:"));
   aboutTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Akhverdiev Valery"));
   aboutTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Designer:"));
   aboutTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Fedor Surovtsev"));
   aboutTable.SetLeftLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Assistance:"));
   aboutTable.SetRightLabel(std::make_shared<InterfaceLabel>(textFontPath, textSize, "Poznyak Anastasia"));
-    
+
   aboutTable.CalculateTablePosition();
   aboutTable.SetPosition(height, width);
-    
+
   InterfaceLabel gameData(textFontPath, textSize, "August 2020 version: 1.0");
   gameData.SetPosition((width - gameData.GetTextRectSize().x) / 2, height - textSize - 30);
-    
+
   InterfaceButton backButton(buttonFontPath, buttonSize, 30, height - buttonSize - 30, "Back");
 
   while (window.isOpen()) {

@@ -21,7 +21,7 @@ class Player : public Entity {
  public:
   explicit Player(const sf::FloatRect &position, int hp, int dmg, int points, std::vector<int> armors);
   void Update(float time, std::vector<Object> &obj) override;
-  void SetKey(const std::string &name);
+  void SetKey(const std::string &name, bool value = true);
   bool GetDir() const;
   int GetHp() const;
   int GetArm() const;

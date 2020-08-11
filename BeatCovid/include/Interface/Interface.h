@@ -10,6 +10,7 @@
 #include "InterfaceImage.h"
 #include "InterfaceButton.h"
 #include "InterfaceTable.h"
+#include "ButtonsPressed.h"
 
 class Interface {
  public:
@@ -25,7 +26,7 @@ class Interface {
   Interface &operator=(const Interface &);
 
   void newGameWarningMenu(sf::RenderWindow &window);
-  int startNewGame(sf::RenderWindow &window);
+  void startNewGame(sf::RenderWindow &window);
   bool endGameWarningMenu(sf::RenderWindow &window);
   bool winMenu(sf::RenderWindow &window, bool isLoadFromMenu);
   bool nextLvlMenu(sf::RenderWindow &window);

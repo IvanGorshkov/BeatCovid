@@ -111,7 +111,7 @@ void Player::keyCheck() {
     fire = true;
   }
 
-  key["R"] = key["L"] = key["UP"] = key["DOWN"] = key["SPACE"] = false;
+  key["SPACE"] = false;
 }
 
 int Player::GetDmg() const {
@@ -314,8 +314,8 @@ bool Player::GetDir() const {
   return dir;
 }
 
-void Player::SetKey(const std::string &name) {
-  key[name] = true;
+void Player::SetKey(const std::string &name, bool value) {
+  key[name] = value;
 }
 
 void Player::ChangePoints(int getPoints) {

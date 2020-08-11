@@ -48,6 +48,7 @@
 		ACB0D85624D367CF0005A1F0 /* Virus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ACB0D85324D367CF0005A1F0 /* Virus.cpp */; };
 		ACB0D85724D367CF0005A1F0 /* Delivery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ACB0D85424D367CF0005A1F0 /* Delivery.cpp */; };
 		ACE7CF8924A3C5540016E5AD /* SFML in Resources */ = {isa = PBXBuildFile; fileRef = ACE7CF8824A3C5530016E5AD /* SFML */; };
+		ACF5034724E2C06F00150BEC /* ButtonsPressed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ACF5034624E2C06F00150BEC /* ButtonsPressed.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,6 +129,8 @@
 		ACB0D85324D367CF0005A1F0 /* Virus.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Virus.cpp; sourceTree = "<group>"; };
 		ACB0D85424D367CF0005A1F0 /* Delivery.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Delivery.cpp; sourceTree = "<group>"; };
 		ACE7CF8824A3C5530016E5AD /* SFML */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SFML; path = BeatCovid/SFML; sourceTree = SOURCE_ROOT; };
+		ACF5034624E2C06F00150BEC /* ButtonsPressed.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ButtonsPressed.cpp; sourceTree = "<group>"; };
+		ACF5034824E2C07800150BEC /* ButtonsPressed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonsPressed.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -379,6 +382,7 @@
 		AC9196CB24AD398900C28412 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				ACF5034624E2C06F00150BEC /* ButtonsPressed.cpp */,
 				AC9196CE24AD39AD00C28412 /* Interface.cpp */,
 				AC9196CC24AD39AD00C28412 /* InterfaceButton.cpp */,
 				AC9196CD24AD39AD00C28412 /* InterfaceLabel.cpp */,
@@ -391,6 +395,7 @@
 		AC9196D624AD39BE00C28412 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				ACF5034824E2C07800150BEC /* ButtonsPressed.h */,
 				AC9196D724AD39D500C28412 /* Interface.h */,
 				AC9196D924AD39D500C28412 /* InterfaceButton.h */,
 				AC9196DB24AD39D500C28412 /* InterfaceLabel.h */,
@@ -473,6 +478,7 @@
 			files = (
 				AC86CD0824A3DAD9007D9C2D /* AnimationManager.cpp in Sources */,
 				AC9196D324AD39AD00C28412 /* Interface.cpp in Sources */,
+				ACF5034724E2C06F00150BEC /* ButtonsPressed.cpp in Sources */,
 				AC86CCF524A3DAC7007D9C2D /* Enemy.cpp in Sources */,
 				AC86CD0524A3DAD3007D9C2D /* Cap.cpp in Sources */,
 				AC86CCE624A3DAB6007D9C2D /* MusicManager.cpp in Sources */,
@@ -612,7 +618,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.0.3;
-				DEVELOPMENT_TEAM = 58T4L2QKV7;
+				DEVELOPMENT_TEAM = VYDPJANCG8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = "${SRCROOT}/BeatCovid/SFML/Frameworks";
 				HEADER_SEARCH_PATHS = "${SRCROOT}/BeatCovid/SFML/include";
@@ -637,7 +643,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.0.3;
-				DEVELOPMENT_TEAM = 58T4L2QKV7;
+				DEVELOPMENT_TEAM = VYDPJANCG8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = "${SRCROOT}/BeatCovid/SFML/Frameworks";
 				HEADER_SEARCH_PATHS = "${SRCROOT}/BeatCovid/SFML/include";
