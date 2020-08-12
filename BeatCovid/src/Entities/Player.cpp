@@ -392,3 +392,8 @@ void Player::SetFinish(bool getFinish) {
 int Player::PlayFinishMusic() const {
   return playFinishMusic;
 }
+
+void Player::SetStay() {
+    STATE = STAY;
+    key["L"] = key["DOWN"] = key["R"] = key["SPACE"] = key["UP"] = false;
+}

@@ -355,7 +355,7 @@ void Interface::startNewGame(sf::RenderWindow &window) {
             game.GetPlayer().SetKey("UP", true);
           }
 
-          if (event.key.code == sf::Keyboard::D || event.key.code == sf::Keyboard::Down) {
+          if (event.key.code == sf::Keyboard::S || event.key.code == sf::Keyboard::Down) {
             game.GetPlayer().SetKey("DOWN", true);
           }
 
@@ -427,7 +427,7 @@ void Interface::startNewGame(sf::RenderWindow &window) {
             game.GetPlayer().SetKey("UP", false);
           }
 
-          if (event.key.code == sf::Keyboard::D || event.key.code == sf::Keyboard::Down) {
+          if (event.key.code == sf::Keyboard::S || event.key.code == sf::Keyboard::Down) {
             game.GetPlayer().SetKey("DOWN", false);
           }
 

@@ -43,7 +43,8 @@ class Player : public Entity {
   bool GetAlive() const;
   void SetFinish(bool getFinish = true);
   int PlayFinishMusic() const;
-
+  void SetStay();
+    
  private:
   void keyCheck();
   void collision(int num, std::vector<Object> &objs);

@@ -425,12 +425,14 @@ void GameManager::drawEnemy(sf::RenderWindow &window, sf::FloatRect screenRect) 
       if (police->IsDrawPenaltyMenu()) {
         Interface &interface = Interface::GetInstance(window);
         interface.PenaltyPolice(window);
+        player.SetStay();
       }
 
       if (police->ISDrawDiedMenu()) {
         Interface &interface = Interface::GetInstance(window);
         interface.DiedPolice(window);
         player.GoToStart();
+        player.SetStay();
       }
     }
 
