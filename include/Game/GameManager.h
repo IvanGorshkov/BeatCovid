@@ -12,25 +12,23 @@
 #include "Antibodies.h"
 #include "GameLabelManager.h"
 #include "GameLabel.h"
+#include "Police.h"
 #include "Breaker.h"
 #include "Delivery.h"
-#include "Police.h"
 #include "Virus.h"
 #include "SafeTransport.h"
 #include "UnSafeTransport.h"
 #include "Sick.h"
 #include "GameTreatPatientProgressBar.h"
 
-#define FIRE_TIME 1000
-
 class GameManager {
  public:
   explicit GameManager(Level &lvl,
-                       int textSize,
+                       unsigned int textSize,
                        MusicManager &music,
                        const std::vector<int> &arms,
                        int points,
-                       std::vector<int> stat,
+                       const std::vector<int> &stat,
                        const std::vector<int> &config);
 
   // Обновление всех классов
@@ -55,7 +53,6 @@ class GameManager {
 
   std::vector<Object> obj;
   Player player;
-  float fireTimer;
   std::shared_ptr<Sick> sick;
 
   GameLabelManager labelManager;

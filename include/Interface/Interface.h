@@ -11,6 +11,8 @@
 #include "InterfaceButton.h"
 #include "InterfaceTable.h"
 
+#define BACK_BUTTON_SHIFT 30
+
 class Interface {
  public:
   static Interface &GetInstance(sf::RenderWindow &window);
@@ -42,12 +44,12 @@ class Interface {
   MusicManager music;
   std::string buttonFontPath;
   std::string textFontPath;
-  int height;
-  int width;
-  int buttonSize;
-  int textSize;
-  int headSize;
-  int gameHeight;
-  int gameWidth;
-  int gameText;
+  unsigned int height;
+  unsigned int width;
+  unsigned int gameHeight;
+  unsigned int gameWidth;
+  unsigned int gameText;
+  unsigned int buttonSize;
+  unsigned int textSize;
+  unsigned int headSize;
 };

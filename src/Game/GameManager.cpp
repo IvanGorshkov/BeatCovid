@@ -1,19 +1,17 @@
 #include "GameManager.h"
 #include <cmath>
 #include <sstream>
-#include <utility>
 #include "Interface.h"
 
 GameManager::GameManager(Level &lvl,
-                         int textSize,
+                         unsigned int textSize,
                          MusicManager &music,
                          const std::vector<int> &arms,
                          int points,
-                         std::vector<int> stat,
+                         const std::vector<int> &stat,
                          const std::vector<int> &config)
     : obj(lvl.GetAllObjects()),
       music(music),
-      fireTimer(0),
       stat(std::move(stat)),
       antigenPoints(config[1]),
       player(lvl.GetObject("player").rect, config[0], 1, points, arms) {
@@ -31,21 +29,14 @@ GameManager::GameManager(Level &lvl,
       i.rect.height = 64;
     }
 
-    if (i.name == "police") {
-      enemies.push_back(std::make_shared<Police>(i.rect.left,
-                                                 i.rect.top,
-                                                 40,
-                                                 64,
-                                                 config[2],
-                                                 config[3],
-                                                 config[4],
-                                                 i.name));
+    if (i.name == "virus") {
+      enemies.push_back(std::make_shared<Virus>(i.rect.left, i.rect.top, 40, 64, config[9], config[10], i.name));
       i.rect.width = 40;
       i.rect.height = 64;
     }
 
-    if (i.name == "virus") {
-      enemies.push_back(std::make_shared<Virus>(i.rect.left, i.rect.top, 40, 64, config[9], config[10], i.name));
+    if (i.name == "police") {
+      enemies.push_back(std::make_shared<Police>(i.rect.left, i.rect.top, 40, 64, config[2], config[3], config[4], i.name));
       i.rect.width = 40;
       i.rect.height = 64;
     }
@@ -78,23 +69,22 @@ GameManager::GameManager(Level &lvl,
   labelManager.SetLabel("PlayerData", std::make_shared<GameLabel>(textSize), LEFT_UP);
   labelManager.SetLabel("PlayerPoints", std::make_shared<GameLabel>(textSize), RIGHT_UP);
   labelManager.SetLabel("TransportHelp", std::make_shared<GameLabel>(textSize / 3 * 2, "E"), PLAYER_POSITION);
-  labelManager.SetLabel("SafeTransportFuel", std::make_shared<GameLabel>(textSize, sf::Color::Cyan), CENTER_UP);
-  labelManager.SetLabel("UnSafeTransportDmg",
-                        std::make_shared<GameLabel>(textSize, "Damaging", sf::Color::Red),
-                        CENTER_UP);
+  labelManager.SetLabel("SafeTransportFuel", std::make_shared<GameLabel>(textSize), CENTER_UP);
+  labelManager.SetLabel("UnSafeTransportDmg", std::make_shared<GameLabel>(textSize), CENTER_UP);
   labelManager.SetLabel("NoVaccine", std::make_shared<GameLabel>(textSize, "No vaccine", sf::Color::Red), CENTER_UP);
+  //  labelManager.SetLabel("FPS", std::make_shared<GameLabel>(textSize / 2, sf::Color::Magenta), LEFT_DOWN);
 }
 
 // Обновление всех классов
 void GameManager::Update(float time) {
-  fireTimer += time;
+  //  fps.Update();
   player.Update(time, obj);
 
-  if ((player.PlayFinishMusic() == 1 || player.PlayFinishMusic() == 2) && !player.GetAlive()) {
+  if (player.GetFinishTimer() == 0) {
     music.PlayTreatPatientSound();
   }
 
-  if (player.PlayFinishMusic() == 0) {
+  if (!player.IsFinishPosition()) {
     music.StopTreatPatientSound();
   }
 
@@ -110,21 +100,17 @@ void GameManager::Update(float time) {
     stat[1]++;
   }
 
-  if (player.GetAlive()) {
+  if (player.IsWin()) {
+    stat[0]++;
     sick->SetAlive();
   }
 
   sick->Update(time, obj);
-
-  if (sick->GetEnd()) {
-    player.SetFinish();
-    stat[0]++;
-  }
 }
 
 // Вывод всех классов на экран
-void GameManager::Draw(sf::RenderWindow &window, float x, float y, int width, int height) {
-  auto screenRect = sf::FloatRect(x - width / 2.0, y - height / 2.0, width, height);
+void GameManager::Draw(sf::RenderWindow &window, float x, float y, int height, int width) {
+  auto screenRect = sf::FloatRect(x - width / 2, y - height / 2, width, height);
 
   drawBullet(window);
   drawEnemy(window, screenRect);
@@ -136,11 +122,11 @@ void GameManager::Draw(sf::RenderWindow &window, float x, float y, int width, in
     labelManager.Draw("NoVaccine", window);
   }
 
-  progressBar.Draw(window, player.DrawProgressBar());
-
-  if (!player.IsDrive()) {
-    player.DrawObjs(window);
+  if (player.GetFinishTimer() != -1) {
+    progressBar.Draw(window, true);
   }
+
+  player.Draw(window);
 
   if (screenRect.intersects(sick->GetRect())) {
     sick->Draw(window);
@@ -153,29 +139,27 @@ Player &GameManager::GetPlayer() {
 
 // Огонь игроком
 void GameManager::Fire() {
-  if (fireTimer > FIRE_TIME) {
-    if (player.GetPoints() > 0) {
-      player.SetKey("SPACE");
-      if (player.GetDir()) {
-        playerBullets.emplace_back(player.GetRect().left - 25,
-                                   player.GetRect().top + 40,
-                                   -PLAYER_BULLET_DX,
-                                   0,
-                                   player.GetDmg(),
-                                   true);
-      } else {
-        playerBullets.emplace_back(player.GetRect().left + player.GetRect().width + 10,
-                                   player.GetRect().top + 40,
-                                   PLAYER_BULLET_DX,
-                                   0,
-                                   player.GetDmg(),
-                                   true);
-      }
-
-      player.ChangePoints(-1);
-      music.PlayHitPlayerSound();
-      fireTimer = 0;
+  if (player.GetHitTimer() > PLAYER_HIT_TIME && player.GetPoints() > 0) {
+    player.SetAction(FIRE_KEY_PRESSED);
+    if (player.GetDir()) {
+      playerBullets.emplace_back(player.GetRect().left - 25,
+                                 player.GetRect().top + 40,
+                                 -PLAYER_BULLET_DX,
+                                 0,
+                                 player.GetDmg(),
+                                 true);
+    } else {
+      playerBullets.emplace_back(player.GetRect().left + player.GetRect().width + 10,
+                                 player.GetRect().top + 40,
+                                 PLAYER_BULLET_DX,
+                                 0,
+                                 player.GetDmg(),
+                                 true);
     }
+
+    player.ChangePoints(-1);
+    music.PlayHitPlayerSound();
+    player.ResetHitTimer();
   }
 }
 
@@ -194,7 +178,7 @@ void GameManager::TakeTransport() {
       }
 
       safeTransportsIt->SetDrive();
-      player.SetDrive();
+      player.SetAction(DRIVE_KEY_PRESSED);
       if (safeTransportsIt->GetName() == "auto") {
         music.PlayCarSound();
       } else {
@@ -218,7 +202,7 @@ void GameManager::TakeTransport() {
       }
 
       unSafeTransportsIt->SetDrive();
-      player.SetDrive();
+      player.SetAction(DRIVE_KEY_PRESSED);
       if (unSafeTransportsIt->GetName() == "bus") {
         music.PlayCarSound();
       } else {
@@ -235,7 +219,7 @@ std::vector<int> GameManager::GetStat() {
 
 void GameManager::drawPlayerData(sf::RenderWindow &window) {
   std::ostringstream ssData;
-  ssData << "HP: " << player.GetHp() << "%" << " ARM: " << player.GetArm() << " V: " << player.GetVaccine();
+  ssData << "HP: " << player.GetHp() << "%" << " ARM: " << player.GetArm() << " V: " << player.IsGetVaccine();
   labelManager.SetText("PlayerData", ssData.str());
   labelManager.Draw("PlayerData", window);
 
@@ -292,7 +276,7 @@ void GameManager::checkHitEnemy() {
 void GameManager::checkHitPlayer() {
   for (enemyBulletsIt = enemyBullets.begin(); enemyBulletsIt != enemyBullets.end(); ++enemyBulletsIt) {
     if (enemyBulletsIt->GetRect().intersects(player.GetRect()) && enemyBulletsIt->IsLife()) {
-      player.TakeDamage(enemyBulletsIt->GetDmg());
+      player.TakeDamge(enemyBulletsIt->GetDmg());
       break;
     }
   }
@@ -510,7 +494,7 @@ void GameManager::updateUnSafeTransport(float time) {
       } else {
         player.SetPosition(unSafeTransportsIt->GetRect().left + 30, unSafeTransportsIt->GetRect().top + 32);
       }
-      player.TakeDamage(unSafeTransportsIt->GetDmg());
+      player.TakeDamge(unSafeTransportsIt->GetDmg());
       break;
     }
   }
@@ -554,6 +538,8 @@ void GameManager::drawUnSafeTransport(sf::RenderWindow &window, sf::FloatRect sc
 
     if (unSafeTransportsIt->IsDrive()) {
       std::ostringstream ss;
+      ss << "Dmg: " << unSafeTransportsIt->PrintDmg();
+      labelManager.SetText("UnSafeTransportDmg", ss.str());
       labelManager.Draw("UnSafeTransportDmg", window);
     }
   }

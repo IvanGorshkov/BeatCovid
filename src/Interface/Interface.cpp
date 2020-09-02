@@ -333,6 +333,7 @@ int Interface::startNewGame(sf::RenderWindow &window) {
 
             if (!gameMenu(window, game.GetPlayer().GetMainData())) {
               repeat = false;
+              Save::SaveStat(game.GetStat());
               return 0;
             }
 
@@ -386,7 +387,7 @@ int Interface::startNewGame(sf::RenderWindow &window) {
         save.SaveGame(game.GetPlayer().GetPoints());
         break;
       }
-
+        
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)
           && sf::Keyboard::isKeyPressed(sf::Keyboard::A)
           && sf::Keyboard::isKeyPressed(sf::Keyboard::S)
@@ -404,19 +405,19 @@ int Interface::startNewGame(sf::RenderWindow &window) {
       }
 
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        game.GetPlayer().SetKey("L");
+        game.GetPlayer().SetAction(LEFT_KEY_PRESSED);
       }
 
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        game.GetPlayer().SetKey("R");
+        game.GetPlayer().SetAction(RIGHT_KEY_PRESSED);
       }
 
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        game.GetPlayer().SetKey("UP");
+        game.GetPlayer().SetAction(UP_KEY_PRESSED);
       }
 
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        game.GetPlayer().SetKey("DOWN");
+        game.GetPlayer().SetAction(DOWN_KEY_PRESSED);
       }
 
       float time = clock.getElapsedTime().asMicroseconds();
