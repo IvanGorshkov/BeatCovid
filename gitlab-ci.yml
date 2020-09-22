@@ -1,0 +1,12 @@
+image: gcc
+
+variables:
+  BIN_NAME: main.out
+
+stages:
+  - test_style
+
+test_style:
+  stage: test_style
+  script:
+    - ./linters/run.sh
