@@ -2,7 +2,6 @@
 .idea/
 .vscode/
 build/
-linters/
 cmake-build-debug/
 save_config.txt
 save_armor.txt
